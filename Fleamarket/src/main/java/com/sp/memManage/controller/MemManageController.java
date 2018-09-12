@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,8 +62,6 @@ public class MemManageController {
 		
 		return "redirect:/maindetail/mmain";
 	}
-	
-	
 		
 	//회원등록 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -79,7 +78,7 @@ public class MemManageController {
 	public String registerPOST(MemManageDTO memManageDTO, Model model) throws Exception {
 		//컨트롤러에서 빈 파일에 필요한 객체 담은후 모델에 빈을 담아서 뷰에서 사용
 		Bean bean = new Bean();
-		
+		System.out.println(memManageDTO);
 		service.registerMember(memManageDTO);
 		
 		model.addAttribute("bean", bean );
@@ -101,25 +100,15 @@ public class MemManageController {
 	public void updateGET(@RequestParam("member_email") String member_email, Model model) throws Exception{
 		
 		model.addAttribute(service.detailMember(member_email));
-		System.out.println("확인");
+	
 	}
-	//회원주수정
+	//회원수정
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updatePOST(@RequestParam("member_email") String member_email, Model model, HttpSession session) throws Exception{
+	public String updatePOST(MemManageDTO memManageDTO, Model model) throws Exception{
 		 
-//		Object obj = session.getAttribute("member");
-//		MemManageDTO member = (MemManageDTO)obj;
-//
-//		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
-
-		Bean bean = new Bean();
-		service.updateMember(member_email);
-		
-		model.addAttribute("bean", bean);
-		
-		System.out.println("업데이트");
-		//return "redirect:/memmanage/detail?member_email="+"123@123";
-		return "redirect:/memmanage/detail";
+		service.updateMember(memManageDTO);
+		System.out.println(memManageDTO);
+		return "redirect:/memmanage/detail?member_email="+memManageDTO.getMember_email();
 	}
 	//회원 삭제
 	@RequestMapping(value ="/delete")

@@ -29,9 +29,9 @@ public class MemManageServiceImpl implements MemManageService {
 	}
 	//회원 수정
 	@Override
-	public void updateMember(String member_email) throws Exception {
+	public void updateMember(MemManageDTO memManageDTO) throws Exception {
 		
-		memManageDAO.update(member_email);
+		memManageDAO.update(memManageDTO);
 		System.out.println("나는 서비스");
 	}
 	//회원 삭제

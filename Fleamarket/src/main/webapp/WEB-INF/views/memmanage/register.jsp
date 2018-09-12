@@ -10,6 +10,7 @@
 <title>회원가입 화면</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script href="../resources/memmanage/js/member.js"></script>
 <script>
   function Postcode() {
     new daum.Postcode({
@@ -63,14 +64,14 @@
     <h1> 회원가입 </h1>
   </div>
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" action="/fleamarket/memmanage/register" method="post" name="frm">
+    <form role="form" action="/fleamarket/memmanage/register" method="post" name="frm" onsubmit="retrun validate();">
        
        <!-- 이메일주소 -->
        <div class="form-group">
          <label for="InputEmail">이메일 주소</label>
          <div class="input-group">
            <input type="email" class="form-control"
-          id="InputEmail" name="member_email" placeholder="이메일 주소">
+          id="memail" name="member_email" placeholder="이메일 주소">
           <span class="input-group-btn">
             <button class="btn btn-success">
               	중복 확인
@@ -85,7 +86,7 @@
       <div class="form-group">
         <label for="InputPassword1">비밀번호</label>
         <input type="password" class="form-control"
-          id="InputPassword1" name="member_pw" placeholder="비밀번호"
+          id="mpw" name="member_pw" placeholder="비밀번호"
           onkeyup="passwordCheckFunction();">
       </div>
       
@@ -93,7 +94,7 @@
       <div class="form-group">
         <label for="InputPassword2">비밀번호 확인</label>
         <input type="password" class="form-control"
-          id="InputPassword2" name="member_pw2" placeholder="비밀번호 확인"
+          id="chpw" name="member_pw2" placeholder="비밀번호 확인"
           onkeyup="passwordCheckFunction();">
         <h5 style="color: red;" id="passwordCheckMessage"></h5>
         <p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
@@ -103,14 +104,14 @@
       <div class="form-group">
         <label for="username">이름</label>
         <input type="text" class="form-control"
-          id="username" name="member_name" placeholder="이름을 입력해 주세요">
+          id="mname" name="member_name" placeholder="이름을 입력해 주세요">
       </div>
       
       <!-- 연락처 -->
       <div class="form-group">
-        <label for="username">연락처</label>
+        <label for="username">전화번호</label>
         <input type="text" class="form-control"
-          id="" name="member_phone" placeholder="연락처를 입력해 주세요">
+          id="mphone" name="member_phone" placeholder="전화번호를 입력해 주세요">
       </div>
         
       <!-- 주소 -->
@@ -118,7 +119,7 @@
         <label for="username">주소</label>
         <div class="input-group">
           <input type="text" class="form-control"
-            id="address" name="member_address" placeholder="주소">
+            id="maddress" name="member_address" placeholder="주소">
           <span class="input-group-btn">
             <button class="btn btn-success" onclick="Postcode()">
               주소 찾기
@@ -131,7 +132,7 @@
       <div class="form-group">
       <label for="username">상세주소</label>
         <input type="text" class="form-control"
-          id="address2" name="member_address2" placeholder="상세주소">
+          id="maddress2" name="member_address2" placeholder="상세주소">
       </div>
   
       <!-- 버튼 -->

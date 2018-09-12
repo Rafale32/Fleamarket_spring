@@ -32,9 +32,8 @@ public class MemManageDAOImpl implements MemManageDAO{
 	}
 	//회원 수정
 	@Override
-	public void update(String member_email) throws Exception {
-		session.update(namespace+".updateMember", member_email);
-		System.out.println("끄아아아악");
+	public void update(MemManageDTO memManageDTO) throws Exception {
+		session.update(namespace+".updateMember", memManageDTO);
 	}
 	//회원 삭제
 	@Override

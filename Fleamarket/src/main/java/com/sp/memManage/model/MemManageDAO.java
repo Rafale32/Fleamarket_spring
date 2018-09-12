@@ -11,7 +11,7 @@ public interface MemManageDAO {
 	//회원 정보
 	public MemManageDTO detail(String member_email)throws Exception;
 	//회원 수정
-	public void update(String member_email)throws Exception;
+	public void update(MemManageDTO memManageDTO)throws Exception;
 	//회원 삭제
 	public void delete(String member_email)throws Exception;
 }

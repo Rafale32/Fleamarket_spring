@@ -53,9 +53,8 @@
 <body>
 	<h1>정보 수정</h1>
 	<form action="/fleamarket/memmanage/update" method="post" name="frm">
-	<input type="hidden" name="command" value="updateMember">
+
 	<!-- 이메일 넘길거 -->
-	<input type="hidden" name="member_email" value="${memManageDTO.member_email }">
 	<table>
 		<tr>
 			<th> 이메일  </th>
@@ -84,7 +83,6 @@
 		</tr> 	
 	</table>
 	<br>
-	<%-- <a href="/fleamarket/memmanage/update?member_email=${member_email }">	 --%>
 	<input type="submit" value="확인" >
 	<!-- </a> -->
 	<input type="reset" value="다시 작성">
