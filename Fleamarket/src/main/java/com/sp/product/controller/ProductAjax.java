@@ -41,7 +41,7 @@ public class ProductAjax {
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 		
 		System.out.println(file.getOriginalFilename()+"----파일내임");
-		
+		 
 		return new ResponseEntity<>(file.getOriginalFilename(), HttpStatus.CREATED);
 	}
 	
