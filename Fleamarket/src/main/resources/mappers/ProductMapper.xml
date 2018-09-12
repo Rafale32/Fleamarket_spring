@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="ProductMapper">
+	<cache />
+
+
+	<select id="countItemBoard" resultType="int" parameterType="String">
+		select count(ITEMBOARD_NO) from itemboard
+		where STORE_NO = (select st.store_no from store st inner join member mb on
+		st.MEMBER_NO = mb.MEMBER_NO
+		where mb.MEMBER_EMAIL = #{ITEMBOARD_email})
+		and itemboard_delete_b = 0
+	</select>
+	
+	
+	<select id="itemListByStore" resultType="ItemDTO" parameterType="String">
+		select * from itemboard ite
+		inner join store st on ite.STORE_NO = st.STORE_NO
+		where st.STORE_NAME=#{store_Name } and ite.ITEMBOARD_DELETE_B = 0 
+    	order by ite.ITEMBOARD_NO
+	</select>
+	
+	
+	<select id="itemList" resultType="ItemDTO" parameterType="String">
+		select * from itemboard ite inner join store st on ite.STORE_NO = st.STORE_NO
+  		inner join MEMBER mem on st.MEMBER_NO=mem.MEMBER_NO 
+  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email}
+	</select>
+	
+	
+ 	<select id="itemImgList" parameterType="int" resultType="ItemImg">
+		select * from itemimg where ITEMBOARD_NO = #{itemboard_No }
+	</select>
+	
+	
+	<select id="itemPrice" parameterType="int" resultType="int">
+		select item_price from item where ITEM_NO=#{item_No }
+	</select>
+	
+	<select id="favCount" parameterType="int" resultType="int">
+		select count(*) from fav where ITEMBOARD_NO = #{itemboard_No }
+	</select>
+	
+	<select id="itemQnaCount" parameterType="int" resultType="int">
+		select count(*) from ITEM_QNA where ITEMBOARD_NO = #{itemboard_No }
+	</select>
+	
+	<select id="countItemBoardByStore" resultType="int" parameterType="String">
+		select count(ITEMBOARD_NO) from itemboard 
+		where STORE_NO = (select STORE_NO from store where STORE_NAME = #{storeName }) and itemboard_delete_b = 0
+	</select>
+	
+	<select id="getCate" resultType="CateDTO">
+		select * from CATEGORY
+	</select>
+	
+	<select id="getSubCate" resultType="CateSubDTO">
+		select * from CATEGORY_SUB where CATEGORY_NO = #{category_No }
+	</select>
+	
+</mapper>

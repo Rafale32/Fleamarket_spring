@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  tiles-definitions PUBLIC
+	"-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd"
+>
+
+<tiles-definitions>
+
+	<!--3. 로그인용 화면 -->
+	<definition name="loginpage" template="/WEB-INF/views/module/emptytemplate.jsp">
+    </definition>
+	
+	<!-- 로그인시로 로그인 화면만 나오게 할까?  -->
+ 	<definition name="memmanage/login" extends="loginpage">
+		<put-attribute name="body" value="/WEB-INF/views/memmanage/login.jsp" />
+	</definition>
+	
+	<!--END 3. 로그인용 화면 -->
+
+
+
+
+
+
+
+	
+	<!--1. 메뉴가 필요없는 상단 하단 바디 만 있는넘 -->
+	<definition name="main_layout" template="/WEB-INF/views/module/maintemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/module/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/module/footer.jsp" />
+	</definition>
+	
+	
+	<!-- 기본 적으로 적용 되는넘 ==>  */* 이니까 마지막에 있어야 먼저 찾질 않음 -->
+<!-- 	<definition name="*/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition> -->
+	
+<!-- 	 <definition name="maindetail/main" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/maindetail/main.jsp" />
+	</definition> -->
+	
+ 	<definition name="maindetail/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/maindetail/{1}.jsp" />
+	</definition>
+	
+	 <definition name="safepay/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/safepay/{1}.jsp" />
+	</definition>
+	
+	 <definition name="board/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp" />
+	</definition>
+	
+	<definition name="memmanage/*" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/memmanage/{1}.jsp" />
+	</definition>
+	
+	<!--END 1. 메뉴가 필요없는 상단 하단 바디 만 있는넘 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--2. 메뉴가 필요한 템플릿 부모 설정-->
+    <definition name="left_layout" template="/WEB-INF/views/module/menutemplate.jsp">
+    	<put-attribute name="leftmenu" value="/WEB-INF/views/module/leftmenu.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/module/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/module/footer.jsp" />
+	</definition>
+
+<!-- 	<definition name="product/list" extends="base_layout">
+		<put-attribute name="body" value="/WEB-INF/views/list.jsp" />
+	</definition> -->
+	
+	
+	<!-- 왼쪽메뉴 있는넘인대 product 주소 단위 인 넘들  =>  */* 이것이 product/* 이것보다 위에 있으면 **이 먼저 실행된다
+	그래서 **은 미리 걸러저야 할 내용이 아니라 나머지가 없으면  -->
+	<definition name="product/*" extends="left_layout">
+		<put-attribute name="body" value="/WEB-INF/views/product/{1}.jsp" />
+	</definition>
+	
+	<definition name="payment/*" extends="left_layout">
+		<put-attribute name="body" value="/WEB-INF/views/payment/{1}.jsp" />
+	</definition>
+	
+	<!--END 2. 메뉴가 필요한 템플릿 부모 설정-->
+	
+	
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
