@@ -1,6 +1,8 @@
 package com.sp.mainDetail.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sp.mainDetail.domain.Criteria_jy;
 import com.sp.mainDetail.domain.ItemQnaDTO;
+import com.sp.mainDetail.domain.PageMaker_jy;
 import com.sp.mainDetail.service.ReplyService;
 
 @RestController
@@ -75,6 +79,38 @@ public class ReplyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	//페이징처리
+	@RequestMapping(value="/{itemboard_no}/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> listPage(
+			@PathVariable("itemboard_no") Integer itemboard_no,
+			@PathVariable("page") Integer page){
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		try {
+			Criteria_jy cri = new Criteria_jy();
+			cri.setPage(page);
+			
+			PageMaker_jy pageMaker = new PageMaker_jy();
+			pageMaker.setCri(cri);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			List<ItemQnaDTO> list = service.listQnaPage(itemboard_no, cri);
+			
+			map.put("list", list);
+			
+			int qnaCount = service.count(itemboard_no);
+			pageMaker.setTotalCount(qnaCount);
+			
+			map.put("pageMaker", pageMaker);
+			
+			entity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

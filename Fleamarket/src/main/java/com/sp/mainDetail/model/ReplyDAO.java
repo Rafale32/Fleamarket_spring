@@ -2,6 +2,7 @@ package com.sp.mainDetail.model;
 
 import java.util.List;
 
+import com.sp.mainDetail.domain.Criteria_jy;
 import com.sp.mainDetail.domain.ItemQnaDTO;
 
 public interface ReplyDAO {
@@ -19,5 +20,9 @@ public interface ReplyDAO {
 	public int maxQnaNo(Integer item_qna_no)throws Exception;
 	
 	public int getItemboard_no(Integer itemboard_no)throws Exception;
+	
+	public List<ItemQnaDTO> listPage(Integer itemboard_no, Criteria_jy cri)throws Exception;
+	
+	public int count(Integer itemboard_no)throws Exception;
 	
 }

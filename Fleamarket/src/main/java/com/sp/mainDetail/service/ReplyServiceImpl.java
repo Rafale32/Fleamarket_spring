@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.sp.mainDetail.domain.Criteria_jy;
 import com.sp.mainDetail.domain.ItemQnaDTO;
 import com.sp.mainDetail.model.ReplyDAO;
 
@@ -47,6 +48,16 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void updateQna(ItemQnaDTO qna) throws Exception {
 		dao.updateQna(qna);
+	}
+
+	@Override
+	public List<ItemQnaDTO> listQnaPage(Integer itemboard_no, Criteria_jy cri) throws Exception {
+		return dao.listPage(itemboard_no, cri);
+	}
+
+	@Override
+	public int count(Integer itemboard_no) throws Exception {
+		return dao.count(itemboard_no);
 	}
 
 }

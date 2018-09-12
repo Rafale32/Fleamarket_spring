@@ -11,6 +11,23 @@
 <!-- <script type="text/javascript" src="../resources/maindetail/jquery-3.1.0.js" charset="utf-8"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+var itemboard_no = 1;
+
+//댓글목록리스트
+function getAllList(){
+	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+		
+		var str ="";
+		console.log(data.length);
+	
+		$(data).each(
+				function(){
+					str += "<li data-item_qna_no='"+this.item_qna_no+"' class='replyLi'>"
+							+ this.item_qna_no+":" +this.item_qna_contents + "</li>";
+				});
+		$("#replies").html(str);
+	}); 
+}  
   /* $(function() {
    $('').click(function(){
    $.ajax({
@@ -74,6 +91,11 @@
   });
   });
   
+  /* var itemboard_no = 1;
+  
+  $.getJSON("/qna/all/"+itemboard_no, function(data){
+  	console.log(data.length);
+  }); */
 </script>
 <style type="text/css">
 </style>
@@ -155,12 +177,12 @@
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
 												<button
-													onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
+													onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
 													class="btn-call" value="${member.member_name}">안심결제</button>
 											</c:when>
 											<c:otherwise>
 												<button
-													onclick="location.href = '/Fleamarket/memmanage/login.do'"
+													onclick="location.href = '/fleamarket/memmanage/login'"
 													class="btn-call">안심결제</button>
 											</c:otherwise>
 										</c:choose>
@@ -227,6 +249,7 @@
 											</div>
 										</div>
 									</div>
+									<ul id="replies">
 									<%-- <div class="comments-wrapper">
 										<div class="comment-item">
 											<c:forEach var="qnaList" items="${bean.itemQnaList}">
@@ -250,6 +273,7 @@
 											</c:forEach>
 										</div>
 									</div> --%>
+									</ul>
 								</div>
 							</div>
 						</div>
