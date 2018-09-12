@@ -5,6 +5,69 @@
 
 <mapper namespace="SafepayMapper">
   <cache />
+  
+  <!-- 결제정보 가져올 때 -->
+  <!-- 결제에 가져올 구매자 회원정보 20180817 재헌 -->
+  <select id="selectMember" resultType="MemManageDTO">
+    select * from member where member_email = #{member_email}
+<!--    select * from member where member_no = #{member_no} -->
+  </select>
+  
+  <!-- 결제에 가져올 상품정보 및 판매자 정보 20180817 재헌 -->
+  <select id="selectItem" resultType="ItemDTO">
+    select * from itemboard ib, item i, store s
+    where ib.item_no = i.item_no
+    and ib.store_no = s.store_no
+    and ib.item_no = #{item_no}
+  </select>
+  
+  <!-- 주문번호 가져오기 -->
+  <select id="selectOrderNo" resultType="int">
+    select max(oorder_no) from oorder
+  </select>
+  
+  <!-- 결제 정보 넘길 때 -->
+  
+  <!-- 주문정보 입력 -->
+  <insert id="insertOrder" parameterType="OorderDTO">
+    insert into oorder
+    (oorder_no, member_no, item_no, oorder_date)
+    values
+    (#{oorder_no}, #{member_no}, #{item_no}, sysdate)
+  </insert>
+  
+  <!-- 결제정보 입력 -->
+  <insert id="insertPayment" parameterType="PaymentDTO">
+    insert into pay
+    (pay_no, pay_price, pay_usepoint, pay_date, oorder_no)
+    values
+    ((select max(pay_no) from pay)+1, #{pay_price}, #{pay_usepoint}, sysdate, #{oorder_no})
+  </insert>
+  
+  <!-- 배송정보입력 -->
+  <insert id="insertDelivery" parameterType="DeliveryDTO">
+    insert into delivery
+    (delivery_no, delivery_name, delivery_ph, delivery_address,
+    delivery_address2, delivery_contents, oorder_no)
+    values
+    ((select max(delivery_no) from delivery)+1,
+    #{delivery_name},#{delivery_ph},#{delivery_address},#{delivery_address2},
+    #{delivery_contents},#{oorder_no})
+  </insert>
+  
+  <!-- 상품 배송상태 수정-->
+  <!-- 1:판매전,2:준비중,3:배송중,4:구매확정
+       결제 완료 후 2번 상태로 변경-->
+<!--   <update id="updateItemDeliveryState" parameterType="ItemDTO"> -->
+<!--     update item set -->
+<!--     item_delivery_state = 2 -->
+<!--     where item_no = #{item_no} -->
+<!--   </update> -->
+  
+  
+  
+  
+
 
 
 </mapper>

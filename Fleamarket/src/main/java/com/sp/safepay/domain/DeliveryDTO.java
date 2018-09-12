@@ -3,16 +3,16 @@ package com.sp.safepay.domain;
 import java.io.Serializable;
 
 // 배송 정보 저장 되는 애
-public class DeliveryDTO_jh implements Serializable {
-  private int delivery_no; // 배송번호
-  private String delivery_name; // 수령인
-  private String delivery_ph; // 수령인 연락처
-  private String delivery_address; // 주소
+public class DeliveryDTO implements Serializable {
+  private int delivery_no;          // 배송번호
+  private String delivery_name;     // 수령인
+  private String delivery_ph;       // 수령인 연락처
+  private String delivery_address;  // 주소
   private String delivery_address2; // 상세주소
   private String delivery_contents; // 배송시 요청사항
-  private int spell_no; // 주문번호
+  private int oorder_no;            // 주문번호
 
-  public DeliveryDTO_jh() {
+  public DeliveryDTO() {
   }
 
   public int getDelivery_no() {
@@ -63,12 +63,14 @@ public class DeliveryDTO_jh implements Serializable {
     this.delivery_contents = delivery_contents;
   }
 
-  public int getSpell_no() {
-    return spell_no;
+  public int getOorder_no() {
+    return oorder_no;
   }
 
-  public void setSpell_no(int spell_no) {
-    this.spell_no = spell_no;
-  };
+  public void setOorder_no(int oorder_no) {
+    this.oorder_no = oorder_no;
+  }
+
+
 
 }

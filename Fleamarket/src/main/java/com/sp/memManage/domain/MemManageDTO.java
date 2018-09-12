@@ -12,15 +12,12 @@ public class MemManageDTO implements Serializable { // 마이바티스는 DTO �
 	private String member_phone; // 전화번호
 	private String member_address; // 주소
 	private String member_address2; // 상세주소
-
 	private Integer member_point; // 포인트
-
-	private Integer member_poInteger; // 포인트
-
 	private String member_state; // 회원 상태
 	private String member_stop_start_date; // 정지 시작일
 	private String member_stop_end; // 정지 종료일
 	private Integer member_admin; // 관리자 상태확인
+	
 	public Integer getMember_no() {
 		return member_no;
 	}
@@ -69,12 +66,6 @@ public class MemManageDTO implements Serializable { // 마이바티스는 DTO �
 	public void setMember_point(Integer member_point) {
 		this.member_point = member_point;
 	}
-	public Integer getMember_poInteger() {
-		return member_poInteger;
-	}
-	public void setMember_poInteger(Integer member_poInteger) {
-		this.member_poInteger = member_poInteger;
-	}
 	public String getMember_state() {
 		return member_state;
 	}
@@ -99,5 +90,6 @@ public class MemManageDTO implements Serializable { // 마이바티스는 DTO �
 	public void setMember_admin(Integer member_admin) {
 		this.member_admin = member_admin;
 	}
-
+	
+	
 }
