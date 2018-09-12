@@ -6,8 +6,74 @@
 
 <mapper namespace="PaymentMapper">
 	<cache />
+	<!-- 판매 내역임 잘못 연결함. -->
+	<select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+		<![CDATA[	  
+		select Ite.Itemboard_Title, I.Item_Delivery_State,
+		I.Item_Price, I.Item_No,
+		S.Store_Name, Img.Thum_Img, P.Pay_Date  
+ 		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
+ 		 ,pay p
+		where O.Member_No = M.Member_No
+  		and O.Item_No = I.Item_No
+ 		 and I.Item_No = Ite.Item_No
+ 		 and Ite.Store_No = S.Store_No
+ 		 and Img.Itemboard_No = Ite.Itemboard_No
+ 		 and P.Oorder_No = O.Oorder_No
+ 		 ]]>
+ 		and M.Member_Email = #{member_email}
+	</select>
 	
+	<update id="perchasedeliveryupdate" parameterType="DeliveryDTO_gy">
+		<![CDATA[
+		update Item set Item_Delivery_State = 4 where Item_No = #{item_no}
+		]]>
+	</update>
+	
+	
+	<select id="SellList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+		<![CDATA[
+		select Ite.Itemboard_Title, I.Item_Delivery_State,
+		I.Item_Price, I.Item_No,
+		S.Store_Name, Img.Thum_Img, P.Pay_Date
+		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
+		where O.Item_No = I.Item_No
+		and I.Item_No = Ite.Item_No
+		and Ite.Store_No = S.Store_No
+		and S.Member_No = M.Member_No
+		and Ite.Itemboard_No = Img.Itemboard_No
+		and P.Oorder_No = O.Oorder_No
+		]]>
+		and M.Member_Email = #{member_email} 
+	</select>
+	
+	<!-- 판매승인버튼 편의상 2라고씀 -->
+	<update id="perchasedeliveryupdate2" parameterType="DeliveryDTO_gy">
+	<![CDATA[
+		update Item set Item_Delivery_State = 3 where Item_No = #{item_no}
+		]]>
+	</update>
+	
+	<select id="SearchMystore" parameterType="DeliveryDTO_gy" resultType="MystoreDTO_gy">
+	Select S.Store_No,S.Store_Name, M.Member_Email, S.Store_Contents from Store s, Member m
+	where S.Member_No = m.Member_No
+	and M.Member_Email = #{member_email}
+	</select>
+	
+	<select id="MystoreReview" parameterType="MystoreDTO_gy" resultType="MystoreReviewDTO_gy">
+	Select R.Store_No,P.Pay_Date,R.Review_Contents ,S.Store_Name,M.Member_Email
+	,R.Review_Star, M.Member_No, M.Member_Name , Ite.Itemboard_Title,Img.Thum_Img
+	From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
+	Itemimg img
+	where R.Store_No = S.Store_No
+	and P.Pay_No = R.Pay_No
+	and P.Oorder_No = O.Oorder_No
+	and O.Item_No = I.Item_No
+	and I.Item_No = Ite.Item_No
+	and Ite.Itemboard_No =Img.Itemboard_No
+	and O.Member_No = M.Member_No
+	and S.Store_No = #{Store_No}
+	</select>
 
 
-	
 </mapper>
