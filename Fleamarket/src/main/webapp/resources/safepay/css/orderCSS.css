@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+/* body { */
+/*   width: 1024px; */
+/* } */
+.order_table {
+  width: 80%;
+/*   border: 1px solid #444444; */
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.order_table td {
+/*   border: 1px solid #444444; */
+  padding-left: 10px;
+  height: 30px;
+}
+
+.right_text{
+  text-align: right;
+  padding-right: 10px;
+}
+
+hr{
+  width: 80%;
+}
+
+
+
+h1{
+  text-align: center;
+}

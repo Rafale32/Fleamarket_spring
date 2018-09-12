@@ -8,32 +8,38 @@
 <head>
 <meta charset="UTF-8">
 <!-- 제이쿼리 -->
-<script src="/Fleamarket/dy/jquery-3.1.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- 다음 주소 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<!-- 20180818 재헌 orderJS_jh.js => 필요한 메서드 담아둠 -->
-<script src="/Fleamarket/jh_gy/jh_js/orderJS_jh.js" ></script>
+<!-- 필요한 메서드 담아둠-->
+<script src="../resources/safepay/js/orderJS.js" ></script>
 
-<!-- css -20180823 재헌 -->
-<link rel="stylesheet" href="/Fleamarket/jh_gy/jh_css/order_jh.css" type="text/css">
+<!-- css -->
+<link rel="stylesheet" href="../resources/safepay/css/orderCSS.css" type="text/css">
+
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" xtype="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 
 <title>주문/결제</title>
 </head>
 <body>
 
   <!-- 	주문결제 -->
-  <div>
-  <form action="insertpayment.do" method="post" onsubmit="return payCheck()">
+  <div class="container">
+  <form action="order" method="post" onsubmit="return payCheck()">
      <!--  구매자 이메일 주소 -->
-<%--      <c:set var="email" value="${bean.memManageDTO.email}"></c:set> --%>
-     <c:set var="email" value="${member.email}"></c:set>
-     <input type="hidden" name="email" value="${email}">
+     <c:set var="email" value="${member.member_email}"></c:set>
+     구매자 메일<input type="text" name="email" value="${email }">
+     <c:set var="member_no" value="${member.member_no}"></c:set>
+     구매자회원번호<input type="text" name="member_no" value="${member_no }">
      <!--  상품번호 -->
      <c:set var="item_no" value="${bean.itemDTO.item_No}"></c:set>
-     <input type="hidden"  name="item_No" value="${item_no}"> 
+     상품번호<input type="text"  name="item_no" value="${item_no}"> 
      <!--  마지막 주문번호를 불러와서 +1 시켜서 현재 페이지의 주문번호를 정한다. -->
-     <c:set var="spell_no" value="${bean.spellDTO_jh.spell_no+1}"></c:set>
-     <input type="hidden" name="spell_no" value="${spell_no}">
+     <c:set var="oorder_no" value="${bean.oorderDTO.oorder_no+1}"></c:set>
+     주문번호<input type="text" name="oorder_no" value="${oorder_no}">
      
       <table class="order_table" id="delivery_table">
       <tr>
@@ -44,29 +50,29 @@
         <tr>
           <td>수령인</td>
           <td colspan="2">
-            <input type="text" name="delivery_name" value="${member.name}">
+            <input type="text" name="delivery_name" value="${member.member_name}">
           </td>
         </tr>
         <tr>
           <td>연락처</td>
           <td colspan="2">
-            <input type="text" name="delivery_ph" value="${member.phone}">
+            <input type="text" name="delivery_ph" value="${member.member_phone}">
           </td>
         </tr>
         <tr>
           <td rowspan="2">배송지</td>
           <td>
             <input type="text" name="delivery_address" id="delivery_address"
-                   value="${member.address}" placeholder="주소" size="50">
+                   value="${member.member_address}" placeholder="주소" size="50">
           </td>
           <td class="right_text">
-            <input type="button" value="주소검색" onclick="search_address()">
+            <input type="button" class="btn" value="주소검색" onclick="search_address()">
           </td>
         </tr>
         <tr>
           <td colspan="2">
             <input type="text" name="delivery_address2" id="delivery_address2"
-                   value="${member.address2}" placeholder="상세주소" size="50">
+                   value="${member.member_address2}" placeholder="상세주소" size="50">
           </td>
         </tr>
         <tr>
@@ -78,7 +84,7 @@
           </td>
         </tr>
       </table>
-  </div>
+  </div>      
 
   <!-- 주문상품   -->
   <div>
@@ -91,7 +97,7 @@
       </td>
     </tr>
     <tr>
-     <td colspan="3">${bean.itemDTO.store_name}</td>
+     <td colspan="3">${bean.itemDTO.store_Name}</td>
     </tr>
     <tr>
       <td rowspan="2">
@@ -99,7 +105,7 @@
         <img src="../productimg/${img}" width="200px" height="150px">
       </td>
       <td>상품명</td>
-      <td class="right_text">${bean.itemDTO.title}</td>
+      <td class="right_text">${bean.itemDTO.itemboard_Title}</td>
     </tr>
     <tr>
       <td>가격</td>
@@ -116,12 +122,11 @@
       <td colspan="3"><h2>포인트</h2></td>
     </tr>
     <tr>
-      <td colspan="3">100원 단위로 사용가능</td>
+      <td colspan="3">100원 단위로 사용가능합니다.</td>
     </tr>
       <tr>
         <td>잔여</td>
-<%--         <c:set var="havePoint" value="${bean.memManageDTO.point}"></c:set> --%>
-        <c:set var="havePoint" value="${member.point}"></c:set>
+        <c:set var="havePoint" value="${member.member_point}"></c:set>
         <td id="havePoint" colspan="2"><fmt:formatNumber value="${havePoint}" />원</td>
 
       </tr>
@@ -138,7 +143,7 @@
         </td>
           <td class="right_text">
             <!--  버튼 클릭시 포인트 보이는 부분 변경 20180818 재헌 -->
-            <input type="button" id="allUseButton" value="전액 사용"
+            <input type="button" id="allUseButton" class="btn" value="전액사용"
                    onclick="allPoint(${havePoint})">
           </td>
       </tr>
@@ -199,13 +204,17 @@
     <!--     넘긴다 -->
     <!--     소모 포인트 -->
     <fmt:parseNumber var="finalPoint2" value="${finalPoint}" integerOnly="true" />
-    <input type="hidden" id="finalPoint2" name="finalPoint2" value="${finalPoint2}">
+    소모 포인트<input type="text" id="finalPoint2" name="pay_usepoint" value="${finalPoint2}">
+<%--     <fmt:parseNumber var="finalPoint2" value="${finalPoint}" integerOnly="true" /> --%>
+<%--     소모 포인트<input type="text" id="finalPoint2" name="finalPoint2" value="${finalPoint2}"> --%>
     <!--     총 금액 -->
     <fmt:parseNumber var="total2" value="${total}" integerOnly="true" />
-    <input type="hidden" id="total2" name="total2" value="${total2}">
+    총 결제금액<input type="text" id="total2" name="pay_price" value="${total2}">
+<%--     <fmt:parseNumber var="total2" value="${total}" integerOnly="true" /> --%>
+<%--     총 결제금액<input type="text" id="total2" name="total2" value="${total2}"> --%>
     <!--     계산된 포인트 -->
     <fmt:parseNumber var="point" value="${startPoint-finalPoint+(total*0.001) }" integerOnly="true" />
-    <input type="hidden" id="point" name="point" value="${point}">
+    계산된 포인트<input type="text" id="point" name="point" value="${point}">
     
   </div>
   <hr>
@@ -215,7 +224,7 @@
     <td class="right_text"><input id="chk" type="checkbox"> 주문 상품정보 및 서비스 이용약관에 동의합니다.</td>
   </tr>
   <tr>
-    <td class="right_text"><input type="submit" value="결제하기" /></td>
+    <td class="right_text"><input type="submit" class="btn" value="결제하기" /></td>
   </tr>
   </table>
   </form>
