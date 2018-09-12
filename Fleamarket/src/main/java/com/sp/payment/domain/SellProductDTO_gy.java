@@ -2,6 +2,8 @@ package com.sp.payment.domain;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
 public class SellProductDTO_gy implements Serializable{
 	
 
@@ -12,7 +14,6 @@ public class SellProductDTO_gy implements Serializable{
 	String thum_img =""; // 썸네일 이미지.
 	int price;
 	String pay_date= ""; //날자
-	
 	
 	public SellProductDTO_gy(){}
 
