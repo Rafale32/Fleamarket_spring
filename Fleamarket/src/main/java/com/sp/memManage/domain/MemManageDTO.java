@@ -1,22 +1,31 @@
 package com.sp.memManage.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class MemManageDTO implements Serializable { // 마이바티스는 DTO 로 사용하는 객체 무조건
 	// 시리얼라이즈 필수적으로 해줘야함
+	
+	private Integer member_no; //멤버 번호
 	private String member_email; // 이메일
 	private String member_pw; // 패스워드
 	private String member_name; // 이름
 	private String member_phone; // 전화번호
 	private String member_address; // 주소
 	private String member_address2; // 상세주소
-	private int member_point; // 포인트
+	private Integer member_poInteger; // 포인트
 	private String member_state; // 회원 상태
 	private String member_stop_start_date; // 정지 시작일
 	private String member_stop_end; // 정지 종료일
-	private int member_admin; // 관리자 상태확인
+	private Integer member_admin; // 관리자 상태확인
 
+	public Integer getMember_no(){
+		return member_no;
+	}
+	
+	public void setMember_no(Integer member_no){
+		this.member_no = member_no;
+	}
+	
 	public String getMember_email() {
 		return member_email;
 	}
@@ -65,12 +74,12 @@ public class MemManageDTO implements Serializable { // 마이바티스는 DTO �
 		this.member_address2 = member_address2;
 	}
 
-	public int getMember_point() {
-		return member_point;
+	public Integer getMember_poInteger() {
+		return member_poInteger;
 	}
 
-	public void setMember_point(int member_point) {
-		this.member_point = member_point;
+	public void setMember_poInteger(Integer member_poInteger) {
+		this.member_poInteger = member_poInteger;
 	}
 
 	public String getMember_state() {
@@ -97,11 +106,11 @@ public class MemManageDTO implements Serializable { // 마이바티스는 DTO �
 		this.member_stop_end = member_stop_end;
 	}
 
-	public int getMember_admin() {
+	public Integer getMember_admin() {
 		return member_admin;
 	}
 
-	public void setMember_admin(int member_admin) {
+	public void setMember_admin(Integer member_admin) {
 		this.member_admin = member_admin;
 	}
 
