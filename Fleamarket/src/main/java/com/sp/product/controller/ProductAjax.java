@@ -51,7 +51,6 @@ public class ProductAjax {
 		
 		System.out.println(file.getOriginalFilename()+"----파일내임");
 		
-		
 		return new ResponseEntity<byte[]>( HttpStatus.CREATED);
 	}
 	
