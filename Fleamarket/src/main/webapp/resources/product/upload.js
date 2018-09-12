@@ -7,7 +7,7 @@ function checkImageType(fileName){
 }
 
 function getFileInfo(fullName){
-		
+	
 	var fileName,imgsrc, getLink;
 	
 	var fileLink;

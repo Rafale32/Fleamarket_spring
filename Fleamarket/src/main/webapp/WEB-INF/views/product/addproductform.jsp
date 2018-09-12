@@ -56,6 +56,9 @@
 		       
 		       </div>
 		   </div>
+		   <div class="hiddenimg">
+		   		
+		   </div>
 		   
 		   <!-- <div>
  		   <input type="file" id="inputimg1" name="inputimg1"/>

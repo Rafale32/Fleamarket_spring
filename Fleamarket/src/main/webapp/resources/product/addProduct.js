@@ -212,6 +212,9 @@ $(function() {
 
 //이미지 추가시 파일 서버와 디비에 업데이트
 $(function() {
+	
+	var cnt = 1;
+	
 	$("#inputimgs").change( function(event) {
 		alert("asdf");
 		
@@ -244,7 +247,7 @@ $(function() {
 				  var str ="";
 				  
 				  if(checkImageType(data)){//getImageLink 메소드에서 썸네일이아닌넘의 파일이름 처리를 해줌 
-					  str ="<div><a href=displayFile?fileName="+getImageLink(data)+">"
+					  str ="<div><a href=/fleamarket/productajax/displayFile?fileName="+getImageLink(data)+">"
 							  +"<img src='/fleamarket/productajax/displayFile?fileName="+data+"'/>"
 							  +"</a><small data-src="+data+">X</small></div>";
 				  }else{
@@ -253,9 +256,40 @@ $(function() {
 							  +"<small data-src="+data+">X</small></div></div>";
 				  }
 				  
+				  alert(getFileInfo(data).fullName);
+				  //서버에 업로드한상태인 파일의 이름을 각각 히든으로 남겨서 처리 함
+				  
 				  $(".uploadedList").append(str);
+				  
+				  var hiddenimg = "<input type='hidden' name='files["+cnt+"]' value='"+ getFileInfo(data).fullName +"'> ";
+				  
+				  $(".hiddenimg").append(hiddenimg);
+				  
+				  cnt++;
+				  
 			  }
 		});	
 		
 	});
+	
+	
+	$(".uploadedList").on("click", "small", function(event){
+		
+		 var that = $(this);
+	
+	   $.ajax({
+		   url:"/fleamarket/productajax/deleteFile",
+		   type:"post",
+		   data: {fileName:$(this).attr("data-src")},
+		   dataType:"text",
+		   success:function(result){
+			   if(result == 'deleted'){
+				   that.parent("div").remove();
+			   }
+		   }
+	   });
+	});
+	
+	
+	
 });
