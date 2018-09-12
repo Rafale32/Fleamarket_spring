@@ -33,6 +33,7 @@ public class ProductController {
 	//뷰단의 파일 이름 형식은 각각의 상단의 (상위 이름/하단의 메소드 벨류이름) 으로 결정됨 
 	@RequestMapping(value = "/productlist", method = RequestMethod.GET)
 	public void productList(Model model, HttpServletRequest request, HttpSession session){
+	
 		
 		/*@RequestParam("store_name") String storeName
 		@RequestParam("pageNum") Integer pageNum*/
