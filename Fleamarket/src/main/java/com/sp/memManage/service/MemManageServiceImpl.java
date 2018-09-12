@@ -9,19 +9,35 @@ import com.sp.memManage.model.MemManageDAO;
 public class MemManageServiceImpl implements MemManageService {
 	
 	@Inject
-	private MemManageDAO dao;
-
-	@Override
-	public void regist() throws Exception {
-		// TODO Auto-generated method stub
-		dao.create();
-	}
+	private MemManageDAO memManageDAO;
 	
+	//로그인 체크
 	@Override
 	public MemManageDTO checkLogin(MemManageDTO dto) throws Exception {
 		
-		return dao.checkLogin(dto);
+		return memManageDAO.checkLogin(dto);
 	}
-
+	//회원 등록
+	@Override
+	public void registerMember(MemManageDTO memManageDTO) throws Exception {
+		memManageDAO.register(memManageDTO);
+	}
+	//회원 정보
+	@Override
+	public MemManageDTO detailMember(String member_email) throws Exception {
+		return memManageDAO.detail(member_email);
+	}
+	//회원 수정
+	@Override
+	public void updateMember(String member_email) throws Exception {
+		
+		memManageDAO.update(member_email);
+		System.out.println("나는 서비스");
+	}
+	//회원 삭제
+	@Override
+	public void deleteMember(String member_email) throws Exception {
+		memManageDAO.delete(member_email);
+	}
 
 }
