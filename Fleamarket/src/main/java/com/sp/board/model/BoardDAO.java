@@ -16,5 +16,5 @@ public interface BoardDAO {
 //	
 //	public void delete(Integer notice_no) throws Exception;
 //	
-//	public List<BoardDTO> list() throws Exception;
+	public List<BoardDTO> list() throws Exception;
 }

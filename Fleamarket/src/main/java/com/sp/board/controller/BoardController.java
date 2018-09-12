@@ -1,7 +1,5 @@
 package com.sp.board.controller;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -30,15 +28,26 @@ public class BoardController {
 	@RequestMapping(value="/register" , method=RequestMethod.POST)
 	public String registPOST(BoardDTO board, Model model, RedirectAttributes rttr)throws Exception{
 		System.out.println("regist post..........");
+		
+		service.regist(board);
+		
 		System.out.println(board.toString());
-//		service.regist(board);
-		//model.addAttribute("result", "success");
 		
-		rttr.addFlashAttribute("msg","SUCCESS"); //由� �떎�씠�젆�듃�떆 RedirectAttributes.addFlashAttribute() �씠�슜�븯�뿬  �뼱�듃由щ럭�듃 異붽��븯硫� 由щ떎�씠�젆�듃 
-		//�븯�뜑�씪�씪�룄 由щ떎�젆 �떆�젏�뿉 �븳踰덈쭔 �궗�슜�븷 媛믪쓣 URL �뿉 �끂異쒗븯吏��븡怨� �떎�쓬 �럹�씠吏��뿉 �쟾�넚�쓣 �븷 �닔媛��엳�떎. 
+//		model.addAttribute("result", "success");
+		rttr.addFlashAttribute("msg","SUCCESS"); 
 		
-		return "/board/success";
+		//return "/board/success";
+		return "redirect:/board/list";
+	} 
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void list(Model model) throws Exception{
+		System.out.println("show all list..........");
+		
+		model.addAttribute("list", service.list());
 	}
+	
+	
 	
 	
 	

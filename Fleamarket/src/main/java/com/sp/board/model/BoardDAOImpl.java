@@ -22,7 +22,12 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	@Override
 	public void make(BoardDTO dto) throws Exception {
-		session.insert(namespace + ".create", dto);
+		session.insert(namespace + ".make", dto);
+	}
+	
+	@Override
+	public List<BoardDTO> list() throws Exception {
+		return session.selectList(namespace+".listview");
 	}
 //
 //	@Override
@@ -40,9 +45,6 @@ public class BoardDAOImpl implements BoardDAO{
 //		session.delete(namespace+".delete", notice_no);
 //	}
 //
-//	@Override
-//	public List<BoardDTO> list() throws Exception {
-//		return session.selectList(namespace+".listview");
-//	}
+
 	
 }

@@ -10,14 +10,16 @@ public interface BoardService {
 	public void create()throws Exception;
 	
 	public void regist(BoardDTO board)throws Exception;
-//	
+	
+	public List<BoardDTO> list() throws Exception;
+	
 //	public BoardDTO read(Integer notice_no) throws Exception;
 //	
 //	public void modify(BoardDTO board) throws Exception;
 //	
 //	public void remove(Integer notice_no) throws Exception;
-//	
-//	public List<BoardDTO> list() throws Exception;
+	
+	
 
 
 }

@@ -24,6 +24,12 @@ public class BoardServiceImpl implements BoardService {
 	 public void regist(BoardDTO board) throws Exception {
 	 dao.make(board);
 	 }
+	 
+	 @Override
+	 public List<BoardDTO> list() throws Exception {
+	 // TODO Auto-generated method stub
+	 return null;
+	 }
 	//
 	// @Override
 	// public BoardDTO read(Integer notice_no) throws Exception {
@@ -43,9 +49,5 @@ public class BoardServiceImpl implements BoardService {
 	//
 	// }
 	//
-	// @Override
-	// public List<BoardDTO> list() throws Exception {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+
 }
