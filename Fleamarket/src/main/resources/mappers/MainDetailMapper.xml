@@ -6,5 +6,191 @@
 
 <mapper namespace="MainDetailMapper">
 	<cache />
+	
+	<!-- <insert id="insertBoard" parameterType="Board"> insert into board( 
+		seq, title, writer, contents, regdate, hitcount, fname )values( board_seq.nextval, 
+		#{title},#{writer},#{contents},sysdate,0,#{fname} ) </insert> -->
 
+	<!-- 추천상품 정보 가져오는 쿼리 -->
+	<select id="recommend" resultType="RecommendDTO">
+		select distinct a.item_no, b.itemboard_title, a.item_price, b.itemboard_date,
+    a.item_delivery_B, b.itemboard_no, a.item_state
+		from
+		item a, itemboard b
+		where a.item_no=b.item_no
+		and b.itemboard_recommend_B=1
+		and b.itemboard_delete_B=0
+    and a.item_delivery_state=1
+	</select>
+
+	<!-- 대 카테고리별 상품들의 itemboard_viewcount 수를 내림차순 정렬하여 10개 씩 잘라 상품정보를 받아오는 쿼리문 -->
+	<select id="hotItemList" resultType="HotItemDTO">
+		<![CDATA[
+		select category_title, itemboard_no, sub_title, itemboard_title, item_price, itemboard_date, item_delivery_B, itemboard_viewcount, item_delivery_state, ranking
+		from(select a.category_title, d.itemboard_no, b.sub_title,
+		d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state,
+		rank() over(partition by a.category_title order by itemboard_viewcount desc)as ranking
+		from category a, category_sub b, item c, itemboard d, itemimg e
+		where a.category_no = b.category_no
+		and b.sub_no = d.sub_no
+		and c.item_no = d.item_no
+		and d.itemboard_no = e.itemboard_no
+		and c.item_delivery_state = 1
+    and d.itemboard_delete_B = 0
+		group by a.category_title, d.itemboard_no, b.sub_title,
+		d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state)
+		where ranking <= 10
+		]]>
+	</select>
+
+	<!-- 대 카테고리 목록 가져옴 -->
+	<select id="hotList" resultType="HotListDTO">
+		select category_no,
+		category_title
+		from category
+		order by category_no
+	</select>
+
+	<select id="categoryList" resultType="CategoryDTO">
+		select category_no,
+		category_title
+		from category
+		order by category_no
+	</select>
+
+	<select id="subCategoryList" resultType="SubCategoryDTO">
+		select category_no,
+		sub_no, sub_title
+		from category_sub
+		order by sub_no, category_no
+	</select>
+
+	<select id="itemDetail" parameterType="int" resultType="ItemDetailDTO">
+		select
+		distinct e.itemboard_no, e.itemboard_title, d.item_price, e.itemboard_viewcount,
+		e.itemboard_date, d.item_state,
+		e.itemboard_change_B, d.item_delivery_B, d.item_delivery_state,
+		e.itemboard_local, e.itemboard_contents,
+		a.category_title, b.sub_title, c.tag_name,
+		e.store_no, f.thum_img, d.item_no
+		from category a,
+		category_sub b, item d,
+		itemboard e, itemimg f, tag c
+		where
+		a.category_no = b.category_no
+		and b.sub_no = e.sub_no
+		and c.itemboard_no = e.itemboard_no
+		and d.item_no = e.item_no
+		and e.itemboard_no =
+		f.itemboard_no
+    and rownum = 1
+		and e.itemboard_no = #{itemboard_no}
+	</select>
+
+	<select id="itemImgList" parameterType="int" resultType="ItemImgDTO">
+		select
+		itemboard_no, img_no, thum_img, big_img
+		from itemimg
+		where itemboard_no
+		= #{itemboard_no}
+	</select>
+
+	<select id="storeInfo" parameterType="int" resultType="storeInfoDTO">
+		select
+		a.itemboard_no, c.member_no, a.itemboard_viewcount, b.store_open_date, b.store_name,
+		b.store_no, b.store_contents, c.member_name
+		from itemboard a, store b, member c
+		where a.store_no = b.store_no
+		and b.member_no = c.member_no
+		and a.itemboard_no =
+		#{itemboard_no}
+	</select>
+
+	<select id="storeItem" parameterType="int" resultType="ItemDetailDTO">
+		select
+		distinct b.itemboard_no, a.item_price, b.itemboard_title
+		from item a, itemboard b
+		where a.item_no = b.item_no
+		and b.store_no = #{store_no}
+		and b.itemboard_delete_B = 0
+		and b.itemboard_no != #{itemboard_no}
+	</select>
+
+	<select id="listQna" parameterType="int" resultType="ItemQnaDTO">
+		select *
+		from item_qna
+		where itemboard_no = #{itemboard_no}
+	</select>
+
+	<insert id="createQna" parameterType="ItemQnaDTO">
+		insert into item_qna(
+		item_qna_no, itemboard_no, item_qna_contents, item_qna_date, member_no
+		)values(
+		((select max(item_qna_no) from item_qna)+1),
+		#{itemboard_no},
+		#{item_qna_contents},
+		sysdate,
+		#{member_no}
+		)
+	</insert>
+
+	<delete id="deleteQna" parameterType="int">
+		delete from item_qna where item_qna_no = #{item_qna_no}
+	</delete>
+	
+	<select id="countQna" parameterType="int">
+		select count(*) from item_qna where itemboard_no = #{itemboard_no}
+	</select>
+	
+	<update id="updateQna" parameterType="itemQnaDTO">
+ 		update item_qna set item_qna_contents = #{item_qna_contents}
+ 		where item_qna_no = #{item_qna_no}
+ 	</update>	
+		
+	<select id="maxQnaNo" parameterType="int" resultType="int">
+		select max(item_qna_no) from item_qna 
+		where itemboard_no = #{itemboard_no}
+	</select>
+	
+	<select id="getItemboard_no" parameterType="int">
+		select itemboard_no from item_qna where item_qna_no = #{item_qna_no}
+	</select>
+
+	<select id="storeNoInfo" parameterType="String" resultType="ItemQnaDTO">
+		select
+		a.store_no, a.store_name
+		from store a, member b
+		where a.member_no = b.member_no
+		and b.member_email = #{member_email}
+	</select>
+	
+	<select id="categoryItemList" parameterType="int" resultType="ItemDetailDTO">
+		select
+		distinct e.itemboard_no, e.itemboard_title, d.item_price, c.fav_no, e.itemboard_viewcount,
+		e.itemboard_date, d.item_state,
+		e.itemboard_change_B, d.item_delivery_B,
+		e.itemboard_local, e.itemboard_contents,
+		a.category_title, b.sub_title, f.tag_name,
+		e.store_no
+		from category a,
+		category_sub b, fav c, item d,
+		itemboard e, tag f
+		where
+		a.category_no = b.category_no
+		and b.sub_no =
+		e.sub_no
+		and c.itemboard_no
+		= e.itemboard_no
+    and e.itemboard_no = f.itemboard_no
+		and d.item_no = e.item_no
+		and e.itemboard_delete_B = 0
+    and d.item_delivery_state = 1
+		and a.category_no  #{category_no}
+	</select>
+	
+	<update id="updateHits" parameterType="int">
+		update itemboard set itemboard_viewcount = itemboard_viewcount+1
+		where itemboard_no = #{itemboard_no}
+	</update>
+	
 </mapper>

@@ -17,9 +17,9 @@ public class PageMaker {
   
   private int displayPageNum = 10;
 
-  private Criteria cri;
+  private Criteria2 cri;
 
-  public void setCri(Criteria cri) {
+  public void setCri(Criteria2 cri) {
     this.cri = cri;
   }
 
@@ -71,7 +71,7 @@ public class PageMaker {
     return displayPageNum;
   }
 
-  public Criteria getCri() {
+  public Criteria2 getCri() {
     return cri;
   }
 

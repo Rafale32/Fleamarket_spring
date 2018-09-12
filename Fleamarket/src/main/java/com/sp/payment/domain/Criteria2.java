@@ -1,12 +1,12 @@
 package com.sp.payment.domain;
 
-public class Criteria {
+public class Criteria2 {
 
   private int page;
   private int perPageNum;
 
   
-  public Criteria() {
+  public Criteria2() {
     this.page = 1;
     this.perPageNum = 10;
   }
