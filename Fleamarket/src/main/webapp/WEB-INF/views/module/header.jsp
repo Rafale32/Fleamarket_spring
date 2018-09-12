@@ -18,7 +18,7 @@
 			<c:choose>
 				<c:when test="${member.member_name == null }">
 					<li class="detailmenu"><a href="/fleamarket/memmanage/login">LOGIN</a></li>
-					<li class="detailmenu"><a href="/fleamarket/memmanage/joinform">JOIN</a></li>
+					<li class="detailmenu"><a href="/fleamarket/memmanage/register">JOIN</a></li>
 				</c:when>
 				<c:when test="${member.member_name != null }">
 					<li class="detailmenu"><a href="/fleamarket/memmanage/logout">LOGOUT</a></li>
@@ -32,7 +32,7 @@
 	<div id="bottommenu">
     <ul>
       <li id="market"><a
-        href="http://localhost:8081/fleamarket/maindetail/mmain">FleaMarket</a>
+        href="http://localhost:8081/Fleamarket/maindetail/main">FleaMarket</a>
       </li>
       <li>
         <form action="/fleamarket/product/searchall" id="searchForm">
@@ -43,7 +43,7 @@
       <div id="secondmenu">
         <c:if test="${member != null }">
           <li class="detailmenu"><a href="/fleamarket/product/productlist?member_email=${member.member_email }" class="btn">MYSTORE</a></li>
-          <li class="detailmenu"><a href="/fleamarket/memmanage/detailAction?member_email=${member.member_email }" class="btn">MYINFO</a></li>
+          <li class="detailmenu"><a href="/fleamarket/memmanage/detail?member_email=${member.member_email }" class="btn">MYINFO</a></li>
         </c:if>
       </div>
       <!--       secondmenu -->

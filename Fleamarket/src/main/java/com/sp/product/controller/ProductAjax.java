@@ -33,7 +33,6 @@ public class ProductAjax {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		
 		return entity;
 	}
 	
@@ -42,7 +41,7 @@ public class ProductAjax {
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 		
 		System.out.println(file.getOriginalFilename()+"----파일내임");
-		
+		 
 		return new ResponseEntity<>(file.getOriginalFilename(), HttpStatus.CREATED);
 	}
 	
@@ -51,6 +50,7 @@ public class ProductAjax {
 	public ResponseEntity<byte[]> displayFile(MultipartFile file)throws Exception{
 		
 		System.out.println(file.getOriginalFilename()+"----파일내임");
+		
 		
 		return new ResponseEntity<byte[]>( HttpStatus.CREATED);
 	}
