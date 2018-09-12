@@ -32,8 +32,6 @@ public class ProductAjax {
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		
-		
 		return entity;
 	}
 	
