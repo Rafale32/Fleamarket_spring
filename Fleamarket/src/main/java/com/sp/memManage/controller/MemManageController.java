@@ -62,6 +62,7 @@ public class MemManageController {
 		return "redirect:/maindetail/mmain";
 	}
 	
+	
 		
 	//회원등록 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
