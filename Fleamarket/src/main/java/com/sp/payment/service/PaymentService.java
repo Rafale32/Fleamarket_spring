@@ -37,4 +37,9 @@ public interface PaymentService {
 	public int sellListcounting(DeliveryDTO_gy dto) throws Exception;
 	
 	public int mystoreReviewCounting(MystoreDTO_gy sdto) throws Exception;
+	
+	//insert_inform
+	
+	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
+	
 }

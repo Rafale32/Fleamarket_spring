@@ -86,5 +86,11 @@ public class PaymentDAOImpl implements PaymentDAO{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".MystoreReviewCounting", sdto);
 	}
+
+	@Override
+	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception {
+		session.insert(namespace+".registerPerchaseAlram",pdto);
+		
+	}
 	
 }

@@ -39,5 +39,8 @@ public interface PaymentDAO {
 	
 	public int sellListcounting(DeliveryDTO_gy dto) throws Exception;
 	
+	//입력 inform 아 바꾸는걸 처리했음
+	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
+	
 	
 }

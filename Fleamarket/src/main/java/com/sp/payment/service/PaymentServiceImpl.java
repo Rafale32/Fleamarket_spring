@@ -85,5 +85,12 @@ public class PaymentServiceImpl implements PaymentService {
 		return dao.MystoreReviewcounting(sdto);
 	}
 
+	//insert_pdto
+	@Override
+	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception {
+		dao.registerPerchaseAlram(pdto);
+		
+	}
+
 
 }

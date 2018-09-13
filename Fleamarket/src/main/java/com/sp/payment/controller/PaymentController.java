@@ -86,14 +86,22 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "/buy_list_gy", method = RequestMethod.POST)
-	public void buyset(Model model,HttpSession session,DeliveryDTO_gy dto,Criteria2 cri) throws Exception {
+	public void buyset(Model model,HttpSession session,DeliveryDTO_gy dto,Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		// dto2에 다 넣기
 		MemManageDTO dto0 = (MemManageDTO) session.getAttribute("member");
 		String loginEmail = dto0.getMember_email();
 		dto2.setMember_email(loginEmail);
+		
 		//이제 바꾸는 것 넣고 서비스 가저온것으로
 		service.changDeliverState(dto);
+		// 여기다가 상대편에게 알림을 보내는 서비스가 들어가야 하겠네...흠...
+		System.out.println(pdto.getItem_no() + " pdto아넘");
+		//
+		pdto.setInform_contents(4);
+		service.registerPerchaseAlram(pdto);
+		
+		
 		//다시 뽑기
 		dto2.setMember_email(loginEmail);
 		List<PuerchaseDTO_gy> list	= service.listPuerchase(dto2,cri);
@@ -240,7 +248,6 @@ public class PaymentController {
        model.addAttribute("pageMaker",pagemaker);
        
 
-		 
 	}
 	
 	
