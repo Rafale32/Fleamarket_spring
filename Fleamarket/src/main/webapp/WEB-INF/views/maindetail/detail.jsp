@@ -155,12 +155,12 @@
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
 												<button
-													onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
+													onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no }'"
 													class="btn-call" value="${member.member_name}">안심결제</button>
 											</c:when>
 											<c:otherwise>
 												<button
-													onclick="location.href = '/Fleamarket/memmanage/login.do'"
+													onclick="location.href = '/fleamarket/memmanage/login'"
 													class="btn-call">안심결제</button>
 											</c:otherwise>
 										</c:choose>

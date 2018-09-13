@@ -49,7 +49,12 @@ public class SafepayServiceImpl implements SafepayService {
 	}
 	
   @Override
-  public void updateItemDeliveryState(ItemDTO itemDTO) throws Exception {
-    dao.updateItemDeliveryState(itemDTO);
+  public void updateItemDeliveryState(int item_no) throws Exception {
+    dao.updateItemDeliveryState(item_no);
+  }
+  
+  @Override
+  public void updateMemberPoint(int member_no) throws Exception {
+    dao.updateMemberPoint(member_no);
   }
 }

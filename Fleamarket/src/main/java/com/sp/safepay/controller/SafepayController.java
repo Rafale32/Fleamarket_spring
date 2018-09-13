@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class SafepayController {
 	
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public void orderGET(@RequestParam("item_no") int item_no,HttpSession session, Locale locale, Model model) throws Exception {
+	  
+	  
 	  System.out.println("orderGET");
 		Bean bean = new Bean();
 		//test user
@@ -59,7 +62,7 @@ public class SafepayController {
 	    Locale locale, Model model,
 	    HttpServletRequest request)throws Exception {
 	  System.out.println("orderPOST"); 
-    
+    request.setCharacterEncoding("UTF8");
 	    // 주문정보입력
 	    System.out.println("*주문정보*");
 	    System.out.println("주문번호 : " + oorderDTO.getOorder_no());
@@ -93,11 +96,11 @@ public class SafepayController {
 	    
 	    // 상품 배송진행상태 수정
 	    System.out.println("*상품 배송진행상태 수정*");
-	    System.out.println("상품 배송진행상태 : "+itemDTO.getDelivery_State());
-	    
-//	    service.updateItemDeliveryState(itemDTO);
-	    
+	    service.updateItemDeliveryState(oorderDTO.getItem_no());
+
 	    // 멤버 포인트 소모 및 적립 수정
+	    System.out.println("*회원 포인트 소모 및 적립 수정");
+	    service.updateMemberPoint(oorderDTO.getMember_no());
     
 
 	  

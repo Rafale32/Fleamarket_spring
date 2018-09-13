@@ -88,7 +88,7 @@
 
   <!-- 주문상품   -->
   <div>
-    <c:set var="price" value="${bean.itemDTO.price}"></c:set>
+    <c:set var="price" value="${bean.itemDTO.item_price}"></c:set>
     <hr>
     <table class="order_table" id="item_table">
     <tr>
@@ -214,7 +214,7 @@
 <%--     총 결제금액<input type="text" id="total2" name="total2" value="${total2}"> --%>
     <!--     계산된 포인트 -->
     <fmt:parseNumber var="point" value="${startPoint-finalPoint+(total*0.001) }" integerOnly="true" />
-    계산된 포인트<input type="text" id="point" name="point" value="${point}">
+    계산된 포인트<input type="text" id="point" name="member_point" value="${point}">
     
   </div>
   <hr>

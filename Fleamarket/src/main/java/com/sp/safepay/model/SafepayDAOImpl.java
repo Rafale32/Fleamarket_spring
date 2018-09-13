@@ -54,8 +54,13 @@ public class SafepayDAOImpl implements SafepayDAO{
   }	
   
   @Override
-  public void updateItemDeliveryState(ItemDTO itemDTO) throws Exception {
-    session.update(namespace+".updateItemDeliveryState", itemDTO);
+  public void updateItemDeliveryState(int item_no) throws Exception {
+    session.update(namespace+".updateItemDeliveryState", item_no);
+  }
+  
+  @Override
+  public void updateMemberPoint(int member_no) throws Exception {
+    session.update(namespace+".updateMemberPoint", member_no);
   }
 	
 }

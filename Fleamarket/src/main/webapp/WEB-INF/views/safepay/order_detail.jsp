@@ -11,14 +11,11 @@
 <!-- 제이쿼리 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- 부트스트랩 -->
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" xtype="text/css" />
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <title>주문 상세 내역</title>
 </head>
 <body>
-<br>
-text
-<br>
      <c:set var="item_no" value="${bean.itemDTO.item_No}"></c:set>
      <input type="hidden"  name="item_no" value="${item_no}"> 
   <h1>주문 상세 내역</h1>

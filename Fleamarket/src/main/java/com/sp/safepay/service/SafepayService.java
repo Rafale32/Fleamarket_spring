@@ -22,6 +22,8 @@ public interface SafepayService {
 	
 	public void insertDelivery(DeliveryDTO deliveryDTO)throws Exception;
 	
-	public void updateItemDeliveryState(ItemDTO itemDTO)throws Exception;
+	public void updateItemDeliveryState(int item_no)throws Exception;
+	
+	public void updateMemberPoint(int membeer_no)throws Exception;
 
 }

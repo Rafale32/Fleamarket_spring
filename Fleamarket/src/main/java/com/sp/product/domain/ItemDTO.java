@@ -26,7 +26,8 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	private int store_No; // 상점 번호
 	private int itemboard_Delete_B;//삭제 유무
 	
-	private int price; //물품 가격
+	private int price;
+	private int item_price; //물품 가격
 	
 	private int favCount; // 다른사람이 찜 한 횟수
 	
@@ -250,15 +251,27 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 
 
 
-	public int getPrice() {
-		return price;
-	}
+  public int getPrice() {
+    return price;
+  }
 
 
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
+
+
+  public int getItem_price() {
+    return item_price;
+  }
+
+
+
+  public void setItem_price(int item_price) {
+    this.item_price = item_price;
+  }
 
 
 
@@ -343,6 +356,10 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	public void setDelivery_State(int delivery_State) {
 		this.delivery_State = delivery_State;
 	}
+
+
+
+
 
 
 	

@@ -4,10 +4,61 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/Fleamarket/css/footer.css" type="text/css">
+<!-- <link rel="stylesheet" href="/Fleamarket/css/footer.css" type="text/css"> -->
+<style type="text/css">
+.footer {
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+}
+
+.footer-toolbar {
+  height: 40px;
+  vertical-align: middle;
+}
+
+.footer-info {
+  height: 100px;
+}
+
+.footer-desc {
+  height: 70px;
+}
+
+.footer-copyright {
+  height: 30px;
+  text-align: center;
+}
+
+.footer a:hover {
+  color: orange;
+}
+
+.footer-toolbar ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 70px;
+}
+
+.footer li {
+  display: inline-block;
+  padding: 10px;
+}
+
+.footer li a {
+  width: auto;
+  height: 40px;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+
+</style>
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
   <div class="footer">
     <div class="footer-toolbar">
       <ul>
@@ -38,5 +89,6 @@
         
     </div><!--     footer-info -->
   </div><!--   footer -->
+</div><!--   container -->
 </body>
 </html>
