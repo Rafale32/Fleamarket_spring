@@ -90,7 +90,7 @@
 				<td>
 				<!-- 판매 = 내 상점으로 이동하기  -->
 					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
-					<a href="">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
+					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
 					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
 					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>판매금액 ${p.item_price}</h3></a>
 

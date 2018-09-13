@@ -1,5 +1,7 @@
 package com.sp.payment.controller;
 
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 
@@ -189,7 +191,7 @@ public class PaymentController {
 		 System.out.println(list.get(0).getPay_date() + "페데");
 		 
 		 
-		 model.addAttribute("list", list);
+		 model.addAttribute("list2", list);
 		 
 			//페이징
 		 PageMaker pagemaker = new PageMaker();
@@ -200,6 +202,44 @@ public class PaymentController {
 		 System.out.println(a + " : 에이 값");
        pagemaker.setTotalCount(a);
        model.addAttribute("pageMaker",pagemaker);
+		 
+	}
+	
+	
+	@RequestMapping(value = "/purchasestoreReview2", method = RequestMethod.GET)
+	public void purchasestoreReview2(Model model,HttpSession session,Criteria2 cri,@RequestParam("store_no") int storeno) throws Exception{
+		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
+	
+		//스토어 넘버
+		
+		System.out.println(storeno +" : 스토어 넘 ");
+		
+		//아이디로 상점 넘버 찾기 이걸로 내상점 리뷰로 가는것이 가능
+		
+		 MystoreDTO_gy storedto = new MystoreDTO_gy();
+		 storedto.setStore_No(storeno);
+		
+		//서비스 만들기 내 상점에 대한 리뷰 쿼리부터 만들것
+		 System.out.println("가즈아~~@@");
+		 
+		 List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
+		
+		 System.out.println(list.get(0).getPay_date() + "페데");
+		 
+		 
+		 model.addAttribute("list2", list);
+		 
+			//페이징
+		 PageMaker pagemaker = new PageMaker();
+		 pagemaker.setCri(cri);
+       //pagemaker.setTotalCount(131);
+       //여기가 중요 service.puerchasecounting(dto2)
+		 int a = service.mystoreReviewCounting(storedto);
+		 System.out.println(a + " : 에이 값");
+       pagemaker.setTotalCount(a);
+       model.addAttribute("pageMaker",pagemaker);
+       
+
 		 
 	}
 	

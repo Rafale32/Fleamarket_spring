@@ -10,8 +10,8 @@
 	<select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
 		<![CDATA[	  
 		select Ite.Itemboard_Title, I.Item_Delivery_State,
-		I.Item_Price, I.Item_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date  
+		I.Item_Price, I.Item_No, M.Member_Email,
+		S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
  		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
  		 ,pay p
 		where O.Member_No = M.Member_No
@@ -54,7 +54,7 @@
 		<![CDATA[
 		select Ite.Itemboard_Title, I.Item_Delivery_State,
 		I.Item_Price, I.Item_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date
+		S.Store_Name, Img.Thum_Img, P.Pay_Date,M.Member_Email,S.Store_No
 		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
 		where O.Item_No = I.Item_No
 		and I.Item_No = Ite.Item_No

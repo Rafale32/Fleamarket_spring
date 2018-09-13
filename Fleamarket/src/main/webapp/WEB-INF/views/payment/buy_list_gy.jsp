@@ -88,7 +88,7 @@
 				<td>
 					<!-- 구매 상점으로 이동하기  -->
 					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
-					<a href="">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
+					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
 					<h4>구매상점 ${p.store_name }</h4>
 					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
 					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격: ${p.item_price}</h3></a>
@@ -100,18 +100,18 @@
 					<form action="/fleamarket/payment/buy_list_gy" method="post">
 						<!-- style="display: none;"  나중에 넣어서 추가 할것-->
 						<input type="text" name="purchaseNo" value="${p.item_no}"
-							style="display: none;">
+							style="display: none">
 						<c:if test="${p.item_delivery_state == 3}">
 							<input type="text" id="pageNo" name="pageNo"
-								value="${purchaseModel.requestPage }">
+								value="${purchaseModel.requestPage }" style="display: none">
 							<input type="text" id="item_no" name="item_no"
-								value="${p.item_no}">
+								value="${p.item_no}" style="display: none">
 							<input type="submit" id="purchaseDetermin" class="btn"
 								value="구매확정버튼">
 						</c:if>
-					</form> <a href="/fleamarket/payment/mystoreReview"><input class="btn"
-						value="내가쓴리뷰확인하기"></a> <!-- 버튼 시험작 만들기--> <input type="button"
-					class="btn" value="시험작" id="abc"> <!--음....  -->
+					</form> 
+					<a href="/fleamarket/payment/purchasestoreReview2?store_no=${p.store_no }"><input class="btn"
+						value="리뷰확인하러가기"></a> <!-- 버튼 시험작 만들기-->
 				</td>
 			</tr>
 

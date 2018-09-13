@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class PuerchaseDTO_gy implements Serializable {
 
 
-	
+	String member_email;
 	String itemboard_title =""; // 판매 물품의 제목
 	int item_delivery_state; // 배송상태 1 이전, 2 결제완료후 준비중 , 3 배송중(판매자 판매승인) , 4 구매자 구매완료 =거래완료
 	int item_price;//바
@@ -16,14 +16,16 @@ public class PuerchaseDTO_gy implements Serializable {
 	String store_name =""; // 어떤 상점인지
 	String thum_img =""; // 썸네일 이미지.
 	String pay_date= ""; //날자
+	int store_no;
 	
 	
 	public PuerchaseDTO_gy(){}
 
 
-	public PuerchaseDTO_gy(String itemboard_title, int item_delivery_state, int item_price, int item_no,
-			String store_name, String thum_img, String pay_date) {
+	public PuerchaseDTO_gy(String member_email, String itemboard_title, int item_delivery_state, int item_price,
+			int item_no, String store_name, String thum_img, String pay_date, int store_no) {
 		super();
+		this.member_email = member_email;
 		this.itemboard_title = itemboard_title;
 		this.item_delivery_state = item_delivery_state;
 		this.item_price = item_price;
@@ -31,7 +33,52 @@ public class PuerchaseDTO_gy implements Serializable {
 		this.store_name = store_name;
 		this.thum_img = thum_img;
 		this.pay_date = pay_date;
+		this.store_no = store_no;
 	}
+
+
+
+
+
+
+
+
+	public int getStore_no() {
+		return store_no;
+	}
+
+
+
+
+
+
+
+
+	public void setStore_no(int store_no) {
+		this.store_no = store_no;
+	}
+
+
+
+
+
+
+
+
+	public String getMember_email() {
+		return member_email;
+	}
+
+
+
+
+
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
+
+
+
 
 
 	public String getItemboard_title() {
