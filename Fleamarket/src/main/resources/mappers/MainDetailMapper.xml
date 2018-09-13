@@ -116,12 +116,12 @@
 		and b.itemboard_no != #{itemboard_no}
 	</select>
 
-	<select id="storeNoInfo" parameterType="String" resultType="ItemQnaDTO">
+	<select id="storeNoInfo" parameterType="int" resultType="ItemQnaDTO">
 		select
 		a.store_no, a.store_name
 		from store a, member b
 		where a.member_no = b.member_no
-		and b.member_email = #{member_email}
+		and b.member_no = #{member_no}
 	</select>
 	
 	<select id="categoryItemList" parameterType="int" resultType="ItemDetailDTO">

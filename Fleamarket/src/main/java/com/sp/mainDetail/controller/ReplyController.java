@@ -30,9 +30,6 @@ public class ReplyController {
 		
 		ResponseEntity<String> entity = null;
 		try {
-			/*qna.setItem_qna_no(service.maxQnaNo(qna.getItemboard_no())+1);
-			System.out.println(service.maxQnaNo(qna.getItemboard_no()));
-			System.out.println(qna.getItem_qna_no());*/
 			service.createQna(qna);
 			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {

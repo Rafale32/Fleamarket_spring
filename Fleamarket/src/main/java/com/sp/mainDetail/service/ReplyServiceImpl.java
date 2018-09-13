@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sp.mainDetail.domain.Criteria_jy;
 import com.sp.mainDetail.domain.ItemQnaDTO;
 import com.sp.mainDetail.model.ReplyDAO;
+import com.sp.memManage.domain.MemManageDTO;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
@@ -17,7 +18,15 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public List<ItemQnaDTO> listQna(Integer itemboard_no) throws Exception {
-		return dao.listQna(itemboard_no);
+		
+		List<ItemQnaDTO> list = dao.listQna(itemboard_no);
+
+		for(int i=0; i<list.size(); i++){
+			list.get(i).setStore_no(dao.storeNoInfo((list.get(i).getMember_no())).getStore_no());
+			list.get(i).setStore_name(dao.storeNoInfo((list.get(i).getMember_no())).getStore_name());
+		}
+		
+		return list; 
 	}
 
 	@Override

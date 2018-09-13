@@ -25,4 +25,7 @@ public interface ReplyDAO {
 	
 	public int count(Integer itemboard_no)throws Exception;
 	
+	public ItemQnaDTO storeNoInfo(Integer member_no)throws Exception;
+	
+	
 }

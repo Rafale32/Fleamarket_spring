@@ -24,4 +24,5 @@ public interface ReplyService {
 	public List<ItemQnaDTO> listQnaPage(Integer itemboard_no, Criteria_jy cri)throws Exception;
 	
 	public int count(Integer itemboard_no)throws Exception;
+	
 }

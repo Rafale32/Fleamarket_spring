@@ -70,4 +70,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return session.selectOne(namespace+".count", itemboard_no);
 	}
 
+	@Override
+	public ItemQnaDTO storeNoInfo(Integer member_no) throws Exception {
+		return session.selectOne(namespace+".storeNoInfo", member_no);
+	}
+
 }

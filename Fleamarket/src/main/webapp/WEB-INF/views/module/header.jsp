@@ -32,7 +32,7 @@
 	<div id="bottommenu">
     <ul>
       <li id="market"><a
-        href="http://localhost:8081/Fleamarket/maindetail/main">FleaMarket</a>
+        href="http://localhost:8081/fleamarket/maindetail/mmain">FleaMarket</a>
       </li>
       <li>
         <form action="/fleamarket/product/searchall" id="searchForm">
