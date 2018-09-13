@@ -1,10 +1,13 @@
 package com.sp.memManage.model;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.sp.memManage.domain.MemManageDTO;
+import com.sp.memManage.domain.StoreDTO;
 
 @Repository
 public class MemManageDAOImpl implements MemManageDAO{
@@ -40,6 +43,28 @@ public class MemManageDAOImpl implements MemManageDAO{
 	public void delete(String member_email) throws Exception {
 		session.delete(namespace+".deleteMember", member_email);
 	}
+	//이메일 중복체크
+	@Override
+	public MemManageDTO emailCheck(MemManageDTO memManageDTO) throws Exception{
+		return session.selectOne(namespace+".emailCheck", memManageDTO);
+	}
+	
+	//스토어 생성
+	@Override
+	public void registerStore(StoreDTO storeDTO)throws Exception{
+		session.insert(namespace+".registerStore", storeDTO);
+	}
+	//랜덤 스토어명 생성
+	@Override
+	public void randomStore(StoreDTO storedDTO)throws Exception{
+		session.update(namespace+".randomName", storedDTO);
+	}
+	//중복된 상점명 찾기
+	@Override
+	public List<StoreDTO> listStore() throws Exception{
+		return session.selectList(namespace+".listStore");
+	}
+	
 
 	
 }

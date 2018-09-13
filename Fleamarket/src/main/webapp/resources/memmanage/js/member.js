@@ -1,63 +1,66 @@
 
-function validate() {
-	var passwordCheck = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
-	var emailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+function check() {
+	
+	//변수를 선언합니다.
+	var emailCh = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	
+    var memail = document.getElementById("memail");
+    var pw = document.getElementById("mpw");
+	
 	// 이메일이 적합한지 검사할 정규식
-
-	var mail = document.getElementById("email");
-	var pw = document.getElementById("pw");
-	var num1 = document.getElementById("unum1");
-	var num2 = document.getElementById("unum2");
-
-	// ------------ 이메일 까지 -----------
-
-	if (!check(emailCheck, email, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+	
+  	if (frm.memail.value == "") {
+		alert("이메일을 입력해 주세요");
+		frm.memail.focus();
 		return false;
 	}
 
-	if (!check(re, pw, "패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+	if(frm.mpw.value ==""){
+		alert("비밀번호를 입력해 주세요");
+		frm.mpw.focus();
 		return false;
 	}
-
-	if (frm.mpw.value != frm.chpw.value) {
-		alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
-		join.chpw.value = "";
-		join.chpw.focus();
-		return false;
-	}
-
-	if (frm.mname.value == "") {
+	
+    if (document.frm.mpw.value.length<4 || document.frm.mpw.value.length>12) {
+        alert("비밀번호를 4~12자까지 입력해주세요.")
+        document.frm.mpw.focus()
+        document.frm.mpw.select()
+        return false;
+    }
+	
+  	if (frm.mname.value == "") {
 		alert("이름을 입력해 주세요");
-		join.mname.focus();
+		frm.mname.focus();
 		return false;
 	}
 	
 	if (frm.mphone.value == "") {
 		alert("전화번호를 입력해 주세요");
-		join.mphone.focus();
+		frm.mphone.focus();
 		return false;
 	}
 	
-	if(frm.maddress.value == ""){
+	if(frm.address.value == ""){
 		alert("주소를 입력해 주세요");
-		join.maddress.focus();
+		frm.address.focus();
 		return false;
 	}
 	
-	if(join.maddress2.value == ""){
-		alert("주소를 입력해 주세요");
-		join.maddress2.focus();
+	if(frm.address2.value == ""){
+		alert("상세 주소를 입력해 주세요");
+		frm.address2.focus();
 		return false;
 	}
+} 
 
+function pwCheck(){
+	var mpw = $('#mpw').val();
+	var chpw = $('#chpw').val();
+	if(mpw != chpw){
+		$('#passwordCheckMessage').html('비밀번호가 일치하지 않습니다.');
+	}else{
+		$('#passwordCheckMessage').html('');		
+	}	
 }
 
-function check(re, what, message) {
-	if (re.test(what.value)) {
-		return true;
-	}
-	alert(message);
-	what.value = "";
-	what.focus();
-	// return false;
-}
+
