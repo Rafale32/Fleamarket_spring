@@ -118,7 +118,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(data){
 				
-				$("#cate").append("<select name='subsubname' id='subsubname'>");
+				$("#cate").append("<select name='sub_No' id='subsubname'>");
 				$.each(data,function(key,value) {
 					
 				//	$("#subsubname").empty();
@@ -173,9 +173,10 @@ $(function() {
 		return false;
 	});*/
 
-	$('body').on('click','.imgs_wrap_now .btn', function(){
+	$('body').on('click','.imgs_wrap .btn', function(e){
+		//e.preventDefault(); 
 		var img = $(this).val();
-		var b =img.split('/');
+		var b =img.split('|');
 		var big_Img , thum_Img, index;
 		var cnt=0;
 		for (let tmp of b) {
@@ -191,11 +192,11 @@ $(function() {
 			cnt++;
 		}
 		
-		//alert(big_Img+":::::::::"+thum_Img);
+		alert(big_Img+":::::::::"+thum_Img);
 		
 		if(confirm("이미지를 삭제 하시겠습니까?")){
 			$.ajax({
-				url: "/fleamarket/product/imgdelete?big_Img="+big_Img+"&thum_Img="+thum_Img,
+				url: "/fleamarket/productajax/oneimgdelete?big_Img="+big_Img+"&thum_Img="+thum_Img,
 				type: "post",
 				success: function(){
 					$(".img"+index).remove();
@@ -216,7 +217,7 @@ $(function() {
 	var cnt = 1;
 	
 	$("#inputimgs").change( function(event) {
-		alert("asdf");
+		//alert("asdf");
 		
 		event.preventDefault();
 		
@@ -256,7 +257,7 @@ $(function() {
 							  +"<small data-src="+data+">X</small></div></div>";
 				  }
 				  
-				  alert(getFileInfo(data).fullName);
+				  //alert(getFileInfo(data).fullName);
 				  //서버에 업로드한상태인 파일의 이름을 각각 히든으로 남겨서 처리 함
 				  
 				  $(".uploadedList").append(str);

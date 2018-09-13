@@ -13,4 +13,6 @@ public interface ProductListDAO {
 	
 	public List<ItemDTO> productListByStore(String storeName, int startRow);
 	
+	public void productDelete(int itemboard_No);
+	
 }

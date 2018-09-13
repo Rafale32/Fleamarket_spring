@@ -93,7 +93,7 @@ public class SafepayController {
 	    
 	    // 상품 배송진행상태 수정
 	    System.out.println("*상품 배송진행상태 수정*");
-	    System.out.println("상품 배송진행상태 : "+itemDTO.getDelivery_State());
+	    System.out.println("상품 배송진행상태 : "+itemDTO.getItem_delivery_State());
 	    
 //	    service.updateItemDeliveryState(itemDTO);
 	    

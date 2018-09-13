@@ -16,6 +16,7 @@ import com.sp.mainDetail.domain.SubCategoryDTO;
 import com.sp.memManage.domain.MemManageDTO;
 import com.sp.memManage.domain.StoreDTO;
 import com.sp.product.domain.CateDTO;
+import com.sp.product.domain.CateSubDTO;
 import com.sp.product.domain.ItemDTO;
 import com.sp.product.domain.PageModel;
 import com.sp.safepay.domain.DeliveryDTO;
@@ -42,9 +43,10 @@ public class Bean  {
 	List<ItemDTO> itemList;
 	private HttpServletRequest request;
 	//List<String> cateList; //카테고리 리스트  //수정 폼에서는 대 카테로 쓰임
-	List<String> sub_cateList; // 물품 수정폼에서 쓰기위해 만듬
-	List<CateDTO> cateList;//대분류 카테고리 객체 리스트
-	PageModel pageModel;//페이지 처리위한넘
+	private List<String> sub_cateList; // 물품 수정폼에서 쓰기위해 만듬
+	private List<CateDTO> cateList;//대분류 카테고리 객체 리스트
+	private PageModel pageModel;//페이지 처리위한넘
+	private List<CateSubDTO> subCate;//수정폼에서 대분류별로 카테고리 뿌려 쓰기위함
 	
 	//추천상품리스트 추가
 	private List<RecommendDTO> recommend;
@@ -80,6 +82,13 @@ public class Bean  {
 
 	public PaymentDTO getPaymentDTO() {
 		return paymentDTO;
+	}
+
+	public List<CateSubDTO> getSubCate() {
+		return subCate;
+	}
+	public void setSubCate(List<CateSubDTO> subCate) {
+		this.subCate = subCate;
 	}
 	public DeliveryDTO getDeliveryDTO() {
     return deliveryDTO;

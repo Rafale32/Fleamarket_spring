@@ -41,10 +41,10 @@
 	
 		<form action="/fleamarket/product/addproduct" onsubmit="return addCheck()" method="post" enctype="multipart/form-data" name="multipleUpload">
 		
- 		   
- 		       <p class="title">업로드할 이미지를 선택해 주세요</p>
- 		       
- 		       
+ 		   		
+ 		      <p class="title">업로드할 이미지를 선택해 주세요</p>
+ 		      
+ 		      
 		      <div id="imgfiles">
 		       		<input type="file" class="file_tag" id="inputimgs" name="inputimgs"/>
 		       </div>
@@ -53,7 +53,7 @@
 		           
 		       </div>
 		       <div class="uploadedList">
-		       
+		       		
 		       </div>
 		   </div>
 		   <div class="hiddenimg">
@@ -84,7 +84,7 @@
 				<label>거래지역:</label>
 
 				<div>
-					<input type="text" placeholder="선호 거래 지역" autocomplete="on" value="" name="local">
+					<input type="text" placeholder="선호 거래 지역" autocomplete="on" value="" name="itemboard_Local">
 
 				</div>
 				<div >
@@ -101,11 +101,11 @@
 				<label>상태:</label>
 
 				<div >
-					<select name="item_state">
-						<option >새상품</option>
-						<option >상</option>
-						<option >중</option>
-						<option >하</option>
+					<select name="item_State">
+						<option value="0">새상품</option>
+						<option value="1">상</option>
+						<option value="2">중</option>
+						<option value="3">하</option>
 					</select>
 				</div>
 			</div>
@@ -114,21 +114,20 @@
 
 				<div>
 					<input type="text" class="form-control" id="input_name" placeholder="제목 (최대 100자)" autocomplete="on" 
-					name="title"/>
+					name="itemboard_Title"/>
 				</div>
 			</div>
 			<div>
 				<label>가격:</label>
 
 				<div >
-					<input type="number" placeholder="10000 (가격은 숫자로 만 입력)"  name="price">
+					<input type="number" placeholder="10000 (가격은 숫자로 만 입력)"  name="item_Price">
 
 					<div>
-						<label> <input type="checkbox" name="delivery_fee">택배비포함
-						</label>
+						<label> <input type="checkbox" name="deliveryIs">택배비포함</label>
 					</div>
 					<div >
-						<label> <input id="input_exchg" type="checkbox" name="change_ornot"><i></i>교환가능</label> 
+						<label> <input id="input_exchg" type="checkbox" name="changeIs"><i></i>교환가능</label> 
 					</div>
 				</div>
 			</div>
@@ -137,7 +136,7 @@
 
 				<div>
 					<textarea class="form-control" rows="30" cols="100"
-						placeholder="상품설명은 2000자까지 가능합니다." name="itemboard_contents"></textarea>
+						placeholder="상품설명은 2000자까지 가능합니다." name="itemboard_Contents"></textarea>
 				</div>
 			</div>
 			<div>
@@ -148,7 +147,7 @@
 				</div>
 			</div>
 				<label>수량:</label>
-				<input type="number" placeholder="1" value="1" name="amount"/>
+				<input type="number" placeholder="1" value="1" name="item_Amount"/>
 				
 				<br>
 				<input type="submit" value="등록">

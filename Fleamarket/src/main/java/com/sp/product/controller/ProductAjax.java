@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sp.product.domain.CateSubDTO;
+import com.sp.product.domain.ItemImg;
 import com.sp.product.service.AddproductService;
+import com.sp.product.service.ProductService;
 import com.sp.util.MediaUtils;
 import com.sp.util.UploadFileUtils;
 
@@ -34,6 +36,9 @@ public class ProductAjax {
 	
 	@Inject
 	private AddproductService service;
+	
+	@Inject
+	private ProductService pService;
 	
 	@RequestMapping(value = "/getsubcate", method = RequestMethod.POST)
 	public ResponseEntity<List<CateSubDTO>> getSubCate(@RequestParam("category_no") Integer category_No){
@@ -101,7 +106,7 @@ public class ProductAjax {
 	}
 	
 	
-	  
+	  //이건 글 등록 할때와 수정할때 서버상에만 올린 파일 삭제할때 사용하는것 
 	  @RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	  public ResponseEntity<String> deleteFile(String fileName){
 	    
@@ -123,4 +128,18 @@ public class ProductAjax {
 	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	  }  
 	
+	  
+	  
+	  //이건 글 수정할때 서버와 디비에 까지 올린 그림 하나씩 삭제할때 사용
+	  @RequestMapping(value = "oneimgdelete", method = RequestMethod.POST)
+	  public void oneImgDelete(ItemImg img)throws Exception{
+		  
+		  File big = new File(uploadPath+img.getBig_Img());
+		  File thimg = new File(uploadPath+img.getThum_Img());
+		  big.delete();
+		  thimg.delete();
+		  
+		  pService.oneImgDelete(img);
+		  
+	  }
 }

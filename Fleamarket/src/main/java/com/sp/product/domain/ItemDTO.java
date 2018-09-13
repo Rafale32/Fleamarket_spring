@@ -2,15 +2,21 @@ package com.sp.product.domain;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사용하는 객체 무조건 시리얼라이즈 필수적으로 해줘야함  
 	
 	//이미지 여러게 담는곳 
-	List<ItemImg> itemImgList;
+	private List<ItemImg> itemImgList;
+	
+	private String[] files;
 	
 	private String member_email;// 현재 사용자 아이디
 	private int sub_No; //섭카테고리 넘버
+	private int category_No;//대카테고리 넘버
 	private String category_Title; //대 카테고리 이름 CATEGORY_TITLE
 	private String sub_Title; // 소 카테고리 이름
 	private Date itemboard_Date; //등록일자
@@ -21,30 +27,71 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	private int itemboard_Viewcount; //조회수
 	private int itemboard_Recommend_b; //추천상품  구현안할듯 지금은 
 	private int itemboard_Change_b; //교환 가능 여부
+	
+	private boolean deliveryIs;//택배비포함여부 뷰단값
+	private boolean changeIs;//교환 가능 뷰단 값
+	
 	private int item_No; // 상품 번호
 	private int itemboard_No = 0; // 게시판글 번호
 	private int store_No; // 상점 번호
 	private int itemboard_Delete_B;//삭제 유무
 	
 	private int price; //물품 가격
+	private int item_Price;
 	
 	private int favCount; // 다른사람이 찜 한 횟수
 	
 	private int itemQnaCount; //상품문의 리플 수
 	
 	private int item_State; // 상품의 상태 새상품 상중하
-	private int delivery_Fee;// 배송비 포함 여부
-	private int amount; //상품 수량
+	private int item_Delivery_B;// 배송비 포함 여부
+	private int item_Amount; //상품 수량
 
 	// 20180818 재헌 상점이름, 배송 유무
 	private String store_Name;
 	// private String delivery_fee;
 	// 20180818 재헌 배송진행상태
-	private int delivery_State;
+	private int item_delivery_State;
 	
 	
 	
 	public ItemDTO() { }
+
+
+
+	public int getCategory_No() {
+		return category_No;
+	}
+
+
+
+	public void setCategory_No(int category_No) {
+		this.category_No = category_No;
+	}
+
+
+
+	public boolean isDeliveryIs() {
+		return deliveryIs;
+	}
+
+
+
+	public void setDeliveryIs(boolean deliveryIs) {
+		this.deliveryIs = deliveryIs;
+	}
+
+
+
+	public boolean isChangeIs() {
+		return changeIs;
+	}
+
+
+
+	public void setChangeIs(boolean changeIs) {
+		this.changeIs = changeIs;
+	}
 
 
 
@@ -57,7 +104,21 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	public void setItemImgList(List<ItemImg> itemImgList) {
 		this.itemImgList = itemImgList;
 	}
-	
+
+
+
+	public String[] getFiles() {
+		return files;
+	}
+
+
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
+
+
 	public String getMember_email() {
 		return member_email;
 	}
@@ -262,6 +323,18 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 
 
 
+	public int getItem_Price() {
+		return item_Price;
+	}
+
+
+
+	public void setItem_Price(int item_Price) {
+		this.item_Price = item_Price;
+	}
+
+
+
 	public int getFavCount() {
 		return favCount;
 	}
@@ -298,26 +371,26 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 
 
 
-	public int getDelivery_Fee() {
-		return delivery_Fee;
+	public int getItem_Delivery_B() {
+		return item_Delivery_B;
 	}
 
 
 
-	public void setDelivery_Fee(int delivery_Fee) {
-		this.delivery_Fee = delivery_Fee;
+	public void setItem_Delivery_B(int item_Delivery_B) {
+		this.item_Delivery_B = item_Delivery_B;
 	}
 
 
 
-	public int getAmount() {
-		return amount;
+	public int getItem_Amount() {
+		return item_Amount;
 	}
 
 
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setItem_Amount(int item_Amount) {
+		this.item_Amount = item_Amount;
 	}
 
 
@@ -334,21 +407,35 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 
 
 
-	public int getDelivery_State() {
-		return delivery_State;
+	public int getItem_delivery_State() {
+		return item_delivery_State;
 	}
 
 
 
-	public void setDelivery_State(int delivery_State) {
-		this.delivery_State = delivery_State;
+	public void setItem_delivery_State(int item_delivery_State) {
+		this.item_delivery_State = item_delivery_State;
 	}
 
 
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "ItemDTO [itemImgList=" + itemImgList + ", files=" + Arrays.toString(files) + ", member_email="
+				+ member_email + ", sub_No=" + sub_No + ", category_Title=" + category_Title + ", sub_Title="
+				+ sub_Title + ", itemboard_Date=" + itemboard_Date + ", itemboard_Local=" + itemboard_Local
+				+ ", itemboard_Title=" + itemboard_Title + ", itemboard_Contents=" + itemboard_Contents + ", tag=" + tag
+				+ ", itemboard_Viewcount=" + itemboard_Viewcount + ", itemboard_Recommend_b=" + itemboard_Recommend_b
+				+ ", itemboard_Change_b=" + itemboard_Change_b + ", deliveryIs=" + deliveryIs + ", changeIs=" + changeIs
+				+ ", item_No=" + item_No + ", itemboard_No=" + itemboard_No + ", store_No=" + store_No
+				+ ", itemboard_Delete_B=" + itemboard_Delete_B + ", price=" + price + ", item_Price=" + item_Price
+				+ ", favCount=" + favCount + ", itemQnaCount=" + itemQnaCount + ", item_State=" + item_State
+				+ ", item_Delivery_B=" + item_Delivery_B + ", item_Amount=" + item_Amount + ", store_Name=" + store_Name
+				+ ", item_delivery_State=" + item_delivery_State + "]";
+	}
+
+
+
 	
 	
 }
