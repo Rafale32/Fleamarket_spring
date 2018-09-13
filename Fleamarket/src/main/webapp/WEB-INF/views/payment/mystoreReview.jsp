@@ -32,7 +32,7 @@
 			<tr><td colspan="2">구매 title: ${p.itemboard_title}</td></tr>
 			<tr><td colspan="2">리뷰 별점 :${p.review_star}</td></tr>
 			<tr>
-				<td colspan="2" height="50%"><c:choose>
+				<td colspan="2" ><c:choose>
 
 						<c:when test="${p.review_star == 0}">
 							<img alt="별점이미지"
@@ -72,5 +72,28 @@
 		</c:forEach>
 	</table>
 	</div>
+	
+	
+	<!-- paging -->
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li><a
+					href="mystoreReview${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+					<a href="mystoreReview${pageMaker.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a
+					href="mystoreReview${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		
+		
 </body>
 </html>
