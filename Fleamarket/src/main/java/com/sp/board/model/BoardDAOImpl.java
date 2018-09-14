@@ -33,6 +33,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public BoardDTO read(Integer notice_no) throws Exception {
 		System.out.println("|BoardDAO| read ¹øÈ£");
 		return session.selectOne(namespace + ".read", notice_no);
+//		return session.selectOne(namespace + ".read", notice_no);
 	}
 
 //	@Override
