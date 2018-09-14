@@ -33,7 +33,7 @@
 		<update id="randomName" parameterType="StoreDTO">
 		update store set store_name=(SELECT DBMS_RANDOM.STRING('A', 8) FROM DUAL)
 		where member_email =#{member_email}
-		</update>	
+		</update>
 
 	
 	<!-- 상점 중복 확인  -->
