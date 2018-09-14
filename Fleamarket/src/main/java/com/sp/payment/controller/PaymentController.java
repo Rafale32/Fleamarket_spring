@@ -261,7 +261,34 @@ public class PaymentController {
 	}
 	
 	
+	//해자
 	
+	@RequestMapping(value = "/tempalram", method = RequestMethod.GET)
+	public void tempalram(Model model,HttpSession session,Criteria2 cri) throws Exception{
+		
+		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
+		MemManageDTO dto = (MemManageDTO) session.getAttribute("member");
+		String loginEmail = dto.getMember_email();
+		dto2.setMember_email(loginEmail);
+		List<PuerchaseDTO_gy> list	= service.listPuerchase(dto2,cri);
+		model.addAttribute("list", list);
+		//return "/payment/buy_list_gy";
+		System.out.println(list.get(0).toString());
+		//페이징
+		
+		 PageMaker pagemaker = new PageMaker();
+		 pagemaker.setCri(cri);
+         //pagemaker.setTotalCount(131);
+         //여기가 중요 service.puerchasecounting(dto2)
+		 
+		 int a = service.puerchasecounting(dto2);
+		 System.out.println(a + " : 에이 값");
+		 
+         pagemaker.setTotalCount(a);
+         model.addAttribute("pageMaker",pagemaker);
+		
+	}
+		
 	
 	
 	

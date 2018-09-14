@@ -74,7 +74,7 @@
 </tr>
 
 				<tr><td colspan="2">리뷰 :${p.review_contents}</td></tr>
-
+				<tr><td colspan="2"><a href="/fleamarket/payment/tempalram">시험작</a></td></tr>
 			<tr></tr>
 		</c:forEach>
 	</table>

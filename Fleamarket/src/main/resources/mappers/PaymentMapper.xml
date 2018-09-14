@@ -142,7 +142,33 @@
 	and S.Store_No = #{Store_No}
 	</select>
 	
+	<!-- alram_section -->
 	
+	<select id="makeSearcharam" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
+	select Ite.Itemboard_Title, I.Item_Delivery_State,
+            I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
+            S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
+          from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
+          ,pay p
+        where O.Member_No = M.Member_No
+          and O.Item_No = I.Item_No
+          and I.Item_No = Ite.Item_No
+          and Ite.Store_No = S.Store_No
+          and Img.Itemboard_No = Ite.Itemboard_No
+          and P.Oorder_No = O.Oorder_No
+     and I.Item_No in
+     <foreach collection="member_list" item="MystoreDTO_gy" index="index" separator="," open="(" close=")">
+     #{itemboard_no}
+     </foreach>
+	</select>
+	
+	<select id="makearamsecond" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
+	select *
+	from Member m , Store s,Itemboard ite
+	where M.Member_No =S.Member_No
+	and S.Store_No = Ite.Store_No
+	and M.Member_Email = #{member_email}
+	</select>
 	
 
 

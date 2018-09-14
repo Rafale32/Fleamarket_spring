@@ -164,6 +164,14 @@ public class PuerchaseDTO_gy implements Serializable {
 		this.pay_date = pay_date;
 	}
 
+	@Override
+	public String toString() {
+		return "PuerchaseDTO_gy [itemboard_no=" + itemboard_no + ", member_email=" + member_email + ", itemboard_title="
+				+ itemboard_title + ", item_delivery_state=" + item_delivery_state + ", item_price=" + item_price
+				+ ", item_no=" + item_no + ", store_name=" + store_name + ", thum_img=" + thum_img + ", pay_date="
+				+ pay_date + ", store_no=" + store_no + ", inform_contents=" + inform_contents + "]";
+	}
+
 	
 
 	
