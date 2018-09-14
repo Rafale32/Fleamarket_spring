@@ -8,14 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-템플릿
 	<!-- 헤더영역 -->
 	<tiles:insertAttribute name="header"/>
-	<hr>
+
 	
 	<!-- 메뉴영역 -->
 	<tiles:insertAttribute name="leftmenu"/>
-	<hr>
+
 	
 	<!-- 바디영역 -->
 	<tiles:insertAttribute name="body"/>

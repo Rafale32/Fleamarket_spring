@@ -15,6 +15,10 @@
 #searchForm {
   margin-left: 200px;
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
 </style>
 </head>
 
