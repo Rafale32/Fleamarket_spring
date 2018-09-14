@@ -66,12 +66,48 @@
   
   <!-- 구매자 포인트 수정 -->
   <!-- 보유포인트-소모포인트+적립포인트 -->
-  <update id="updateMemberPoint" parameterType="int">
+  <update id="updateMemberPoint" parameterType="MemManageDTO">
     update member set
     member_point = #{member_point}
     where member_no = #{member_no}
   </update>
   
+  
+  
+  <!-- 주문상세내역 들어갈 때-->
+  <!-- 주문내역 -->
+  <select id="findOrder" resultType="OorderDTO">
+    select * from oorder where item_no=#{item_no}
+  </select>
+  
+  <!-- 상품정보 -->
+  <select id="findItem" resultType="ItemDTO">
+    select * from itemboard ib, item i, store s
+    where ib.item_no = i.item_no
+    and ib.store_no = s.store_no
+    and ib.item_no = #{item_no}
+  </select>
+  
+  <!-- 결제내역 -->
+  <select id="findPayment" resultType="PaymentDTO">
+    select * from pay where oorder_no=
+    (select oorder_no from oorder where item_no=#{item_no})
+  </select>
+  
+  <!-- 배송정보 -->
+  <select id="findDeli" resultType="DeliveryDTO">
+    select * from delivery where oorder_no=
+    (select oorder_no from oorder where item_no=#{item_no})
+  </select>
+  
+  <!-- 상품이미지 가져오기 -->
+  <select id="findImg"  resultType="ItemImgDTO_jh" >
+    select THUM_IMG from
+      (select DISTINCT thum_img from itemimg where itemboard_no=
+        (select itemboard_no from itemboard where item_no = #{item_no})
+      )
+    where ROWNUM=1
+  </select>
   
 
 

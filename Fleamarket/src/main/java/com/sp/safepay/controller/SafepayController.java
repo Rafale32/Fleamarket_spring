@@ -31,8 +31,6 @@ public class SafepayController {
 	
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public void orderGET(@RequestParam("item_no") int item_no,HttpSession session, Locale locale, Model model) throws Exception {
-	  
-	  
 	  System.out.println("orderGET");
 		Bean bean = new Bean();
 		//test user
@@ -48,10 +46,14 @@ public class SafepayController {
 		OorderDTO oorderDTO = new OorderDTO();
 		oorderDTO.setOorder_no(service.selectOrderNo());
 		bean.setOorderDTO(oorderDTO);
+		
+		// 이미지
+		bean.setItemImgDTO_jh(service.findImg(item_no));
 
 		model.addAttribute("bean", bean );
 		
 	}
+	
 	
 	@RequestMapping(value = "/order", method = RequestMethod.POST)
 	public String orderPOST(
@@ -59,10 +61,12 @@ public class SafepayController {
 	    OorderDTO oorderDTO,
 	    PaymentDTO paymentDTO,
 	    DeliveryDTO deliveryDTO,
+	    MemManageDTO memManageDTO,
 	    Locale locale, Model model,
 	    HttpServletRequest request)throws Exception {
 	  System.out.println("orderPOST"); 
-    request.setCharacterEncoding("UTF8");
+//    request.setCharacterEncoding("UTF8");
+	  
 	    // 주문정보입력
 	    System.out.println("*주문정보*");
 	    System.out.println("주문번호 : " + oorderDTO.getOorder_no());
@@ -100,13 +104,12 @@ public class SafepayController {
 
 	    // 멤버 포인트 소모 및 적립 수정
 	    System.out.println("*회원 포인트 소모 및 적립 수정");
-	    service.updateMemberPoint(oorderDTO.getMember_no());
+	    System.out.println("회원번호 : " + memManageDTO.getMember_no());
+	    System.out.println("사용포인트 소모 및 포인트 적립 : " + memManageDTO.getMember_point());
+	    
+	    service.updateMemberPoint(memManageDTO);
     
-
-	  
-	  
-//	  model.addAttribute("bean", bean );
-	  return "redirect:/safepay/order_detail";
+	  return "redirect:/safepay/order_detail?item_no="+oorderDTO.getItem_no();
 	}
 	
 	
@@ -114,8 +117,27 @@ public class SafepayController {
 	
 	
 	@RequestMapping(value = "/order_detail", method = RequestMethod.GET)
-	public void order_detail(Locale locale, Model model) {
+	public void order_detail(@RequestParam("item_no") int item_no, Locale locale, Model model)throws Exception {
+	  System.out.println("order_detailGET");
 	  Bean bean = new Bean();
+	  
+	  // 주문내역 불러오기
+	  bean.setOorderDTO(service.findOrder(item_no));
+	  
+	  // 상품정보 불러오기
+	  bean.setItemDTO(service.findItem(item_no));
+	  
+	  // 결제내역 불러오기
+	  bean.setPaymentDTO(service.findPayment(item_no));
+	  
+	  // 배송정보 불러오기
+	  bean.setDeliveryDTO(service.findDeli(item_no));
+	  
+	  // 이미지 불러오기
+    bean.setItemImgDTO_jh(service.findImg(item_no));
+	  
+	  
+	  
 	  
 	  model.addAttribute("bean", bean );
 	  
