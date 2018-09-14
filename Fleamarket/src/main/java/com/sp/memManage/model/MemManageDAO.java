@@ -22,7 +22,7 @@ public interface MemManageDAO {
 	
 	//스토어 생성
 	public void registerStore(StoreDTO storeDTO)throws Exception;
-	//랜던 상정명 회성
+	//랜던 상정명 생성
 	public void randomStore(StoreDTO storeDTO)throws Exception;
 	//중복된 상점명 찾기
 	public List<StoreDTO> listStore()throws Exception;

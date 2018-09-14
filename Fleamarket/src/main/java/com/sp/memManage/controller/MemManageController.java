@@ -98,11 +98,11 @@ public class MemManageController {
 	public String registerPOST(MemManageDTO memManageDTO, StoreDTO storeDTO, Model model) throws Exception {
 		//컨트롤러에서 빈 파일에 필요한 객체 담은후 모델에 빈을 담아서 뷰에서 사용
 		Bean bean = new Bean();
-		System.out.println(memManageDTO);
+
 		
 		service.registerMember(memManageDTO);
 		service.registerStore(storeDTO);
-		service.randomStore(storeDTO);
+	//	service.randomStore(storeDTO);
 		
 		model.addAttribute("bean", bean );
 		
