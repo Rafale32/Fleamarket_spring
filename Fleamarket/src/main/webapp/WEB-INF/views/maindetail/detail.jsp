@@ -13,7 +13,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <script id="template" type="text/x-handlebars-template">
-{{#each .}}
 <li class="replyLi" data-item_qna_no={{item_qna_no}}>
 <div class="comments-wrapper">
 	<div class="comment-item">
@@ -25,36 +24,54 @@
 					</div>
 				</div>
 				<div class="comment-content">{{item_qna_contents}}</div>
-				{{#abc member_no}}
-					<a href="">
+					<a href="deleteQnaAction.do?item_qna_no=${qnaList.item_qna_no}&itemboard_no=${bean.itemDetail.itemboard_no}">
 						<div class="delete-qna">삭제하기</div>
 					</a>
-				{{/abc}}
 				<div class="split"></div>
 			</div>
 		</div>
 	</div>
 </div>
 </li>
-{{/each}}
 </script>
 
-<script>
-Handlebars.registerHelper("prettifyDate", function(timeValue) {
-	var dateObj = new Date(timeValue);
-	var year = dateObj.getFullYear();
-	var month = dateObj.getMonth() + 1;
-	var date = dateObj.getDate();
-	return year + "/" + month + "/" + date;
-});
+<script id="template2" type="text/x-handlebars-template">
+<li class="replyLi" data-item_qna_no={{item_qna_no}}>
+<div class="comments-wrapper">
+	<div class="comment-item">
+		<div class="comment-item-wrapper">
+			<div class="comment-info-wrapper">
+				<div class="comment-info-header">
+					<div class="comment-writer-name">
+						<a href="">{{store_name}}</a>
+					</div>
+				</div>
+				<div class="comment-content">{{item_qna_contents}}</div>
+				<div class="split"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</li>
+</script>
 
-/* Handlebars.registerHelper("abc", function(no){
+
+<script>
+
+
+/* Handlebars.registerHelper('list',function(items, options){
 	var member_noObj = $("#member_no");
 	var member_no = member_noObj.val();
+	alert(member_no);
+	var out = "<div>";
 	
-	if(no == member_no){
-		return no.fn(this);
+	for(var i=0, l=items.length; i<l; i++){
+	  if(member_no == (options.fn(items[i]) ){
+		  out = out+"<a>"+ 삭제하기 + "</a>";
+	  }
 	}
+	
+	return out + "</div>";
 }); */
 
 var printData = function(replyArr, target, templateObject){
@@ -62,7 +79,7 @@ var printData = function(replyArr, target, templateObject){
 	var template = Handlebars.compile(templateObject.html());
 	
 	var html = template(replyArr);
-	$(".replyLi").remove();
+ 	$(".replyLi").remove();
 	target.after(html);
 }
 </script>
@@ -82,9 +99,23 @@ getAllList();
 //댓글목록리스트
 function getAllList(){
 	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
-	 
-		printData(data, $("#repliesDiv"), $("#template"));
-		console.log(data);
+	  
+		var member_noObj = $("#member_no");
+		var member_no = member_noObj.val();
+		
+		$.each(data, function(index, item) {
+			if(member_no == item.member_no){
+				var source = $("#template").html();
+				var template = Handlebars.compile(source);
+				$("#repliesDiv").after(template(item));
+			}else{
+				var source = $("#template2").html();
+				var template = Handlebars.compile(source);
+				$("#repliesDiv").after(template(item));
+			}
+// 			printData(data, $("#repliesDiv"), $("#template"));
+			console.log(item);
+		});
 	}); 
 }  
   
@@ -132,6 +163,7 @@ function getAllList(){
   			console.log("result: "+result);
   			if(result == 'SUCCESS'){
   				alert("등록되었습니다.");
+  				$("#replyLi").remove();
   				getAllList();
   				member_noObj.val("");
   				item_qna_contentsObj.val("");
