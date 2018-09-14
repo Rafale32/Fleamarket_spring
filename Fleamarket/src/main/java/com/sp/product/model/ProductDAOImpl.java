@@ -42,6 +42,36 @@ public class ProductDAOImpl implements ProductDAO{
 		session.delete(namespace+".oneImgDelete", img);
 		
 	}
+
+	@Override
+	public void itemModify(ItemDTO itemDTO) throws Exception {
+		
+		session.update(namespace+".updateItem", itemDTO);
+	}
+
+	@Override
+	public void itemBoardModify(ItemDTO itemDTO) throws Exception {
+		
+		session.update(namespace+".updateItemBoard", itemDTO);
+	}
+
+	@Override
+	public void tagModify(ItemDTO itemDTO) throws Exception {
+		
+		session.update(namespace+".tagModify", itemDTO);
+	}
+
+	@Override
+	public List<ItemDTO> searchAll(String subj) throws Exception {
+		
+		return session.selectList(namespace+".searchAll", subj);
+	}
+
+	@Override
+	public String getOneImg(int itemboard_No) throws Exception {
+		
+		return session.selectOne(namespace+".getOneImg", itemboard_No);
+	}
 	
 
 	

@@ -39,6 +39,8 @@ public class ItemDTO implements Serializable { // 마이바티스는 DTO 로 사
 
 	private int price; // 물품 가격
 	private int item_Price;
+	
+	private String thumImg;//하나의 섬네일 이미지 검색에서 담기위한놈
 
 	private int favCount; // 다른사람이 찜 한 횟수
 
@@ -55,6 +57,14 @@ public class ItemDTO implements Serializable { // 마이바티스는 DTO 로 사
 	private int item_delivery_State;
 
 	public ItemDTO() {
+	}
+
+	public String getThumImg() {
+		return thumImg;
+	}
+
+	public void setThumImg(String thumImg) {
+		this.thumImg = thumImg;
 	}
 
 	public List<ItemImg> getItemImgList() {
@@ -295,6 +305,22 @@ public class ItemDTO implements Serializable { // 마이바티스는 DTO 로 사
 
 	public void setItem_delivery_State(int item_delivery_State) {
 		this.item_delivery_State = item_delivery_State;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemDTO [itemImgList=" + itemImgList + ", files=" + Arrays.toString(files) + ", member_email="
+				+ member_email + ", sub_No=" + sub_No + ", category_No=" + category_No + ", category_Title="
+				+ category_Title + ", sub_Title=" + sub_Title + ", itemboard_Date=" + itemboard_Date
+				+ ", itemboard_Local=" + itemboard_Local + ", itemboard_Title=" + itemboard_Title
+				+ ", itemboard_Contents=" + itemboard_Contents + ", tag_Name=" + tag_Name + ", itemboard_Viewcount="
+				+ itemboard_Viewcount + ", itemboard_Recommend_b=" + itemboard_Recommend_b + ", itemboard_Change_b="
+				+ itemboard_Change_b + ", deliveryIs=" + deliveryIs + ", changeIs=" + changeIs + ", item_No=" + item_No
+				+ ", itemboard_No=" + itemboard_No + ", store_No=" + store_No + ", itemboard_Delete_B="
+				+ itemboard_Delete_B + ", price=" + price + ", item_Price=" + item_Price + ", thumImg=" + thumImg
+				+ ", favCount=" + favCount + ", itemQnaCount=" + itemQnaCount + ", item_State=" + item_State
+				+ ", item_Delivery_B=" + item_Delivery_B + ", item_Amount=" + item_Amount + ", store_Name=" + store_Name
+				+ ", item_delivery_State=" + item_delivery_State + "]";
 	}
 
 }

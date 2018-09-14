@@ -108,7 +108,7 @@ public class ProductController {
 		model.addAttribute(bean);
 	}
 	
-	@RequestMapping( value = "/addproduct", method = RequestMethod.POST)//물품 추가 폼 페이지 가는부분 대 카테로리만 필요
+	@RequestMapping( value = "/addproduct", method = RequestMethod.POST)
 	public String addproduct(ItemDTO itemDTO, Model model, HttpSession session){
 		Bean bean = new Bean();
 		MemManageDTO member = (MemManageDTO)session.getAttribute("member");
@@ -143,7 +143,18 @@ public class ProductController {
 	
 	
 	
-	
+	@RequestMapping( value = "/productmodify", method = RequestMethod.POST)
+	public String productModify(ItemDTO itemDTO, Model model, HttpSession session)throws Exception{
+		Bean bean = new Bean();
+		MemManageDTO member = (MemManageDTO)session.getAttribute("member");
+		itemDTO.setMember_email(member.getMember_email());
+		
+		service.productModify(itemDTO);
+		
+		
+//		model.addAttribute(bean);
+		return "redirect:/product/productlist";
+	}
 	
 	
 	

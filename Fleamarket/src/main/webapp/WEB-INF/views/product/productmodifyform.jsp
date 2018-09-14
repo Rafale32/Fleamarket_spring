@@ -7,12 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
   <script src="../resources/product/jquery-3.1.0.js"></script>
     <!-- 부트스트랩 -->
-	<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
-  rel="stylesheet" type="text/css" />
+	<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/product/addProduct.js"></script>
 	<script src="../resources/product/upload.js"></script>
-  
+	
     <script type="text/javascript">
 	    function addCheck(e) {
 	    	if (confirm("상품을 수정 하시겠습니까?")) 
@@ -66,9 +65,10 @@
 		   <div class="hiddenimg">
 		   		
 		   </div>
-		   
+		   <input type="hidden" value="${bean.itemDTO.itemboard_No }" name="itemboard_No">
 			
 			<div>
+			
 				<label >카테고리:</label>
 				<div>
 					<select name="subname" id="subname">
@@ -86,7 +86,7 @@
 					</select>
 				</div>
 				<div id="cate">
-					<select name="subsubname" id="subsubname">
+					<select name="sub_No" id="subsubname">
 						<c:forEach var="tmp" items="${bean.subCate }" >
 							<c:choose>
 								<c:when test="${tmp.sub_No == bean.itemDTO.sub_No}">

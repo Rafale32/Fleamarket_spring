@@ -16,4 +16,13 @@ public interface ProductDAO {
 	
 	public void oneImgDelete(ItemImg img)throws Exception;
 	
+	public void itemModify(ItemDTO itemDTO)throws Exception;
+	
+	public void itemBoardModify(ItemDTO itemDTO)throws Exception;
+	
+	public void tagModify(ItemDTO itemDTO)throws Exception;
+	
+	public List<ItemDTO> searchAll(String subj)throws Exception;
+	
+	public String getOneImg(int itemboard_No)throws Exception;
 }

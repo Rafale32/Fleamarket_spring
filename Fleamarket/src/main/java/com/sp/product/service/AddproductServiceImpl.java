@@ -76,6 +76,7 @@ public class AddproductServiceImpl implements AddproductService {
 				for(String tmp2:tags){
 					allTags += tmp2.trim()+",";
 				}
+				itemDTO.setTag_Name(allTags);
 			}
 		}
 		

@@ -14,7 +14,7 @@ import com.sp.product.model.ProductListDAO;
 @Service
 public class ProductListServiceImpl implements ProductListService{
 	
-	public static final int PAGE_SIZE = 4;//페이지당 2개씩 나중에 값늘어나면 5개씩
+	public static final int PAGE_SIZE = 5;//페이지당 2개씩 나중에 값늘어나면 5개씩
 	
 	@Inject
 	ProductListDAO dao;

@@ -21,14 +21,14 @@
 		select * from itemboard ite
 		inner join store st on ite.STORE_NO = st.STORE_NO
 		where st.STORE_NAME=#{store_Name } and ite.ITEMBOARD_DELETE_B = 0 
-    	order by ite.ITEMBOARD_NO
+    	order by ite.ITEMBOARD_NO desc
 	</select>
 	
 	
 	<select id="itemList" resultType="ItemDTO" parameterType="String">
 		select * from itemboard ite inner join store st on ite.STORE_NO = st.STORE_NO
   		inner join MEMBER mem on st.MEMBER_NO=mem.MEMBER_NO 
-  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email} and ite.ITEMBOARD_DELETE_B = 0 order by ite.ITEMBOARD_NO
+  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email} and ite.ITEMBOARD_DELETE_B = 0 order by ite.ITEMBOARD_NO desc
 	</select>
 	
 	
@@ -128,8 +128,6 @@
 	</update>
 	
 	
-
-	
 	<select id="itemNboardNtag" parameterType="int" resultType="ItemDTO">
 		select * from ITEM it inner join ITEMBOARD ib 
 		on it.ITEM_NO=ib.ITEM_NO
@@ -141,5 +139,65 @@
 	<delete id="oneImgDelete" parameterType="String">
 		delete from itemimg where BIG_IMG = #{big_Img }
 	</delete>
+	
+	
+	
+	
+	
+	
+	<update id="updateItem" parameterType="ItemDTO">
+		update item set item_price = #{item_Price},
+		  item_amount = #{item_Amount },
+		  item_delivery_b = #{item_Delivery_B },
+		  item_delivery_state = item_delivery_state, 
+		  item_state = #{item_State }
+		where item_no = (select item_no from itemboard where itemboard_no = #{itemboard_No })
+	</update>
+	
+	<update id="updateItemBoard" parameterType="ItemDTO">
+		update ITEMBOARD set sub_no = #{sub_No} ,
+		  itemboard_local = #{itemboard_Local }, 
+		  itemboard_title = #{itemboard_Title }, 
+		  itemboard_contents = #{itemboard_Contents },
+		  itemboard_Recommend_b = itemboard_Recommend_b, 
+		  itemboard_Change_b = #{itemboard_Change_b }
+		  where itemboard_no = #{itemboard_No }
+	</update>
+	
+	<update id="tagModify" parameterType="ItemDTO">
+		update tag set TAG_NAME = #{tag_Name }
+		where ITEMBOARD_NO = #{itemboard_No }
+	</update>
+	
+	
+	
+	
+	
+	<!-- 검색관련 -->
+	
+	<select id="searchAll" resultType="ItemDTO" parameterType="String">
+		select itb.ITEMBOARD_NO, itb.ITEMBOARD_title, itb.ITEMBOARD_local , it.item_PRICE ,ta.TAG_NAME  
+		from ITEMBOARD itb inner join item it on it.ITEM_NO = itb.ITEM_NO 
+		inner join tag ta on ta.ITEMBOARD_NO=itb.ITEMBOARD_NO
+		where itb.ITEMBOARD_title like '%' ||  #{searchSubj } || '%' 
+		or ta.TAG_NAME like '%' ||  #{searchSubj } || '%' order by itb.ITEM_NO desc
+	</select>
+	
+	<select id="getOneImg" resultType="String" parameterType="int">
+		select THUM_IMG from ITEMIMG where ITEMBOARD_NO = #{itemboard_No } and rownum =1
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

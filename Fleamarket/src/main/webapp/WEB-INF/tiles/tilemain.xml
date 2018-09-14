@@ -56,6 +56,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/memmanage/{1}.jsp" />
 	</definition>
 	
+	<definition name="search/searchall" extends="main_layout">
+		<put-attribute name="body" value="/WEB-INF/views/product/searchresult.jsp" />
+	</definition>
+	
 	<!--END 1. 메뉴가 필요없는 상단 하단 바디 만 있는넘 -->
     
     

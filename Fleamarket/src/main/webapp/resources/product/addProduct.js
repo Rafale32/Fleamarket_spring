@@ -254,7 +254,7 @@ $(function() {
 				  }else{
 					  str = "<div><a href='displayFile?fileName="+data+"'>" 
 							  + getOriginalName(data)+"</a>"
-							  +"<small data-src="+data+">X</small></div></div>";
+							  +"<small data-src="+data+">삭제하기</small></div></div>";
 				  }
 				  
 				  //alert(getFileInfo(data).fullName);
