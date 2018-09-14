@@ -152,7 +152,7 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "/sell_list_gy", method = RequestMethod.POST)
-	public void chagesDeriSell(Model model,HttpSession session,DeliveryDTO_gy dto, Criteria2 cri) throws Exception {
+	public void chagesDeriSell(Model model,HttpSession session,DeliveryDTO_gy dto, Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		// dto2에 다 넣기
 		MemManageDTO dto0 = (MemManageDTO) session.getAttribute("member");
@@ -165,6 +165,14 @@ public class PaymentController {
 		dto2.setMember_email(loginEmail);
 		List<PuerchaseDTO_gy> list	= service.listSell(dto2,cri);
 		model.addAttribute("list", list);
+		
+		//알림글 추가부분
+		System.out.println(pdto.getItemboard_no() + " pdto아넘");
+		System.out.println(pdto.getItem_no() + " pdto아넘");
+		//
+		pdto.setInform_contents(3);
+		service.registerPerchaseAlram(pdto);
+		
 		
 		//페이징
 		 PageMaker pagemaker = new PageMaker();
