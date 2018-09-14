@@ -126,8 +126,6 @@ public class ProductAjax {
 	    
 	    return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	  }  
-	
-	  
 	  
 	  //이건 글 수정할때 서버와 디비에 까지 올린 그림 하나씩 삭제할때 사용
 	  @RequestMapping(value = "oneimgdelete", method = RequestMethod.POST)
