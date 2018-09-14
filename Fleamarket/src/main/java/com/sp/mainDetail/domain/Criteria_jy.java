@@ -1,10 +1,10 @@
 package com.sp.mainDetail.domain;
 
-public class Criteria {
+public class Criteria_jy {
 	private int page;
 	private int perPageNum;
 
-	public Criteria(){
+	public Criteria_jy(){
 		this.page = 1;
 		this.perPageNum = 5;
 	}
@@ -30,8 +30,19 @@ public class Criteria {
 		return page;
 	}
 	
+	//method for MyBatis SQL Mapper -
 	public int getPageStart(){
 		return (this.page -1) * perPageNum;
+	}
+	
+//method for MyBatis SQL Mapper -
+	public int getPerPageNum(){
+		return this.perPageNum;
+	}
+
+	@Override
+	public String toString() {
+		return "Criteria_jy [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
 	
 	
