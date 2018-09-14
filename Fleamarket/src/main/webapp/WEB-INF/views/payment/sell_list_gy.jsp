@@ -22,8 +22,12 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link rel="stylesheet" href="../gy_css/buySellTable.css" type="text/css">
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-  type="text/css" />
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
   
   <script src="/resources/payment/cangeDeliveryst_gy.js" type="text/javascript"> 
   </script>

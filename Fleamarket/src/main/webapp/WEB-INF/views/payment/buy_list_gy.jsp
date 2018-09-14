@@ -29,8 +29,12 @@
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
 </script>
@@ -49,7 +53,7 @@
 			<tr id="date_tabletop">
 				<td colspan="4" class="date">날자 :${p.pay_date}</td>
 			</tr>
-			
+
 
 			<!-- 테이블 내용-->
 			<tr>
@@ -85,13 +89,13 @@
 				</td>
 
 				<td>
-					<!-- 구매 상점으로 이동하기  -->
-					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
-					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
-					<%-- <h2> ${p.itemboard_no }</h2> --%>
-					<h4>구매상점 ${p.store_name }</h4>
-					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
-					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격: ${p.item_price}</h3></a>
+					<!-- 구매 상점으로 이동하기  --> <!-- 상품명 클릭시 해당 하는 상품글 이동 --> <a
+					href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">
+						<h2>제목(상품명) ${p.itemboard_title}</h2>
+				</a> <%-- <h2> ${p.itemboard_no }</h2> --%>
+					<h4>구매상점 ${p.store_name }</h4> <!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
+					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격:
+							${p.item_price}</h3></a>
 				</td>
 
 				<td>
@@ -109,12 +113,12 @@
 							<input type="submit" id="purchaseDetermin" class="btn"
 								value="구매확정버튼">
 						</c:if>
-					</form> 
-					<a href="/fleamarket/payment/purchasestoreReview2?store_no=${p.store_no }"><input class="btn"
-						value="리뷰확인하러가기"></a> <!-- 버튼 시험작 만들기-->
+					</form> <a
+					href="/fleamarket/payment/purchasestoreReview2?store_no=${p.store_no }"><input
+						class="btn" value="리뷰확인하러가기"></a> <!-- 버튼 시험작 만들기-->
 				</td>
 			</tr>
-			
+
 		</c:forEach>
 
 	</table>
@@ -138,6 +142,6 @@
 					href="buy_list_gy${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 			</c:if>
 		</ul>
-		</div>
+	</div>
 </body>
 </html>
