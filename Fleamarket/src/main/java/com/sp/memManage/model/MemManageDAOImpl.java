@@ -1,6 +1,7 @@
 package com.sp.memManage.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
@@ -44,9 +45,20 @@ public class MemManageDAOImpl implements MemManageDAO{
 		session.delete(namespace+".deleteMember", member_email);
 	}
 	//이메일 중복체크
+//	@Override
+//	public int emailCheck(Map<String, Object> map) throws Exception{
+//		
+//		Map<String, Object> resultMap = (Map<String, Object>)session.selectOne(namespace+".emailcheck", map);
+//		
+//		int result = Integer.valueOf(String.valueOf(resultMap.get("RESULT")));
+//		
+//		return result;
+//	}
+	
+	//이메일 체크
 	@Override
-	public MemManageDTO emailCheck(MemManageDTO memManageDTO) throws Exception{
-		return session.selectOne(namespace+".emailCheck", memManageDTO);
+	public int emailchekc(String member_email)throws Exception{
+		return session.selectOne(namespace+".emailCheck", member_email);
 	}
 	
 	//스토어 생성

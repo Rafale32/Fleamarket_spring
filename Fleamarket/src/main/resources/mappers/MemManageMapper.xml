@@ -30,10 +30,20 @@
 	</insert>
 	
 	<!-- 랜덤 상점 생성 및 변경 -->
-		<update id="randomName" parameterType="StoreDTO">
+	<update id="randomName" parameterType="StoreDTO">
+		merge <!-- /* HASH_USE*/ --> 
+			into store a
+			using member b
+			on a.member_no = b.member_no
+			and b.member_email = #{member_email}
+			when matched then
+			update set a.store_name =(SELECT DBMS_RANDOM.STRING('A', 6) FROM DUAL);
+		
+<!-- 	
+	
 		update store set store_name=(SELECT DBMS_RANDOM.STRING('A', 8) FROM DUAL)
-		where member_email =#{member_email}
-		</update>
+		where member_email =#{member_email} -->
+	</update>
 
 	
 	<!-- 상점 중복 확인  -->
@@ -43,9 +53,14 @@
 	
 	
 	<!-- 이메일 중복체크 -->
-	<select id="emailCheck" parameterType="String" resultType="Integer">
-		select count(*) from member
-		where member_email = #{member_email}
+	<select id="emailCheck" parameterType="HashMap" resultType="HashMap">
+   		<![CDATA[
+   			select
+   				count(member_email) as result
+   				from member
+   				where
+   				member_email = #{member_email}
+   		]]>
 	</select>
 	
 	<!-- 상세보기 -->
@@ -65,6 +80,7 @@
 		delete from member where
 		member_email = #{member_email}
 	</delete>
+	
 	
 <!-- 
 	

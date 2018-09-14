@@ -1,6 +1,7 @@
 package com.sp.memManage.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sp.memManage.domain.MemManageDTO;
 import com.sp.memManage.domain.StoreDTO;
@@ -18,7 +19,10 @@ public interface MemManageDAO {
 	//회원 삭제
 	public void delete(String member_email)throws Exception;
 	//이메일 중복체크
-	public MemManageDTO emailCheck(MemManageDTO memManageDTO)throws Exception;
+//	public int emailCheck(Map<String, Object> map)throws Exception;
+	
+	//이메일 중복체크2
+	public int emailchekc(String member_email)throws Exception;
 	
 	//스토어 생성
 	public void registerStore(StoreDTO storeDTO)throws Exception;

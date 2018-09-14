@@ -1,6 +1,7 @@
 package com.sp.memManage.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -53,11 +54,27 @@ public class MemManageServiceImpl implements MemManageService {
 	public void deleteMember(String member_email) throws Exception {
 		memManageDAO.delete(member_email);
 	}
-	//이메일 중복체크
+//	//이메일 중복체크
+//	@Override
+//	public String emailcheck(String str) throws Exception{
+//		
+//		System.out.println("인증 중");
+//		  if(memManageDAO.emailCheck(str) ==null) {
+//		    return "T";
+//		  }else {
+//		    return "F";
+//		  }
+//		
+//	}
+	
+//	@Override
+//	public int emailcheck(Map<String, Object> map) throws Exception{
+//		return memManageDAO.emailCheck(map);
+//	}
+	
 	@Override
-	public MemManageDTO emailCheck(MemManageDTO memManageDTO) throws Exception{
-		
-		return memManageDAO.emailCheck(memManageDTO);
+	public int emailcheck(String member_email) throws Exception{
+		return memManageDAO.emailchekc(member_email);
 	}
 	
 	//스토어 생성

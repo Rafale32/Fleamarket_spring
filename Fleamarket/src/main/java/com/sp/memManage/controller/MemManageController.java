@@ -1,9 +1,12 @@
 package com.sp.memManage.controller;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.inject.Inject;
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -70,18 +73,53 @@ public class MemManageController {
 	}
 	
 //	//이메일 중복체크
-//	@RequestMapping("/mailCheck")
+//	@RequestMapping(value = "/emailcheck", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+//	public @ResponseBody String emailcheck(HttpServletResponse response,  @RequestParam("member_email") String member_email, Model model)throws Exception {
+//
+//		System.out.println("들어오냐");
+//		  String msg = service.emailcheck(member_email);
+//		  System.out.println(msg);
+//		  String responseMsg;
+//
+//		  if(msg == "T") {
+//		        responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
+//		  }else {
+//		    responseMsg = "{\"msg\":\""+"사용이 불가한 이메일 입니다."+"\"}";
+//		  }
+//		  System.out.println("들어오냐2222");
+//		   URLEncoder.encode(responseMsg , "UTF-8");
+//
+////			model.addAttribute("msg", service.authenticate(email));
+//		   System.out.println("들어오냐3333");
+//		  System.out.println(member_email);
+//		
+//		  return responseMsg;
+//		  
+//		}
+	
+	//이메일 중복체크
+//	@RequestMapping(value="/emailcheck")
 //	@ResponseBody
-//	public int emailCheck(MemManageDTO memManageDTO, Model model) throws Exception{
+//	public int emailcheck(CommandMap commandMap, Map<String, Object> map) throws Exception{
 //		
-//		int result = 0;
-//		MemManageDTO dto = service.emailCheck(memManageDTO);
-//		if( dto != null) result = 1;
-//		else System.out.println("사용가능");
+//		int checkResult = service.emailcheck(map);
 //		
-//		return result;
+//		return checkResult;
 //	}
-		
+	
+//	@RequestMapping(value="/emailcheck")
+//	@ResponseBody
+//	public int emailcheck(@RequestParam("member_email") String member_email) throws Exception{
+//		
+//		int checkResult = service.emailcheck(member_email);
+//		return checkResult;
+//	}
+//	
+//	@RequestMapping(value="/emailcheck", method=RequestMethod.POST)
+//	public @ResponseBody int emailcheck(@RequestParam("member_email") String member_email) {
+//		
+//		return service.emailcheck(member_email).size();
+//	}
 		
 	//회원등록 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

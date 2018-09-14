@@ -4,53 +4,95 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <title>회원가입 화면</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="../resources/memmanget/js/jquery-3.1.0.js"></script>
 <script src="../resources/memmanage/js/member.js"></script>
 <script src="../resources/memmanage/js/address.js"></script>
 
-<script type="text/javascript">
+<!-- <script>
+$(document).ready(function(){
+	var email = $('#checkbtn').unbind("click").click(function(e){
+		e.preventDefault();
+		fn_emailCheck();	
+	});
+});
 
-var emailCheck = 0;
-
-function checkEmai() {
-    var inputed = $('.id').val();
-    console.log(inputed);
-    $.ajax({
-        data : {
-            id : inputed
-        },
-        url : "/emailCheck",
-        success : function(data) {
-            if(inputed=="" && data=='0') {
-                $(".signupbtn").prop("disabled", true);
-                $(".signupbtn").css("background-color", "#aaaaaa");
-                $("#emailCheck").css("background-color", "#FFCECE");
-                emailCheck = 0;
-            } else if (data == '0') {
-                $("#emailCheck").css("background-color", "#B0F6AC");
-                emailCheck = 1;
-                if(emailCheck==1) {
-                    $(".signupbtn").prop("disabled", false);
-                    $(".signupbtn").css("background-color", "#4CAF50");
-                } 
-            } else if (data == '1') {
-                $(".signupbtn").prop("disabled", true);
-                $(".signupbtn").css("background-color", "#aaaaaa");
-                $("#emailCheck").css("background-color", "#FFCECE");
-                emailCheck = 0;
-            } 
-        }
-    });
+function fn_emailCheck(){
+	var emailId = $("#memail").val();
+	var userData = {"ID" : emailId}
+	
+	if(emailId.lenght < 1)
+		{
+		alert("dldididididi");
+		}
+	else
+	{
+		$.ajax({
+			type : "POST",
+			url : "/memmange/emailcheck",
+			data : userData,
+			dataType : "json",
+			error : function(error){
+				alert("서버가 응답하지 않습니다. \n 다시 시도해주시기 바랍니다.");
+			},
+			success : function(result){
+				if(result == 0)
+				{
+				$("#memail").attr("disabled", true);
+				alert("사용이 가능한 아이디입니다.");
+				}
+				else if(result ==1)
+				{
+				alert("이미 존재하는 아이디입니다. \n 다른 아이디를 사용해주세요.");	
+				}
+				else
+				{
+				alert("에러가 발생하였습니다.");
+				}
+			}
+		});
+	}	
 }
+</script> -->
 
+<script>
+$(document).ready(function(){
+	$(".dupliId").click(function(){
+		var id_frm = $("input[name=id]");
+		var b = countId(); //javascript로 아이디에 대한 유효성검증을 먼저한다.
+		var check = 0; //중복체크 했는지 나중에 확인할 때 쓸 변수
+		if(b==true){   //유효성 검증을 통과하면
+			$.ajax({
+				type: 'POST',
+				url: '/rest/member/checkDupl',
+				data: {
+					"id" : $(id_frm).val()
+				},
+				success: function(data){
+					if(data==0){
+						$('#dupli').html('<font size="2" color="green">사용할 수 있는 아이디</font>');
+						check=1;
+					}
+					else{
+						$('#dupli').html('<font size="2" color="red">'+$(id_frm).val()+'는 이미 존재하는 아이디입니다.</font>');
+						$(id_frm).val(""); //form의 값을 지운다
+						$(id_frm).focus(); //focus를 form에 위치시킨다
+						check=0;
+					}
+				}
+			});//end ajax 
+		} //end if
+	}); //end click event
+}); //end jQuery
 
 </script>
-
 
 </head>
 <body>
@@ -70,12 +112,11 @@ function checkEmai() {
          <label for="InputEmail">이메일 주소</label>
          <div class="input-group">
            <input type="email" class="form-control"
-          id="memail" name="member_email" placeholder="이메일 주소">
-          <span class="input-group-btn">
-            <button type="submit" id="emailCheck" oninput="checkEmail()" class="btn btn-success">
-              	중복 확인
-            </button>
-          </span>
+          id="memail" name="member_email" placeholder="이메일 주소를 입력하세요">
+           <button type="submit" id="checkbtn" onclick="return emailcheck()" class="btn btn-default">중복확인</button>
+           <div id ="checkMsg" class="input-group-btn"></div>
+			
+
         </div>
       </div>
       
@@ -150,7 +191,7 @@ function checkEmai() {
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
+
 	</div>
 </body>
   
