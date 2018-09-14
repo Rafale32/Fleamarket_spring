@@ -105,7 +105,6 @@ public class ProductAjax {
         return entity;
 	}
 	
-	
 	  //이건 글 등록 할때와 수정할때 서버상에만 올린 파일 삭제할때 사용하는것 
 	  @RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	  public ResponseEntity<String> deleteFile(String fileName){
