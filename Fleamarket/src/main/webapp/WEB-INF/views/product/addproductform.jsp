@@ -143,7 +143,7 @@
 				<label>연관태그:</label>
 				
 				<div>
-					<input type="text" placeholder="선택 사항 (예: 아이폰, 케이스)" width="140px" name="tag"/>
+					<input type="text" placeholder="선택 사항 (예: 아이폰, 케이스)" width="140px" name="tag_Name"/>
 				</div>
 			</div>
 				<label>수량:</label>

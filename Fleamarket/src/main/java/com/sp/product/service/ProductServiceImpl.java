@@ -17,15 +17,13 @@ public class ProductServiceImpl implements ProductService {
 	public void productModifyForm(int itemboard_No, Bean bean) throws Exception {
 		
 		ItemDTO dto = dao.itemNboardNtag(itemboard_No);
-		System.out.println(dto.getTag());
 		dto.setItemImgList(dao.getImgList(itemboard_No));
 		bean.setItemDTO(dto);
 		bean.setSubCate(dao.getSubCate(dto.getCategory_No()));
 		
 		
 		bean.getItemDTO().setCategory_No(bean.getSubCate().get(0).getCategory_No());
-		
-		
+		System.out.println(dto.getItem_Amount());
 		
 	}
 

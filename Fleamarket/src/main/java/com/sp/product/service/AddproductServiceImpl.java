@@ -67,8 +67,8 @@ public class AddproductServiceImpl implements AddproductService {
 			}
 		}
 		
-		if(itemDTO.getTag() != null){
-			String tmp = itemDTO.getTag();
+		if(itemDTO.getTag_Name() != null){
+			String tmp = itemDTO.getTag_Name();
 			String[] tags = tmp.split(",");
 			
 			String allTags = "";
@@ -79,7 +79,7 @@ public class AddproductServiceImpl implements AddproductService {
 			}
 		}
 		
-		dao.insertTags(itemDTO.getTag());
+		dao.insertTags(itemDTO.getTag_Name());
 	}
 
 }

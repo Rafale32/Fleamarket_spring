@@ -23,7 +23,7 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	private String itemboard_Local; //거래지역
 	private String itemboard_Title; // 상품게시판 의 상품 제목
 	private String itemboard_Contents; // 상품게시판의 상품설명 //여기에 잠시 담자 썸네일 이미지 하나짜리
-	private String tag;// 태그
+	private String tag_Name;// 태그
 	private int itemboard_Viewcount; //조회수
 	private int itemboard_Recommend_b; //추천상품  구현안할듯 지금은 
 	private int itemboard_Change_b; //교환 가능 여부
@@ -214,15 +214,14 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	}
 
 
-
-	public String getTag() {
-		return tag;
+	public String getTag_Name() {
+		return tag_Name;
 	}
 
 
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTag_Name(String tag_Name) {
+		this.tag_Name = tag_Name;
 	}
 
 
@@ -422,17 +421,22 @@ public class ItemDTO implements Serializable{ //마이바티스는 DTO 로 사�
 	@Override
 	public String toString() {
 		return "ItemDTO [itemImgList=" + itemImgList + ", files=" + Arrays.toString(files) + ", member_email="
-				+ member_email + ", sub_No=" + sub_No + ", category_Title=" + category_Title + ", sub_Title="
-				+ sub_Title + ", itemboard_Date=" + itemboard_Date + ", itemboard_Local=" + itemboard_Local
-				+ ", itemboard_Title=" + itemboard_Title + ", itemboard_Contents=" + itemboard_Contents + ", tag=" + tag
-				+ ", itemboard_Viewcount=" + itemboard_Viewcount + ", itemboard_Recommend_b=" + itemboard_Recommend_b
-				+ ", itemboard_Change_b=" + itemboard_Change_b + ", deliveryIs=" + deliveryIs + ", changeIs=" + changeIs
-				+ ", item_No=" + item_No + ", itemboard_No=" + itemboard_No + ", store_No=" + store_No
-				+ ", itemboard_Delete_B=" + itemboard_Delete_B + ", price=" + price + ", item_Price=" + item_Price
-				+ ", favCount=" + favCount + ", itemQnaCount=" + itemQnaCount + ", item_State=" + item_State
-				+ ", item_Delivery_B=" + item_Delivery_B + ", item_Amount=" + item_Amount + ", store_Name=" + store_Name
+				+ member_email + ", sub_No=" + sub_No + ", category_No=" + category_No + ", category_Title="
+				+ category_Title + ", sub_Title=" + sub_Title + ", itemboard_Date=" + itemboard_Date
+				+ ", itemboard_Local=" + itemboard_Local + ", itemboard_Title=" + itemboard_Title
+				+ ", itemboard_Contents=" + itemboard_Contents + ", tag_Name=" + tag_Name + ", itemboard_Viewcount="
+				+ itemboard_Viewcount + ", itemboard_Recommend_b=" + itemboard_Recommend_b + ", itemboard_Change_b="
+				+ itemboard_Change_b + ", deliveryIs=" + deliveryIs + ", changeIs=" + changeIs + ", item_No=" + item_No
+				+ ", itemboard_No=" + itemboard_No + ", store_No=" + store_No + ", itemboard_Delete_B="
+				+ itemboard_Delete_B + ", price=" + price + ", item_Price=" + item_Price + ", favCount=" + favCount
+				+ ", itemQnaCount=" + itemQnaCount + ", item_State=" + item_State + ", item_Delivery_B="
+				+ item_Delivery_B + ", item_Amount=" + item_Amount + ", store_Name=" + store_Name
 				+ ", item_delivery_State=" + item_delivery_State + "]";
 	}
+
+
+
+
 
 
 

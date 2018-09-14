@@ -195,11 +195,11 @@
 				<label>연관태그:</label>
 				
 				<div>
-					<input type="text" placeholder="선택 사항 (예: 아이폰, 케이스)" value="${bean.itemDTO.tag }" width="140px" name="tag"/>
+					<input type="text" placeholder="선택 사항 (예: 아이폰, 케이스)" value="${bean.itemDTO.tag_Name }" width="140px" name="tag_Name"/>
 				</div>
 			</div>
 				<label>수량:</label>
-				<input type="number" placeholder="1" value="1" value="${bean.itemDTO.item_Amount }"  name="item_Amount"/>
+				<input type="number" placeholder="1" value="${bean.itemDTO.item_Amount }"  name="item_Amount"/>
 				
 				<br>
 				<input type="submit" value="등록">
