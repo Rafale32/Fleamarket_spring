@@ -20,10 +20,10 @@
 </head>
 <body>
 
-	<h1>도착확인용</h1>
+	<h1>도착확인용2</h1>
 	
 	<div>
-	<table id="Mystore_review" class="table" border="1">
+	<table id="purchasestoreReview" class="table" border="1">
 		<c:forEach var="p" items="${list2}">
 			<tr>
 				<td class="date">구매 날자 :${p.pay_date}</td>
@@ -82,17 +82,17 @@
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
 				<li><a
-					href="mystoreReview${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+					href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage }"
 				end="${pageMaker.endPage }" var="idx">
 				<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-					<a href="mystoreReview${pageMaker.makeSearch(idx)}">${idx}</a>
+					<a href="purchasestoreReview2${pageMaker.makeSearch(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li><a
-					href="mystoreReview${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+					href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 			</c:if>
 		</ul>
 		</div>

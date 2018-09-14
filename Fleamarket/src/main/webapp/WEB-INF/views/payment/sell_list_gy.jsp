@@ -51,7 +51,7 @@
 	<table id="sell_list_table" class="table">
 		<c:forEach var = "p" items="${list}">
 		<tr>
-			<td colspan="4" class="date">날자부 :${p.pay_date }</td>
+			<td colspan="4" class="date">날자부 :${p.pay_date }  아이템 보드 ${p.itemboard_no }</td>
 		</tr>
 
 		
@@ -88,9 +88,12 @@
 				</td>
 
 				<td>
+				
 				<!-- 판매 = 내 상점으로 이동하기  -->
-					<a href="">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
-					<h3>판매금액 ${p.item_price}</h3>
+					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
+					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
+					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
+					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>판매금액 ${p.item_price}</h3></a>
 
 				</td>
 
@@ -98,6 +101,7 @@
 					<form action="/fleamarket/payment/sell_list_gy" method="post">
 				<!-- style="display: none;"  나중에 넣어서 추가 할것-->
 					<c:if test="${p.item_delivery_state == 2}">
+					<input type="text" id=ite_boardno value="${p.itemboard_no }">
 					<input type="text" id="pageNo" name="pageNo" value=${SellModel2.requestPage }>
 					<input type="text" id="item_no" name="item_no" value=${p.item_no } >
 					<input type="submit" id="purchaseDetermin" class="btn" value="판매승인버튼" >
@@ -113,31 +117,26 @@
 
 
 	</table>
-	
-	<!-- 5페이지 이동 바꿀수 있음 전체 페이지가 나오기위해 5보다 크면되잖아? 스타트 페이지가-->
-	<c:if test="${SellModel2.startPage > 5 }">
-	<a href="PaymentPagingSellController_gy.gg?pageNum=${SellModel2.requestPage-5}"> [ 이 전 페이지로...]</a>
-	</c:if>
-	<!-- 한페이지씩 이동 2페이지 부터 나오게 만듬 -->
-		<c:if test="${SellModel2.requestPage >= 2 }">
-		<a href="PaymentPagingSellController_gy.gg?pageNum=${SellModel2.requestPage-1}"> [ 이 전 ]</a>
-		</c:if>
-	<!-- 숫사 부분 -->
-	<c:forEach var="pageNo" begin="${SellModel2.startPage }" end="${SellModel2.endPage }">
-		<!-- 현제 페이지가 2 이상일때 이전이라는 글 나오게 하기-->
-		<c:if test="${pageNo == SellModel2.requestPage}" > <b></c:if>
-		<a href="PaymentPagingSellController_gy.gg?pageNum=${pageNo}"> ${pageNo}</a>
-		<c:if test="${pageNo == SellModel2.requestPage}" > </b></c:if>
-		<!-- 다음키 -->
-		</c:forEach>
-		<c:if test="${SellModel2.requestPage < SellModel2.endPage}">
-		<a href="PaymentPagingSellController_gy.gg?pageNum=${SellModel2.requestPage+1}"> [ 다음 ]</a>
-		</c:if>
-		
-		<!-- 엔드페이지 수가 적을때 나올수 있게끔 -->
-		<c:if test="${SellModel2.totalPageCount > SellModel2.endPage }">
-		<a href="PaymentPagingSellController_gy.gg?pageNum=${SellModel2.requestPage+5}"> [ 다 음 페이지로...]</a>
-		</c:if>
+		<!-- 페이지 메이커 사용 -->
+
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li><a
+					href="sell_list_gy${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+			</c:if>
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+					<a href="sell_list_gy${pageMaker.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a
+					href="sell_list_gy${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+			</c:if>
+		</ul>
+		</div>
 
 </body>
 </html>
