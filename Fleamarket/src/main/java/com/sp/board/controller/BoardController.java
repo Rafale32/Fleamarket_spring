@@ -1,25 +1,66 @@
 package com.sp.board.controller;
 
-import java.util.Locale;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.sp.bean.Bean;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sp.board.domain.BoardDTO;
+import com.sp.board.service.BoardService;
 
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
-	//뷰단의 파일 이름 형식은 각각의 상단의 (상위 이름/하단의 메소드 벨류이름) 으로 결정됨 
-	@RequestMapping(value = "/example", method = RequestMethod.GET)
-	public void home(Locale locale, Model model) {
-		//컨트롤러에서 빈 파일에 필요한 객체 담은후 모델에 빈을 담아서 뷰에서 사용
-		Bean bean = new Bean();
+	@Inject
+	private BoardService service;
+	
+	@RequestMapping(value="/register" , method=RequestMethod.GET)
+	public void registerGET(BoardDTO board, Model model)throws Exception{
+		System.out.println("register get..........");
+	}
+	
+	@RequestMapping(value="/register" , method=RequestMethod.POST)
+	public String registPOST(BoardDTO board, Model model, RedirectAttributes rttr)throws Exception{
+		System.out.println("regist post..........");
+		System.out.println(board.toString());
 		
-		model.addAttribute("bean", bean );
+		service.regist(board);
+		rttr.addFlashAttribute("msg","SUCCESS"); 
+		
+		return "redirect:/board/noList";
+	} 
+	
+	@RequestMapping(value = "/noList", method = RequestMethod.GET)
+	public void noList(Model model) throws Exception{
+		
+		System.out.println("show all list..........");
+		
+		model.addAttribute("list", service.noList());
+	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("notice_no") int notice_no, Model model) throws Exception{
+		
+		System.out.println("review move............");
+		
+		model.addAttribute(service.read(notice_no));
 		
 	}
+	
+	
+	
+//	@RequestMapping(value = "/example", method = RequestMethod.GET)
+//	public void home(Locale locale, Model model) {
+//		Bean bean = new Bean();
+//		
+//		model.addAttribute("bean", bean );
+//		
+//	}
 
 }

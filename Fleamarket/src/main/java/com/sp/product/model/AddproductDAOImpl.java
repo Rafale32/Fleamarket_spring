@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sp.product.domain.CateDTO;
 import com.sp.product.domain.CateSubDTO;
+import com.sp.product.domain.ItemDTO;
+import com.sp.product.domain.ItemImg;
 
 @Repository
 public class AddproductDAOImpl implements AddproductDAO{
@@ -29,5 +31,27 @@ public class AddproductDAOImpl implements AddproductDAO{
 		
 		return session.selectList(namespace+".getSubCate", category_No);
 	}
+
+	
+	@Override
+	public void insertItem(ItemDTO itemDTO) {
+		session.insert(namespace + ".insertItem", itemDTO);
+	}
+
+	@Override
+	public void insertItemBoard(ItemDTO itemDTO) {
+		session.insert(namespace + ".insertItemBoard", itemDTO);
+	}
+
+	@Override
+	public void insertImgs(ItemImg img) {
+		session.insert(namespace + ".insertImgs", img);
+	}
+	
+	@Override
+	public void insertTags(String tag) {
+		session.insert(namespace+".insertTag", tag);	
+	}
+	
 
 }
