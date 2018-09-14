@@ -94,7 +94,7 @@
 						<h2>제목(상품명) ${p.itemboard_title}</h2>
 				</a> <%-- <h2> ${p.itemboard_no }</h2> --%>
 					<h4>구매상점 ${p.store_name }</h4> <!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
-					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격:
+					<a href="/fleamarket/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격:
 							${p.item_price}</h3></a>
 				</td>
 
