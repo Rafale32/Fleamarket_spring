@@ -270,8 +270,8 @@ function getAllList(){
 									<c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
-												<button
-													onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
+												<button	onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
+													onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no }'"
 													class="btn-call" value="${member.member_name}">안심결제</button>
 											</c:when>
 											<c:otherwise>

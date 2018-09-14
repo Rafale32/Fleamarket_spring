@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class ItemImgDTO_jh implements Serializable{
   private int img_no;       // 이미지번호
-  private int itemboard_no; // 게시글번호
   private String thum_img;  // 썸네일이미지 파일명
   private String big_img;   // 이미지 파일명
+  private int itemboard_no; // 게시글번호
   
   
   public ItemImgDTO_jh(){}
