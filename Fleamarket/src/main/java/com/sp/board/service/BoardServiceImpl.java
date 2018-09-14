@@ -15,28 +15,25 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO dao;
 
 	@Override
-	public void create() throws Exception {
-		dao.create();
+	public void create() throws Exception {	}
 
+	@Override
+	public void regist(BoardDTO board) throws Exception {
+		dao.make(board);
+	}
+
+	@Override
+	public List<BoardDTO> noList() throws Exception {
+		System.out.println("|BoardServiceImpl| noList");
+		return dao.noList();
 	}
 	
 	 @Override
-	 public void regist(BoardDTO board) throws Exception {
-	 dao.make(board);
+	 public BoardDTO read(Integer notice_no) throws Exception {
+		 System.out.println("|BoardServiceImpl| read");
+	 return dao.read(notice_no);
 	 }
-	 
-	 @Override
-	 public List<BoardDTO> list() throws Exception {
-	 // TODO Auto-generated method stub
-	 return null;
-	 }
-	//
-	// @Override
-	// public BoardDTO read(Integer notice_no) throws Exception {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	//
+	
 	// @Override
 	// public void modify(BoardDTO board) throws Exception {
 	// // TODO Auto-generated method stub

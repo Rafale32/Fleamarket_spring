@@ -2,7 +2,7 @@ package com.sp.board.domain;
 
 import java.io.Serializable;
 
-public class BoardDTO {  
+public class BoardDTO implements Serializable{  
 	private int    notice_no;
 	private String notice_title;
 	private String notice_contents;
@@ -20,6 +20,7 @@ public class BoardDTO {
 		this.notice_contents = notice_contents;
 		this.notice_date = notice_date;
 		this.notice_category = notice_category;
+		System.out.println("|DTO|");
 	}
 
 
@@ -68,8 +69,5 @@ public class BoardDTO {
 		return "BoardDTO [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_contents="
 				+ notice_contents + ", notice_date=" + notice_date + ", notice_category=" + notice_category + "]";
 	}
-	
-
-	
 }
 

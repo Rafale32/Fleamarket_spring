@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sp.bean.Bean;
 import com.sp.board.domain.BoardDTO;
 import com.sp.board.service.BoardService;
 
@@ -28,26 +28,30 @@ public class BoardController {
 	@RequestMapping(value="/register" , method=RequestMethod.POST)
 	public String registPOST(BoardDTO board, Model model, RedirectAttributes rttr)throws Exception{
 		System.out.println("regist post..........");
-		
-		service.regist(board);
-		
 		System.out.println(board.toString());
 		
-//		model.addAttribute("result", "success");
+		service.regist(board);
 		rttr.addFlashAttribute("msg","SUCCESS"); 
 		
-		//return "/board/success";
-		return "redirect:/board/list";
+		return "redirect:/board/noList";
 	} 
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(Model model) throws Exception{
+	@RequestMapping(value = "/noList", method = RequestMethod.GET)
+	public void noList(Model model) throws Exception{
+		
 		System.out.println("show all list..........");
 		
-		model.addAttribute("list", service.list());
+		model.addAttribute("list", service.noList());
 	}
 	
-	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("notice_no") int notice_no, Model model) throws Exception{
+		
+		System.out.println("review move............");
+		
+		model.addAttribute(service.read(notice_no));
+		
+	}
 	
 	
 	

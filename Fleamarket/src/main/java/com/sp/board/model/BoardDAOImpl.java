@@ -16,9 +16,7 @@ public class BoardDAOImpl implements BoardDAO{
 	private static String namespace = "BoardMapper";
 	
 	@Override
-	public void create() throws Exception {
-		session.insert(namespace+".create");
-	}
+	public void create() {	}
 	
 	@Override
 	public void make(BoardDTO dto) throws Exception {
@@ -26,15 +24,17 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 	@Override
-	public List<BoardDTO> list() throws Exception {
-		return session.selectList(namespace+".listview");
+	public List<BoardDTO> noList() throws Exception {
+		System.out.println("|BoardDAO| noList");
+		return session.selectList(namespace + ".noList");
 	}
-//
-//	@Override
-//	public BoardDTO read(Integer notice_no) throws Exception {
-//		return session.selectOne(namespace+".read", notice_no);
-//	}
-//
+
+	@Override
+	public BoardDTO read(Integer notice_no) throws Exception {
+		System.out.println("|BoardDAO| read ¹øÈ£");
+		return session.selectOne(namespace + ".read", notice_no);
+	}
+
 //	@Override
 //	public void update(BoardDTO dto) throws Exception {
 //		session.update(namespace+".update", dto);
@@ -46,5 +46,4 @@ public class BoardDAOImpl implements BoardDAO{
 //	}
 //
 
-	
 }
