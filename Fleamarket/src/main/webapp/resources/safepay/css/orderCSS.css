@@ -1,10 +1,7 @@
 @CHARSET "UTF-8";
 
-/* body { */
-/*   width: 1024px; */
-/* } */
 .order_table {
-  width: 80%;
+  width: 100%;
 /*   border: 1px solid #444444; */
   border-collapse: collapse;
   margin: 0 auto;
@@ -21,9 +18,9 @@
   padding-right: 10px;
 }
 
-hr{
-  width: 80%;
-}
+/* hr{ */
+/*   width: 80%; */
+/* } */
 
 
 

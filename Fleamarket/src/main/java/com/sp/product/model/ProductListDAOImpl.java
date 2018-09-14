@@ -77,5 +77,11 @@ public class ProductListDAOImpl implements ProductListDAO {
 		}
 		return list;
 	}
+	
+	@Override
+	public void productDelete(int itemboard_No) {
+		
+		session.update(namespace+".itemBoardDelete", itemboard_No);
+	}
 
 }

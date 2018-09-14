@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import com.sp.board.model.BoardDAO;
+import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
@@ -22,11 +23,12 @@ public class PaymentServiceImpl implements PaymentService {
 		// TODO Auto-generated method stub
 		dao.create();
 	}
-
+	
+	// 구매내역 +페이징
 	@Override
-	public List<PuerchaseDTO_gy> listPuerchase(DeliveryDTO_gy dto) throws Exception {
+	public List<PuerchaseDTO_gy> listPuerchase(DeliveryDTO_gy dto,Criteria2 cri) throws Exception {
 		
-		return dao.listPuerchase(dto);
+		return dao.listPuerchase(dto,cri);
 	}
 
 	
@@ -36,12 +38,8 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	}
 
-	
-	@Override
-	public List<PuerchaseDTO_gy> listSell(DeliveryDTO_gy dto) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.listSell(dto);
-	}
+	////
+
 
 	@Override
 	public void changDeliverState2(DeliveryDTO_gy dto) throws Exception {
@@ -57,9 +55,41 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	public List<MystoreReviewDTO_gy> MystoreReview(MystoreDTO_gy sdto) throws Exception {
+	public List<MystoreReviewDTO_gy> MystoreReview(MystoreDTO_gy sdto,Criteria2 cri) throws Exception {
 		// TODO Auto-generated method stub
-		return dao.MystoreReview(sdto);
+		return dao.MystoreReview(sdto,cri);
+	}
+
+	@Override
+	public int puerchasecounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.puerchasecounting(dto);
+	}
+	
+	// 판매내역 + 페이징
+	@Override
+	public List<PuerchaseDTO_gy> listSell(DeliveryDTO_gy dto, Criteria2 cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSell(dto, cri);
+	}
+
+	@Override
+	public int sellListcounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.sellListcounting(dto);
+	}
+// 스토어 리뷰 카운팅
+	@Override
+	public int mystoreReviewCounting(MystoreDTO_gy sdto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.MystoreReviewcounting(sdto);
+	}
+
+	//insert_pdto
+	@Override
+	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception {
+		dao.registerPerchaseAlram(pdto);
+		
 	}
 
 

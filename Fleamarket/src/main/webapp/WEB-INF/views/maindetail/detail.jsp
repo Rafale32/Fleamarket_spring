@@ -2,25 +2,92 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/maindetail/detail.css" type="text/css">
-<!-- <script type="text/javascript" src="../resources/maindetail/jquery-3.1.0.js" charset="utf-8"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-item_qna_no={{item_qna_no}}>
+<div class="comments-wrapper">
+	<div class="comment-item">
+		<div class="comment-item-wrapper">
+			<div class="comment-info-wrapper">
+				<div class="comment-info-header">
+					<div class="comment-writer-name">
+						<a href="">{{store_name}}</a>
+					</div>
+				</div>
+				<div class="comment-content">{{item_qna_contents}}</div>
+				{{#abc member_no}}
+					<a href="">
+						<div class="delete-qna">삭제하기</div>
+					</a>
+				{{/abc}}
+				<div class="split"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</li>
+{{/each}}
+</script>
+
+<script>
+Handlebars.registerHelper("prettifyDate", function(timeValue) {
+	var dateObj = new Date(timeValue);
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth() + 1;
+	var date = dateObj.getDate();
+	return year + "/" + month + "/" + date;
+});
+
+/* Handlebars.registerHelper("abc", function(no){
+	var member_noObj = $("#member_no");
+	var member_no = member_noObj.val();
+	
+	if(no == member_no){
+		return no.fn(this);
+	}
+}); */
+
+var printData = function(replyArr, target, templateObject){
+	
+	var template = Handlebars.compile(templateObject.html());
+	
+	var html = template(replyArr);
+	$(".replyLi").remove();
+	target.after(html);
+}
+</script>
+
 <script type="text/javascript">
-  /* $(function() {
-   $('').click(function(){
-   $.ajax({
-   url:'/Fleamarket/maindetail/favaction.do',
-   type:'post',
-   dataType:'json',
-   success:successHandler
-   });
-   })
-  }*/
+$(document).ready(function(){
+
+var itemboard_noObj = $("#itemboard_no");
+var itemboard_no = itemboard_noObj.val();
+console.log($("#itemboard_no").val());
+getAllList();
+
+/* if($("#replies li").size() > 1){
+	return;
+} */
+
+//댓글목록리스트
+function getAllList(){
+	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+	 
+		printData(data, $("#repliesDiv"), $("#template"));
+		console.log(data);
+	}); 
+}  
+  
   $(function() {
     $('#fav-btn').click(function() {
       alert("찜");
@@ -37,9 +104,9 @@
 		});
   });
 
-  $(document).ready(function(){
+  //댓글등록
   $("#replyAddBtn").on("click", function(){
-  	
+
   	var itemboard_noObj = $("#itemboard_no");
   	var member_noObj = $("#member_no");
   	var item_qna_contentsObj = $("#item_qna_contents");
@@ -50,7 +117,7 @@
   	
   	$.ajax({
   		type:'post',
-  		url:'/qna',
+  		url:'/fleamarket/qna',
   		headers :{
   			"Content-Type" : "application/json",
   			"X-HTTP-Method-Override" : "POST"
@@ -65,15 +132,64 @@
   			console.log("result: "+result);
   			if(result == 'SUCCESS'){
   				alert("등록되었습니다.");
-  				itemboard_noObj.val("");
+  				getAllList();
   				member_noObj.val("");
   				item_qna_contentsObj.val("");
   			}
   		}
   	});
   });
+
+  //댓글수정
+  $("#replies").on("click", ".replyLi button", function(){
+  	var reply = $(this).parent();
+  	
+  	var item_qna_no = reply.attr("data-item_qna_no");
+  	var item_qna_contents = reply.text();
+  	
+  	alert(item_qna_no + " : " + item_qna_contents);
+  	
   });
   
+  /* var itemboard_no = 1;
+  
+  $.getJSON("/qna/all/"+itemboard_no, function(data){
+  	console.log(data.length);
+  }); */
+  
+  //페이징처리
+  
+  /* function getPage(pageInfo){
+  	
+  	$.getJSON(pageInfo,function(data){
+  		printData(data.list, $("#repliesDiv"), $('#template'));
+  		printPaging(data.pageMaker, $(".pagination"));
+  		
+  		//$("#modifyModal").modal('hide');
+  	});
+  } */
+  
+ /*  var printPaging = function(pageMaker, target){
+  	
+  	var str = "";
+  	
+  	if(pageMaker.prev){
+  		str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+  	}
+  	
+  	for(var i=pageMaker.startPage, len = pageMaker.endPage; i<=len; i++){
+  		var strClass = pageMaker.cri.page == i?'class=active':'';
+  		str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
+  	}
+  	
+  	if(pageMaker.next){
+  		str += "<li><a href='"+(pageMaker.endPage+1)+"'> >> </a></li>";
+  	}
+  	
+  	target.html(str);
+  }; */
+  
+});
 </script>
 <style type="text/css">
 </style>
@@ -154,13 +270,13 @@
 									<c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
-												<button
-													onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
+												<button	onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
+													onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no }'"
 													class="btn-call" value="${member.member_name}">안심결제</button>
 											</c:when>
 											<c:otherwise>
 												<button
-													onclick="location.href = '/Fleamarket/memmanage/login.do'"
+													onclick="location.href = '/fleamarket/memmanage/login'"
 													class="btn-call">안심결제</button>
 											</c:otherwise>
 										</c:choose>
@@ -208,25 +324,19 @@
 										상품문의 <span class="comments-count"></span>
 									</div>
 									<div class="comments-input-wrapper">
-										<div class="comment-input">
-											<div class="input-wrapper">
-												<c:if test="${member.member_name ne null}">
-													<%-- <form action="qnaAction.do" method="post">
-														<input type="hidden" name="itemboard_no"
-															value="${bean.itemDetail.itemboard_no}"> <input
-															type="hidden" name="member.no" value="${member.member_no}">
-														<textarea name="item_qna_contents" placeholder="문의 내용을 입력해주세요"
-															rows="2"></textarea>
-														<input class="write-btn" type="submit" value="등록">
-													</form> --%>
-													<label type="hidden" id="itemboard_no" value="${bean.itemDetail.itemboard_no}"></label>
-													<label type="hidden" id="member_no" value="${member.member_no}"></label>
+										<c:if test="${member.member_name ne null}">
+											<div class="comment-input">
+												<div class="input-wrapper">
 													<textarea type="text" id="item_qna_contents" rows="2" placeholder="문의내용을 입력해주세요."></textarea>
 													<button type="button" class="write-btn" id="replyAddBtn">등록</button>
-												</c:if>
+												</div>
 											</div>
-										</div>
+										</c:if>
+										<input type="hidden" id="itemboard_no" value="${bean.itemDetail.itemboard_no}">
+										<input type="hidden" id="member_no" value="${member.member_no}">
 									</div>
+									<ul id="replies">
+										<li id="repliesDiv">
 									<%-- <div class="comments-wrapper">
 										<div class="comment-item">
 											<c:forEach var="qnaList" items="${bean.itemQnaList}">
@@ -250,6 +360,13 @@
 											</c:forEach>
 										</div>
 									</div> --%>
+										</li>
+									</ul>
+									<div class='text-center'>
+										<ul id="pagination">
+
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>

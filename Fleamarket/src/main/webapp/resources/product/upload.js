@@ -7,7 +7,7 @@ function checkImageType(fileName){
 }
 
 function getFileInfo(fullName){
-		
+	
 	var fileName,imgsrc, getLink;
 	
 	var fileLink;
@@ -53,8 +53,8 @@ function getImageLink(fileName){
 	}
 	var front = fileName.substr(0,12);
 	var end = fileName.substr(14);
-	alert(front);
-	alert(end);
+	//alert(front);
+	//alert(end);
 	return front + end;
 	
 }

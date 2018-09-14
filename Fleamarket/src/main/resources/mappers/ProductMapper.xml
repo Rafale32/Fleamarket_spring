@@ -28,7 +28,7 @@
 	<select id="itemList" resultType="ItemDTO" parameterType="String">
 		select * from itemboard ite inner join store st on ite.STORE_NO = st.STORE_NO
   		inner join MEMBER mem on st.MEMBER_NO=mem.MEMBER_NO 
-  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email}
+  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email} and ite.ITEMBOARD_DELETE_B = 0 order by ite.ITEMBOARD_NO
 	</select>
 	
 	
@@ -61,5 +61,85 @@
 	<select id="getSubCate" resultType="CateSubDTO">
 		select * from CATEGORY_SUB where CATEGORY_NO = #{category_No }
 	</select>
+	
+	
+	
+	
+	
+	
+	<insert id="insertItem" parameterType="ItemDTO">
+		INSERT  into item(item_no, item_price, item_state, item_amount, item_delivery_b, 
+		item_delivery_state)
+		  values (
+		    (select max(ITEM_NO) from item)+1,
+		    #{item_Price },
+		    #{item_State },
+		    #{item_Amount },
+		    #{item_Delivery_B },
+		    1
+		  )
+	</insert>
+	
+	<!-- 이거 수정해놔봐 메인카테고리 cateName 이름 디비랑 똑같이 -->
+	<insert id="insertItemBoard" parameterType="ItemDTO">
+		INSERT  into itemboard (sub_no, itemboard_date, itemboard_local, itemboard_title, 
+		  itemboard_contents, itemboard_viewcount, itemboard_recommend_b, itemboard_change_b, 
+		  item_no, itemboard_no, store_no, itemboard_delete_b)
+		  values(
+		    #{sub_No},
+		    sysdate,
+		    #{itemboard_Local },
+		    #{itemboard_Title },
+		    #{itemboard_Contents },
+		    0,
+		    0,
+		    #{itemboard_Change_b },
+		    (select max(ITEM_NO) from item),
+		    (select max(itemboard_no) from itemboard)+1,
+		    (select st.store_no from member mb inner join store st 
+		      on mb.member_no = st.MEMBER_NO where mb.member_email = #{member_email }),
+		    0
+		  )
+	</insert>
+	
+
+	<insert id="insertImgs" parameterType="ItemImg">
+		insert into itemimg(img_no, itemboard_no, big_img, thum_img ) values(
+		  (select max(IMG_NO) from itemimg)+1,
+		  (select max(itemboard_no) from itemboard),
+		  #{big_Img },
+		  #{thum_Img }
+		)
+	</insert>
+	
+	
+	<insert id="insertTag" parameterType="String">
+		insert into tag (tag_no, TAG_NAME, itemboard_no) 
+		values((select max(TAG_NO) from tag)+1,#{tag },
+		(select max(ITEMBOARD_NO) from ITEMBOARD))
+	</insert>	
+	
+	
+
+
+	<!-- 삭제가 아니라 상태 변경으로 출력을 안해주는것임 -->
+	<update id="itemBoardDelete" parameterType="int">
+		UPDATE itemboard set ITEMBOARD_DELETE_B = 1  where ITEMBOARD_NO = #{itemboard_No }
+	</update>
+	
+	
+
+	
+	<select id="itemNboardNtag" parameterType="int" resultType="ItemDTO">
+		select * from ITEM it inner join ITEMBOARD ib 
+		on it.ITEM_NO=ib.ITEM_NO
+		inner join tag ta on ta.ITEMBOARD_NO = ib.ITEMBOARD_NO
+		inner join CATEGORY_SUB cs on cs.SUB_NO = ib.SUB_NO
+		where ib.ITEMBOARD_NO =#{itemboard_No }
+	</select>
+	
+	<delete id="oneImgDelete" parameterType="String">
+		delete from itemimg where BIG_IMG = #{big_Img }
+	</delete>
 	
 </mapper>

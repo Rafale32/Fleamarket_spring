@@ -6,12 +6,27 @@
 
 <mapper namespace="PaymentMapper">
 	<cache />
-	<!-- 판매 내역임 잘못 연결함. -->
+	
 	<select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
 		<![CDATA[	  
-		select Ite.Itemboard_Title, I.Item_Delivery_State,
-		I.Item_Price, I.Item_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date  
+			select Ite.Itemboard_Title, I.Item_Delivery_State,
+			I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
+			S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
+ 		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
+ 		 ,pay p
+		where O.Member_No = M.Member_No
+  		and O.Item_No = I.Item_No
+ 		 and I.Item_No = Ite.Item_No
+ 		 and Ite.Store_No = S.Store_No
+ 		 and Img.Itemboard_No = Ite.Itemboard_No
+ 		 and P.Oorder_No = O.Oorder_No
+ 		 ]]>
+ 	and M.Member_Email = #{member_email}
+	</select>
+	
+	<select id="puerchasecounting" parameterType="DeliveryDTO_gy" resultType="integer">
+		<![CDATA[	  
+		select count(*)
  		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
  		 ,pay p
 		where O.Member_No = M.Member_No
@@ -30,12 +45,49 @@
 		]]>
 	</update>
 	
+	<!-- insert alram -->
+
+	<insert id="registerPerchaseAlram" parameterType="PuerchaseDTO_gy">
+		<![CDATA[
+		insert into 
+		Inform(INFORM_NO,
+		ITEM_NO,
+		ITEMBOARD_NO,
+		INFORM_DATE,
+		INFORM_CHECK_B,
+		INFORM_CONTENTS)
+		Values ((select nvl(max(INFORM_NO)+1,1)from inform),
+		#{item_no},
+		#{itemboard_no},
+		sysdate,
+		1,
+		#{inform_contents}
+		)
+		]]>
+	</insert> 
+	
+	
 	
 	<select id="SellList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
 		<![CDATA[
 		select Ite.Itemboard_Title, I.Item_Delivery_State,
-		I.Item_Price, I.Item_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date
+		I.Item_Price, I.Item_No,Ite.Itemboard_No,
+		S.Store_Name, Img.Thum_Img, P.Pay_Date,M.Member_Email,S.Store_No
+		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
+		where O.Item_No = I.Item_No
+		and I.Item_No = Ite.Item_No
+		and Ite.Store_No = S.Store_No
+		and S.Member_No = M.Member_No
+		and Ite.Itemboard_No = Img.Itemboard_No
+		and P.Oorder_No = O.Oorder_No
+		]]>
+		and M.Member_Email = #{member_email} 
+	</select>
+	
+	<!-- 판매내역 카운팅 -->
+	<select id="SellListcounting" parameterType="DeliveryDTO_gy" resultType="integer">
+		<![CDATA[	  
+		select count(*)
 		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
 		where O.Item_No = I.Item_No
 		and I.Item_No = Ite.Item_No
@@ -74,6 +126,23 @@
 	and O.Member_No = M.Member_No
 	and S.Store_No = #{Store_No}
 	</select>
+	
+	<select id="MystoreReviewCounting" parameterType="MystoreDTO_gy" resultType="integer">
+	Select count(*)
+	From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
+	Itemimg img
+	where R.Store_No = S.Store_No
+	and P.Pay_No = R.Pay_No
+	and P.Oorder_No = O.Oorder_No
+	and O.Item_No = I.Item_No
+	and I.Item_No = Ite.Item_No
+	and Ite.Itemboard_No =Img.Itemboard_No
+	and O.Member_No = M.Member_No
+	and S.Store_No = #{Store_No}
+	</select>
+	
+	
+	
 
 
 </mapper>

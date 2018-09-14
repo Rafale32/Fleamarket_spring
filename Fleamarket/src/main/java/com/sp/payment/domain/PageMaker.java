@@ -11,7 +11,7 @@ public class PageMaker {
   private int totalCount;
   private int startPage;
   private int endPage;
-  private boolean prev;
+  private boolean prev;	
   private boolean next;
 
   

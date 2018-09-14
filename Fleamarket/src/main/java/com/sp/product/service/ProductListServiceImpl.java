@@ -98,5 +98,12 @@ public class ProductListServiceImpl implements ProductListService{
 	    
 		return null;
 	}
+
+	@Override
+	public void itemBoardDelete(int itemboard_No) {
+		
+		dao.productDelete(itemboard_No);
+		
+	}
 	
 }

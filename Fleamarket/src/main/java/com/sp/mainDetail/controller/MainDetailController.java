@@ -44,4 +44,8 @@ public class MainDetailController {
 		System.out.println(bean.getItemDetail().getItemboard_title());
 	}
 	
+	/*@RequestMapping(value="/test", method=RequestMethod.GET)
+	public void ajaxText(){
+	
+	}*/
 }

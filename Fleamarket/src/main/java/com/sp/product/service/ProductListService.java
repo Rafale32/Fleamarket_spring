@@ -9,4 +9,5 @@ public interface ProductListService {
 	
 	public List<ItemDTO> productListService(String email, String storeName, int requestPage , Bean bean);
 	
+	public void itemBoardDelete(int itemboard_No);
 }
