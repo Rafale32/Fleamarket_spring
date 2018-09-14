@@ -60,7 +60,6 @@ public class ProductAjax {
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 		
 		
-		
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
 	}
