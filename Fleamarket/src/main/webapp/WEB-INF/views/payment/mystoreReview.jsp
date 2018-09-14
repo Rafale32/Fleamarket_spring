@@ -20,8 +20,6 @@
 </head>
 <body>
 
-	<h1>도착확인용</h1>
-	
 	<div>
 	<table id="Mystore_review" class="table" border="1">
 		<c:forEach var="p" items="${list2}">
@@ -29,7 +27,13 @@
 				<td class="date">구매 날자 :${p.pay_date}</td>
 				<td>구매자 이름 :${p.member_name}</td>
 			</tr>
-			<tr><td colspan="2">구매 title: ${p.itemboard_title}</td></tr>
+			<tr>
+			<td colspan="2">
+			<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">
+			구매 title: ${p.itemboard_title}
+			</a>
+			</td>
+			</tr>
 			<tr><td colspan="2">리뷰 별점 :${p.review_star}</td></tr>
 			<tr>
 				<td colspan="2" ><c:choose>

@@ -55,7 +55,7 @@
 	<table id="sell_list_table" class="table">
 		<c:forEach var = "p" items="${list}">
 		<tr>
-			<td colspan="4" class="date">날자부 :${p.pay_date }  아이템 보드 ${p.itemboard_no }</td>
+			<td colspan="4" class="date">날자부 :${p.pay_date }</td>
 		</tr>
 
 		
