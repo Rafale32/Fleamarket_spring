@@ -6,6 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
   <script src="../resources/product/jquery-3.1.0.js"></script>
+    <!-- 부트스트랩 -->
+	<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+	<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/product/addProduct.js"></script>
 	<script src="../resources/product/upload.js"></script>
   
