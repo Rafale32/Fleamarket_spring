@@ -30,7 +30,7 @@ public interface MainDetailDAO {
 	
 	public StoreInfoDTO storeInfo(Integer itemboard_no)throws Exception;
 	
-	public List<ItemDetailDTO> storeItemList(Integer store_no, Integer itemboard_no)throws Exception;
+	public List<ItemDetailDTO> storeItemList(StoreInfoDTO store)throws Exception;
 	
 	public List<ItemQnaDTO> listQna(Integer itemboard_no)throws Exception;
 	

@@ -38,6 +38,7 @@ public class MainDetailController {
 		
 		bean.setItemDetail(service.itemDetail(itemboard_no));
 		bean.setItemImgList(service.itemImgList(itemboard_no));
+		bean.setStoreInfo(service.storeInfo(itemboard_no));
 		
 		model.addAttribute("bean",bean);
 		

@@ -127,8 +127,17 @@ public class MainDetailServiceImpl implements MainDetailService {
 
 	@Override
 	public StoreInfoDTO storeInfo(Integer itemboard_no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		StoreInfoDTO store = new StoreInfoDTO();
+		store = dao.storeInfo(itemboard_no);
+		store.setItemList(dao.storeItemList(store));
+		store.setItemCount(store.getItemList().size());
+		
+		for(int i=0; i<store.getItemList().size(); i++){
+			store.getItemList().get(i).setImgList(
+					dao.itemImgList(store.getItemList().get(i).getItemboard_no()));
+		}
+		
+		return store;
 	}
 
 	@Override

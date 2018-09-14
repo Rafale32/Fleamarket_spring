@@ -276,13 +276,15 @@ div {
 
 .product-info>.title {
 	display: block;
-	margin: 0 0 30px;
+	margin: auto 0 30px;
 	border-bottom: 1px solid #e8e8e8;
 	padding-bottom: 16px;
 	font-size: 18px;
 	color: #212121;
 	font-weight: 500;
 	line-height: 18px;
+	height: 30px;
+	
 }
 
 .product-info>.description {
@@ -324,7 +326,10 @@ ul {
 .product-comments {
 	width: 100%;
 }
-
+.product-comments .title{
+	font-size : 18px;
+	margin-bottom: 10px;
+}
 .product-comments .title .comments-count {
 	color: #f64448;
 }
@@ -339,7 +344,10 @@ ul {
 	width: 100%;
 	height: 100px;
 	border-bottom: 1px solid #efefef;
-	padding: 20px;
+/* 	padding-bottom: 300px; */
+/* 	padding-top: 20px; */
+/* 	padding-left: 20px; */
+/* 	padding-right: 20px; */
 }
 
 .comment-input .comment-footer {
@@ -352,12 +360,14 @@ ul {
 .comment-input .input-wrapper textarea {
 	caret-color: #f64448;
 	border: none;
-	width: 100%;
-	height: 100%;
+	width: 93%;
+	height: 60%;
 	overflow: auto;
 	font-size: 13px;
 	resize: none;
 	color: gray;
+	margin: 20px;
+	margin-bottom: 40px;
 }
 
 .comment-input .comment-footer .comment-write-btn {
@@ -416,12 +426,19 @@ ul {
 
 .comment-item .comment-item-wrapper .comment-info-wrapper .comment-info-header .comment-writer-name
 	{
+	display : inline-block;
 	float: left;
 	font-size: 14px;
 	line-height: 14px;
 	color: #999;
 }
 
+
+.comment-date{
+	float:right;
+	font-size : 13px;
+	color : #999;
+}
 .product-detail .product-desc-wrapper .detail-tab-content .seller-content
 	{
 	display: table-cell;
@@ -568,4 +585,8 @@ a {
 	float: right;
 	font-size: 14px;
 	color: red;
+}
+
+.hidden{
+	display: none;
 }

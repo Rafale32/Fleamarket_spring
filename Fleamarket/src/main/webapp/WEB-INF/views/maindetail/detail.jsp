@@ -22,10 +22,12 @@
 					<div class="comment-writer-name">
 						<a href="">{{store_name}}</a>
 					</div>
+					<div class="comment-date">{{item_qna_date}}</div>
 				</div>
 				<div class="comment-content">{{item_qna_contents}}</div>
-					<a href="deleteQnaAction.do?item_qna_no=${qnaList.item_qna_no}&itemboard_no=${bean.itemDetail.itemboard_no}">
-						<div class="delete-qna">삭제하기</div>
+					<a id="replyDelBtn">
+						<label class="hidden" id="qnaNo">{{item_qna_no}}</label>
+						<div class="delete-qna">삭제</div>
 					</a>
 				<div class="split"></div>
 			</div>
@@ -45,6 +47,7 @@
 					<div class="comment-writer-name">
 						<a href="">{{store_name}}</a>
 					</div>
+					<div class="comment-date">{{item_qna_date}}</div>
 				</div>
 				<div class="comment-content">{{item_qna_contents}}</div>
 				<div class="split"></div>
@@ -97,27 +100,69 @@ getAllList();
 } */
 
 //댓글목록리스트
+// function getAllList(){
+// 	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+	  
+// 		var member_noObj = $("#member_no");
+// 		var member_no = member_noObj.val();
+// 		$(".replyLi").remove();
+// 		$.each(data, function(index, item) {
+// 			if(member_no == item.member_no){
+// 				var source = $("#template").html();
+// 				var template = Handlebars.compile(source);
+// 				$("#repliesDiv").after(template(item));
+// 			}else{
+// 				var source = $("#template2").html();
+// 				var template = Handlebars.compile(source);
+// 				$("#repliesDiv").after(template(item));
+// 			}
+// 		});
+// 	}); 
+// }  
 function getAllList(){
 	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
 	  
 		var member_noObj = $("#member_no");
 		var member_no = member_noObj.val();
-		
+		$(".replyLi").remove();
 		$.each(data, function(index, item) {
-			if(member_no == item.member_no){
-				var source = $("#template").html();
-				var template = Handlebars.compile(source);
-				$("#repliesDiv").after(template(item));
+			if(index < 4){
+				if(member_no == item.member_no){
+					var source = $("#template").html();
+					var template = Handlebars.compile(source);
+					$("#repliesDiv").after(template(item));
+					console.log("히든X");
+				}else{
+					var source = $("#template2").html();
+					var template = Handlebars.compile(source);
+					$("#repliesDiv").after(template(item));
+					console.log("히든X");
+				}
 			}else{
-				var source = $("#template2").html();
-				var template = Handlebars.compile(source);
-				$("#repliesDiv").after(template(item));
+				if(member_no == item.member_no){
+					var source = $("#template").html();
+					var template = Handlebars.compile(source);
+					$("#repliesDiv").after(template(item));
+					$(this).find('replyLi').attr('style', 'display:none');
+					console.log("히든");
+				}else{
+					var source = $("#template2").html();
+					var template = Handlebars.compile(source);
+					$("#repliesDiv").after(template(item));
+					$(this).find('replyLi').attr('style', 'display:none');
+					console.log("히든");
+				}
 			}
-// 			printData(data, $("#repliesDiv"), $("#template"));
-			console.log(item);
 		});
 	}); 
-}  
+} 
+  
+	 //스크롤처리
+	$(window).bind('scroll', function() {
+  	if($(window).scrollTop() >= $('body').offset().top + $('body').outerHeight() - window.innerHeight) {
+  		alert("dz");
+  	}
+  }); 
   
   $(function() {
     $('#fav-btn').click(function() {
@@ -139,9 +184,11 @@ function getAllList(){
   $("#replyAddBtn").on("click", function(){
 
   	var itemboard_noObj = $("#itemboard_no");
+  	console.log("1", itemboard_noObj);
   	var member_noObj = $("#member_no");
+  	console.log("2", member_noObj);
   	var item_qna_contentsObj = $("#item_qna_contents");
-  	
+  	console.log("3",item_qna_contentsObj);
   	var itemboard_no = itemboard_noObj.val();
   	var member_no = member_noObj.val();
   	var item_qna_contents = item_qna_contentsObj.val();
@@ -163,10 +210,9 @@ function getAllList(){
   			console.log("result: "+result);
   			if(result == 'SUCCESS'){
   				alert("등록되었습니다.");
-  				$("#replyLi").remove();
   				getAllList();
-  				member_noObj.val("");
-  				item_qna_contentsObj.val("");
+//   				member_noObj.val("");
+//   				item_qna_contentsObj.val("");
   			}
   		}
   	});
@@ -183,44 +229,31 @@ function getAllList(){
   	
   });
   
-  /* var itemboard_no = 1;
-  
-  $.getJSON("/qna/all/"+itemboard_no, function(data){
-  	console.log(data.length);
-  }); */
-  
-  //페이징처리
-  
-  /* function getPage(pageInfo){
+  //댓글삭제
+  $("body").on("click",' #replyDelBtn',function(){
+  	var item_qna_no = $(this).find('label').text()
+  	item_qna_no *= 1;
   	
-  	$.getJSON(pageInfo,function(data){
-  		printData(data.list, $("#repliesDiv"), $('#template'));
-  		printPaging(data.pageMaker, $(".pagination"));
-  		
-  		//$("#modifyModal").modal('hide');
+  	$.ajax({
+  		type:'delete',
+  		url:'/fleamarket/qna/'+item_qna_no,
+  		headers :{
+  			"Content-Type" : "application/json",
+  			"X-HTTP-Method-Override" : "DELETE"},
+  		dateType:'text',
+  		success : function(result){
+  			console.log("result: "+result);
+  			if(result == 'SUCCESS'){
+  				alert("삭제 되었습니다.");
+//   				$(".replyLi").remove();
+					$(this).find('.replyLi').remove();
+  				getAllList();
+  			}
+  		}
   	});
-  } */
-  
- /*  var printPaging = function(pageMaker, target){
   	
-  	var str = "";
-  	
-  	if(pageMaker.prev){
-  		str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
-  	}
-  	
-  	for(var i=pageMaker.startPage, len = pageMaker.endPage; i<=len; i++){
-  		var strClass = pageMaker.cri.page == i?'class=active':'';
-  		str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
-  	}
-  	
-  	if(pageMaker.next){
-  		str += "<li><a href='"+(pageMaker.endPage+1)+"'> >> </a></li>";
-  	}
-  	
-  	target.html(str);
-  }; */
-  
+  });
+
 });
 </script>
 <style type="text/css">
@@ -299,7 +332,7 @@ function getAllList(){
 								</button>
 
 								<c:choose>
-									<c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
+									<c:when test="${bean.itemDetail.item_delivery_B eq 1 }">
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
 												<button	onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
@@ -402,7 +435,7 @@ function getAllList(){
 								</div>
 							</div>
 						</div>
-						<%-- <div class="seller-content">
+						<div class="seller-content">
 							<div class="product-seller-wrapper">
 								<div class="product-seller">
 									<div class="title">상점정보</div>
@@ -454,9 +487,9 @@ function getAllList(){
 										</div>
 										<div class="product-detail-btns">
 											<c:choose>
-												<c:when test="${bean.itemDetail.delivery_state eq 1 }">
+												<c:when test="${bean.itemDetail.item_delivery_B eq 1 }">
 													<c:choose>
-														<c:when test="${member.name ne null}">
+														<c:when test="${member.member_name ne null}">
 															<button
 																onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
 																class="btn-call">안심결제</button>
@@ -476,7 +509,7 @@ function getAllList(){
 									</div>
 								</div>
 							</div>
-						</div> --%> 
+						</div> 
 					</div>
 				</div>
 			</div>

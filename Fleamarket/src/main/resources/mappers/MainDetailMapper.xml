@@ -106,13 +106,14 @@
 		#{itemboard_no}
 	</select>
 
-	<select id="storeItem" parameterType="int" resultType="ItemDetailDTO">
+	<select id="storeItem" parameterType="StoreInfoDTO" resultType="ItemDetailDTO">
 		select
 		distinct b.itemboard_no, a.item_price, b.itemboard_title
 		from item a, itemboard b
 		where a.item_no = b.item_no
 		and b.store_no = #{store_no}
-		and b.itemboard_delete_B = 0
+		and b.itemboard_delete_b = 0
+		and a.item_delivery_b = 1
 		and b.itemboard_no != #{itemboard_no}
 	</select>
 
@@ -158,6 +159,7 @@
 		select *
 		from item_qna
 		where itemboard_no = #{itemboard_no}
+		order by item_qna_date asc
 	</select>
 
 	<insert id="createQna" parameterType="ItemQnaDTO">

@@ -68,13 +68,8 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	}
 
 	@Override
-	public List<ItemDetailDTO> storeItemList(Integer store_no, Integer itemboard_no) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
-		paramMap.put("store_no", store_no);
-		paramMap.put("itemboard_no", itemboard_no);
-		
-		return session.selectList(namespace+".storeItem", paramMap);
+	public List<ItemDetailDTO> storeItemList(StoreInfoDTO store) throws Exception {
+		return session.selectList(namespace+".storeItem", store);
 	}
 
 	@Override
