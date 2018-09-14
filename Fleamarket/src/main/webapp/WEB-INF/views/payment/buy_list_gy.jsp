@@ -88,7 +88,7 @@
 					<!-- 구매 상점으로 이동하기  -->
 					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
 					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
-					<h2> ${p.itemboard_no }</h2>
+					<%-- <h2> ${p.itemboard_no }</h2> --%>
 					<h4>구매상점 ${p.store_name }</h4>
 					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
 					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>구매가격: ${p.item_price}</h3></a>
@@ -99,7 +99,7 @@
 
 					<form action="/fleamarket/payment/buy_list_gy" method="post">
 						<!-- style="display: none;"  나중에 넣어서 추가 할것-->
-						<input type="text" name="itemboard_no" value="${p.itemboard_no }">
+						<input type="text" name="itemboard_no" value="${p.itemboard_no }" style="display: none">
 						<input type="text" name="purchaseNo" value="${p.item_no}"
 							style="display: none">
 						<c:if test="${p.item_delivery_state == 3}">

@@ -101,9 +101,9 @@
 					<form action="/fleamarket/payment/sell_list_gy" method="post">
 				<!-- style="display: none;"  나중에 넣어서 추가 할것-->
 					<c:if test="${p.item_delivery_state == 2}">
-					<input type="text" id=ite_boardno name="itemboard_no" value="${p.itemboard_no }">
-					<input type="text" id="pageNo" name="pageNo" value=${SellModel2.requestPage }>
-					<input type="text" id="item_no" name="item_no" value=${p.item_no } >
+					<input type="text" id=ite_boardno name="itemboard_no" value="${p.itemboard_no }" style="display: none">
+					<input type="text" id="pageNo" name="pageNo" value="${SellModel2.requestPage }" style="display: none">
+					<input type="text" id="item_no" name="item_no" value="${p.item_no }" style="display: none">
 					<input type="submit" id="purchaseDetermin" class="btn" value="판매승인버튼" >
 					</c:if>
 					<br>
