@@ -9,12 +9,12 @@ public class ItemQnaDTO implements Serializable{
   private String store_name;
   private String item_qna_contents;
   private String item_qna_date;
-  private String member_no;
+  private int member_no;
   
   public ItemQnaDTO(){}
 
 	public ItemQnaDTO(int item_qna_no, int itemboard_no, int store_no, String store_name, String item_qna_contents,
-			String item_qna_date, String member_no) {
+			String item_qna_date, int member_no) {
 		super();
 		this.item_qna_no = item_qna_no;
 		this.itemboard_no = itemboard_no;
@@ -24,6 +24,7 @@ public class ItemQnaDTO implements Serializable{
 		this.item_qna_date = item_qna_date;
 		this.member_no = member_no;
 	}
+
 
 	public int getItem_qna_no() {
 		return item_qna_no;
@@ -73,14 +74,14 @@ public class ItemQnaDTO implements Serializable{
 		this.item_qna_date = item_qna_date;
 	}
 
-	public String getMember_no() {
+
+	public int getMember_no() {
 		return member_no;
 	}
 
-	public void setMember_no(String member_no) {
+
+	public void setMember_no(int member_no) {
 		this.member_no = member_no;
 	}
-
-	
   
 }

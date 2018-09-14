@@ -15,10 +15,38 @@
 	<insert id="registerMember" parameterType="MemManageDTO">
 		<![CDATA[
 		insert into member(member_no, member_email, member_pw, member_name, member_phone, member_address, member_address2, member_admin)
-		values( (select nvl(max(member_no)+1,1)from member), #{member_email}, 
+		values( (select max(member_no)from member)+1, #{member_email}, 
 		#{member_pw},#{member_name}, #{member_phone},#{member_address},#{member_address2}, 0 )
 		]]>
 	</insert>
+	
+	<!-- 상점 생성 -->
+	<insert id="registerStore" parameterType="StoreDTO">
+		insert into store(store_no, store_name, store_viewcount, store_open_date, member_no)
+		values(
+	    (select max(store_no) from store)+1,
+	    (select member_email from member where member_no=(select max(store_no) from store)+1),
+	    0, sysdate, (select max(store_no) from store)+1)
+	</insert>
+	
+	<!-- 랜덤 상점 생성 및 변경 -->
+		<update id="randomName" parameterType="StoreDTO">
+		update store set store_name=(SELECT DBMS_RANDOM.STRING('A', 8) FROM DUAL)
+		where member_email =#{member_email}
+		</update>
+
+	
+	<!-- 상점 중복 확인  -->
+	<select id="listStore"  resultType="StoreDTO">
+		select * from store
+	</select>
+	
+	
+	<!-- 이메일 중복체크 -->
+	<select id="emailCheck" parameterType="String" resultType="Integer">
+		select count(*) from member
+		where member_email = #{member_email}
+	</select>
 	
 	<!-- 상세보기 -->
 	<select id="detailMember" parameterType="String" resultType="MemManageDTO">
@@ -30,8 +58,6 @@
 	  update member set
 		member_email=#{member_email}, member_pw=#{member_pw}, member_name=#{member_name}, member_phone=#{member_phone},
 		member_address=#{member_address}, member_address2=#{member_address2} where member_email =#{member_email}
-
- 
 	</update>
 	
 	<!-- 회원탈퇴 -->

@@ -7,7 +7,6 @@ public class ItemImg implements Serializable{
 	private String thum_Img;
 	private String big_Img;
 	
-	
 	public String getThum_Img() {
 		return thum_Img;
 	}

@@ -99,8 +99,7 @@
 
 					<form action="/fleamarket/payment/buy_list_gy" method="post">
 						<!-- style="display: none;"  나중에 넣어서 추가 할것-->
-						<input type="text" name="itemboard_no" value="${p.itemboard_no }" style="display: none">
-						<input type="text" name="purchaseNo" value="${p.item_no}"
+						<input type="text" name="itemboard_no" value="${p.itemboard_no }"
 							style="display: none">
 						<c:if test="${p.item_delivery_state == 3}">
 							<input type="text" id="pageNo" name="pageNo"

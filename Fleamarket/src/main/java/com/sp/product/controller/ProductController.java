@@ -18,6 +18,7 @@ import com.sp.memManage.domain.MemManageDTO;
 import com.sp.product.domain.ItemDTO;
 import com.sp.product.service.AddproductService;
 import com.sp.product.service.ProductListService;
+import com.sp.product.service.ProductService;
 
 
 @Controller
@@ -25,10 +26,13 @@ import com.sp.product.service.ProductListService;
 public class ProductController {
 	
 	@Inject
-	private ProductListService service;
+	private ProductListService lService;
 	
 	@Inject
 	private AddproductService addService;
+	
+	@Inject
+	private ProductService service;
 	
 	//뷰단의 파일 이름 형식은 각각의 상단의 (상위 이름/하단의 메소드 벨류이름) 으로 결정됨 
 	@RequestMapping(value = "/productlist", method = RequestMethod.GET)
@@ -76,9 +80,9 @@ public class ProductController {
 		List<ItemDTO> resultList;
 		
 		if(mmDTO == null){
-			resultList = service.productListService(null, storeName,requestPage , bean);
+			resultList = lService.productListService(null, storeName,requestPage , bean);
 		}else{
-			resultList = service.productListService(mmDTO.getMember_email(), storeName,requestPage , bean);
+			resultList = lService.productListService(mmDTO.getMember_email(), storeName,requestPage , bean);
 		}
 		
 		//이미지 경로는 이렇게 전체 리얼패스를 쓰는게 아니라 프로젝트 상의 경로로 써야함  /Fleamarket/productimg/${tmp2.thum_Img } 이런식으로
@@ -95,7 +99,7 @@ public class ProductController {
 		
 	}
 	
-	@RequestMapping( value = "addproductform", method = RequestMethod.GET)//물품 추가 폼 페이지 가는부분 대 카테로리만 필요
+	@RequestMapping( value = "/addproductform", method = RequestMethod.GET)//물품 추가 폼 페이지 가는부분 대 카테로리만 필요
 	public void addProductFrom(Model model){
 		Bean bean = new Bean();
 		
@@ -103,5 +107,52 @@ public class ProductController {
 		
 		model.addAttribute(bean);
 	}
-
+	
+	@RequestMapping( value = "/addproduct", method = RequestMethod.POST)//물품 추가 폼 페이지 가는부분 대 카테로리만 필요
+	public String addproduct(ItemDTO itemDTO, Model model, HttpSession session){
+		Bean bean = new Bean();
+		MemManageDTO member = (MemManageDTO)session.getAttribute("member");
+		itemDTO.setMember_email(member.getMember_email());
+		
+		//System.out.println(itemDTO.toString());
+		
+		addService.addProduct(itemDTO);
+		
+		
+//		model.addAttribute(bean);
+		return "redirect:/product/productlist";
+	}
+	
+	@RequestMapping("/productdelete")
+	public String productDelete(@RequestParam("itemboard_No") int itemboard_No){
+		
+		lService.itemBoardDelete(itemboard_No);
+		
+		return "redirect:/product/productlist";
+	}
+	
+	@RequestMapping("/productmodifyform")
+	public void productModifyForm(@RequestParam("itemboard_No") int itemboard_No , Model model)throws Exception{
+		Bean bean = new Bean();
+		bean.setCateList(addService.getCateDTO());
+		
+		service.productModifyForm(itemboard_No, bean);
+		
+		model.addAttribute(bean);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -6,12 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-템플릿
+
 	<!-- 헤더영역 -->
-	<tiles:insertAttribute name="header"/>
-	<hr>
+	<tiles:insertAttribute name="header" />
 	
 	<!-- 바디영역 -->
 	<tiles:insertAttribute name="body"/>

@@ -104,6 +104,9 @@
 					<input type="text" id=ite_boardno name="itemboard_no" value="${p.itemboard_no }" style="display: none">
 					<input type="text" id="pageNo" name="pageNo" value="${SellModel2.requestPage }" style="display: none">
 					<input type="text" id="item_no" name="item_no" value="${p.item_no }" style="display: none">
+					<input type="text" id="pageNo" name="pageNo" value=${SellModel2.requestPage }>
+					<input type="text" id="item_no" name="item_no" value=${p.item_no } style="display: none">
+
 					<input type="submit" id="purchaseDetermin" class="btn" value="판매승인버튼" >
 					</c:if>
 					<br>
