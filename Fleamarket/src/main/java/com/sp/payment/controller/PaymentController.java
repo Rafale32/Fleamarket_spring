@@ -166,6 +166,8 @@ public class PaymentController {
 		List<PuerchaseDTO_gy> list	= service.listSell(dto2,cri);
 		model.addAttribute("list", list);
 		
+		
+		
 		//알림글 추가부분
 		System.out.println(pdto.getItemboard_no() + " pdto아넘");
 		System.out.println(pdto.getItem_no() + " pdto아넘");
