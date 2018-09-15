@@ -12,7 +12,7 @@
 <!-- 다음 주소 API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<!-- 필요한 메서드 담아둠-->
+<!-- 필요한 메서드 담아둠 -->
 <script src="../resources/safepay/js/orderJS.js" ></script>
 
 <!-- css  -->
