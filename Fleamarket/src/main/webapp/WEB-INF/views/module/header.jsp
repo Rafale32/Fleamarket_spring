@@ -25,7 +25,7 @@
 <body>
   <div class="container">
     <nav class="navbar navbar-default">
-<!--     <div class="container-fluid"> -->
+    <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand" href="/fleamarket/maindetail/mmain">Flea</a>
@@ -93,13 +93,14 @@
                     내 상점 </a></li>
                 <!--             <li class="divider"></li> -->
                 <!--             <li><a href="#">Separated link</a></li> -->
-              </ul></li>
+              </ul>
+            </li>
           </c:if>
         </ul>
 
       </div>
       <!-- /.navbar-collapse -->
-<!--     </div> -->
+    </div>
     <!-- /.container-fluid -->
     </nav>
   </div>
