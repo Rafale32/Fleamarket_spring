@@ -15,10 +15,10 @@
 <!-- 필요한 메서드 담아둠-->
 <script src="../resources/safepay/js/orderJS.js" ></script>
 
-<!-- css -->
+<!-- css  -->
 <link rel="stylesheet" href="../resources/safepay/css/orderCSS.css" type="text/css">
 
-<!-- 부트스트랩  -->
+<!-- 부트스트랩 -->
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 
