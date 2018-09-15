@@ -2,7 +2,12 @@
 	pageEncoding="UTF-8"%>
 
 <%-- <%@include file="../include/header.jsp"%> --%>
-
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <!-- Main content -->
 <section class="content">
 	<div class="row">

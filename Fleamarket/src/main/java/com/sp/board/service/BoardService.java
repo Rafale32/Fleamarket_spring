@@ -13,10 +13,11 @@ public interface BoardService {
 	public List<BoardDTO> noList() throws Exception;
 	
 	public BoardDTO read(Integer notice_no) throws Exception;
-//	
-//	public void modify(BoardDTO board) throws Exception;
-//	
-//	public void remove(Integer notice_no) throws Exception;
+	
+	public void remove(Integer notice_no) throws Exception;
+	
+	public void modify(BoardDTO board) throws Exception;
+	
 	
 	
 
