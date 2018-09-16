@@ -3,6 +3,7 @@ package com.sp.mainDetail.model;
 import java.util.List;
 
 import com.sp.mainDetail.domain.CategoryDTO;
+import com.sp.mainDetail.domain.FavDTO;
 import com.sp.mainDetail.domain.HotItemDTO;
 import com.sp.mainDetail.domain.HotListDTO;
 import com.sp.mainDetail.domain.ItemDetailDTO;
@@ -30,7 +31,7 @@ public interface MainDetailDAO {
 	
 	public StoreInfoDTO storeInfo(Integer itemboard_no)throws Exception;
 	
-	public List<ItemDetailDTO> storeItemList(Integer store_no, Integer itemboard_no)throws Exception;
+	public List<ItemDetailDTO> storeItemList(StoreInfoDTO store)throws Exception;
 	
 	public List<ItemQnaDTO> listQna(Integer itemboard_no)throws Exception;
 	
@@ -42,4 +43,9 @@ public interface MainDetailDAO {
 	
 	public List<ItemDetailDTO> categoryItemList(Integer category_no)throws Exception;
 	
+	public void addFav(FavDTO fav)throws Exception;
+	
+	public List<FavDTO> listFav(Integer itemboard_no)throws Exception;
+	
+	public void removeFav(Integer fav_no)throws Exception;
 }

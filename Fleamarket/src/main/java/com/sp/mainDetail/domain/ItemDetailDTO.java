@@ -1,7 +1,9 @@
 package com.sp.mainDetail.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class ItemDetailDTO implements Serializable{ //마이바티스는 DTO 로 사용하는 객체 무조건 시리얼라이즈 필수적으로 해줘야함  

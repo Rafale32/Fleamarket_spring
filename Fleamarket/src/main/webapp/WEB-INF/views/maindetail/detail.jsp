@@ -13,7 +13,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <script id="template" type="text/x-handlebars-template">
-{{#each .}}
 <li class="replyLi" data-item_qna_no={{item_qna_no}}>
 <div class="comments-wrapper">
 	<div class="comment-item">
@@ -23,57 +22,66 @@
 					<div class="comment-writer-name">
 						<a href="">{{store_name}}</a>
 					</div>
+					<div class="comment-date">{{item_qna_date}}</div>
 				</div>
 				<div class="comment-content">{{item_qna_contents}}</div>
-				{{#abc member_no}}
-					<a href="">
-						<div class="delete-qna">삭제하기</div>
+					<a id="replyDelBtn">
+						<label class="hidden" id="qnaNo">{{item_qna_no}}</label>
+						<div class="delete-qna">삭제</div>
 					</a>
-				{{/abc}}
 				<div class="split"></div>
 			</div>
 		</div>
 	</div>
 </div>
 </li>
-{{/each}}
 </script>
 
-<script>
-Handlebars.registerHelper("prettifyDate", function(timeValue) {
-	var dateObj = new Date(timeValue);
-	var year = dateObj.getFullYear();
-	var month = dateObj.getMonth() + 1;
-	var date = dateObj.getDate();
-	return year + "/" + month + "/" + date;
-});
+<script id="template2" type="text/x-handlebars-template">
+<li class="replyLi" data-item_qna_no={{item_qna_no}}>
+<div class="comments-wrapper">
+	<div class="comment-item">
+		<div class="comment-item-wrapper">
+			<div class="comment-info-wrapper">
+				<div class="comment-info-header">
+					<div class="comment-writer-name">
+						<a href="">{{store_name}}</a>
+					</div>
+					<div class="comment-date">{{item_qna_date}}</div>
+				</div>
+				<div class="comment-content">{{item_qna_contents}}</div>
+				<div class="split"></div>
+			</div>
+		</div>
+	</div>
+</div>
+</li>
+</script>
 
-/* Handlebars.registerHelper("abc", function(no){
-	var member_noObj = $("#member_no");
-	var member_no = member_noObj.val();
-	
-	if(no == member_no){
-		return no.fn(this);
-	}
-}); */
+
+<script>
 
 var printData = function(replyArr, target, templateObject){
 	
 	var template = Handlebars.compile(templateObject.html());
 	
 	var html = template(replyArr);
-	$(".replyLi").remove();
+ 	$(".replyLi").remove();
 	target.after(html);
 }
 </script>
 
 <script type="text/javascript">
 $(document).ready(function(){
-
+	
 var itemboard_noObj = $("#itemboard_no");
 var itemboard_no = itemboard_noObj.val();
 console.log($("#itemboard_no").val());
 getAllList();
+
+var favCheck = false; //찜 여부 확인하기 위한 변수
+var fav_no = 0; //
+getFav();
 
 /* if($("#replies li").size() > 1){
 	return;
@@ -82,17 +90,69 @@ getAllList();
 //댓글목록리스트
 function getAllList(){
 	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
-	 
-		printData(data, $("#repliesDiv"), $("#template"));
-		console.log(data);
+	  
+		var member_noObj = $("#member_no");
+		var member_no = member_noObj.val();
+		$(".replyLi").remove();
+		$.each(data, function(index, item) {
+			if(member_no == item.member_no){
+				var source = $("#template").html();
+				var template = Handlebars.compile(source);
+				$("#repliesDiv").after(template(item));
+			}else{
+				var source = $("#template2").html();
+				var template = Handlebars.compile(source);
+				$("#repliesDiv").after(template(item));
+			}
+		});
 	}); 
-}  
+}
+// }  
+// function getAllList(){
+// 	$.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+	  
+// 		var member_noObj = $("#member_no");
+// 		var member_no = member_noObj.val();
+// 		$(".replyLi").remove();
+// 		$.each(data, function(index, item) {
+// 			if(index < 4){
+// 				if(member_no == item.member_no){
+// 					var source = $("#template").html();
+// 					var template = Handlebars.compile(source);
+// 					$("#repliesDiv").after(template(item));
+// 					console.log("히든X");
+// 				}else{
+// 					var source = $("#template2").html();
+// 					var template = Handlebars.compile(source);
+// 					$("#repliesDiv").after(template(item));
+// 					console.log("히든X");
+// 				}
+// 			}else{
+// 				if(member_no == item.member_no){
+// 					var source = $("#template").html();
+// 					var template = Handlebars.compile(source);
+// 					$("#repliesDiv").after(template(item));
+// 					$(this).find('replyLi').attr('style', 'display:none');
+// 					console.log("히든");
+// 				}else{
+// 					var source = $("#template2").html();
+// 					var template = Handlebars.compile(source);
+// 					$("#repliesDiv").after(template(item));
+// 					$(this).find('replyLi').attr('style', 'display:none');
+// 					console.log("히든");
+// 				}
+// 			}
+// 		});
+// 	}); 
+// } 
   
-  $(function() {
-    $('#fav-btn').click(function() {
-      alert("찜");
-    });
-  });
+	 //스크롤처리
+	$(window).bind('scroll', function() {
+  	if($(window).scrollTop() >= $('body').offset().top + $('body').outerHeight() - window.innerHeight) {
+  		alert("dz");
+  	}
+  }); 
+  
 	
   $(document).ready(function(){
 		$('.btn-call').click(function(){
@@ -133,8 +193,8 @@ function getAllList(){
   			if(result == 'SUCCESS'){
   				alert("등록되었습니다.");
   				getAllList();
-  				member_noObj.val("");
-  				item_qna_contentsObj.val("");
+//   				member_noObj.val("");
+//   				item_qna_contentsObj.val("");
   			}
   		}
   	});
@@ -151,44 +211,112 @@ function getAllList(){
   	
   });
   
-  /* var itemboard_no = 1;
-  
-  $.getJSON("/qna/all/"+itemboard_no, function(data){
-  	console.log(data.length);
-  }); */
-  
-  //페이징처리
-  
-  /* function getPage(pageInfo){
+  //댓글삭제
+  $("body").on("click",' #replyDelBtn',function(){
+  	var item_qna_no = $(this).find('label').text()
+  	item_qna_no *= 1;
   	
-  	$.getJSON(pageInfo,function(data){
-  		printData(data.list, $("#repliesDiv"), $('#template'));
-  		printPaging(data.pageMaker, $(".pagination"));
-  		
-  		//$("#modifyModal").modal('hide');
+  	$.ajax({
+  		type:'delete',
+  		url:'/fleamarket/qna/'+item_qna_no,
+  		headers :{
+  			"Content-Type" : "application/json",
+  			"X-HTTP-Method-Override" : "DELETE"},
+  		dateType:'text',
+  		success : function(result){
+  			console.log("result: "+result);
+  			if(result == 'SUCCESS'){
+  				alert("삭제 되었습니다.");
+//   				$(".replyLi").remove();
+					$(this).find('.replyLi').remove();
+  				getAllList();
+  			}
+  		}
   	});
-  } */
+  });
   
- /*  var printPaging = function(pageMaker, target){
+  //찜하기, 찜 취소하기
+  $(function() {
+    $('#fav-btn').click(function() {
+    	var itemboard_noObj = $("#itemboard_no");
+    	var member_noObj = $("#member_no");
+    	var itemboard_no = itemboard_noObj.val();
+    	var member_no = member_noObj.val();
+    	
+    	if(member_no == 0){
+    		alert("로그인 해주세요.");
+    		return;
+    	}
+    	
+    	if(favCheck){
+    		$.ajax({
+      		type:'delete',
+      		url:'/fleamarket/fav/'+fav_no,
+      		headers :{
+      			"Content-Type" : "application/json",
+      			"X-HTTP-Method-Override" : "DELETE"},
+      		dateType:'text',
+      		success : function(result){
+      			console.log("result: "+result);
+      			if(result == 'SUCCESS'){
+      				alert("찜 취소되었습니다.");
+      				getFav();
+      				favCheck = false;
+      			}
+      		}
+      	});
+    	}else{
+    		$.ajax({
+    			type:'post',
+    			url:'/fleamarket/fav',
+    			headers :{
+    				"Content-Type" : "application/json",
+    				"X-HTTP-Method-Override" : "POST"
+    			},
+    			dataType : 'text',
+    			data : JSON.stringify({
+    				itemboard_no : itemboard_no,
+    				member_no : member_no,
+    			}),
+    			success : function(result){
+    				console.log("result: "+result);
+    				if(result == 'SUCCESS'){
+    					alert("찜 등록되었습니다.");
+    					getFav();
+    				}
+    			}
+    		});
+    	}	
+  	});
+  });
   	
-  	var str = "";
-  	
-  	if(pageMaker.prev){
-  		str += "<li><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
-  	}
-  	
-  	for(var i=pageMaker.startPage, len = pageMaker.endPage; i<=len; i++){
-  		var strClass = pageMaker.cri.page == i?'class=active':'';
-  		str += "<li "+strClass+"><a href='"+i+"'>"+i+"</a></li>";
-  	}
-  	
-  	if(pageMaker.next){
-  		str += "<li><a href='"+(pageMaker.endPage+1)+"'> >> </a></li>";
-  	}
-  	
-  	target.html(str);
-  }; */
-  
+  	//찜목록 가져오는 함수
+    function getFav(){
+    	$.getJSON("/fleamarket/fav/all/"+itemboard_no, function(data){ 
+    	  
+    		var member_noObj = $("#member_no");
+    		var member_no = member_noObj.val();
+    		
+    		var cntNum = 0;
+    		
+    		$.each(data, function(index, item){
+    			cntNum++;
+    			if(member_no == item.member_no){
+    				favCheck = true;
+    				fav_no = item.fav_no;
+    			}
+    		});
+    		$('#cnt').remove();
+    		str = "<span id='cnt' class='faved-cnt'>  "+cntNum+"</span>"
+    		$(".faved-cnt").after(str);
+    		
+    		if(favCheck){
+    			$('.faved-cnt').css("color","yellow");
+    		}else{
+    			$('.faved-cnt').css("color","white");
+    		}
+    	});
+    }
 });
 </script>
 <style type="text/css">
@@ -260,14 +388,27 @@ function getAllList(){
 										${bean.itemDetail.itemboard_local}</span></li>
 							</ul>
 							<div class="button-container">
-								<button id="fav-btn" class="btn-faved">
-									<div class="icon icon-faved pick-white"></div>
-									찜 <span class="faved-cnt">23</span>
-									<!---->
-								</button>
+								<c:choose>
+									<c:when test="${member.member_name ne null}">
+										<button id="fav-btn" class="btn-faved">
+										<div class="icon icon-faved pick-white"></div>
+										<span id="fav" class="faved-cnt">찜</span>
+										<!---->
+										</button>
+									</c:when>
+									<c:otherwise>
+										<button id="fav-btn" class="btn-faved"
+												onclick="location.href = '/fleamarket/memmanage/login'">
+										<div class="icon icon-faved pick-white"></div>
+										<span class="faved-cnt">찜</span>
+										<!---->
+										</button>
+									</c:otherwise>
+								</c:choose>
+								
 
 								<c:choose>
-									<c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
+									<c:when test="${bean.itemDetail.item_delivery_B eq 1 }">
 										<c:choose>
 											<c:when test="${member.member_name ne null}">
 												<button	onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
@@ -370,7 +511,7 @@ function getAllList(){
 								</div>
 							</div>
 						</div>
-						<%-- <div class="seller-content">
+						<div class="seller-content">
 							<div class="product-seller-wrapper">
 								<div class="product-seller">
 									<div class="title">상점정보</div>
@@ -402,7 +543,7 @@ function getAllList(){
 																	<div class="product-price">
 																		<div class="seller-popular-product">
 																			<span class="bold"> <fmt:formatNumber
-																					value="${itemList.price}" /> <small>원</small>
+																					value="${itemList.item_price}" /> <small>원</small>
 																			</span>
 																		</div>
 																	</div>
@@ -414,17 +555,19 @@ function getAllList(){
 												<a class="seller-name"
 													href="/Fleamarket/product/productlist.do?store_name=${bean.storeInfo.store_name }">
 													<div class="seller-product-more">
+													<c:if test="${bean.storeInfo.itemCount > 2}">
 														<span class="product-count">${bean.storeInfo.itemCount-2}</span>개
-														상품 더보기
+															상품 더보기
+													</c:if>
 													</div>
 												</a>
 											</div>
 										</div>
 										<div class="product-detail-btns">
 											<c:choose>
-												<c:when test="${bean.itemDetail.delivery_state eq 1 }">
+												<c:when test="${bean.itemDetail.item_delivery_state == 1 }">
 													<c:choose>
-														<c:when test="${member.name ne null}">
+														<c:when test="${member.member_name ne null}">
 															<button
 																onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
 																class="btn-call">안심결제</button>
@@ -444,7 +587,7 @@ function getAllList(){
 									</div>
 								</div>
 							</div>
-						</div> --%> 
+						</div> 
 					</div>
 				</div>
 			</div>

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.sp.mainDetail.domain.CategoryDTO;
+import com.sp.mainDetail.domain.FavDTO;
 import com.sp.mainDetail.domain.HotItemDTO;
 import com.sp.mainDetail.domain.HotListDTO;
 import com.sp.mainDetail.domain.ItemDetailDTO;
@@ -93,7 +94,7 @@ public class MainDetailServiceImpl implements MainDetailService {
       StringTokenizer st = new StringTokenizer(itemDetail.getTag_name(), ",");
 
       while (st.hasMoreTokens()) {
-        strList.add(st.nextToken());
+        strList.add("#"+st.nextToken());
       }
       itemDetail.setTagList(strList);
 
@@ -127,8 +128,17 @@ public class MainDetailServiceImpl implements MainDetailService {
 
 	@Override
 	public StoreInfoDTO storeInfo(Integer itemboard_no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		StoreInfoDTO store = new StoreInfoDTO();
+		store = dao.storeInfo(itemboard_no);
+		store.setItemList(dao.storeItemList(store));
+		store.setItemCount(store.getItemList().size());
+		
+		for(int i=0; i<store.getItemList().size(); i++){
+			store.getItemList().get(i).setImgList(
+					dao.itemImgList(store.getItemList().get(i).getItemboard_no()));
+		}
+		
+		return store;
 	}
 
 	@Override
@@ -203,5 +213,21 @@ public class MainDetailServiceImpl implements MainDetailService {
 	    
 	    return time;
 	  }
+	
+	//Fav
+	@Override
+	public void addFav(FavDTO fav) throws Exception {
+		dao.addFav(fav);
+	}
 
+	@Override
+	public List<FavDTO> listFav(Integer itemboard_no) throws Exception {
+		return dao.listFav(itemboard_no);
+	}
+
+	@Override
+	public void removeFav(Integer fav_no) throws Exception {
+		dao.removeFav(fav_no);
+	}
+	
 }

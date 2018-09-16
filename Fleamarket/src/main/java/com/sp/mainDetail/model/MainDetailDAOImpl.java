@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.sp.mainDetail.domain.CategoryDTO;
+import com.sp.mainDetail.domain.FavDTO;
 import com.sp.mainDetail.domain.HotItemDTO;
 import com.sp.mainDetail.domain.HotListDTO;
 import com.sp.mainDetail.domain.ItemDetailDTO;
@@ -68,13 +69,8 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	}
 
 	@Override
-	public List<ItemDetailDTO> storeItemList(Integer store_no, Integer itemboard_no) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
-		paramMap.put("store_no", store_no);
-		paramMap.put("itemboard_no", itemboard_no);
-		
-		return session.selectList(namespace+".storeItem", paramMap);
+	public List<ItemDetailDTO> storeItemList(StoreInfoDTO store) throws Exception {
+		return session.selectList(namespace+".storeItem", store);
 	}
 
 	@Override
@@ -100,6 +96,22 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	@Override
 	public List<ItemDetailDTO> categoryItemList(Integer category_no) throws Exception {
 		return session.selectList(namespace+".categoryItemList", category_no);
+	}
+
+	//Fav
+	@Override
+	public void addFav(FavDTO fav) throws Exception {
+		session.insert(namespace+".addFav", fav);
+	}
+
+	@Override
+	public List<FavDTO> listFav(Integer itemboard_no) throws Exception {
+		return session.selectList(namespace+".listFav", itemboard_no);
+	}
+
+	@Override
+	public void removeFav(Integer fav_no) throws Exception {
+		session.delete(namespace+".removeFav", fav_no);
 	}
 	
 	
