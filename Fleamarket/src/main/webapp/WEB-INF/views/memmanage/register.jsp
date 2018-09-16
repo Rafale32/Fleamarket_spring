@@ -4,53 +4,48 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <title>회원가입 화면</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="../resources/memmanget/js/jquery-3.1.0.js"></script>
 <script src="../resources/memmanage/js/member.js"></script>
 <script src="../resources/memmanage/js/address.js"></script>
 
-<script type="text/javascript">
-
-var emailCheck = 0;
-
-function checkEmai() {
-    var inputed = $('.id').val();
-    console.log(inputed);
-    $.ajax({
-        data : {
-            id : inputed
-        },
-        url : "/emailCheck",
-        success : function(data) {
-            if(inputed=="" && data=='0') {
-                $(".signupbtn").prop("disabled", true);
-                $(".signupbtn").css("background-color", "#aaaaaa");
-                $("#emailCheck").css("background-color", "#FFCECE");
-                emailCheck = 0;
-            } else if (data == '0') {
-                $("#emailCheck").css("background-color", "#B0F6AC");
-                emailCheck = 1;
-                if(emailCheck==1) {
-                    $(".signupbtn").prop("disabled", false);
-                    $(".signupbtn").css("background-color", "#4CAF50");
-                } 
-            } else if (data == '1') {
-                $(".signupbtn").prop("disabled", true);
-                $(".signupbtn").css("background-color", "#aaaaaa");
-                $("#emailCheck").css("background-color", "#FFCECE");
-                emailCheck = 0;
-            } 
-        }
-    });
-}
-
-
+<script>
+  $(document).ready(function(){
+// ID 중복체크
+ 	$("#btnCheckId").click(function(){
+		var loginId = $("#member_email").val(); //입력한 loginId 값 가져와서 loginId 변수에 저장
+		console.log("loginId ======>" + loginId);
+		if(loginId==""){ //입력값이 없으면
+			alert("ID를 먼저 입력해주세요");
+		} else { // 중복검사 실행
+			var url = "/fleamarket/memmanage/emailcheck?member_email="+loginId;
+			$.get(url,function(data){
+// 				if(data.code > 0){	// 아이디 사용 가능
+				if(data == 0){	// 아이디 사용 가능
+					alert("사용 가능한 ID 입니다.");
+					$("#checkedId").val("Y");
+				} else {
+					alert("이미 사용중인 ID 입니다.");
+					$("#checkedId").val("N");
+				}
+			});
+		}
+	
+	});  
+ 	
+/* 	
+	$("#member_email").blur(function(){
+		console.log($(this).val());
+	}); */
+});	 
 </script>
-
 
 </head>
 <body>
@@ -60,22 +55,22 @@ function checkEmai() {
   <article class="container">
   <div class="page-header  text-center">
     <h1> 회원가입 </h1>
+  
   </div>
   <div class="col-md-6 col-md-offset-3">
     <form role="form" action="/fleamarket/memmanage/register" 
     method="post" name="frm" id="frm_id" onsubmit="return check();">
-       
+    <input type="hidden" id=checkedId" value="N">
        <!-- 이메일주소 -->
        <div class="form-group">
          <label for="InputEmail">이메일 주소</label>
          <div class="input-group">
            <input type="email" class="form-control"
-          id="memail" name="member_email" placeholder="이메일 주소">
-          <span class="input-group-btn">
-            <button type="submit" id="emailCheck" oninput="checkEmail()" class="btn btn-success">
-              	중복 확인
-            </button>
-          </span>
+          id="member_email" name="member_email" placeholder="이메일 주소를 입력하세요">
+           <a href ="javascript:;" id="btnCheckId" class="checkId">중복확인</a>
+           <div id ="checkMsg" class="input-group-btn"></div>
+			
+
         </div>
       </div>
       
@@ -150,7 +145,7 @@ function checkEmai() {
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
+
 	</div>
 </body>
   

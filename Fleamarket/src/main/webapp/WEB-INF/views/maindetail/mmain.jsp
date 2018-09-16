@@ -13,7 +13,12 @@
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<script>
+   function fnMove(seq){
+      var offset = $("#cate"+seq).offset();
+      $('html, body').animate({scrollTop : offset.top}, 400);
+   }
+</script>
 </head>
 <body>
   <div class="container">
@@ -119,9 +124,9 @@
     <!-- 카테고리 -->
     <h3>카테고리별 인기상품</h3>
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
-      <c:forEach var="categoryList" items="${bean.hotList}">
+      <c:forEach var="categoryList" items="${bean.hotList}" varStatus="status">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default">${categoryList.category_title}</button>
+          <button onclick="fnMove('${status.count}')" type="button" class="btn btn-default">${categoryList.category_title}</button>
         </div>
 
       </c:forEach>
@@ -131,8 +136,8 @@
     
     
     <!-- 카테고리별 인기상품 -->
-    <c:forEach var="list" items="${bean.hotList}">
-      <h4 style="display:inline-block;">${list.category_title}</h4>
+    <c:forEach var="list" items="${bean.hotList}" varStatus="status">
+      <h4 style="display:inline-block;" id="cate${status.count}">${list.category_title}</h4>
       <a href="categoryItemListAction.do?category_no=${categoryList.category_no}">전체보기</a>
       <div class="row">
         <c:forEach var="itemList" items="${list.hotList}">
@@ -142,7 +147,7 @@
                 <img class="img" alt="카테고리별 인기상품 이미지" src="../productimg/${img.thum_img}">
               </c:forEach>
             <div class="caption">
-              <a href="categoryItemListAction.do?category_no=${list.category_no}">
+              <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
                 <h4>${itemList.itemboard_title}</h4>
               <p> <fmt:formatNumber value="${itemList.item_price}" />원 </p>
               <p> ${itemList.itemboard_date} </p>

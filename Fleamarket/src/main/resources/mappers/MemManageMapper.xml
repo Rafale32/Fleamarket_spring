@@ -25,27 +25,31 @@
 		insert into store(store_no, store_name, store_viewcount, store_open_date, member_no)
 		values(
 	    (select max(store_no) from store)+1,
-	    (select member_email from member where member_no=(select max(store_no) from store)+1),
-	    0, sysdate, (select max(store_no) from store)+1)
+	    (SELECT DBMS_RANDOM.STRING('A', 7) FROM DUAL),
+	     0, sysdate, (select max(store_no) from store)+1)
+	    
+<!-- 	    (select member_email from member where member_no=(select max(store_no) from store)+1), -->
+	   
 	</insert>
-	
-	<!-- 랜덤 상점 생성 및 변경 -->
-		<update id="randomName" parameterType="StoreDTO">
-		update store set store_name=(SELECT DBMS_RANDOM.STRING('A', 8) FROM DUAL)
-		where member_email =#{member_email}
-		</update>
-
 	
 	<!-- 상점 중복 확인  -->
 	<select id="listStore"  resultType="StoreDTO">
 		select * from store
 	</select>
 	
+	<!-- 중복된 상점명 변경  -->
+	<update id="updateStore" parameterType="StoreDTO">
+		update store set
+			store_name = (SELECT DBMS_RANDOM.STRING('A', 7) FROM DUAL) where store_name =#{store_name}	
+	</update>
 	
 	<!-- 이메일 중복체크 -->
 	<select id="emailCheck" parameterType="String" resultType="Integer">
-		select count(*) from member
-		where member_email = #{member_email}
+   		<![CDATA[
+   			select count(*)
+   				from member
+   				where member_email = #{member_email}
+   		]]>
 	</select>
 	
 	<!-- 상세보기 -->
@@ -65,33 +69,5 @@
 		delete from member where
 		member_email = #{member_email}
 	</delete>
-	
-<!-- 
-	
- 	<insert id="registerStore" parameterType="StoreDTO">
-		insert into store(store_no, store_name, store_open_date)
-		values((select nvl(max(store_no)+1,1)from store), #{store_name}, sysdate, )
-	</insert> 
-	
-	랜덤 상정명 생성
-	<update id="randomStore" parameterType="StoreDto">
-		update store set
-		store_name=#{store_name} where member_email =#{member_email}
-	</update>
-	
-	상점 중복 확인
-	<select id="listStore"  resultType="StoreDto">
-		select * from store
-	</select>
-	
-	아이디 중복 확인
-	<select id="idCheck" resultType="MemManageDTO">
-		select * from member where member_email = #{member_email}
-	</select>
-
-	삭제 고민좀 해야함 삭제가 아니라 업데이트식으로 하는 방법을 변경해야함
-
-	-->
-	
 	
 </mapper>

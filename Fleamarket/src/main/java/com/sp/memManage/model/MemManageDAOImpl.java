@@ -1,6 +1,7 @@
 package com.sp.memManage.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
@@ -44,9 +45,20 @@ public class MemManageDAOImpl implements MemManageDAO{
 		session.delete(namespace+".deleteMember", member_email);
 	}
 	//이메일 중복체크
+//	@Override
+//	public int emailCheck(Map<String, Object> map) throws Exception{
+//		
+//		Map<String, Object> resultMap = (Map<String, Object>)session.selectOne(namespace+".emailcheck", map);
+//		
+//		int result = Integer.valueOf(String.valueOf(resultMap.get("RESULT")));
+//		
+//		return result;
+//	}
+	
+	//이메일 체크
 	@Override
-	public MemManageDTO emailCheck(MemManageDTO memManageDTO) throws Exception{
-		return session.selectOne(namespace+".emailCheck", memManageDTO);
+	public Integer emailcheck(String member_email)throws Exception{
+		return this.session.selectOne(namespace+".emailCheck", member_email);
 	}
 	
 	//스토어 생성
@@ -54,11 +66,14 @@ public class MemManageDAOImpl implements MemManageDAO{
 	public void registerStore(StoreDTO storeDTO)throws Exception{
 		session.insert(namespace+".registerStore", storeDTO);
 	}
-	//랜덤 스토어명 생성
+
+	//스토어명 변경
 	@Override
-	public void randomStore(StoreDTO storedDTO)throws Exception{
-		session.update(namespace+".randomName", storedDTO);
+	public void storeUpdate(StoreDTO storeDTO)throws Exception{
+		session.update(namespace+".updateStore", storeDTO);
 	}
+		
+	
 	//중복된 상점명 찾기
 	@Override
 	public List<StoreDTO> listStore() throws Exception{

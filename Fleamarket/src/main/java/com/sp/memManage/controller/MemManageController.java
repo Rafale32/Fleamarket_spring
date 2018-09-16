@@ -1,9 +1,15 @@
 package com.sp.memManage.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.activation.CommandMap;
 import javax.inject.Inject;
+import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -68,20 +74,6 @@ public class MemManageController {
 		
 		return "redirect:/maindetail/mmain";
 	}
-	
-//	//이메일 중복체크
-//	@RequestMapping("/mailCheck")
-//	@ResponseBody
-//	public int emailCheck(MemManageDTO memManageDTO, Model model) throws Exception{
-//		
-//		int result = 0;
-//		MemManageDTO dto = service.emailCheck(memManageDTO);
-//		if( dto != null) result = 1;
-//		else System.out.println("사용가능");
-//		
-//		return result;
-//	}
-		
 		
 	//회원등록 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -98,11 +90,10 @@ public class MemManageController {
 	public String registerPOST(MemManageDTO memManageDTO, StoreDTO storeDTO, Model model) throws Exception {
 		//컨트롤러에서 빈 파일에 필요한 객체 담은후 모델에 빈을 담아서 뷰에서 사용
 		Bean bean = new Bean();
-		System.out.println(memManageDTO);
-		
+
 		service.registerMember(memManageDTO);
 		service.registerStore(storeDTO);
-//		service.randomStore(storeDTO);
+		service.listStoreService();
 		
 		model.addAttribute("bean", bean );
 		
@@ -150,6 +141,35 @@ public class MemManageController {
 		//return "redirect:/memmanage/delete";
 	}
 	
+	// id 중복검사를 위한 AJAX
+	@ResponseBody
+	@RequestMapping(value="/emailcheck", method=RequestMethod.GET)
+	public int checkId(String member_email) throws Exception{
+		
+			int cnt = service.emailcheck(member_email);
+			System.out.println(member_email);
+			
+			return cnt;
+	}
+//	public ResponseDTO checkId(String memeber_email) throws Exception{
+//				
+//		ResponseDTO dto = new ResponseDTO();
+//		try {
+//			int result = service.emailcheck(memeber_email);
+//			dto.setCode(result);
+//			
+//			if(result==1) {	// ID 사용 가능
+//				dto.setMsg("ID를 사용할 수 있습니다.");
+//			} else {
+//				dto.setMsg("이미 사용중인 ID입니다.");
+//			}
+//		} catch(Exception e) {
+//			dto.setCode(-1);
+//			dto.setMsg("에러가 발생했습니다. 관리자에게 문의하세요.");
+//		}
+//		return dto;
+//	}
 	
+
 }
 

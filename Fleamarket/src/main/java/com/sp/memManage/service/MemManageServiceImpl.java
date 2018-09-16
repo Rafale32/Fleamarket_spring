@@ -1,6 +1,7 @@
 package com.sp.memManage.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sp.memManage.domain.MemManageDTO;
 import com.sp.memManage.domain.StoreDTO;
 import com.sp.memManage.model.MemManageDAO;
+import com.sp.memManage.model.MemManageDAOImpl;
 
 import sun.print.resources.serviceui;
 
@@ -18,6 +20,8 @@ public class MemManageServiceImpl implements MemManageService {
 	
 	@Inject
 	private MemManageDAO memManageDAO;
+	
+	@Inject MemManageDAOImpl memManageDAOImpl;
 	
 	//로그인 체크
 	@Override
@@ -53,11 +57,31 @@ public class MemManageServiceImpl implements MemManageService {
 	public void deleteMember(String member_email) throws Exception {
 		memManageDAO.delete(member_email);
 	}
-	//이메일 중복체크
+//	//이메일 중복체크
+//	@Override
+//	public String emailcheck(String str) throws Exception{
+//		
+//		System.out.println("인증 중");
+//		  if(memManageDAO.emailCheck(str) ==null) {
+//		    return "T";
+//		  }else {
+//		    return "F";
+//		  }
+//		
+//	}
+	
+//	@Override
+//	public int emailcheck(Map<String, Object> map) throws Exception{
+//		return memManageDAO.emailCheck(map);
+//	}
+	
 	@Override
-	public MemManageDTO emailCheck(MemManageDTO memManageDTO) throws Exception{
+	public Integer emailcheck(String member_email) throws Exception{		
 		
-		return memManageDAO.emailCheck(memManageDTO);
+		int cnt = memManageDAOImpl.emailcheck(member_email);
+		System.out.println(cnt);
+		return cnt;
+
 	}
 	
 	//스토어 생성
@@ -65,11 +89,13 @@ public class MemManageServiceImpl implements MemManageService {
 	public void registerStore(StoreDTO storeDTO)throws Exception{
 		memManageDAO.registerStore(storeDTO);
 	}
-	//랜던 상정명 회성
-	public void randomStore(StoreDTO storeDTO)throws Exception{
-		
-		memManageDAO.randomStore(storeDTO);
+	
+	//스토어명 변경
+	@Override
+	public void storeUpdate(StoreDTO storeDTO)throws Exception{
+		memManageDAO.storeUpdate(storeDTO);
 	}
+
 	//중복된 상점명 찾기
 	public List<StoreDTO> listStoreService()throws Exception{
 		
@@ -77,4 +103,5 @@ public class MemManageServiceImpl implements MemManageService {
 	}
 
 
+	
 }

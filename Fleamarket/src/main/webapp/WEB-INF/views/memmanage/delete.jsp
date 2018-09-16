@@ -3,7 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet" xtype="text/css" />
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>탈퇴 화면</title>
 <script type="text/javascript">
