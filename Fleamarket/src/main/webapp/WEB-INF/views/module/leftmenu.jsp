@@ -19,7 +19,7 @@
 				href="/fleamarket/product/productlist?member_email=${member.member_email }">내
 				상품</a>
 			<a href="/fleamarket/product/addproductform">물품등록</a>
-			<a href="#">찜</a>
+			<a href="/fleamarket/payment/favoritpage">찜</a>
 			<!-- 내가 찜한 상품들 일종의 장바구니 -->
 			<a href="/fleamarket/payment/mystoreReview">상점후기</a>
 			<a href="/fleamarket/payment/buy_list_gy">구매내역</a>

@@ -42,4 +42,8 @@ public interface PaymentService {
 	
 	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
 	
+	
+	public List<PuerchaseDTO_gy> listFavorit(DeliveryDTO_gy dto,Criteria2 cri) throws Exception;
+	
+	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception;
 }

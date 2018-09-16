@@ -142,6 +142,27 @@
 	and S.Store_No = #{Store_No}
 	</select>
 	
+	<!-- favorit -->
+	
+	<select id="favoritList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+	 select Ite.Itemboard_Title, I.Item_Delivery_State,
+	I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
+ 	Img.Thum_Img,ite.itemboard_local
+ 	from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
+	where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
+	and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
+	and m.MEMBER_NO = f.MEMBER_NO
+	and i.ITEM_NO = ite.ITEMBOARD_NO
+	and M.Member_Email = #{member_email} 
+	</select>
+	
+	<delete id="deletefavorit" parameterType="PuerchaseDTO_gy">
+	DELETE from FAV where ITEMBOARD_NO = #{itemboard_no}
+	</delete>
+	
+	
+	
+	
 	<!-- alram_section -->
 	
 	<select id="makeSearcharam" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
