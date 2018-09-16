@@ -12,8 +12,8 @@
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 .footer { 
-   padding: 0px; 
-   margin: 0px; 
+    padding: 0px;  
+    margin: 0px;  
    font-weight: bold; 
  } 
 
@@ -43,7 +43,7 @@
   list-style-type: none;
   margin: 0px;
   padding: 0px;
-  padding-left: 70px;
+/*   padding-left: 70px; */
 }
 
 .footer li {
@@ -64,9 +64,8 @@
 </head>
 <body>
 <div class="container">
-  <div class="footer">
-  
-  
+<hr>
+  <div class="footer text-center">
     <div class="footer-toolbar">
       <ul>
         <li><a href="#" class="footer-btn">자주묻는질문</a></li>
@@ -95,7 +94,7 @@
         </div><!--         footer-copyright -->
         
     </div><!--     footer-info -->
-  </div><!--   footer -->
+  </div> <!--    footer -->
 </div><!--   container -->
 </body>
 </html>

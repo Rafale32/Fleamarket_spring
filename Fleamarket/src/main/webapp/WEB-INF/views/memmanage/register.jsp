@@ -58,7 +58,7 @@ function checkEmai() {
     <!-- 입력한 값을 전송하기 위해 form 태그를 사용  -->
     <!-- 값 전송은 post방식, 전송할 페이지는 login페이지 -->
   <article class="container">
-  <div class="page-header">
+  <div class="page-header  text-center">
     <h1> 회원가입 </h1>
   </div>
   <div class="col-md-6 col-md-offset-3">

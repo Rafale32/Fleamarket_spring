@@ -28,10 +28,6 @@
 table td {
   vertical-align: middle !important;
 }
-
-.nav{
-  margin: 0 auto;
-}
 </style>
 <title>Insert title here</title>
 </head>
@@ -77,7 +73,7 @@ table td {
     </table>
 
     <!-- 페이징 -->
-    <nav>
+    <nav class="text-center">
       <ul class="pagination">
         <c:if test="${member.member_email != null && bean.itemDTO.store_name == null}">
           <!-- 이전 -->
