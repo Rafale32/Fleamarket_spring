@@ -25,6 +25,7 @@ import com.sp.product.service.ProductService;
 @RequestMapping("/product/*")
 public class ProductController {
 	
+	
 	@Inject
 	private ProductListService lService;
 	
