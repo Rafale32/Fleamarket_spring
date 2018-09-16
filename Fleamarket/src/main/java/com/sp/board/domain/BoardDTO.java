@@ -1,6 +1,7 @@
 package com.sp.board.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class BoardDTO implements Serializable{  
 	private int    notice_no;
@@ -68,6 +69,12 @@ public class BoardDTO implements Serializable{
 	public String toString() {
 		return "BoardDTO [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_contents="
 				+ notice_contents + ", notice_date=" + notice_date + ", notice_category=" + notice_category + "]";
+	}
+
+
+	public List<BoardDTO> listPage(int page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

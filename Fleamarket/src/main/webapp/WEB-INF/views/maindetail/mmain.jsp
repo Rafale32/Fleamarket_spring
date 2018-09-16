@@ -95,7 +95,7 @@
         <div class="thumbnail">
           <c:forEach var="img" items="${reList.imgList}" begin="0" end="0">
             <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">
-              <img src="../productimg/${img.thum_img}" alt="추천상품이미지">
+              <img src="/fleamarket/resources/product/upload${img.thum_img}" alt="추천상품이미지">
             </a>
           </c:forEach>
           <div class="caption">
@@ -144,7 +144,7 @@
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
               <c:forEach var="img" items="${itemList.imgList}" begin="0" end="0">
-                <img class="img" alt="카테고리별 인기상품 이미지" src="../productimg/${img.thum_img}">
+                <img class="img" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.thum_img}">
               </c:forEach>
             <div class="caption">
               <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">

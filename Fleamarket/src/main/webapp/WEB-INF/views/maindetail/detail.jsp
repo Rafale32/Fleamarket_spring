@@ -342,7 +342,7 @@ function getAllList(){
 					<div class="product-image-slide">
 						<c:forEach var="imgList" items="${bean.itemImgList}" begin="0"
 							end="0" step="1">
-							<img class="image" alt="" src="../productimg/${imgList.thum_img}">
+							<img class="image" alt="" src="/fleamarket/resources/product/upload${imgList.thum_img}">
 						</c:forEach>
 					</div>
 					<div class="product-summary">
@@ -538,7 +538,7 @@ function getAllList(){
 																<div class="small-product">
 																	<c:forEach var="img" items="${itemList.imgList }"
 																		begin="0" end="0">
-																		<img alt="" src="../productimg/${img.thum_img}">
+																		<img alt="" src="/fleamarket/resources/product/upload${img.thum_img}">
 																	</c:forEach>
 																	<div class="product-price">
 																		<div class="seller-popular-product">
