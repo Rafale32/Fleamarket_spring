@@ -6,14 +6,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
   request.setCharacterEncoding("utf-8");
-			/* SellProductDAO_gy dao = SellProductDAO_gy.getInstance();
-			List<SellProductDTO_gy> list = dao.listBoard();
-			request.setAttribute("SellModel", list); */
+         /* SellProductDAO_gy dao = SellProductDAO_gy.getInstance();
+         List<SellProductDTO_gy> list = dao.listBoard();
+         request.setAttribute("SellModel", list); */
 
-			/* PaymentPagingService_gy daoservice = PaymentPagingService_gy.getInstance();
-			PaymentPagingDTO_gy dao2 = new PaymentPagingDTO_gy();
-			dao2 = daoservice.listBoardService2(2, request); 
-			request.setAttribute("SellModel2", dao2);   */
+         /* PaymentPagingService_gy daoservice = PaymentPagingService_gy.getInstance();
+         PaymentPagingDTO_gy dao2 = new PaymentPagingDTO_gy();
+         dao2 = daoservice.listBoardService2(2, request); 
+         request.setAttribute("SellModel2", dao2);   */
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -58,16 +58,16 @@ table td {
 <body>
 <div class="container">
   <br>
-	<table class="table text-center" id="sell_list_table" frame="void">
+   <table class="table text-center" id="sell_list_table" frame="void">
     <tr><td colspan="6"></td></tr>
-	  <tr>
-	    <td>상품사진</td>
-	    <td>상품명</td>
-	    <td>상품가격</td>
-	    <td>거래상태</td>
-	    <td>구매일</td>
-	    <td>기능</td>
-	  </tr>
+     <tr>
+       <td>상품사진</td>
+       <td>상품명</td>
+       <td>상품가격</td>
+       <td>거래상태</td>
+       <td>구매일</td>
+       <td>기능</td>
+     </tr>
     
     <c:forEach var="p" items="${list}">
       <tr>
@@ -127,11 +127,11 @@ table td {
             <!-- style="display: none;"  나중에 넣어서 추가 할것-->
             <c:if test="${p.item_delivery_state == 2}">
               <input type="text" id=ite_boardno name="itemboard_no"
-                value="${p.itemboard_no }">
+                value="${p.itemboard_no }" style="display: none">
               <input type="text" id="pageNo" name="pageNo"
-                value=${SellModel2.requestPage }>
+                value="${SellModel2.requestPage }" style="display: none">
               <input type="text" id="item_no" name="item_no"
-                value=${p.item_no }>
+                value=${p.item_no } style="display: none">
               <input type="submit" id="purchaseDetermin" class="btn btn-success"
                 value="판매승인">
             </c:if>

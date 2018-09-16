@@ -92,5 +92,17 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	}
 
+	@Override
+	public List<PuerchaseDTO_gy> listFavorit(DeliveryDTO_gy dto, Criteria2 cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listFavorit(dto, cri);
+	}
+
+	@Override
+	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception {
+		dao.deletfavorit(pdto);
+		
+	}
+
 
 }

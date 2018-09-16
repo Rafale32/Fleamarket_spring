@@ -18,15 +18,18 @@ public class PuerchaseDTO_gy implements Serializable {
 	String pay_date= ""; //날자
 	int store_no;
 	int inform_contents;//inform컨텐츠
+	String itemboard_local;
 	
 	
 	public PuerchaseDTO_gy(){}
+	
+	
 
 
 
 	public PuerchaseDTO_gy(int itemboard_no, String member_email, String itemboard_title, int item_delivery_state,
 			int item_price, int item_no, String store_name, String thum_img, String pay_date, int store_no,
-			int inform_contents) {
+			int inform_contents, String itemboard_local) {
 		super();
 		this.itemboard_no = itemboard_no;
 		this.member_email = member_email;
@@ -39,7 +42,27 @@ public class PuerchaseDTO_gy implements Serializable {
 		this.pay_date = pay_date;
 		this.store_no = store_no;
 		this.inform_contents = inform_contents;
+		this.itemboard_local = itemboard_local;
 	}
+
+
+	
+
+
+	public String getItemboard_local() {
+		return itemboard_local;
+	}
+
+
+
+
+
+	public void setItemboard_local(String itemboard_local) {
+		this.itemboard_local = itemboard_local;
+	}
+
+
+
 
 
 	public int getInform_contents() {
@@ -162,6 +185,14 @@ public class PuerchaseDTO_gy implements Serializable {
 
 	public void setPay_date(String pay_date) {
 		this.pay_date = pay_date;
+	}
+
+	@Override
+	public String toString() {
+		return "PuerchaseDTO_gy [itemboard_no=" + itemboard_no + ", member_email=" + member_email + ", itemboard_title="
+				+ itemboard_title + ", item_delivery_state=" + item_delivery_state + ", item_price=" + item_price
+				+ ", item_no=" + item_no + ", store_name=" + store_name + ", thum_img=" + thum_img + ", pay_date="
+				+ pay_date + ", store_no=" + store_no + ", inform_contents=" + inform_contents + "]";
 	}
 
 	

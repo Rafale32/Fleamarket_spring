@@ -12,35 +12,39 @@ public interface PaymentDAO {
 	
 	public void create()throws Exception;
 	
-	//구매 내역을 뽑는것
+	//援щℓ �궡�뿭�쓣 戮묐뒗寃�
 	public List<PuerchaseDTO_gy> listPuerchase(DeliveryDTO_gy dto,Criteria2 cri) throws Exception;
 	
 	
-	//판매내역
+	//�뙋留ㅻ궡�뿭
 	public List<PuerchaseDTO_gy> listSell(DeliveryDTO_gy dto,Criteria2 cri) throws Exception;
 	
 	
-	//구매자 구매확정, 딜리버리 스테이트 변경
+	//援щℓ�옄 援щℓ�솗�젙, �뵜由щ쾭由� �뒪�뀒�씠�듃 蹂�寃�
 	public void changDeliverState(DeliveryDTO_gy dto) throws Exception;
 	
-	//판매자 판매승인, 딜리버리 스테이트 변경
+	//�뙋留ㅼ옄 �뙋留ㅼ듅�씤, �뵜由щ쾭由� �뒪�뀒�씠�듃 蹂�寃�
 	public void changDeliverState2(DeliveryDTO_gy dto) throws Exception;
 	
-	//스토어 찾기, 리뷰 찾기 , 카운팅
+	//�뒪�넗�뼱 李얘린, 由щ럭 李얘린 , 移댁슫�똿
 	public MystoreDTO_gy SearchMystore(DeliveryDTO_gy dto) throws Exception;
 	
 	public List<MystoreReviewDTO_gy> MystoreReview(MystoreDTO_gy sdto,Criteria2 cri)throws Exception;
 	
 	public int MystoreReviewcounting(MystoreDTO_gy sdto) throws Exception;
 	
-	//카운팅 페이지
+	//移댁슫�똿 �럹�씠吏�
 	
 	public int puerchasecounting(DeliveryDTO_gy dto) throws Exception;
 	
 	public int sellListcounting(DeliveryDTO_gy dto) throws Exception;
 	
-	//입력 inform 아 바꾸는걸 처리했음
+	//�엯�젰 inform �븘 諛붽씀�뒗嫄� 泥섎━�뻽�쓬
 	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
 	
+
+	public List<PuerchaseDTO_gy> listFavorit(DeliveryDTO_gy dto,Criteria2 cri) throws Exception;
+	
+	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception;
 	
 }

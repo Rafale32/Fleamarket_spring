@@ -45,7 +45,7 @@
           </div>
 
           <div class="btn-group" role="group">
-            <a href="#">
+            <a href="/fleamarket/payment/favoritpage">
               <button type="button" class="btn btn-info">찜</button>
             </a>
           </div>

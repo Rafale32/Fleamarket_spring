@@ -92,5 +92,17 @@ public class PaymentDAOImpl implements PaymentDAO{
 		session.insert(namespace+".registerPerchaseAlram",pdto);
 		
 	}
+
+	@Override
+	public List<PuerchaseDTO_gy> listFavorit(DeliveryDTO_gy dto, Criteria2 cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".favoritList", dto,new RowBounds(cri.getPageStart() , cri.getPerPageNum()));
+	}
+
+	@Override
+	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception {
+		session.delete(namespace + ".deletefavorit", pdto);
+		
+	}
 	
 }

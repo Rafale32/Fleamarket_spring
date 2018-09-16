@@ -10,10 +10,10 @@
   request.setCharacterEncoding("utf-8");
   //request.setAttribute("purchaseModel", list);
   /* 새로운 코드 */
-  /* 	PaymentPagingService_gy daoservice = PaymentPagingService_gy.getInstance();
-  	PaymentPagingDTO_gy dao2 = new PaymentPagingDTO_gy();
-  	dao2 = daoservice.listBoardService(2, request);
-  	request.setAttribute("purchaseModel", dao2);  */
+  /*    PaymentPagingService_gy daoservice = PaymentPagingService_gy.getInstance();
+     PaymentPagingDTO_gy dao2 = new PaymentPagingDTO_gy();
+     dao2 = daoservice.listBoardService(2, request);
+     request.setAttribute("purchaseModel", dao2);  */
 %>
 <html>
 <head>
@@ -115,6 +115,7 @@ table td {
               <!-- style="display: none;"  나중에 넣어서 추가 할것-->
               <input type="text" name="itemboard_no"
                 value="${p.itemboard_no }" style="display: none">
+                
               <c:if test="${p.item_delivery_state == 3}">
                 <input type="text" id="pageNo" name="pageNo"
                   value="${purchaseModel.requestPage }"
