@@ -64,7 +64,6 @@ table td {
                   <input type="button" class="btn btn-warning" value="수정">
                 </a>
                 <input type="button" onclick="deleteCheck(${tmp.itemboard_No })" value="삭제" class="btn btn-danger">
-                <%-- <a href="/fleamarket/product/productdelete?itemboard_No=${tmp.itemboard_No }" onclick="deleteCheck(${tmp.itemboard_No })">삭제</a>  --%>
               </td>
             </c:when>
           </c:choose>
