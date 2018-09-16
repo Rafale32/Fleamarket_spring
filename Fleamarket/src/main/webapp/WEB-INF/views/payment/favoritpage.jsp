@@ -32,6 +32,7 @@
 	<table id="favorit_list_table" frame="void" class="table">
 	
 		<c:forEach var="p" items="${list}">
+		<tr>
 			<td>
 			<img alt="물품임시이미지"
 					src="/fleamarket/resources/payment/img/${p.thum_img}.jpg"
@@ -55,6 +56,7 @@
 								value="찜 삭제">
 					</form>
 			</td>
+			</tr>
 		</c:forEach>
 		
 		</table>
