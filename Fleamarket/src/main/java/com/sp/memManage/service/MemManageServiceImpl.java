@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sp.memManage.domain.MemManageDTO;
 import com.sp.memManage.domain.StoreDTO;
 import com.sp.memManage.model.MemManageDAO;
+import com.sp.memManage.model.MemManageDAOImpl;
 
 import sun.print.resources.serviceui;
 
@@ -19,6 +20,8 @@ public class MemManageServiceImpl implements MemManageService {
 	
 	@Inject
 	private MemManageDAO memManageDAO;
+	
+	@Inject MemManageDAOImpl memManageDAOImpl;
 	
 	//로그인 체크
 	@Override
@@ -73,8 +76,12 @@ public class MemManageServiceImpl implements MemManageService {
 //	}
 	
 	@Override
-	public int emailcheck(String member_email) throws Exception{
-		return memManageDAO.emailchekc(member_email);
+	public Integer emailcheck(String member_email) throws Exception{		
+		
+		int cnt = memManageDAOImpl.emailcheck(member_email);
+		System.out.println(cnt);
+		return cnt;
+
 	}
 	
 	//스토어 생성
@@ -82,16 +89,19 @@ public class MemManageServiceImpl implements MemManageService {
 	public void registerStore(StoreDTO storeDTO)throws Exception{
 		memManageDAO.registerStore(storeDTO);
 	}
-	//랜던 상정명 회성
-	public void randomStore(StoreDTO storeDTO)throws Exception{
-		
-		memManageDAO.randomStore(storeDTO);
+	
+	//스토어명 변경
+	@Override
+	public void storeUpdate(StoreDTO storeDTO)throws Exception{
+		memManageDAO.storeUpdate(storeDTO);
 	}
+
 	//중복된 상점명 찾기
 	public List<StoreDTO> listStoreService()throws Exception{
-		
+	
 		return memManageDAO.listStore();
 	}
 
 
+	
 }

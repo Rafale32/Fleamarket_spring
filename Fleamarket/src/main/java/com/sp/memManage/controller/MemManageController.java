@@ -1,7 +1,10 @@
 package com.sp.memManage.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.activation.CommandMap;
@@ -71,55 +74,6 @@ public class MemManageController {
 		
 		return "redirect:/maindetail/mmain";
 	}
-	
-//	//이메일 중복체크
-//	@RequestMapping(value = "/emailcheck", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-//	public @ResponseBody String emailcheck(HttpServletResponse response,  @RequestParam("member_email") String member_email, Model model)throws Exception {
-//
-//		System.out.println("들어오냐");
-//		  String msg = service.emailcheck(member_email);
-//		  System.out.println(msg);
-//		  String responseMsg;
-//
-//		  if(msg == "T") {
-//		        responseMsg = "{\"msg\":\""+"사용가능한 이메일 입니다."+"\"}";
-//		  }else {
-//		    responseMsg = "{\"msg\":\""+"사용이 불가한 이메일 입니다."+"\"}";
-//		  }
-//		  System.out.println("들어오냐2222");
-//		   URLEncoder.encode(responseMsg , "UTF-8");
-//
-////			model.addAttribute("msg", service.authenticate(email));
-//		   System.out.println("들어오냐3333");
-//		  System.out.println(member_email);
-//		
-//		  return responseMsg;
-//		  
-//		}
-	
-	//이메일 중복체크
-//	@RequestMapping(value="/emailcheck")
-//	@ResponseBody
-//	public int emailcheck(CommandMap commandMap, Map<String, Object> map) throws Exception{
-//		
-//		int checkResult = service.emailcheck(map);
-//		
-//		return checkResult;
-//	}
-	
-//	@RequestMapping(value="/emailcheck")
-//	@ResponseBody
-//	public int emailcheck(@RequestParam("member_email") String member_email) throws Exception{
-//		
-//		int checkResult = service.emailcheck(member_email);
-//		return checkResult;
-//	}
-//	
-//	@RequestMapping(value="/emailcheck", method=RequestMethod.POST)
-//	public @ResponseBody int emailcheck(@RequestParam("member_email") String member_email) {
-//		
-//		return service.emailcheck(member_email).size();
-//	}
 		
 	//회원등록 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -137,10 +91,9 @@ public class MemManageController {
 		//컨트롤러에서 빈 파일에 필요한 객체 담은후 모델에 빈을 담아서 뷰에서 사용
 		Bean bean = new Bean();
 
-		
 		service.registerMember(memManageDTO);
 		service.registerStore(storeDTO);
-	//	service.randomStore(storeDTO);
+		service.listStoreService();
 		
 		model.addAttribute("bean", bean );
 		
@@ -188,6 +141,35 @@ public class MemManageController {
 		//return "redirect:/memmanage/delete";
 	}
 	
+	// id 중복검사를 위한 AJAX
+	@ResponseBody
+	@RequestMapping(value="/emailcheck", method=RequestMethod.GET)
+	public int checkId(String member_email) throws Exception{
+		
+			int cnt = service.emailcheck(member_email);
+			System.out.println(member_email);
+			
+			return cnt;
+	}
+//	public ResponseDTO checkId(String memeber_email) throws Exception{
+//				
+//		ResponseDTO dto = new ResponseDTO();
+//		try {
+//			int result = service.emailcheck(memeber_email);
+//			dto.setCode(result);
+//			
+//			if(result==1) {	// ID 사용 가능
+//				dto.setMsg("ID를 사용할 수 있습니다.");
+//			} else {
+//				dto.setMsg("이미 사용중인 ID입니다.");
+//			}
+//		} catch(Exception e) {
+//			dto.setCode(-1);
+//			dto.setMsg("에러가 발생했습니다. 관리자에게 문의하세요.");
+//		}
+//		return dto;
+//	}
 	
+
 }
 

@@ -16,82 +16,35 @@
 <script src="../resources/memmanage/js/member.js"></script>
 <script src="../resources/memmanage/js/address.js"></script>
 
-<!-- <script>
-$(document).ready(function(){
-	var email = $('#checkbtn').unbind("click").click(function(e){
-		e.preventDefault();
-		fn_emailCheck();	
-	});
-});
-
-function fn_emailCheck(){
-	var emailId = $("#memail").val();
-	var userData = {"ID" : emailId}
-	
-	if(emailId.lenght < 1)
-		{
-		alert("dldididididi");
-		}
-	else
-	{
-		$.ajax({
-			type : "POST",
-			url : "/memmange/emailcheck",
-			data : userData,
-			dataType : "json",
-			error : function(error){
-				alert("서버가 응답하지 않습니다. \n 다시 시도해주시기 바랍니다.");
-			},
-			success : function(result){
-				if(result == 0)
-				{
-				$("#memail").attr("disabled", true);
-				alert("사용이 가능한 아이디입니다.");
-				}
-				else if(result ==1)
-				{
-				alert("이미 존재하는 아이디입니다. \n 다른 아이디를 사용해주세요.");	
-				}
-				else
-				{
-				alert("에러가 발생하였습니다.");
-				}
-			}
-		});
-	}	
-}
-</script> -->
-
 <script>
-$(document).ready(function(){
-	$(".dupliId").click(function(){
-		var id_frm = $("input[name=id]");
-		var b = countId(); //javascript로 아이디에 대한 유효성검증을 먼저한다.
-		var check = 0; //중복체크 했는지 나중에 확인할 때 쓸 변수
-		if(b==true){   //유효성 검증을 통과하면
-			$.ajax({
-				type: 'POST',
-				url: '/rest/member/checkDupl',
-				data: {
-					"id" : $(id_frm).val()
-				},
-				success: function(data){
-					if(data==0){
-						$('#dupli').html('<font size="2" color="green">사용할 수 있는 아이디</font>');
-						check=1;
-					}
-					else{
-						$('#dupli').html('<font size="2" color="red">'+$(id_frm).val()+'는 이미 존재하는 아이디입니다.</font>');
-						$(id_frm).val(""); //form의 값을 지운다
-						$(id_frm).focus(); //focus를 form에 위치시킨다
-						check=0;
-					}
+  $(document).ready(function(){
+// ID 중복체크
+ 	$("#btnCheckId").click(function(){
+		var loginId = $("#member_email").val(); //입력한 loginId 값 가져와서 loginId 변수에 저장
+		console.log("loginId ======>" + loginId);
+		if(loginId==""){ //입력값이 없으면
+			alert("ID를 먼저 입력해주세요");
+		} else { // 중복검사 실행
+			var url = "/fleamarket/memmanage/emailcheck?member_email="+loginId;
+			$.get(url,function(data){
+// 				if(data.code > 0){	// 아이디 사용 가능
+				if(data == 0){	// 아이디 사용 가능
+					alert("사용 가능한 ID 입니다.");
+					$("#checkedId").val("Y");
+				} else {
+					alert("이미 사용중인 ID 입니다.");
+					$("#checkedId").val("N");
 				}
-			});//end ajax 
-		} //end if
-	}); //end click event
-}); //end jQuery
-
+			});
+		}
+	
+	});  
+ 	
+/* 	
+	$("#member_email").blur(function(){
+		console.log($(this).val());
+	}); */
+});	 
 </script>
 
 </head>
@@ -102,18 +55,19 @@ $(document).ready(function(){
   <article class="container">
   <div class="page-header">
     <h1> 회원가입 </h1>
+  
   </div>
   <div class="col-md-6 col-md-offset-3">
     <form role="form" action="/fleamarket/memmanage/register" 
     method="post" name="frm" id="frm_id" onsubmit="return check();">
-       
+    <input type="hidden" id=checkedId" value="N">
        <!-- 이메일주소 -->
        <div class="form-group">
          <label for="InputEmail">이메일 주소</label>
          <div class="input-group">
            <input type="email" class="form-control"
-          id="memail" name="member_email" placeholder="이메일 주소를 입력하세요">
-           <button type="submit" id="checkbtn" onclick="return emailcheck()" class="btn btn-default">중복확인</button>
+          id="member_email" name="member_email" placeholder="이메일 주소를 입력하세요">
+           <a href ="javascript:;" id="btnCheckId" class="checkId">중복확인</a>
            <div id ="checkMsg" class="input-group-btn"></div>
 			
 

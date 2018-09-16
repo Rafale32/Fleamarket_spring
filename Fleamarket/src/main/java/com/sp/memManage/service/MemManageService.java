@@ -22,12 +22,14 @@ public interface MemManageService {
 	//이메일 중복체크
 //	public int emailcheck(Map<String, Object> map) throws Exception;
 	
-	public int emailcheck(String member_email) throws Exception;
+	public Integer emailcheck(String member_email) throws Exception;
 	
 	//스토어 생성
 	public void registerStore(StoreDTO storeDTO)throws Exception;
-	//랜던 상정명 생성
-	public void randomStore(StoreDTO storeDTO)throws Exception;
+
+	//스토어명 변경
+	public void storeUpdate(StoreDTO storeDTO)throws Exception;
+	
 	//중복된 상점명 찾기
 	public List<StoreDTO> listStoreService()throws Exception;
 }

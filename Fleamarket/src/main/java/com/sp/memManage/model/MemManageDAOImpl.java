@@ -57,8 +57,8 @@ public class MemManageDAOImpl implements MemManageDAO{
 	
 	//이메일 체크
 	@Override
-	public int emailchekc(String member_email)throws Exception{
-		return session.selectOne(namespace+".emailCheck", member_email);
+	public Integer emailcheck(String member_email)throws Exception{
+		return this.session.selectOne(namespace+".emailCheck", member_email);
 	}
 	
 	//스토어 생성
@@ -66,11 +66,14 @@ public class MemManageDAOImpl implements MemManageDAO{
 	public void registerStore(StoreDTO storeDTO)throws Exception{
 		session.insert(namespace+".registerStore", storeDTO);
 	}
-	//랜덤 스토어명 생성
+
+	//스토어명 변경
 	@Override
-	public void randomStore(StoreDTO storedDTO)throws Exception{
-		session.update(namespace+".randomName", storedDTO);
+	public void storeUpdate(StoreDTO storeDTO)throws Exception{
+		session.update(namespace+".updateStore", storeDTO);
 	}
+		
+	
 	//중복된 상점명 찾기
 	@Override
 	public List<StoreDTO> listStore() throws Exception{
