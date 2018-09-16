@@ -15,5 +15,5 @@ public interface ProductService {
 	
 	public void productModify(ItemDTO itemDTO)throws Exception;
 	
-	public List<ItemDTO> searchAll(String subj)throws Exception;
+	public List<ItemDTO> searchAll(String subj, int startRow, int rowSize)throws Exception;
 }

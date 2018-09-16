@@ -49,7 +49,7 @@
         </ul>
         <!-- 검색 -->
         <form class="navbar-form navbar-left" role="search"
-          action="/fleamarket/search/searchall" id="searchForm">
+          action="/fleamarket/search/searchall" id="searchForm" method="post">
           <div class="form-group">
             <input type="text" class="form-control search-box-input"
               placeholder="상품명" name="searchSubj">

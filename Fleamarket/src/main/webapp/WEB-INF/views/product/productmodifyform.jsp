@@ -55,7 +55,7 @@
 		       <div class="imgs_wrap">
 		           <c:forEach items="${bean.itemDTO.itemImgList }" var="tmp" varStatus="status">
 		           		<img src="/fleamarket/resources/product/upload${tmp.thum_Img }" class="img${status.index }">
-		           		<button value="${tmp.thum_Img }|${tmp.big_Img }|${status.index }" class="btn" id="btn${status.index }">그림 삭제하기</button>
+		           		<button value="${tmp.thum_Img }|${tmp.big_Img }|${status.index }" class="btn" id="btn${status.index }">등록된 그림 삭제하기</button>
 		           </c:forEach>
 		       </div>
 		       <div class="uploadedList">
@@ -96,8 +96,8 @@
 									<option value="${tmp.sub_No }">${tmp.sub_Title }</option>
 								</c:otherwise>
 							</c:choose>
-						</c:forEach>		
-					</select>			
+						</c:forEach>
+					</select>
 				</div>
 			</div>
 			<div >

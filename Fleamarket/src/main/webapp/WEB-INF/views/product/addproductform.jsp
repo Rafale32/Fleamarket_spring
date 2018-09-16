@@ -85,6 +85,7 @@
 
 				</div>
 			</div>
+			
 			<div >
 				<label>거래지역:</label>
 
@@ -102,6 +103,7 @@
 					<!-- <button>지역 검색</button> -->
 				</div>
 			</div>
+			
 			<div >
 				<label>상태:</label>
 

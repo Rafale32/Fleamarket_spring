@@ -22,7 +22,7 @@ public interface ProductDAO {
 	
 	public void tagModify(ItemDTO itemDTO)throws Exception;
 	
-	public List<ItemDTO> searchAll(String subj)throws Exception;
+	public List<ItemDTO> searchAll(String subj, int startRow, int rowSize)throws Exception;
 	
 	public String getOneImg(int itemboard_No)throws Exception;
 }

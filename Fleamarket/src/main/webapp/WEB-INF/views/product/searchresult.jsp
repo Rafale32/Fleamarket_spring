@@ -12,7 +12,7 @@
 
 $(function() {
 	var searchSubj = '';
-	//var cnt = 0;
+	var cnt = 0;
 	
 	//파라미터값에 있는 걸 잘라서 값으로 반환 해주는 함수 $.urlParam('searchSubj') 원하는 파람 쓰면 그 파람의 값넘어옴
 	$.urlParam = function(name){
@@ -26,63 +26,60 @@ $(function() {
 	}
 	
 	
- 	$(window).bind('scroll', function() {
+  	$(window).bind('scroll', function() {
 	    if($(window).scrollTop() >= $('.posts').offset().top + $('.posts').outerHeight() - window.innerHeight) {
-	        searchSubj = $.urlParam('searchSubj');
+	    	
+	    	//alert($(window).scrollTop() + "  " + $(document).height() + "  "  + $(window).height());
+	    	
 	        
+	        searchSubj = $(".searchSubj").val();
 	        
- 	        $.ajax({
-				url: "/fleamarket/product/searchall?searchSubj="+searchSubj+"&aja=yes",
+ 	        	$.ajax({
+				url: "/fleamarket/productajax/searchall?searchSubj="+searchSubj,
 				type: "post",
 				dataType: "json",
 				success: function(data){
 					var cnt = 1;
 					
-					/* $.each(data.item, function(){
-						
-					}) */
 					
-					
+					//alert(cnt+":카운트값");
+					var all = "<tr>";
 					$.each(data,function(key,value) {
 						
-					//	$("#subsubname").empty();
-					//	alert('key:'+key+', name:'+value.cate);
-					//$("#subsubname").append( "<option value='"+ value.cate +"'>"+ value.cate +"</option>" );
-					//$(".itemtab").append("<tr>");
-					var all = "<tr>";
-						$.each(value, function(i, value2) {
-							/* if(cnt == 1 || cnt%2==1){
+						if(cnt%5 == 0 ){
+							all = all + "<tr>";
+						} 
+						
+						var td = "<td>"+ "<a href=/fleamarket/maindetail/detailAction?itemboard_no="+ value.itemboard_No +">"
+								+ "<img src=/fleamarket/resources/product/upload"+value.thumImg+"><br>" 
+								+ value.itemboard_Title + "<br>" 
+								+ value.item_Price + "<br>" 
+								+ value.itemboard_Local + "<br>" 
+								+ "</td>";
 								
-							} */
-							
-							//alert(value2.thum_img);
-							//"itemboard_No":16,"thum_img":"88441820_2_1534756574_w4341_small.jpg","price":2040,"title":"aaa","local":"신촌"
-							var td = "<td>"+ "<a href=/fleamarket/maindetail/detailAction?itemboard_no="+ value2.itemboard_No +">"
-									+ "<img src=/fleamarket/productimg/"+value2.thum_img+"><br>" 
-									+ value2.title + "<br>" 
-									+ value2.price + "<br>" 
-									+ value2.local + "<br>" 
-									+ "</td>";
-									
-							all = all + td;
-							
-							/* if(cnt%2 == 0){
-								
-								
-							} */
-							//cnt = cnt + 1;
-						});
+						all = all + td;
+						/* if(cnt%4 == 0 ){
+							all = all + "<tr>";
+						} */
+						
+						if(cnt%5 == 0){
+							all = all + "</tr>";
+						}
+						cnt = cnt + 1;
+						
 						//$(".itemtab").append("</tr>");
-						all = all + "</tr>";
-						$(".itemtab").append(all);
+						//alert(all);
 					});
 					
-				}
-			});
-	        
-	    }
-	});
-});
+					$(".itemtab").append(all);
+					
+				}//success END
+			});//AJAX END
+	    }//IF END
+	});//SCROLL END
+	
+});//function END
+
 
 </script>
 <head>
@@ -91,6 +88,7 @@ $(function() {
 </head>
 <body>
 	<div class="posts" id="flux" style="text-align: center; vertical-align: middle;">
+	<input type="hidden" name="searchSubj" value="${bean.searchSubj }" class="searchSubj">
 		<table style="undefined;table-layout: fixed; width: 1020px" class="itemtab">
 			<colgroup>
 				<col style="width: 61.005682px">
@@ -104,7 +102,7 @@ $(function() {
 		  </tr>
 		  
 		  <c:forEach items="${bean.itemList }" var="tmp" varStatus="sta">
-		  		<c:if test="${sta.count == 1 || sta.count%2 == 1  }"><tr></c:if>
+		  		<c:if test="${sta.count == 1 || sta.count%4 == 1  }"><tr></c:if>
 			  	<td>
 			  		<a href="/fleamarket/maindetail/detail?itemboard_no=${tmp.itemboard_No }">
 			  			<img src="/fleamarket/resources/product/upload${tmp.thumImg }"> <br>
@@ -114,7 +112,7 @@ $(function() {
 			  		</a>
 			  	</td>
 			    
-			 	<c:if test="${sta.count%2 == 0  }"></tr><br></c:if>
+			 	<c:if test="${sta.count%4 == 0  }"></tr><br></c:if>
 		  </c:forEach>
 		</table>
 	

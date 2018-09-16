@@ -3,6 +3,8 @@ package com.sp.product.model;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -62,9 +64,9 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public List<ItemDTO> searchAll(String subj) throws Exception {
+	public List<ItemDTO> searchAll(String subj, int startRow, int rowSize) throws Exception {
 		
-		return session.selectList(namespace+".searchAll", subj);
+		return session.selectList(namespace+".searchAll",subj,new RowBounds(startRow, rowSize) );
 	}
 
 	@Override

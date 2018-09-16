@@ -85,8 +85,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ItemDTO> searchAll(String subj) throws Exception {
-		List<ItemDTO> dtoList = dao.searchAll(subj);
+	public List<ItemDTO> searchAll(String subj, int startRow, int rowSize) throws Exception {
+		
+		List<ItemDTO> dtoList = dao.searchAll(subj, startRow, rowSize);
 		
 		for(ItemDTO tmp : dtoList){
 			tmp.setThumImg(dao.getOneImg(tmp.getItemboard_No()));

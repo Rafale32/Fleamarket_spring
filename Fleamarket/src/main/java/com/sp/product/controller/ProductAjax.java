@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sp.product.domain.CateSubDTO;
+import com.sp.product.domain.ItemDTO;
 import com.sp.product.domain.ItemImg;
 import com.sp.product.service.AddproductService;
 import com.sp.product.service.ProductService;
@@ -139,4 +141,44 @@ public class ProductAjax {
 		  pService.oneImgDelete(img);
 		  
 	  }
+	  
+	  
+	  @RequestMapping(value="/searchall")
+	  public ResponseEntity<List<ItemDTO>> searchAll(HttpSession session, @RequestParam("searchSubj") String subj){
+		  
+		  ResponseEntity<List<ItemDTO>> entity = null;
+		  
+		  if(SearchController.startRow == SearchController.rowSize){//시작 사이즈가 5이면 페이지 처음 들어온 상태임 그상테니까 세션값 초기화해서 
+			  //넣어주고 처리해 줘야겠지.
+			  session.setAttribute("searchStartRow", SearchController.startRow);
+			  
+		  }
+		  
+		  int startRow = (Integer)session.getAttribute("searchStartRow");
+		  System.out.println(":아작스: 시작로우-"+startRow + "  주제:"+subj+"  한번 로우갑:"+ SearchController.rowSize);
+		  
+		try {
+				List<ItemDTO> list = pService.searchAll(subj, startRow , SearchController.rowSize);
+				entity = new ResponseEntity<>(list, HttpStatus.OK);
+				System.out.println(list);
+			} catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		  
+		  SearchController.startRow = startRow+SearchController.rowSize;
+		  session.setAttribute("searchStartRow", startRow+SearchController.rowSize);
+		  
+		  
+		  
+		  return entity;
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 }

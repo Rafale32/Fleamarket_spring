@@ -107,6 +107,7 @@ $(document).ready(function() {
 		alert("ASdf");
 	});*/
 	
+	//대 카테고리 누르면 소카테고리 나오게 한것
 	$("#subname").on("change", function(e) {
 		
 		var tmp = $("#subname").val();//대 카테고리 번호가 넘어옴
@@ -149,7 +150,7 @@ function handleImgsFilesSelect(e) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var img_html = "<img src=\"" + e.target.result + "\"" +  'id=img'+ cnt + "/>";
-			$(".imgs_wrap").append(img_html);
+			//$(".imgs_wrap").append(img_html);
 			
 			cnt++;
 //			var img_input = "<input type='file' id='inputimgs"+ cnt +"' name='inputimgs"+cnt+"'/>";
@@ -211,7 +212,7 @@ $(function() {
 })
 
 
-//이미지 추가시 파일 서버와 디비에 업데이트
+//이미지 추가시 파일 서버에만 업데이트 디비는 등록 눌렀을대 등록이됨 
 $(function() {
 	
 	var cnt = 1;
@@ -250,12 +251,14 @@ $(function() {
 				  if(checkImageType(data)){//getImageLink 메소드에서 썸네일이아닌넘의 파일이름 처리를 해줌 
 					  str ="<div><a href=/fleamarket/productajax/displayFile?fileName="+getImageLink(data)+">"
 							  +"<img src='/fleamarket/productajax/displayFile?fileName="+data+"'/>"
-							  +"</a><small data-src="+data+">X</small></div>";
-				  }else{
+							  +"</a><small data-src="+data+">현재이미지삭제</small></div>";
+				  }
+				  //그림 파일 아닌넘 일단 안보이게 처리해둠
+				  /*else{
 					  str = "<div><a href='displayFile?fileName="+data+"'>" 
 							  + getOriginalName(data)+"</a>"
 							  +"<small data-src="+data+">삭제하기</small></div></div>";
-				  }
+				  }*/
 				  
 				  //alert(getFileInfo(data).fullName);
 				  //서버에 업로드한상태인 파일의 이름을 각각 히든으로 남겨서 처리 함

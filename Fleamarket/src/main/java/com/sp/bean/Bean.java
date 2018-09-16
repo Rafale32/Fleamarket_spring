@@ -47,6 +47,7 @@ public class Bean  {
 	private List<CateDTO> cateList;//대분류 카테고리 객체 리스트
 	private PageModel pageModel;//페이지 처리위한넘
 	private List<CateSubDTO> subCate;//수정폼에서 대분류별로 카테고리 뿌려 쓰기위함
+	private String searchSubj;//검색시 검색 한 글 가지고 가지위함
 	
 	//추천상품리스트 추가
 	private List<RecommendDTO> recommend;
@@ -84,6 +85,12 @@ public class Bean  {
 		return paymentDTO;
 	}
 
+	public String getSearchSubj() {
+		return searchSubj;
+	}
+	public void setSearchSubj(String searchSubj) {
+		this.searchSubj = searchSubj;
+	}
 	public List<CateSubDTO> getSubCate() {
 		return subCate;
 	}
