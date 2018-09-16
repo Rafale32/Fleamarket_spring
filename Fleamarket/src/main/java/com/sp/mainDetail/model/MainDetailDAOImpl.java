@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.sp.mainDetail.domain.CategoryDTO;
+import com.sp.mainDetail.domain.FavDTO;
 import com.sp.mainDetail.domain.HotItemDTO;
 import com.sp.mainDetail.domain.HotListDTO;
 import com.sp.mainDetail.domain.ItemDetailDTO;
@@ -95,6 +96,22 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	@Override
 	public List<ItemDetailDTO> categoryItemList(Integer category_no) throws Exception {
 		return session.selectList(namespace+".categoryItemList", category_no);
+	}
+
+	//Fav
+	@Override
+	public void addFav(FavDTO fav) throws Exception {
+		session.insert(namespace+".addFav", fav);
+	}
+
+	@Override
+	public List<FavDTO> listFav(Integer itemboard_no) throws Exception {
+		return session.selectList(namespace+".listFav", itemboard_no);
+	}
+
+	@Override
+	public void removeFav(Integer fav_no) throws Exception {
+		session.delete(namespace+".removeFav", fav_no);
 	}
 	
 	

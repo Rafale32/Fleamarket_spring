@@ -41,7 +41,7 @@ public class MainDetailController {
 		bean.setStoreInfo(service.storeInfo(itemboard_no));
 		
 		model.addAttribute("bean",bean);
-		
+		System.out.println(bean.getItemDetail().getItem_delivery_state());
 		System.out.println(bean.getItemDetail().getItemboard_title());
 	}
 	

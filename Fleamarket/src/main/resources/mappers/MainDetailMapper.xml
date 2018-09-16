@@ -207,4 +207,20 @@
 		from item_qna
 		where itemboard_no = #{itemboard_no}
 	</select>
+	
+	<!-- fav -->
+	<insert id="addFav" parameterType="favDTO">
+		insert into fav(fav_no, member_no, itemboard_no)
+		values(((select max(fav_no) from fav)+1), 
+		#{member_no}, #{itemboard_no})
+	</insert>
+	
+	<select id="listFav" parameterType="int" resultType="favDTO">
+		select * from fav where itemboard_no = #{itemboard_no}
+	</select>
+	
+	<delete id="removeFav" parameterType="int">
+		delete from fav where fav_no = #{fav_no}
+	</delete>
+	
 </mapper>

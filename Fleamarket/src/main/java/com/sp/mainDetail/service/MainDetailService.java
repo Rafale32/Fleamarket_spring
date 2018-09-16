@@ -3,6 +3,7 @@ package com.sp.mainDetail.service;
 import java.util.List;
 
 import com.sp.mainDetail.domain.CategoryDTO;
+import com.sp.mainDetail.domain.FavDTO;
 import com.sp.mainDetail.domain.HotItemDTO;
 import com.sp.mainDetail.domain.HotListDTO;
 import com.sp.mainDetail.domain.ItemDetailDTO;
@@ -34,4 +35,9 @@ public interface MainDetailService {
 	
 	public void deleteQna(Integer item_qna_no)throws Exception;
 	
+	public void addFav(FavDTO fav)throws Exception;
+	
+	public List<FavDTO> listFav(Integer itemboard_no)throws Exception;
+	
+	public void removeFav(Integer fav_no)throws Exception;
 }
