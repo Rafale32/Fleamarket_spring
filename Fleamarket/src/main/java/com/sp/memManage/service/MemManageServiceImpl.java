@@ -98,7 +98,7 @@ public class MemManageServiceImpl implements MemManageService {
 
 	//중복된 상점명 찾기
 	public List<StoreDTO> listStoreService()throws Exception{
-	
+		
 		return memManageDAO.listStore();
 	}
 
