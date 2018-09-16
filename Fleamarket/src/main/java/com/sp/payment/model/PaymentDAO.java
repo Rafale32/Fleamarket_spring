@@ -42,5 +42,7 @@ public interface PaymentDAO {
 	//입력 inform 아 바꾸는걸 처리했음
 	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
 	
+	//원하는 아이템 보드로 땡겨오는것
+	
 	
 }

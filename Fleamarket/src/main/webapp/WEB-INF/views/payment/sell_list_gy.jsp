@@ -22,8 +22,12 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link rel="stylesheet" href="../gy_css/buySellTable.css" type="text/css">
-<link href="../resources/boot/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-  type="text/css" />
+<!-- 제이쿼리 -->
+<script src="../resources/product/jquery-3.1.0.js"></script>
+<!-- 부트스트랩 -->
+<link href="../resources/boot/bootstrap/css/bootstrap.min.css"
+  rel="stylesheet" type="text/css" />
+<script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
   
   <script src="/resources/payment/cangeDeliveryst_gy.js" type="text/javascript"> 
   </script>
@@ -51,7 +55,7 @@
 	<table id="sell_list_table" class="table">
 		<c:forEach var = "p" items="${list}">
 		<tr>
-			<td colspan="4" class="date">날자부 :${p.pay_date }  아이템 보드 ${p.itemboard_no }</td>
+			<td colspan="4" class="date">날자부 :${p.pay_date }</td>
 		</tr>
 
 		
@@ -93,7 +97,7 @@
 					<!-- 상품명 클릭시 해당 하는 상품글 이동 -->
 					<a href="/fleamarket/maindetail/detail?itemboard_no=${p.item_no }">  <h2>제목(상품명) ${p.itemboard_title}</h2> </a>
 					<!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
-					<a href="/safepay/order_detail?item_no=${p.item_no }"><h3>판매금액 ${p.item_price}</h3></a>
+					<a href="/fleamarket/safepay/order_detail?item_no=${p.item_no }"><h3>판매금액 ${p.item_price}</h3></a>
 
 				</td>
 
@@ -101,9 +105,12 @@
 					<form action="/fleamarket/payment/sell_list_gy" method="post">
 				<!-- style="display: none;"  나중에 넣어서 추가 할것-->
 					<c:if test="${p.item_delivery_state == 2}">
-					<input type="text" id=ite_boardno name="itemboard_no" value="${p.itemboard_no }">
+					<input type="text" id=ite_boardno name="itemboard_no" value="${p.itemboard_no }" style="display: none">
+					<input type="text" id="pageNo" name="pageNo" value="${SellModel2.requestPage }" style="display: none">
+					<input type="text" id="item_no" name="item_no" value="${p.item_no }" style="display: none">
 					<input type="text" id="pageNo" name="pageNo" value=${SellModel2.requestPage }>
-					<input type="text" id="item_no" name="item_no" value=${p.item_no } >
+					<input type="text" id="item_no" name="item_no" value=${p.item_no } style="display: none">
+
 					<input type="submit" id="purchaseDetermin" class="btn" value="판매승인버튼" >
 					</c:if>
 					<br>
