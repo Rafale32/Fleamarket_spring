@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-엠티템플릿
 	
 	<!-- 바디영역 -->
 	<tiles:insertAttribute name="body"/>
