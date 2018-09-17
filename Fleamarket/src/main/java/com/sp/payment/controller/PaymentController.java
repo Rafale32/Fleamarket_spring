@@ -211,8 +211,8 @@ public class PaymentController {
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
 		 int a = service.mystoreReviewCounting(storedto);
-       pagemaker.setTotalCount(a);
-       model.addAttribute("pageMaker",pagemaker);
+		 pagemaker.setTotalCount(a);
+		 model.addAttribute("pageMaker",pagemaker);
        
 
 	}
