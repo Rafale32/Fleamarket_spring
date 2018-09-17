@@ -13,8 +13,9 @@
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
 #searchForm {
-  margin-left: 200px;
+  margin-left: 300px;
 }
+
 .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
@@ -31,8 +32,7 @@
         <a class="navbar-brand" href="/fleamarket/maindetail/mmain">Flea</a>
       </div>
 
-      <div class="collapse navbar-collapse"
-        id="bs-example-navbar-collapse-1">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <!--         <li class="active"> -->
           <!--           <a href="#">공지사항 <span class="sr-only">(current)</span></a> -->
@@ -52,14 +52,11 @@
           <!--         </li> -->
         </ul>
         <!-- 검색 -->
-        <form class="navbar-form navbar-left" role="search"
-          action="/fleamarket/search/searchall" id="searchForm" method="post">
+        <form class="navbar-form navbar-left" role="search" action="/fleamarket/search/searchall" id="searchForm" method="post">
           <div class="form-group">
-            <input type="text" class="form-control search-box-input"
-              placeholder="상품명" name="searchSubj">
+            <input type="text" class="form-control search-box-input" placeholder="상품명" name="searchSubj">
           </div>
-          <button type="submit" class="btn btn-default icon-search"
-            id="subbtn">검색</button>
+          <button type="submit" class="btn btn-default icon-search" id="subbtn">검색</button>
         </form>
 
         <ul class="nav navbar-nav navbar-right">
