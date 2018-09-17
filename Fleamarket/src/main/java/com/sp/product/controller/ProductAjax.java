@@ -57,7 +57,6 @@ public class ProductAjax {
 		return entity;
 	}
 	
-	
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
 		
