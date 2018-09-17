@@ -10,10 +10,11 @@
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
-<title>정보 수정</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="../resources/memmanage/js/address.js"></script>
 <script src="../resources/memmanage/js/member.js"></script>
+
+<title>정보 수정</title>
 
 </head>
 <body>
@@ -24,13 +25,13 @@
     </div>
     <div class="col-md-6 col-md-offset-3">
       <form action="/fleamarket/memmanage/update" method="post"
-        name="frm" id="frm_id" onsubmit="return check();">
-
+        name="frm" id="frm_id" onsubmit="return check();">  
+        
         <!-- 이메일 넘길거 -->
         <div class="form-group">
           <label for="InputEmail">이메일 주소</label>
           <div class="input-group">
-            <input type="email" name="member_email" class="form-control"
+            <input type="email" name="member_email" id="member_email" class="form-control"
               value="${memManageDTO.member_email }" readonly="readonly">
           </div>
         </div>
