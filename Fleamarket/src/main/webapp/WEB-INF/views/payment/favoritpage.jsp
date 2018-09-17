@@ -65,17 +65,17 @@
 		<ul class="pagination">
 			<c:if test="${pageMaker.prev}">
 				<li><a
-					href="buy_list_gy${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+					href="favoritpage${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 			</c:if>
 			<c:forEach begin="${pageMaker.startPage }"
 				end="${pageMaker.endPage }" var="idx">
 				<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-					<a href="buy_list_gy${pageMaker.makeSearch(idx)}">${idx}</a>
+					<a href="favoritpage${pageMaker.makeSearch(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<li><a
-					href="buy_list_gy${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+					href="favoritpage${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 			</c:if>
 		</ul>
 	</div>
