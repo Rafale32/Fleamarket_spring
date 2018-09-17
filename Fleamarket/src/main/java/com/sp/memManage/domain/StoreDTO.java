@@ -1,6 +1,8 @@
 package com.sp.memManage.domain;
 
-public class StoreDTO {
+import java.io.Serializable;
+
+public class StoreDTO implements Serializable {
 	
 	private int store_no; //스토어 넘버
 	private String store_name; // 스토어 이름
