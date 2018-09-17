@@ -129,14 +129,14 @@ table td {
         
         <!-- 이후 -->
       <c:choose>
-        <c:when test="${pageMaker.next && pageMaker.endPage > 0}&store_Name=${list2.get(0).store_name}">
+        <c:when test="${pageMaker.next && pageMaker.endPage > 0}">
           <li >
         </c:when>
         <c:otherwise>
           <li class="disabled">
         </c:otherwise>
       </c:choose>
-          <li>
+           <li>
             <a href="pstoreReview${pageMaker.makeSearch(pageMaker.endPage +1) }&store_Name=${list2.get(0).store_name}">
               <span aria-hidden="true">&raquo;</span>
             </a>
