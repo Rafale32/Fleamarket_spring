@@ -29,15 +29,11 @@ public interface MainDetailService {
 	
 	public StoreInfoDTO storeInfo(Integer itemboard_no) throws Exception;
 	
-	public List<ItemQnaDTO> itemQnaList(Integer itemboard_no)throws Exception;
-	
-	public void insertQna(ItemQnaDTO qna)throws Exception;
-	
-	public void deleteQna(Integer item_qna_no)throws Exception;
-	
 	public void addFav(FavDTO fav)throws Exception;
 	
 	public List<FavDTO> listFav(Integer itemboard_no)throws Exception;
 	
 	public void removeFav(Integer fav_no)throws Exception;
+	
+	public List<ItemDetailDTO> categoryItem(Integer category_no)throws Exception;
 }

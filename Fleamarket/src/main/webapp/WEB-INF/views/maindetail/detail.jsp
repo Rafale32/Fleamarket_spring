@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/maindetail/detail.css" type="text/css">
+<link rel="stylesheet" href="../resources/maindetail/css/slideshow.css" type="text/css">
+<script type="text/javascript" src="../resources/maindetail/mootools.js"></script>
+<script type="text/javascript" src="../resources/maindetail/slideshow.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -93,8 +96,13 @@ function getAllList(){
      
       var member_noObj = $("#member_no");
       var member_no = member_noObj.val();
+      var cnt = 0;
+      
+      
       $(".replyLi").remove();
       $.each(data, function(index, item) {
+         cnt++;
+         
          if(member_no == item.member_no){
             var source = $("#template").html();
             var template = Handlebars.compile(source);
@@ -105,6 +113,9 @@ function getAllList(){
             $("#repliesDiv").after(template(item));
          }
       });
+      
+      var str = "<span class='comments-count'>"+cnt+"</span>"
+      $("#comment-title").append(str);
    }); 
 }
 // }  
@@ -307,8 +318,12 @@ function getAllList(){
              }
           });
           $('#cnt').remove();
-          str = "<span id='cnt' class='faved-cnt'>  "+cntNum+"</span>"
+          str = "<span id='cnt' class='faved-cnt'>  "+cntNum+"</span>";
           $(".faved-cnt").after(str);
+          
+          $('#cnt2').remove();
+          str2 = "<span id='cnt2' class='text-pick'>찜 "+cntNum+"</span>";
+          $("#product-fav").prepend(str2);
           
           if(favCheck){
              $('.faved-cnt').css("color","yellow");
@@ -354,9 +369,9 @@ function getAllList(){
                            <small>원</small>
                         </h3>
                      </div>
-                     <div class="product-summary__assistant">
-                        <span class="text-pick"><div class="icon icon pick"></div>
-                           찜 ${bean.itemDetail.fav_no} </span> <span class="split"></span> <span
+                     <div id="product-fav" class="product-summary__assistant">
+                        <%-- <span class="text-pick"><div class="icon icon pick"></div>
+                           찜 ${bean.itemDetail.fav_no} </span> --%> <span class="split"></span> <span
                            class="text-eye"><div class="icon icon eye"></div> 조회수
                            ${bean.itemDetail.itemboard_viewcount } </span> <span class="split"></span> <span
                            class="text-time"><div class="icon icon time"></div>
@@ -412,7 +427,6 @@ function getAllList(){
                               <c:choose>
                                  <c:when test="${member.member_name ne null}">
                                     <button   onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
-                                       onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no }'"
                                        class="btn-call" value="${member.member_name}">안심결제</button>
                                  </c:when>
                                  <c:otherwise>
@@ -461,7 +475,7 @@ function getAllList(){
                      </div>
                    <div class="product-comments-wrapper">
                         <div class="product-comments">
-                           <div class="title">
+                           <div id="comment-title" class="title">
                               상품문의 <span class="comments-count"></span>
                            </div>
                            <div class="comments-input-wrapper">
@@ -568,14 +582,13 @@ function getAllList(){
                                     <c:when test="${bean.itemDetail.item_delivery_state == 1 }">
                                        <c:choose>
                                           <c:when test="${member.member_name ne null}">
-                                             <button
-                                                onclick="location.href = '/Fleamarket/payment/payment.do?item_no=${bean.itemDetail.item_no }'"
-                                                class="btn-call">안심결제</button>
+                                             <button   onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
+                                       class="btn-call" value="${member.member_name}">안심결제</button>
                                           </c:when>
                                           <c:otherwise>
                                              <button
-                                                onclick="location.href = '/Fleamarket/memmanage/login.do'"
-                                                class="btn-call">안심결제</button>
+                                             onclick="location.href = '/fleamarket/memmanage/login'"
+                                             class="btn-call">안심결제</button>
                                           </c:otherwise>
                                        </c:choose>
                                     </c:when>
