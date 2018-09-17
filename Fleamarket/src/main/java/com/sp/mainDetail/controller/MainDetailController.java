@@ -46,12 +46,14 @@ public class MainDetailController {
 	}
 	
 	@RequestMapping(value= "/categoryitem", method=RequestMethod.GET)
-	public void categoryItem(@RequestParam("category_no") Integer category_no, Model model)throws Exception{
+	public void categoryItem(@RequestParam("category_title") String category_title, Model model)throws Exception{
 		Bean bean = new Bean();
 		
-		bean.setCategoryItemList(service.categoryItem(category_no));
+		bean.setCategoryItemList(service.categoryItem(category_title));
 		
 		model.addAttribute("bean", bean);
+		
+		model.addAttribute("title",category_title);
 	}
 	
 	

@@ -157,12 +157,12 @@ function getAllList(){
 //    }); 
 // } 
   
-    //스크롤처리
+    /* //스크롤처리
    $(window).bind('scroll', function() {
      if($(window).scrollTop() >= $('body').offset().top + $('body').outerHeight() - window.innerHeight) {
         alert("dz");
      }
-  }); 
+  });  */
   
    
   $(document).ready(function(){
@@ -423,7 +423,7 @@ function getAllList(){
                         
 
                         <c:choose>
-                           <c:when test="${bean.itemDetail.item_delivery_B eq 1 }">
+                           <c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
                               <c:choose>
                                  <c:when test="${member.member_name ne null}">
                                     <button   onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
@@ -461,12 +461,14 @@ function getAllList(){
                               <li class="assistant"><strong>거래지역</strong><br> <span
                                  class="value">${bean.itemDetail.itemboard_local}</span></li>
                               <li class="assistant"><strong>카테고리</strong>
-                                 <div>${bean.itemDetail.category_title}</div></li>
+                              	<a href="/fleamarket/maindetail/categoryitem?category_title=${bean.itemDetail.category_title}">
+                              		<div>${bean.itemDetail.category_title}</div>
+                              	</a>
                               <li class="assistant"><strong>상품태그</strong>
                                  <div>
                                     <c:if test="${bean.itemDetail.tagList ne null}">
                                        <c:forEach var="list" items="${bean.itemDetail.tagList}">
-                                          <a href="">${list }</a>
+                                          <a href="/fleamarket/search/searchall?searchSubj=${list}">#${list }</a>
                                        </c:forEach>
                                     </c:if>
                                  </div></li>
@@ -548,7 +550,7 @@ function getAllList(){
                                              items="${bean.storeInfo.itemList}" begin="0" end="1"
                                              step="1">
                                              <a
-                                                href="detailAction.do?itemboard_no=${itemList.itemboard_no}">
+                                                href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
                                                 <div class="small-product">
                                                    <c:forEach var="img" items="${itemList.imgList }"
                                                       begin="0" end="0">

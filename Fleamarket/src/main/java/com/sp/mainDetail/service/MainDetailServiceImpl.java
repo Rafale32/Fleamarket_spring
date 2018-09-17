@@ -94,7 +94,7 @@ public class MainDetailServiceImpl implements MainDetailService {
       StringTokenizer st = new StringTokenizer(itemDetail.getTag_name(), ",");
 
       while (st.hasMoreTokens()) {
-        strList.add("#"+st.nextToken());
+        strList.add(st.nextToken());
       }
       itemDetail.setTagList(strList);
 
@@ -213,9 +213,9 @@ public class MainDetailServiceImpl implements MainDetailService {
 	}
 
 	@Override
-	public List<ItemDetailDTO> categoryItem(Integer category_no) throws Exception {
+	public List<ItemDetailDTO> categoryItem(String category_title) throws Exception {
 		List<ItemDetailDTO> list = new ArrayList<ItemDetailDTO>();
-    list = dao.categoryItem(category_no);
+    list = dao.categoryItem(category_title);
     
     for(int i=0; i<list.size(); i++){
       list.get(i).setImgList(dao.itemImgList(list.get(i).getItemboard_no()));

@@ -149,7 +149,7 @@
 		and a.category_no  #{category_no}
 	</select> -->
 	
-	<select id="categoryItem" parameterType="int" resultType="ItemDetailDTO">
+	<select id="categoryItem" parameterType="string" resultType="ItemDetailDTO">
 	select a.item_price, a.item_delivery_B, a.item_delivery_state,
 	b.itemboard_no, b.itemboard_title, b.itemboard_date, c.category_title
 	from item a, itemboard b, category c, category_sub d
@@ -158,7 +158,7 @@
 	and c.category_no = d.category_no
 	and a.item_delivery_state = 1
 	and b.itemboard_delete_B = 0
-	and c.category_no = #{category_no}
+	and c.category_title = #{category_title}
 	</select>
 	
 	<update id="updateHits" parameterType="int">

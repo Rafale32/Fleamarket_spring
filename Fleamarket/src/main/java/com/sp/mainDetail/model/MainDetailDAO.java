@@ -49,5 +49,5 @@ public interface MainDetailDAO {
 	
 	public void removeFav(Integer fav_no)throws Exception;
 	
-	public List<ItemDetailDTO> categoryItem(Integer category_no)throws Exception;
+	public List<ItemDetailDTO> categoryItem(String category_title)throws Exception;
 }

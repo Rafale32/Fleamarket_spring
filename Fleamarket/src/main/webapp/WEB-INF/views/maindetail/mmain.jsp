@@ -136,7 +136,7 @@ color: red;
     <!-- 카테고리별 인기상품 -->
     <c:forEach var="list" items="${bean.hotList}" varStatus="status">
       <h4 style="display:inline-block;" id="cate${status.count}">${list.category_title}</h4>
-      <a href="/fleamarket/maindetail/categoryitem?category_no=${list.category_no}">전체보기</a>
+      <a href="/fleamarket/maindetail/categoryitem?category_title=${list.category_title}">전체보기</a>
       <div class="row">
         <c:forEach var="itemList" items="${list.hotList}">
         <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
