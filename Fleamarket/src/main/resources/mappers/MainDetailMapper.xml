@@ -125,7 +125,7 @@
 		and b.member_no = #{member_no}
 	</select>
 	
-	<select id="categoryItemList" parameterType="int" resultType="ItemDetailDTO">
+	<!-- <select id="categoryItemList" parameterType="int" resultType="ItemDetailDTO">
 		select
 		distinct e.itemboard_no, e.itemboard_title, d.item_price, c.fav_no, e.itemboard_viewcount,
 		e.itemboard_date, d.item_state,
@@ -147,6 +147,18 @@
 		and e.itemboard_delete_B = 0
     and d.item_delivery_state = 1
 		and a.category_no  #{category_no}
+	</select> -->
+	
+	<select id="categoryItem" parameterType="int" resultType="ItemDetailDTO">
+	select a.item_price, a.item_delivery_B, a.item_delivery_state,
+	b.itemboard_no, b.itemboard_title, b.itemboard_date, c.category_title
+	from item a, itemboard b, category c, category_sub d
+	where a.item_no = b.item_no
+	and b.sub_no = d.sub_no
+	and c.category_no = d.category_no
+	and a.item_delivery_state = 1
+	and b.itemboard_delete_B = 0
+	and c.category_no = #{category_no}
 	</select>
 	
 	<update id="updateHits" parameterType="int">
