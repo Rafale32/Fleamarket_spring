@@ -137,28 +137,21 @@ public class PaymentController {
 	}
 	
 	@RequestMapping(value = "/sell_list_gy", method = RequestMethod.POST)
-	public void chagesDeriSell(Model model,HttpSession session,DeliveryDTO_gy dto, Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
+	public void chagesDeriSell(Model model,HttpSession session,DeliveryDTO_gy dto,
+			Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		MemManageDTO dto0 = (MemManageDTO) session.getAttribute("member");
 		String loginEmail = dto0.getMember_email();
 		dto2.setMember_email(loginEmail);
-		
 		service.changDeliverState2(dto);
 		dto2.setMember_email(loginEmail);
 		List<PuerchaseDTO_gy> list	= service.listSell(dto2,cri);
 		model.addAttribute("list", list);
-		
-		
-		
 		pdto.setInform_contents(3);
 		service.registerPerchaseAlram(pdto);
-		
-		
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
-       //pagemaker.setTotalCount(131);
 		 int a = service.sellListcounting(dto2);
-		 System.out.println(a + " : �뿉�씠 媛�");
        pagemaker.setTotalCount(a);
        model.addAttribute("pageMaker",pagemaker);
 	}
@@ -168,53 +161,37 @@ public class PaymentController {
 	
 	//�궡�긽�젏 由щ럭蹂닿린濡� 媛�湲�
 	@RequestMapping(value = "/mystoreReview", method = RequestMethod.GET)
-	public void mystoreReview(Model model,HttpSession session,Criteria2 cri) throws Exception{
+	public void mystoreReview(Model model,HttpSession session,Criteria2 cri)
+			throws Exception{
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		MemManageDTO dto0 = (MemManageDTO) session.getAttribute("member");
 		String loginEmail = dto0.getMember_email();
 		dto2.setMember_email(loginEmail);
-		
-		
-		
 		 MystoreDTO_gy storedto= service.SearchMystore(dto2);
-		
-		 List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
-		
-		 
+		 List<MystoreReviewDTO_gy> list = 
+				 (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
 		 model.addAttribute("list2", list);
-		 
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
        //pagemaker.setTotalCount(131);
 		 int a = service.mystoreReviewCounting(storedto);
        pagemaker.setTotalCount(a);
        model.addAttribute("pageMaker",pagemaker);
-		 
 	}
 	
 	@RequestMapping(value = "/pstoreReview", method = RequestMethod.GET)
-	public void pstoreReview(Model model,HttpSession session,Criteria2 cri,@RequestParam("store_Name") String storename) throws Exception{
+	public void pstoreReview(Model model,HttpSession session,Criteria2 cri,
+			@RequestParam("store_Name") String storename) throws Exception{
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
-	
-		
-		
 		 MystoreDTO_gy storedto = new MystoreDTO_gy();
 		 storedto.setStore_Name(storename);
-		
-		 
 		 List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
-		
-		 
-		 
 		 model.addAttribute("list2", list);
-		 
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
 		 int a = service.mystoreReviewCounting(storedto);
 		 pagemaker.setTotalCount(a);
 		 model.addAttribute("pageMaker",pagemaker);
-       
-
 	}
 	
 	@RequestMapping(value = "/purchasestoreReview2", method = RequestMethod.GET)
@@ -222,15 +199,17 @@ public class PaymentController {
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 	
 		
+		System.out.println(storename + "  1차 스넴");
 		
 		 MystoreDTO_gy storedto = new MystoreDTO_gy();
+		 
 		 storedto.setStore_Name(storename);
 		
 		 
 		 List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
 		
 		 
-		 
+		 System.out.println(list.get(0).getStore_name());
 		 model.addAttribute("list2", list);
 		 
 		 PageMaker pagemaker = new PageMaker();
@@ -271,43 +250,27 @@ public class PaymentController {
 	
 	
 	@RequestMapping(value = "/favoritpage", method = RequestMethod.GET)
-	public void favoritpage(Model model,HttpSession session, Criteria2 cri) throws Exception {
+	public void favoritpage(Model model,HttpSession session, Criteria2 cri)
+			throws Exception {
 		
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		MemManageDTO dto = (MemManageDTO) session.getAttribute("member");
 		String loginEmail = dto.getMember_email();
 		dto2.setMember_email(loginEmail);
-		
-		
 		List<PuerchaseDTO_gy> list	= service.listFavorit(dto2,cri);
 		model.addAttribute("list", list);
-		
-		//return "/payment/buy_list_gy";
-		
-		//�럹�씠吏�
-		
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
-         //pagemaker.setTotalCount(131);
-         //�뿬湲곌� 以묒슂 service.puerchasecounting(dto2)
-		 
 		 int a = service.puerchasecounting(dto2);
-		 
          pagemaker.setTotalCount(a);
          model.addAttribute("pageMaker",pagemaker);
-
-		
-		
 	}
 	
 	@RequestMapping(value = "/favoritpage", method = RequestMethod.POST)
-	public void favoritdeletepage(Model model,HttpSession session, Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
-		
+	public void favoritdeletepage(Model model,HttpSession session,
+			Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
 		System.out.println(pdto.getItemboard_no() + " itemboard_no");
-		
 		service.deletfavorit(pdto);
-		
-		
 	}
 		
 		
