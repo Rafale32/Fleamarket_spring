@@ -113,6 +113,11 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	public void removeFav(Integer fav_no) throws Exception {
 		session.delete(namespace+".removeFav", fav_no);
 	}
+
+	@Override
+	public List<ItemDetailDTO> categoryItem(Integer category_no) throws Exception {
+		return session.selectList(namespace+".categoryItem", category_no);
+	}
 	
 	
 }

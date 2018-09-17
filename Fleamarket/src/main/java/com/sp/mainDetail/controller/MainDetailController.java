@@ -45,8 +45,14 @@ public class MainDetailController {
 		System.out.println(bean.getItemDetail().getItemboard_title());
 	}
 	
-	/*@RequestMapping(value="/test", method=RequestMethod.GET)
-	public void ajaxText(){
+	@RequestMapping(value= "/categoryitem", method=RequestMethod.GET)
+	public void categoryItem(@RequestParam("category_no") Integer category_no, Model model)throws Exception{
+		Bean bean = new Bean();
+		
+		bean.setCategoryItemList(service.categoryItem(category_no));
+		
+		model.addAttribute("bean", bean);
+	}
 	
-	}*/
+	
 }

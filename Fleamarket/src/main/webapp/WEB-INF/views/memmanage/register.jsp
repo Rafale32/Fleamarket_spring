@@ -10,42 +10,13 @@
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
-<title>회원가입 화면</title>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="../resources/memmanage/js/member.js"></script>
 <script src="../resources/memmanage/js/address.js"></script>
+<script src="../resources/memmanage/js/emailcheck.js"></script>
 
-<script>
-  $(document).ready(function(){
-// ID 중복체크
- 	$("#btnCheckId").click(function(){
-		var loginId = $("#member_email").val(); //입력한 loginId 값 가져와서 loginId 변수에 저장
-		console.log("loginId ======>" + loginId);
-		if(loginId==""){ //입력값이 없으면
-			alert("ID를 먼저 입력해주세요");
-		} else { // 중복검사 실행
-			var url = "/fleamarket/memmanage/emailcheck?member_email="+loginId;
-			$.get(url,function(data){
-// 				if(data.code > 0){	// 아이디 사용 가능
-				if(data == 0){	// 아이디 사용 가능
-					alert("사용 가능한 ID 입니다.");
-					$("#checkedId").val("Y");
-				} else {
-					alert("이미 사용중인 ID 입니다.");
-					$("#checkedId").val("N");
-				}
-			});
-		}
-	
-	});  
- 	
-/* 	
-	$("#member_email").blur(function(){
-		console.log($(this).val());
-	}); */
-});	 
-</script>
+<title>회원가입 화면</title>
 
 </head>
 <body>
@@ -58,9 +29,9 @@
   
   </div>
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" action="/fleamarket/memmanage/register" 
-    method="post" name="frm" id="frm_id" onsubmit="return check();">
-    <input type="hidden" id=checkedId" value="N">
+    <form action="/fleamarket/memmanage/register" 
+    method="post" name="frm" id="frm_id" onsubmit="return checkMember();">  
+  <input type="hidden" id="checkedId" value="N"> 
        <!-- 이메일주소 -->
        <div class="form-group">
          <label for="InputEmail">이메일 주소</label>
@@ -70,7 +41,6 @@
            <a href ="javascript:;" id="btnCheckId" class="checkId">중복확인</a>
            <div id ="checkMsg" class="input-group-btn"></div>
 			
-
         </div>
       </div>
       
@@ -131,7 +101,7 @@
   
       <!-- 버튼 -->
       <div class="form-group text-center">
-        <input type="submit" name="submit" class="btn btn-info" value="회원가입">
+        <input type="submit" class="btn btn-info" value="회원가입">
 
         <input type="reset" class="btn btn-info" value="다시입력">
         

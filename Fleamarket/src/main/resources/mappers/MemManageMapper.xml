@@ -70,4 +70,12 @@
 		member_email = #{member_email}
 	</delete>
 	
+	<!-- 관리자 로그인  -->
+	<select id="loginAdmin" parameterType="MemManageDTO" resultType="MemManageDTO">
+		select * from member 
+			where member_email=#{member_email} and 
+			member_pw=#{member_pw} and 
+			member_admin = 1
+	</select>
+	
 </mapper>

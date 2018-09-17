@@ -33,6 +33,7 @@ import com.sp.util.UploadFileUtils;
 @RequestMapping("/productajax/*")
 public class ProductAjax {
 	
+	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
@@ -57,10 +58,8 @@ public class ProductAjax {
 		return entity;
 	}
 	
-	
 	@RequestMapping(value = "/uploadAjax", method = RequestMethod.POST)
 	public ResponseEntity<String> uploadAjax(MultipartFile file)throws Exception{
-		
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()),
 				HttpStatus.CREATED);
@@ -155,10 +154,10 @@ public class ProductAjax {
 		  }
 		  
 		  int startRow = (Integer)session.getAttribute("searchStartRow");
-		  System.out.println(":아작스: 시작로우-"+startRow + "  주제:"+subj+"  한번 로우갑:"+ SearchController.rowSize);
 		  
+		  List<ItemDTO> list = null;
 		try {
-				List<ItemDTO> list = pService.searchAll(subj, startRow , SearchController.rowSize);
+				list = pService.searchAll(subj, startRow , SearchController.rowSize);
 				entity = new ResponseEntity<>(list, HttpStatus.OK);
 				System.out.println(list);
 			} catch (Exception e) {
@@ -169,7 +168,9 @@ public class ProductAjax {
 		  SearchController.startRow = startRow+SearchController.rowSize;
 		  session.setAttribute("searchStartRow", startRow+SearchController.rowSize);
 		  
-		  
+		  /*System.out.println(":아작스: 시작로우-"+startRow + "  주제:"+subj+"  "
+			  		+ "한번 로우갑:"+ SearchController.rowSize
+			  		+ "    디비에서 가지고온 로우수::"+ list.size());*/
 		  
 		  return entity;
 	  }

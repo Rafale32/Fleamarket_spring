@@ -141,24 +141,6 @@ public class MainDetailServiceImpl implements MainDetailService {
 		return store;
 	}
 
-	@Override
-	public List<ItemQnaDTO> itemQnaList(Integer itemboard_no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertQna(ItemQnaDTO qna) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteQna(Integer item_qna_no) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public String time(String itemTime){
 	  //아이템상세글 작성시간 처리
 	    Date date = new Date();
@@ -228,6 +210,19 @@ public class MainDetailServiceImpl implements MainDetailService {
 	@Override
 	public void removeFav(Integer fav_no) throws Exception {
 		dao.removeFav(fav_no);
+	}
+
+	@Override
+	public List<ItemDetailDTO> categoryItem(Integer category_no) throws Exception {
+		List<ItemDetailDTO> list = new ArrayList<ItemDetailDTO>();
+    list = dao.categoryItem(category_no);
+    
+    for(int i=0; i<list.size(); i++){
+      list.get(i).setImgList(dao.itemImgList(list.get(i).getItemboard_no()));
+      list.get(i).setItemboard_date(time(list.get(i).getItemboard_date()));
+    }
+		
+    return list;
 	}
 	
 }

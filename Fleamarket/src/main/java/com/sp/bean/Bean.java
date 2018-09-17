@@ -48,6 +48,7 @@ public class Bean  {
 	private PageModel pageModel;//페이지 처리위한넘
 	private List<CateSubDTO> subCate;//수정폼에서 대분류별로 카테고리 뿌려 쓰기위함
 	private String searchSubj;//검색시 검색 한 글 가지고 가지위함
+	private String store_Name;//레프트 메뉴 분기때문에 넣어둠
 	
 	//추천상품리스트 추가
 	private List<RecommendDTO> recommend;
@@ -85,6 +86,12 @@ public class Bean  {
 		return paymentDTO;
 	}
 
+	public String getStore_Name() {
+		return store_Name;
+	}
+	public void setStore_Name(String store_Name) {
+		this.store_Name = store_Name;
+	}
 	public String getSearchSubj() {
 		return searchSubj;
 	}

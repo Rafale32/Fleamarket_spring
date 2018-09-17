@@ -13,6 +13,11 @@
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+.red{
+color: red;
+}
+</style>
 <script>
    function fnMove(seq){
       var offset = $("#cate"+seq).offset();
@@ -36,12 +41,10 @@
       <div class="carousel-inner">
         <!--슬라이드1-->
         <div class="item active">
-          <img src="http://www.blueb.co.kr/SRC2/_image/w01.jpg"
+          <img src="http://seoul-p-studio.bunjang.net/images/nocrop/253037543.jpg"
             style="width: 100%" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Slide 1</h1>
-              <p>텍스트 1</p>
             </div>
           </div>
         </div>
@@ -49,12 +52,10 @@
 
         <!--슬라이드2-->
         <div class="item">
-          <img src="http://www.blueb.co.kr/SRC2/_image/w02.jpg"
+          <img src="http://seoul-p-studio.bunjang.net/images/nocrop/256279251.jpg"
             style="width: 100%" data-src="" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Slide 2</h1>
-              <p>텍스트 2</p>
             </div>
           </div>
         </div>
@@ -62,12 +63,10 @@
 
         <!--슬라이드3-->
         <div class="item">
-          <img src="http://www.blueb.co.kr/SRC2/_image/w03.jpg"
+          <img src="http://seoul-p-studio.bunjang.net/images/nocrop/256255308.jpg"
             style="width: 100%" data-src="" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Slide 3</h1>
-              <p>텍스트 3</p>
             </div>
           </div>
         </div>
@@ -91,19 +90,17 @@
     <h3>추천상품</h3>
     <div class="row">
     <c:forEach var="reList" items="${bean.recommend}">
+    <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
           <c:forEach var="img" items="${reList.imgList}" begin="0" end="0">
-            <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">
-              <img src="/fleamarket/resources/product/upload${img.thum_img}" alt="추천상품이미지">
-            </a>
+            <img src="/fleamarket/resources/product/upload${img.thum_img}" alt="추천상품이미지">
           </c:forEach>
           <div class="caption">
-            <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">
               <h4>${reList.itemboard_title}</h4>
               <p>
                 <c:choose>
-                  <c:when test="${reList.item_delivery_B eq 1}">무료배송</c:when>
+                  <c:when test="${reList.item_delivery_B eq 1}"><div class="red">무료배송</div></c:when>
                   <c:otherwise>배송비별도</c:otherwise>
                 </c:choose>
                 <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
@@ -111,10 +108,11 @@
               </p>
               <p><fmt:formatNumber value="${reList.item_price}" />원</p>
               <p>${reList.itemboard_date }</p>
-            </a>
+            
           </div>
         </div>
       </div>
+     </a>
     </c:forEach>
     </div><!--row -->  
     <!-- 추천상품 -->
@@ -138,23 +136,31 @@
     <!-- 카테고리별 인기상품 -->
     <c:forEach var="list" items="${bean.hotList}" varStatus="status">
       <h4 style="display:inline-block;" id="cate${status.count}">${list.category_title}</h4>
-      <a href="categoryItemListAction.do?category_no=${categoryList.category_no}">전체보기</a>
+      <a href="/fleamarket/maindetail/categoryitem?category_no=${list.category_no}">전체보기</a>
       <div class="row">
         <c:forEach var="itemList" items="${list.hotList}">
+        <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
               <c:forEach var="img" items="${itemList.imgList}" begin="0" end="0">
                 <img class="img" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.thum_img}">
               </c:forEach>
             <div class="caption">
-              <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
                 <h4>${itemList.itemboard_title}</h4>
+                <p>
+                <c:choose>
+                  <c:when test="${itemList.item_delivery_B eq 1}"><div class="red">무료배송</div></c:when>
+                  <c:otherwise>배송비별도</c:otherwise>
+                </c:choose>
+                <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
+                <!-- <a href="#" class="btn btn-default" role="button">Button</a> -->
+              </p>
               <p> <fmt:formatNumber value="${itemList.item_price}" />원 </p>
               <p> ${itemList.itemboard_date} </p>
-            </a>
           </div>
         </div>
       </div>
+      </a>
       </c:forEach>
       </div><!--row -->
       <hr>
