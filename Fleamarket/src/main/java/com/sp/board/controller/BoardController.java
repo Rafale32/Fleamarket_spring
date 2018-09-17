@@ -1,6 +1,7 @@
 package com.sp.board.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sp.board.domain.BoardDTO;
 import com.sp.board.service.BoardService;
+import com.sp.memManage.domain.MemManageDTO;
 
 
 @Controller
@@ -39,18 +41,22 @@ public class BoardController {
 	} 
 	
 	@RequestMapping(value = "/noList", method = RequestMethod.GET)
-	public void noList(Model model) throws Exception{
+	public void noList(Model model, HttpSession hsession) throws Exception{
 		System.out.println();
 		System.out.println("notice list..........");
 		
+		MemManageDTO mdto = (MemManageDTO) hsession.getAttribute("member");
+		model.addAttribute("sesn", mdto);
 		model.addAttribute("list", service.noList());
 	}
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("notice_no") int notice_no, Model model) throws Exception{
+	public void read(@RequestParam("notice_no") int notice_no, Model model, HttpSession hsession) throws Exception{
 		System.out.println();
 		System.out.println("review move............");
 		
+		MemManageDTO mdto = (MemManageDTO) hsession.getAttribute("member");
+		model.addAttribute("sesn", mdto);
 		model.addAttribute(service.read(notice_no));
 		
 	}
