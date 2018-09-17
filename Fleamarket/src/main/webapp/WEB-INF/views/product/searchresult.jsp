@@ -12,7 +12,7 @@
 
 $(function() {
 	var searchSubj = '';
-	var cnt = 0;
+	var cnt = 1;
 	
 	//파라미터값에 있는 걸 잘라서 값으로 반환 해주는 함수 $.urlParam('searchSubj') 원하는 파람 쓰면 그 파람의 값넘어옴
 	$.urlParam = function(name){
@@ -25,58 +25,54 @@ $(function() {
 	    }
 	}
 	
+	$("#moreinfo").on("click", function() {
 	
-  	$(window).bind('scroll', function() {
-	    if($(window).scrollTop() >= $('.posts').offset().top + $('.posts').outerHeight() - window.innerHeight) {
-	    	
-	    	//alert($(window).scrollTop() + "  " + $(document).height() + "  "  + $(window).height());
-	    	
-	        
-	        searchSubj = $(".searchSubj").val();
-	        
- 	        	$.ajax({
-				url: "/fleamarket/productajax/searchall?searchSubj="+searchSubj,
-				type: "post",
-				dataType: "json",
-				success: function(data){
-					var cnt = 1;
-					
-					
-					//alert(cnt+":카운트값");
-					var all = "<tr>";
-					$.each(data,function(key,value) {
+       searchSubj = $(".searchSubj").val();
+       
+        $.ajax({
+		url: "/fleamarket/productajax/searchall?searchSubj="+searchSubj,
+		type: "post",
+		dataType: "json",
+		success: function(data){
+			
+			
+			
+			//alert(cnt+":카운트값"); var all = "<tr>";
+			var all = "";
+			$.each(data,function(key,value) {
+				
+				if(cnt == 1 || cnt%4 == 1 ){
+					all = all + "<tr>";
+				} 
+				
+				var td = "<td>"+ "<a href=/fleamarket/maindetail/detailAction?itemboard_no="+ value.itemboard_No +">"
+						+ "<img src=/fleamarket/resources/product/upload"+value.thumImg+"/><br>" 
+						+ value.itemboard_Title + "<br>" 
+						+ value.item_Price + "<br>" 
+						+ value.itemboard_Local + "<br></a>" 
+						+ "</td>";
 						
-						if(cnt%5 == 0 ){
-							all = all + "<tr>";
-						} 
-						
-						var td = "<td>"+ "<a href=/fleamarket/maindetail/detailAction?itemboard_no="+ value.itemboard_No +">"
-								+ "<img src=/fleamarket/resources/product/upload"+value.thumImg+"><br>" 
-								+ value.itemboard_Title + "<br>" 
-								+ value.item_Price + "<br>" 
-								+ value.itemboard_Local + "<br>" 
-								+ "</td>";
-								
-						all = all + td;
-						/* if(cnt%4 == 0 ){
-							all = all + "<tr>";
-						} */
-						
-						if(cnt%5 == 0){
-							all = all + "</tr>";
-						}
-						cnt = cnt + 1;
-						
-						//$(".itemtab").append("</tr>");
-						//alert(all);
-					});
-					
-					$(".itemtab").append(all);
-					
-				}//success END
-			});//AJAX END
-	    }//IF END
-	});//SCROLL END
+				all = all + td;
+				/* if(cnt%4 == 0 ){
+					all = all + "<tr>";
+				} */
+				
+				if(cnt%4 == 0){
+					all = all + "</tr>";
+				}
+				cnt = cnt + 1;
+				
+				//$(".itemtab").append("</tr>");
+				//alert(all);
+			}); //each END
+			
+			$(".itemtab").append(all);
+			//alert("**********"+all+"--------------------------------------------------"+cnt);
+			}//success END
+		});//AJAX END
+	
+	
+	});//moreinfo click END
 	
 });//function END
 
@@ -88,17 +84,16 @@ $(function() {
 </head>
 <body>
 	<div class="posts" id="flux" style="text-align: center; vertical-align: middle;">
-	<input type="hidden" name="searchSubj" value="${bean.searchSubj }" class="searchSubj">
-		<table style="undefined;table-layout: fixed; width: 1020px" class="itemtab">
+		<input type="hidden" name="searchSubj" value="${bean.searchSubj }" class="searchSubj">
+		<table border="1" style="undefined;table-layout: fixed; width: 1020px" class="itemtab">
 			<colgroup>
 				<col style="width: 61.005682px">
 				<col style="width: 61.005682px">
 				<col style="width: 61.005682px">
 				<col style="width: 65.005682px">
-				<col style="width: 66.005682px">
 			</colgroup>
 		  <tr>
-		    <th colspan="2">검색된 상품<br><br><br><br><br></th>
+		    <th colspan="4">검색된 상품<br><br><br><br><br></th>
 		  </tr>
 		  
 		  <c:forEach items="${bean.itemList }" var="tmp" varStatus="sta">
@@ -115,7 +110,7 @@ $(function() {
 			 	<c:if test="${sta.count%4 == 0  }"></tr><br></c:if>
 		  </c:forEach>
 		</table>
-	
+		<div><input type="button" value="더보기" id="moreinfo"></div>
 	</div>
 </body>
 </html>

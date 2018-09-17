@@ -65,7 +65,7 @@ public class ProductController {
 		}
 		
 		int requestPage = pageNum;*/
-		String storeName =  request.getParameter("store_name");
+		String storeName =  request.getParameter("store_Name");
 		
 		
 		MemManageDTO mmDTO = (MemManageDTO)session.getAttribute("member");

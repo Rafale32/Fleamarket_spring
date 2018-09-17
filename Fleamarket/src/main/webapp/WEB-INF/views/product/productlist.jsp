@@ -74,7 +74,7 @@ table td {
     <!-- 페이징 -->
     <nav class="text-center">
       <ul class="pagination">
-        <c:if test="${member.member_email != null && bean.itemDTO.store_name == null}">
+        <c:if test="${member.member_email != null && bean.itemDTO.store_Name == null}">
           <!-- 이전 -->
           <c:choose>
             <c:when test="${bean.pageModel.startPage <= 5 }">
@@ -126,7 +126,7 @@ table td {
         </c:if>
         
         
-        <c:if test="${param.store_name != null }">
+        <c:if test="${param.store_Name != null }">
         <!-- 이전 -->
           <c:choose>
             <c:when test="${bean.pageModel.startPage <= 5 }">
