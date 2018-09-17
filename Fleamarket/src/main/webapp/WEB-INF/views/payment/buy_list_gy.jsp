@@ -127,7 +127,7 @@ table td {
               </c:if>
             </form>
             
-            <a href="/fleamarket/payment/purchasestoreReview2?store_no=${p.store_no }">
+            <a href="/fleamarket/payment/purchasestoreReview2?store_name=${p.store_name }">
               <input type="button" class="btn btn-info" value="리뷰확인">
             </a> <!-- 버튼 시험작 만들기-->
               

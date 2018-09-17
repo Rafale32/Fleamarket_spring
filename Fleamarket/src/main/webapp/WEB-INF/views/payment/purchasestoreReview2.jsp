@@ -111,7 +111,7 @@ table td {
           <li>
         </c:otherwise>
       </c:choose>
-            <a href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.startPage - 1) }">
+            <a href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.startPage - 1) }&store_name=${list2.get(0).store_name}">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
@@ -119,7 +119,7 @@ table td {
         <!-- 현재페이지 -->
         <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
           <li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-            <a href="purchasestoreReview2${pageMaker.makeSearch(idx)}">${idx}</a>
+            <a href="purchasestoreReview2${pageMaker.makeSearch(idx)}&store_name=${list2.get(0).store_name}">${idx}</a>
           </li>
         </c:forEach>
         
@@ -133,7 +133,7 @@ table td {
         </c:otherwise>
       </c:choose>
           <li>
-            <a href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.endPage +1) }">
+            <a href="purchasestoreReview2${pageMaker.makeSearch(pageMaker.endPage +1) }&store_name=${list2.get(0).store_name}">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
