@@ -16,15 +16,16 @@
 <body>
   <div class="container">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    
       <c:choose>
-        <c:when test="${param.store_name != null}">
+        <c:when test="${param.store_Name != null}">
           <div class="btn-group" role="group">
-            <a href="#">
+            <a href="/fleamarket/product/productlist?store_Name=${param.store_Name }">
               <button type="button" class="btn btn-info">상품</button>
             </a>
           </div>
           <div class="btn-group" role="group">
-            <a href="#">
+            <a href="/fleamarket/payment/pstoreReview?store_Name=${param.store_Name }">
               <button type="button" class="btn btn-info">상점후기</button>
             </a>
           </div>

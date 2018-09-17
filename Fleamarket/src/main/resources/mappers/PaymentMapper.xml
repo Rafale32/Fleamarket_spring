@@ -125,7 +125,7 @@
 	and I.Item_No = Ite.Item_No
 	and Ite.Itemboard_No =Img.Itemboard_No
 	and O.Member_No = M.Member_No
-	and S.Store_No = #{Store_No}
+	and S.Store_Name = #{Store_Name}
 	</select>
 	
 	<select id="MystoreReviewCounting" parameterType="MystoreDTO_gy" resultType="integer">
