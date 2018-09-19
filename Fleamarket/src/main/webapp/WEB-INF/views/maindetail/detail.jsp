@@ -423,7 +423,7 @@ function getAllList(){
                         
 
                         <c:choose>
-                           <c:when test="${bean.itemDetail.item_delivery_B eq 1 }">
+                           <c:when test="${bean.itemDetail.item_delivery_state eq 1 }">
                               <c:choose>
                                  <c:when test="${member.member_name ne null}">
                                     <button   onclick="location.href = '/fleamarket/safepay/order?item_no=${bean.itemDetail.item_no}'"
