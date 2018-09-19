@@ -8,9 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/maindetail/detail.css" type="text/css">
-<link rel="stylesheet" href="../resources/maindetail/css/slideshow.css" type="text/css">
-<script type="text/javascript" src="../resources/maindetail/mootools.js"></script>
-<script type="text/javascript" src="../resources/maindetail/slideshow.js"></script>
+<link rel="stylesheet" href="../resources/maindetail/rotation/css/main.css" type="text/css">
+<link rel="stylesheet" href="../resources/maindetail/rotation/css/normalize.css" type="text/css">
+<script type="text/javascript" src="../resources/maindetail/rotation/js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="../resources/maindetail/rotation/js/main.js"></script>
+<script type="text/javascript" src="../resources/maindetail/rotation/js/vendor/modernizr.custom.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -76,7 +78,6 @@ var printData = function(replyArr, target, templateObject){
 
 <script type="text/javascript">
 $(document).ready(function(){
-   
 var itemboard_noObj = $("#itemboard_no");
 var itemboard_no = itemboard_noObj.val();
 console.log($("#itemboard_no").val());
@@ -332,6 +333,109 @@ function getAllList(){
           }
        });
     }
+     
+     
+		//이미지 슬라이드
+		$(function(){
+	var $container = $('.slideshow'); //슬라이드쇼 전체컨테이너
+	var $slideGroup = $('.slideshow-slides');//슬라이더 그룹
+	var $slides = $slideGroup.find('.slide');//각각의 슬라이더 4개
+	var $nav = $container.find('.slideshow-nav');//네비게이션(prev, next)
+	var $indicator = $container.find('.slideshow-indicator');//인디게이터
+	
+	var currentIndex = 0; //현재 슬라이드의 인덱스를 저장하는 변수
+	var indicatorHTML = '';
+	var timer;
+	
+	$slides.each(function(i){
+		$(this).css({
+			left: 100 * i + '%'
+		});
+		
+		indicatorHTML += '<a href="#">'+(i+1)+'</a>'
+	});
+	
+	$indicator.html(indicatorHTML);
+	
+	//슬라이더 이동함수
+	function goToSlide(index){
+		$slideGroup.animate({
+			left: -100 * index + '%'
+		},/*시간간격*/ 500);
+		currentIndex = index;
+		updateNav();
+	}
+	
+	//인디케이터 이벤트
+	//indicator의 a태그는 원래 있던 태그가 아니라
+	//함수로 만든 태그이기 때문에 click이 아닌
+	//부모인 indicator에 on함수로 이벤트 적용
+	/*$indicator.on('hover','a', function(event){
+		event.preventDefault();
+		//.index : 몇번째 인덱스인지 반환
+		goToSlide($(this).index());
+	});*/
+	$indicator.find('a').hover(function(event){
+		event.preventDefault();
+		goToSlide($(this).index());
+	});
+	//네비게이션 이벤트
+	$nav.find('a').click(function(event){
+		event.preventDefault();
+		if($(this).hasClass('prev')){
+			goToSlide(currentIndex -1);
+		}else{
+			goToSlide(currentIndex +1);
+		}
+		
+		updateNav();
+	})
+	
+	//네비게이션 업데이트 함수
+	function updateNav(){
+		var $navPrev = $nav.find('.prev');
+		var $navNext = $nav.find('.next');
+		
+		if(currentIndex == 0){
+			$navPrev.addClass('disabled');
+		}else{
+			$navPrev.removeClass('disabled');
+		}
+		
+		if(currentIndex == 3){
+			$navNext.addClass('disabled');
+		}else{
+			$navNext.removeClass('disabled');
+		}
+		
+		//해당 인디게이터에게 'active' 클래스 적용
+		$indicator.find('a').removeClass('active')
+			.eq(currentIndex).addClass('active');
+	}
+	
+	//마우스 관련 이벤트
+	$container.on({ //이벤트 여러개 걸때
+		mouseenter : stopTimer,
+		mouseleave : startTimer
+	});
+	
+	//타이머 시작함수
+	function startTimer(){
+		//주기적으로 호출하는 함수
+		timer = setInterval(function(){
+			var nextIndex = (currentIndex + 1) % 4;
+			goToSlide(nextIndex);
+		}, 2000);
+	}
+	
+	//타이머 정지함수
+	function stopTimer(){
+		clearInterval(timer);
+	}
+	
+	updateNav();
+	startTimer();
+});
 });
 </script>
 <style type="text/css">
@@ -355,10 +459,25 @@ function getAllList(){
          <div class="item-detail-wrapper">
             <div class="product-summary-wrapper">
                <div class="product-image-slide">
-                  <c:forEach var="imgList" items="${bean.itemImgList}" begin="0"
+                  <%-- <c:forEach var="imgList" items="${bean.itemImgList}" begin="0"
                      end="0" step="1">
-                     <img class="image" alt="" src="/fleamarket/resources/product/upload${imgList.thum_img}">
-                  </c:forEach>
+                     <img class="image" alt="" src="/fleamarket/resources/product/upload${imgList.big_img}">
+                  </c:forEach> --%>
+                  <div class="slideshow">
+   									<div class="slideshow-slides">
+<!--         							<a href="./" class="slide" id="slide-1"><img src="./img/slide-1.jpg" alt="" width="1600" height="465"></a> -->
+        							<c:forEach var="imgList" items="${bean.itemImgList}" varStatus="i">
+                     		<a href="./" class="slide" id="slide-${i}">
+                     			<img alt="" src="/fleamarket/resources/product/upload${imgList.big_img}" width="434" height="434">
+                     		</a>	
+                  		</c:forEach>
+    								</div>
+    								<div class="slideshow-nav">
+        							<a href="#" class="prev">Prev</a>
+        							<a href="#" class="next">Next</a>
+    								</div>
+    								<div class="slideshow-indicator"></div>
+									</div>
                </div>
                <div class="product-summary">
                   <div class="product-summary">
