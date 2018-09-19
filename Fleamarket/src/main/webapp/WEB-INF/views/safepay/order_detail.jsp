@@ -19,6 +19,8 @@
 </head>
 <body>
 <div class="container">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-7 col-md-8">
   <c:set var="item_no" value="${bean.itemDTO.item_No}"></c:set>
   <input type="hidden"  name="item_no" value="${item_no}"> 
   <h1>주문 상세 내역</h1>
@@ -136,11 +138,10 @@
       </tr>
       
       <tr>
-        <td><b>최종결제금액</b></td>
-        <td class="right_text"><b>
+        <td><h2><b>최종결제금액</b></h2></td>
+        <td class="right_text">
           <c:set var="total" value="${bean.paymentDTO.pay_price}"></c:set>
-          <fmt:formatNumber value="${total}"/>원
-          </b>
+            <h2><b><fmt:formatNumber value="${total}"/>원</b></h2>
         </td>
       </tr>
     </table>
@@ -172,6 +173,8 @@
         <td class="right_text">${bean.deliveryDTO.delivery_contents}</td>
       </tr>
     </table>
+  </div>
+  </div>
   </div>
 
   <!--   버튼 -->

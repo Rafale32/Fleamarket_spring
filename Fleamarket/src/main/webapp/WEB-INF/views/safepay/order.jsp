@@ -27,6 +27,8 @@
 <body>
   <!-- 	주문결제 -->
   <div class="container">
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-7 col-md-8">
   <form action="order" method="post" onsubmit="return payCheck()">
 
     <!--  구매자 이메일 주소 -->
@@ -180,10 +182,10 @@
     </tr>
     <!--  총 결제 금액   -->
     <tr>
-      <td><b>최종결제금액</b></td>
+      <td><h2><b>최종결제금액</b></h2></td>
         <c:set var="total" value="${price+(price*0.03+1000)+deli_fee}"></c:set>
       <td id="total"  class="right_text">
-        <b><fmt:formatNumber value="${total}" />원</b>
+        <h3><b><fmt:formatNumber value="${total}" />원</b></h3>
       </td>
     </tr>
   </table>
@@ -204,11 +206,12 @@
   <table id="pay_table" class="order_table">
     <tr>
       <td class="right_text">
-        <input id="chk" type="checkbox"> 주문 상품정보 및 서비스 이용약관에 동의합니다.
+        <h4><input id="chk" type="checkbox"> 주문 상품정보 및 서비스 이용약관에 동의합니다.</h4>
       </td>
     </tr>
     <tr>
       <td class="right_text">
+        <br>
         <input type="submit" class="btn btn-primary" value="결제하기" />
         <a href="/fleamarket/maindetail/detail?itemboard_no=${bean.itemDTO.itemboard_No}">
         <input type="button" class="btn btn-danger" value="결제취소" />
@@ -219,6 +222,8 @@
   </div>
   
   </form>
+  </div>
+    </div>
 </div>
   <br><br><br>
 </body>

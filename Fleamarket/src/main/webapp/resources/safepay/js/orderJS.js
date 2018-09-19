@@ -115,12 +115,12 @@ function changePoint() {
   
   total = price + fee + deliFee - point;
   var strTotal = setComma(total);
-
   // 히든 인풋 넘길 값
   // 총금액
-
-  $('#total').text(strTotal + '원'); //text
+  $('#total').text(''); //text
+  $('#total').append("<h3><b>"+strTotal+"원</b></h3>");
   document.getElementById('total2').value = parseInt(total); //int
+//  document.getElementById('total').style.font = 'bold px30 궁서체 ';
 
 
   // 계산된 포인트
