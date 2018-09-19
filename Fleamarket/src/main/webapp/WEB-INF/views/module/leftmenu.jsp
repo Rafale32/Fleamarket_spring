@@ -12,11 +12,11 @@
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 <body>
   <div class="container">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
-    
       <c:choose>
         <c:when test="${param.store_Name != null}">
           <div class="btn-group" role="group">
@@ -68,12 +68,12 @@
               <button type="button" class="btn btn-info">판매내역</button>
             </a>
           </div>
-
-          <div class="btn-group" role="group">
-            <a href="#">
-              <button type="button" class="btn btn-info">정산</button>
-            </a>
-          </div>
+          <!-- 미구현 -->
+<!--           <div class="btn-group" role="group"> -->
+<!--             <a href="#"> -->
+<!--               <button type="button" class="btn btn-info">정산</button> -->
+<!--             </a> -->
+<!--           </div> -->
         </c:when>
       </c:choose>
     </div>

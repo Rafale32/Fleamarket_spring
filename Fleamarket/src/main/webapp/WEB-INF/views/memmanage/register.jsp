@@ -16,7 +16,7 @@
 <script src="../resources/memmanage/js/address.js"></script>
 <script src="../resources/memmanage/js/emailcheck.js"></script>
 
-<title>회원가입 화면</title>
+<title>회원가입</title>
 
 </head>
 <body>

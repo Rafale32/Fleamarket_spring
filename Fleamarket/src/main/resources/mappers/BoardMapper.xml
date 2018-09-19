@@ -2,15 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
 <mapper namespace="BoardMapper">
 	<insert id="make" parameterType="BoardDTO">
-		insert into
-		notice(notice_no,notice_title, notice_contents, notice_date,
-		notice_category )
-		values(#{notice_no}, #{notice_title},
-		#{notice_contents}, sysdate, #{notice_category})
+		insert into notice(notice_no,notice_title, notice_contents, notice_date, notice_category )
+		values((select max(notice_no) from notice)+1, #{notice_title}, #{notice_contents}, sysdate, #{notice_category})
 	</insert>
 
 	<select id="noList" resultType="BoardDTO">
