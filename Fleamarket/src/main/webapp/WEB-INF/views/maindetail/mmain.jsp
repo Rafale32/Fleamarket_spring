@@ -17,6 +17,11 @@
 .red{
 color: red;
 }
+
+.img1{
+ width: 250px;
+ height: 220px;
+}
 </style>
 <script>
    function fnMove(seq){
@@ -28,7 +33,7 @@ color: red;
 <body>
   <div class="container">
     <!-- 슬라이더 -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 100%">
 
       <!--페이지-->
       <ol class="carousel-indicators">
@@ -94,7 +99,7 @@ color: red;
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
           <c:forEach var="img" items="${reList.imgList}" begin="0" end="0">
-            <img src="/fleamarket/resources/product/upload${img.thum_img}" alt="추천상품이미지">
+            <img src="/fleamarket/resources/product/upload${img.big_img}" alt="추천상품이미지">
           </c:forEach>
           <div class="caption">
               <h4>${reList.itemboard_title}</h4>
@@ -136,14 +141,14 @@ color: red;
     <!-- 카테고리별 인기상품 -->
     <c:forEach var="list" items="${bean.hotList}" varStatus="status">
       <h4 style="display:inline-block;" id="cate${status.count}">${list.category_title}</h4>
-      <a href="/fleamarket/maindetail/categoryitem?category_no=${list.category_no}">전체보기</a>
+      <a href="/fleamarket/maindetail/categoryitem?category_title=${list.category_title}">전체보기</a>
       <div class="row">
         <c:forEach var="itemList" items="${list.hotList}">
         <a href="/fleamarket/maindetail/detail?itemboard_no=${itemList.itemboard_no}">
           <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
               <c:forEach var="img" items="${itemList.imgList}" begin="0" end="0">
-                <img class="img" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.thum_img}">
+                <img class="img1" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.big_img}">
               </c:forEach>
             <div class="caption">
                 <h4>${itemList.itemboard_title}</h4>

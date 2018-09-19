@@ -14,12 +14,10 @@ color: red;
 </style>
 </head>
 <body>
+
 	<div class="container">
-		<c:forEach var="list" items="${bean.categoryItemList}" begin="0"
-			end="0">
-			<h2>${list.category_title}</h2>
+			<h2>${title}</h2>
 			<br><br>
-		</c:forEach>
 		<div class="row">
     <c:forEach var="reList" items="${bean.categoryItemList}">
     <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">

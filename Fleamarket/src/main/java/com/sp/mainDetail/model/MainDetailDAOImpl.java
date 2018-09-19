@@ -115,8 +115,8 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	}
 
 	@Override
-	public List<ItemDetailDTO> categoryItem(Integer category_no) throws Exception {
-		return session.selectList(namespace+".categoryItem", category_no);
+	public List<ItemDetailDTO> categoryItem(String category_title) throws Exception {
+		return session.selectList(namespace+".categoryItem", category_title);
 	}
 	
 	

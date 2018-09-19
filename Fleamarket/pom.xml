@@ -167,7 +167,6 @@
 		</dependency>
 
 		<!-- END DB SETTING -->
-
 		<dependency><!-- JSON LibrarY -->
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

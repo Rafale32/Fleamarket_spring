@@ -52,6 +52,8 @@ div {
 	position: relative;
 	float: left;
 	margin-right: 30px;
+	width: 434px;
+	height: 434px;
 }
 
 .product-summary-wrapper .product-summary {
