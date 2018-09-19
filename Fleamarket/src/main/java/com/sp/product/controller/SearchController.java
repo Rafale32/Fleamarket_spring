@@ -46,6 +46,26 @@ public class SearchController {
 		
 	}
 	
+	@RequestMapping(value="/searchall", method = RequestMethod.GET)
+	public void searchAllGet(@RequestParam("searchSubj")String subj, Model model)throws Exception{
+		//int startRow = 0 ; //시작 로우
+		//int rowSize = 6 ;
+		startRow = 0;
+		Bean bean = new Bean();
+		
+		List<ItemDTO> itemDTO =  service.searchAll(subj, startRow, rowSize); //itemboard_No, thumImg , itemboard_Local  ,item_Price , itemboard_Title
+		
+		bean.setItemList(itemDTO);
+		
+		bean.setSearchSubj(subj);
+		
+		model.addAttribute("bean", bean);
+		
+		startRow = rowSize; 
+		
+		
+	}
+	
 	
 	
 	
