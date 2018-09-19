@@ -33,6 +33,7 @@ import com.sp.util.UploadFileUtils;
 @RequestMapping("/productajax/*")
 public class ProductAjax {
 	
+	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
