@@ -71,7 +71,7 @@
 		INSERT  into item(item_no, item_price, item_state, item_amount, item_delivery_b, 
 		item_delivery_state)
 		  values (
-		    (select max(ITEM_NO) from item)+1,
+		    (select nvl(max(ITEM_NO)+1,1) from item),
 		    #{item_Price },
 		    #{item_State },
 		    #{item_Amount },
@@ -95,7 +95,7 @@
 		    0,
 		    #{itemboard_Change_b },
 		    (select max(ITEM_NO) from item),
-		    (select max(itemboard_no) from itemboard)+1,
+		    (select nvl(max(itemboard_no)+1,1) from itemboard),
 		    (select st.store_no from member mb inner join store st 
 		      on mb.member_no = st.MEMBER_NO where mb.member_email = #{member_email }),
 		    0
@@ -105,7 +105,7 @@
 
 	<insert id="insertImgs" parameterType="ItemImg">
 		insert into itemimg(img_no, itemboard_no, big_img, thum_img ) values(
-		  (select max(IMG_NO) from itemimg)+1,
+		  (select nvl(max(IMG_NO)+1,1) from itemimg),
 		  (select max(itemboard_no) from itemboard),
 		  #{big_Img },
 		  #{thum_Img }
@@ -114,8 +114,8 @@
 	
 	
 	<insert id="insertTag" parameterType="String">
-		insert into tag (tag_no, TAG_NAME, itemboard_no) 
-		values((select max(TAG_NO) from tag)+1,#{tag },
+		insert into tag (tag_no, TAG_NAME, itemboard_no)
+		values((select nvl(max(TAG_NO)+1,1) from tag),#{tag },
 		(select max(ITEMBOARD_NO) from ITEMBOARD))
 	</insert>	
 	

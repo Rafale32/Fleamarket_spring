@@ -14,21 +14,7 @@
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-  window.onload = function() {
-    var header = document.getElementById('purchaseDetermin');
-    header.onclick = function() {
-      var con_test = confirm("찜 항목을 삭제 하시겠습니까?");
-      if (con_test == true) {
-        alert("삭제 되었습니다.");
-      } else if (con_test == false) {
-        alert("취소 되었습니다.");
-        return false;
-      }
-    };
 
-  };
-</script>
 <style type="text/css">
 table td {
   vertical-align: middle !important;

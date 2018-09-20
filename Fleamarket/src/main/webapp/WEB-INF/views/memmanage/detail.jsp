@@ -34,7 +34,7 @@ h3{
   text-align: center;
 }
 .infoTable{
-width: 300px !important;
+width: 500px !important;
 margin: 0 auto;
 }
 .infoTable td{
@@ -72,6 +72,10 @@ margin: 0 auto;
         <tr>
           <th>상세주소</th>
           <td>${memManageDTO.member_address2 }</td>
+        </tr>
+        <tr>
+          <th>포인트</th>
+          <td>${memManageDTO.member_point }</td>
         </tr>
         <tr>
         <td colspan="2"></td>

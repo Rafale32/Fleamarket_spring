@@ -29,8 +29,8 @@
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 
-<script type="text/javascript"
-  src="../resources/payment/js/cangeDeliveryst_gy.js"></script>
+<!-- <script type="text/javascript" -->
+<!--   src="../resources/payment/js/cangeDeliveryst_gy.js"></script> -->
 <style type="text/css">
 .itemStateImg{
   width: 100px;
