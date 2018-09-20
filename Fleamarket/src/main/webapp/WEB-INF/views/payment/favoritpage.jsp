@@ -10,7 +10,7 @@
 <link href="../resources/boot/bootstrap/css/bootstrap.min.css"
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
- <script type="text/javascript">
+<!--  <script type="text/javascript">
   window.onload = function() {
 	  var header = document.getElementById('purchaseDetermin');
 		 header.onclick = function (){
@@ -26,12 +26,12 @@
 	  
   };
   
-  </script>
+  </script> -->
 </head>
 <body>
 	<table id="favorit_list_table" frame="void" class="table">
 	
-		<c:forEach var="p" items="${list}">
+		<c:forEach var="p" items="${list3}">
 		<tr>
 			<td>
 			<img alt="물품임시이미지"
@@ -79,5 +79,7 @@
 			</c:if>
 		</ul>
 	</div>
+	
+	
 </body>
 </html>

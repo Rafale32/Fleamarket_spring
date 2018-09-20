@@ -96,6 +96,9 @@ public class PaymentDAOImpl implements PaymentDAO{
 	@Override
 	public List<PuerchaseDTO_gy> listFavorit(DeliveryDTO_gy dto, Criteria2 cri) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("호출eryearerqwger");
+		System.out.println(dto.getMember_email() + "메엠버 이메");
+		System.out.println("결과: " + session.selectList(namespace + ".favoritList", dto,new RowBounds(cri.getPageStart() , cri.getPerPageNum())));
 		return session.selectList(namespace + ".favoritList", dto,new RowBounds(cri.getPageStart() , cri.getPerPageNum()));
 	}
 

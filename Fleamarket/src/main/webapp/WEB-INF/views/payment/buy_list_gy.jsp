@@ -29,8 +29,8 @@
   rel="stylesheet" type="text/css" />
 <script src="../resources/boot/bootstrap/js/bootstrap.min.js"></script>
 
-<script type="text/javascript"
-  src="../resources/payment/js/cangeDeliveryst_gy.js"></script>
+<!-- <script type="text/javascript"
+  src="../resources/payment/js/cangeDeliveryst_gy.js"></script> -->
 <style type="text/css">
 .itemStateImg{
   width: 100px;
@@ -55,7 +55,7 @@ table td {
         <td>기능</td>
       </tr>
       
-      <c:forEach var="p" items="${list}">
+      <c:forEach var="p" items="${list4}">
 <%--       <tr><td colspan="6">${p.store_name }</td></tr> --%>
         <tr>
           <!--  상품이미지 -->

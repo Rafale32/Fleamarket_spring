@@ -101,7 +101,15 @@ public class MainDetailDAOImpl implements MainDetailDAO{
 	//Fav
 	@Override
 	public void addFav(FavDTO fav) throws Exception {
-		session.insert(namespace+".addFav", fav);
+		try {
+			session.insert(namespace+".addFav", fav);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		
 	}
 
 	@Override

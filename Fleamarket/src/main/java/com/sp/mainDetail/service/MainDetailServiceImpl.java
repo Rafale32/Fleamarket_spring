@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sp.mainDetail.domain.CategoryDTO;
 import com.sp.mainDetail.domain.FavDTO;
@@ -198,6 +199,7 @@ public class MainDetailServiceImpl implements MainDetailService {
 	
 	//Fav
 	@Override
+	@Transactional
 	public void addFav(FavDTO fav) throws Exception {
 		dao.addFav(fav);
 	}

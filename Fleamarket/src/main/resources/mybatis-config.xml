@@ -4,6 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+	
+
 	<typeAliases>
 		<package name="com.sp.board.domain"/>
 		<package name="com.sp.mainDetail.domain"/>
@@ -12,4 +14,6 @@
 		<package name="com.sp.product.domain"/>
 		<package name="com.sp.safepay.domain"/>
 	</typeAliases>
+	
+	
 </configuration>
