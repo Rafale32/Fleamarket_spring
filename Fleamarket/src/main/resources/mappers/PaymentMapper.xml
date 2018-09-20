@@ -6,166 +6,177 @@
 
 <mapper namespace="PaymentMapper">
 
-	<select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
-		<![CDATA[	  
-			select Ite.Itemboard_Title, I.Item_Delivery_State,
-			I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
-			S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
- 		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
- 		 ,pay p
-		where O.Member_No = M.Member_No
-  		and O.Item_No = I.Item_No
- 		 and I.Item_No = Ite.Item_No
- 		 and Ite.Store_No = S.Store_No
- 		 and Img.Itemboard_No = Ite.Itemboard_No
- 		 and P.Oorder_No = O.Oorder_No
- 		 ]]>
- 	and M.Member_Email = #{member_email}
-	</select>
-	
-	<select id="puerchasecounting" parameterType="DeliveryDTO_gy" resultType="integer">
-		<![CDATA[	  
-		select count(*)
- 		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
- 		 ,pay p
-		where O.Member_No = M.Member_No
-  		and O.Item_No = I.Item_No
- 		 and I.Item_No = Ite.Item_No
- 		 and Ite.Store_No = S.Store_No
- 		 and Img.Itemboard_No = Ite.Itemboard_No
- 		 and P.Oorder_No = O.Oorder_No
- 		 ]]>
- 		and M.Member_Email = #{member_email}
-	</select>
-	
-	<update id="perchasedeliveryupdate" parameterType="DeliveryDTO_gy">
-		<![CDATA[
-		update Item set Item_Delivery_State = 4 where Item_No = #{item_no}
-		]]>
-	</update>
-	
-	<!-- insert alram -->
+   <select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+      <![CDATA[     
+         select Ite.Itemboard_Title, I.Item_Delivery_State,
+         I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
+         S.Store_Name, P.Pay_Date,S.Store_No
+        from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
+        ,pay p
+      where O.Member_No = M.Member_No
+        and O.Item_No = I.Item_No
+        and I.Item_No = Ite.Item_No
+        and Ite.Store_No = S.Store_No
+        and Img.Itemboard_No = Ite.Itemboard_No
+        and P.Oorder_No = O.Oorder_No
+        ]]>
+    and M.Member_Email = #{member_email}
+   </select>
+   
+   <select id="puerchasecounting" parameterType="DeliveryDTO_gy" resultType="integer">
+      <![CDATA[     
+      select count(*)
+        from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
+        ,pay p
+      where O.Member_No = M.Member_No
+        and O.Item_No = I.Item_No
+        and I.Item_No = Ite.Item_No
+        and Ite.Store_No = S.Store_No
+        and Img.Itemboard_No = Ite.Itemboard_No
+        and P.Oorder_No = O.Oorder_No
+        ]]>
+       and M.Member_Email = #{member_email}
+   </select>
+   
+   <update id="perchasedeliveryupdate" parameterType="DeliveryDTO_gy">
+      <![CDATA[
+      update Item set Item_Delivery_State = 4 where Item_No = #{item_no}
+      ]]>
+   </update>
+   
+   <!-- insert alram -->
 
-	<insert id="registerPerchaseAlram" parameterType="PuerchaseDTO_gy">
-		<![CDATA[
-		insert into 
-		Inform(INFORM_NO,
-		ITEM_NO,
-		ITEMBOARD_NO,
-		INFORM_DATE,
-		INFORM_CHECK_B,
-		INFORM_CONTENTS)
-		Values ((select nvl(max(INFORM_NO)+1,1)from inform),
-		#{item_no},
-		#{itemboard_no},
-		sysdate,
-		1,
-		#{inform_contents}
-		)
-		]]>
-	</insert> 
-	
-	
-	
-	<select id="SellList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
-		<![CDATA[
-		select Ite.Itemboard_Title, I.Item_Delivery_State,
-		I.Item_Price, I.Item_No,Ite.Itemboard_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date,M.Member_Email,S.Store_No
-		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
-		where O.Item_No = I.Item_No
-		and I.Item_No = Ite.Item_No
-		and Ite.Store_No = S.Store_No
-		and S.Member_No = M.Member_No
-		and Ite.Itemboard_No = Img.Itemboard_No
-		and P.Oorder_No = O.Oorder_No
-		]]>
-		and M.Member_Email = #{member_email} 
-	</select>
-	
-	<!-- 판매내역 카운팅 -->
-	<select id="SellListcounting" parameterType="DeliveryDTO_gy" resultType="integer">
-		<![CDATA[	  
-		select count(*)
-		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
-		where O.Item_No = I.Item_No
-		and I.Item_No = Ite.Item_No
-		and Ite.Store_No = S.Store_No
-		and S.Member_No = M.Member_No
-		and Ite.Itemboard_No = Img.Itemboard_No
-		and P.Oorder_No = O.Oorder_No
-		]]>
-		and M.Member_Email = #{member_email} 
-	</select>
-	
-	<!-- 판매승인버튼 편의상 2라고씀 -->
-	<update id="perchasedeliveryupdate2" parameterType="DeliveryDTO_gy">
-	<![CDATA[
-		update Item set Item_Delivery_State = 3 where Item_No = #{item_no}
-		]]>
-	</update>
-	
-	<select id="SearchMystore" parameterType="DeliveryDTO_gy" resultType="MystoreDTO_gy">
-	Select S.Store_No,S.Store_Name, M.Member_Email, S.Store_Contents from Store s, Member m
-	where S.Member_No = m.Member_No
-	and M.Member_Email = #{member_email}
-	</select>
-	
-	<select id="MystoreReview" parameterType="MystoreDTO_gy" resultType="MystoreReviewDTO_gy">
-	Select R.Store_No,P.Pay_Date,R.Review_Contents ,S.Store_Name,M.Member_Email
-	,R.Review_Star, M.Member_No, M.Member_Name , Ite.Itemboard_Title,Img.Thum_Img
-	,I.Item_No
-  	From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
-	Itemimg img
-	where R.Store_No = S.Store_No
-	and P.Pay_No = R.Pay_No
-	and P.Oorder_No = O.Oorder_No
-	and O.Item_No = I.Item_No
-	and I.Item_No = Ite.Item_No
-	and Ite.Itemboard_No =Img.Itemboard_No
-	and O.Member_No = M.Member_No
-	and S.Store_Name = #{Store_Name}
-	</select>
-	
-	<select id="MystoreReviewCounting" parameterType="MystoreDTO_gy" resultType="integer">
-	Select count(*)
-	From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
-	Itemimg img
-	where R.Store_No = S.Store_No
-	and P.Pay_No = R.Pay_No
-	and P.Oorder_No = O.Oorder_No
-	and O.Item_No = I.Item_No
-	and I.Item_No = Ite.Item_No
-	and Ite.Itemboard_No =Img.Itemboard_No
-	and O.Member_No = M.Member_No
-	and S.Store_Name = #{Store_Name}
-	</select>
-	
-	<!-- favorit -->
-	
-	<select id="favoritList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
-	 select Ite.Itemboard_Title, I.Item_Delivery_State,
-	I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
- 	Img.Thum_Img,ite.itemboard_local
- 	from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
-	where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
-	and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
-	and m.MEMBER_NO = f.MEMBER_NO
-	and i.ITEM_NO = ite.ITEMBOARD_NO
-	and M.Member_Email = #{member_email} 
-	</select>
-	
-	<delete id="deletefavorit" parameterType="PuerchaseDTO_gy">
-	DELETE from FAV where ITEMBOARD_NO = #{itemboard_no}
-	</delete>
-	
-	
-	
-	
-	<!-- alram_section -->
-	
-	<select id="makeSearcharam" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
-	select Ite.Itemboard_Title, I.Item_Delivery_State,
+   <insert id="registerPerchaseAlram" parameterType="PuerchaseDTO_gy">
+      <![CDATA[
+      insert into 
+      Inform(INFORM_NO,
+      ITEM_NO,
+      ITEMBOARD_NO,
+      INFORM_DATE,
+      INFORM_CHECK_B,
+      INFORM_CONTENTS)
+      Values ((select nvl(max(INFORM_NO)+1,1)from inform),
+      #{item_no},
+      #{itemboard_no},
+      sysdate,
+      1,
+      #{inform_contents}
+      )
+      ]]>
+   </insert> 
+   
+   
+   
+   <select id="SellList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+      <![CDATA[
+      select Ite.Itemboard_Title, I.Item_Delivery_State,
+      I.Item_Price, I.Item_No,Ite.Itemboard_No,
+      S.Store_Name, P.Pay_Date,M.Member_Email,S.Store_No
+      from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
+      where O.Item_No = I.Item_No
+      and I.Item_No = Ite.Item_No
+      and Ite.Store_No = S.Store_No
+      and S.Member_No = M.Member_No
+      and Ite.Itemboard_No = Img.Itemboard_No
+      and P.Oorder_No = O.Oorder_No
+      ]]>
+      and M.Member_Email = #{member_email} 
+   </select>
+   
+   <!-- 판매내역 카운팅 -->
+   <select id="SellListcounting" parameterType="DeliveryDTO_gy" resultType="integer">
+      <![CDATA[     
+      select count(*)
+      from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
+      where O.Item_No = I.Item_No
+      and I.Item_No = Ite.Item_No
+      and Ite.Store_No = S.Store_No
+      and S.Member_No = M.Member_No
+      and Ite.Itemboard_No = Img.Itemboard_No
+      and P.Oorder_No = O.Oorder_No
+      ]]>
+      and M.Member_Email = #{member_email} 
+   </select>
+   
+   <!-- 판매승인버튼 편의상 2라고씀 -->
+   <update id="perchasedeliveryupdate2" parameterType="DeliveryDTO_gy">
+   <![CDATA[
+      update Item set Item_Delivery_State = 3 where Item_No = #{item_no}
+      ]]>
+   </update>
+   
+   <select id="SearchMystore" parameterType="DeliveryDTO_gy" resultType="MystoreDTO_gy">
+   Select S.Store_No,S.Store_Name, M.Member_Email, S.Store_Contents from Store s, Member m
+   where S.Member_No = m.Member_No
+   and M.Member_Email = #{member_email}
+   </select>
+   
+   <select id="MystoreReview" parameterType="MystoreDTO_gy" resultType="MystoreReviewDTO_gy">
+   Select R.Store_No,P.Pay_Date,R.Review_Contents ,S.Store_Name,M.Member_Email
+   ,R.Review_Star, M.Member_No, M.Member_Name , Ite.Itemboard_Title,ite.itemboard_no
+   ,I.Item_No
+     From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
+   Itemimg img
+   where R.Store_No = S.Store_No
+   and P.Pay_No = R.Pay_No
+   and P.Oorder_No = O.Oorder_No
+   and O.Item_No = I.Item_No
+   and I.Item_No = Ite.Item_No
+   and Ite.Itemboard_No =Img.Itemboard_No
+   and O.Member_No = M.Member_No
+   and S.Store_Name = #{Store_Name}
+   </select>
+   
+   <select id="MystoreReviewCounting" parameterType="MystoreDTO_gy" resultType="integer">
+   Select count(*)
+   From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
+   Itemimg img
+   where R.Store_No = S.Store_No
+   and P.Pay_No = R.Pay_No
+   and P.Oorder_No = O.Oorder_No
+   and O.Item_No = I.Item_No
+   and I.Item_No = Ite.Item_No
+   and Ite.Itemboard_No =Img.Itemboard_No
+   and O.Member_No = M.Member_No
+   and S.Store_Name = #{Store_Name}
+   </select>
+   
+   <!-- favorit -->
+   
+   <select id="favoritList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
+    <![CDATA[
+    select  Distinct Ite.Itemboard_Title, I.Item_Delivery_State,ite.Itemboard_no,
+   I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,ite.itemboard_local
+    from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
+   where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
+   and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
+   and m.MEMBER_NO = f.MEMBER_NO
+   and i.ITEM_NO = ite.ITEMBOARD_NO
+   and M.Member_Email = #{member_email} 
+   ]]>    
+   </select>
+   
+   <select id="favoritcount" parameterType="DeliveryDTO_gy" resultType="integer">
+    select count(*)
+    from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
+   where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
+   and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
+   and m.MEMBER_NO = f.MEMBER_NO
+   and i.ITEM_NO = ite.ITEMBOARD_NO
+   and M.Member_Email = #{member_email} 
+   </select>
+   
+   <delete id="deletefavorit" parameterType="PuerchaseDTO_gy">
+   DELETE from FAV where ITEMBOARD_NO = #{itemboard_no}
+   </delete>
+   
+   
+   
+   
+   <!-- alram_section -->
+   
+   <select id="makeSearcharam" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
+   select Ite.Itemboard_Title, I.Item_Delivery_State,
             I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
             S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
           from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
@@ -180,16 +191,25 @@
      <foreach collection="member_list" item="MystoreDTO_gy" index="index" separator="," open="(" close=")">
      #{itemboard_no}
      </foreach>
-	</select>
-	
-	<select id="makearamsecond" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
-	select *
-	from Member m , Store s,Itemboard ite
-	where M.Member_No =S.Member_No
-	and S.Store_No = Ite.Store_No
-	and M.Member_Email = #{member_email}
-	</select>
-	
+   </select>
+   
+   <select id="makearamsecond" parameterType="PuerchaseDTO_gy" resultType="MystoreDTO_gy">
+   select *
+   from Member m , Store s,Itemboard ite
+   where M.Member_No =S.Member_No
+   and S.Store_No = Ite.Store_No
+   and M.Member_Email = #{member_email}
+   </select>
+   
+   <select id="onlyoneimag" parameterType="PuerchaseDTO_gy" resultType="ImagelistDTO">
+      <![CDATA[     
+      select Distinct Ite.Itemboard_No, Img.Thum_Img from Itemboard ite , Itemimg img
+        where Ite.Itemboard_No = Img.Itemboard_No
+        and Ite.Itemboard_No = #{itemboard_no}
+        and Rownum = 1
+      ]]>
+   </select>
+   
 
 
 </mapper>

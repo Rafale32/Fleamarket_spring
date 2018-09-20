@@ -32,11 +32,11 @@ public class PageMaker {
   private void calcData() {
 
     endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
-
+    System.out.println(endPage + " 엔인펜");
     startPage = (endPage - displayPageNum) + 1;
 
     int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
-
+    System.out.println(tempEndPage + " 템엔페");
     if (endPage > tempEndPage) {
       endPage = tempEndPage;
     }

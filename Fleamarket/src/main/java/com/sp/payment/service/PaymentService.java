@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
+import com.sp.payment.domain.ImagelistDTO;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
 import com.sp.payment.domain.PuerchaseDTO_gy;
@@ -37,6 +38,10 @@ public interface PaymentService {
 	public int sellListcounting(DeliveryDTO_gy dto) throws Exception;
 	
 	public int mystoreReviewCounting(MystoreDTO_gy sdto) throws Exception;
+	
+	public int favCounting(DeliveryDTO_gy dto) throws Exception;
+	
+	public ImagelistDTO listimag(PuerchaseDTO_gy dto22)throws Exception;
 	
 	//insert_inform
 	

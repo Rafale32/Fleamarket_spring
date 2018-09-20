@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
+import com.sp.payment.domain.ImagelistDTO;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
 import com.sp.payment.domain.PuerchaseDTO_gy;
@@ -72,6 +73,8 @@ public class PaymentDAOImpl implements PaymentDAO{
 	@Override
 	public int puerchasecounting(DeliveryDTO_gy dto) throws Exception {
 		// TODO Auto-generated method stub
+		
+		System.out.println("호오출");
 		return session.selectOne(namespace + ".puerchasecounting", dto);
 	}
 
@@ -106,6 +109,18 @@ public class PaymentDAOImpl implements PaymentDAO{
 	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception {
 		session.delete(namespace + ".deletefavorit", pdto);
 		
+	}
+
+	@Override
+	public int favListcounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".favoritcount", dto);
+	}
+
+	@Override
+	public ImagelistDTO listimag(PuerchaseDTO_gy dto22) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+ ".onlyoneimag", dto22);
 	}
 	
 }
