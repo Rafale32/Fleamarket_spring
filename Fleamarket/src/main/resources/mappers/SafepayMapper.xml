@@ -23,7 +23,8 @@
   
   <!-- 주문번호 가져오기 -->
   <select id="selectOrderNo" resultType="int">
-    select max(oorder_no) from oorder
+<!--     select max(oorder_no) from oorder -->
+    select nvl(max(oorder_no)+1,1) from oorder
   </select>
   
   <!-- 결제 정보 넘길 때 -->
@@ -41,7 +42,7 @@
     insert into pay
     (pay_no, pay_price, pay_usepoint, pay_date, oorder_no)
     values
-    ((select max(pay_no) from pay)+1, #{pay_price}, #{pay_usepoint}, sysdate, #{oorder_no})
+    ((select nvl(max(pay_no)+1,1) from pay), #{pay_price}, #{pay_usepoint}, sysdate, #{oorder_no})
   </insert>
   
   <!-- 배송정보입력 -->
@@ -50,7 +51,7 @@
     (delivery_no, delivery_name, delivery_ph, delivery_address,
     delivery_address2, delivery_contents, oorder_no)
     values
-    ((select max(delivery_no) from delivery)+1,
+    ((select nvl(max(delivery_no)+1,1) from delivery),
     #{delivery_name},#{delivery_ph},#{delivery_address},#{delivery_address2},
     #{delivery_contents},#{oorder_no})
   </insert>
