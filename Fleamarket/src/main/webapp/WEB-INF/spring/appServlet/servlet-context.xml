@@ -58,9 +58,13 @@
 	<!-- uploadPath 로 어노테이션 이용해서 경로 가져오기 위해 아래 처럼 설정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg
+<<<<<<< HEAD
 
 			value="C:/Users/CJH/git/Fleamarket_spring/Fleamarket/src/main/webapp/resources/product/upload"></beans:constructor-arg>
 
+=======
+			value="C:\Users\juwpk\git\Fleamarket_spring\Fleamarket\src\main\webapp\resources\product\upload"></beans:constructor-arg>
+>>>>>>> refs/remotes/origin/jw
 	</beans:bean>
 	<!--END 파일 업로드 관련 설정 -->
 	

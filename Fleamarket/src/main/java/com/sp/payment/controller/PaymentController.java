@@ -274,6 +274,7 @@ public class PaymentController {
        int a = service.puerchasecounting(dto2);
          pagemaker.setTotalCount(a);
          model.addAttribute("pageMaker",pagemaker);
+<<<<<<< HEAD
          
         
    }
@@ -312,5 +313,43 @@ public class PaymentController {
       System.out.println("�젙留� �씠履쎌쑝濡� �샃�땲源�?");
       
    }
+=======
+	}
+	
+	@RequestMapping(value = "/favoritpage", method = RequestMethod.POST)
+	public void favoritdeletepage(Model model,HttpSession session,
+			Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
+		System.out.println(pdto.getItemboard_no() + " itemboard_no");
+		service.deletfavorit(pdto);
+		
+		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
+	      MemManageDTO dto = (MemManageDTO) session.getAttribute("member");
+	      String loginEmail = dto.getMember_email();
+	      
+	      System.out.println(loginEmail);
+	      dto2.setMember_email(loginEmail);
+	      List<PuerchaseDTO_gy> list   = service.listFavorit(dto2,cri);
+	      
+
+	      
+	      model.addAttribute("list", list);
+	       PageMaker pagemaker = new PageMaker();
+	       pagemaker.setCri(cri);
+	       int a = service.puerchasecounting(dto2);
+	        pagemaker.setTotalCount(a);
+	        model.addAttribute("pageMaker",pagemaker);
+	}
+		
+		
+	
+	
+	
+	
+/*	@RequestMapping(value = "/img/*", method = RequestMethod.GET)
+	public void img(Model model,HttpSession session) throws Exception {
+		System.out.println("�젙留� �씠履쎌쑝濡� �샃�땲源�?");
+		
+	}
+>>>>>>> refs/remotes/origin/jw
 */
 }
