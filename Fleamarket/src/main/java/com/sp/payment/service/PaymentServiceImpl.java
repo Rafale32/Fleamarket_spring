@@ -104,5 +104,11 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	}
 
+	@Override
+	public int favCounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.favListcounting(dto);
+	}
+
 
 }

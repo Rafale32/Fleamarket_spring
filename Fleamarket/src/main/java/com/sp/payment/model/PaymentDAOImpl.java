@@ -72,6 +72,8 @@ public class PaymentDAOImpl implements PaymentDAO{
 	@Override
 	public int puerchasecounting(DeliveryDTO_gy dto) throws Exception {
 		// TODO Auto-generated method stub
+		
+		System.out.println("호오출");
 		return session.selectOne(namespace + ".puerchasecounting", dto);
 	}
 
@@ -106,6 +108,12 @@ public class PaymentDAOImpl implements PaymentDAO{
 	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception {
 		session.delete(namespace + ".deletefavorit", pdto);
 		
+	}
+
+	@Override
+	public int favListcounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".favoritcount", dto);
 	}
 	
 }

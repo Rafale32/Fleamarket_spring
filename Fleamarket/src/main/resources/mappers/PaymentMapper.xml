@@ -155,6 +155,16 @@
 	and M.Member_Email = #{member_email} 
 	</select>
 	
+	<select id="favoritcount" parameterType="DeliveryDTO_gy" resultType="integer">
+	 select count(*)
+ 	from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
+	where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
+	and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
+	and m.MEMBER_NO = f.MEMBER_NO
+	and i.ITEM_NO = ite.ITEMBOARD_NO
+	and M.Member_Email = #{member_email} 
+	</select>
+	
 	<delete id="deletefavorit" parameterType="PuerchaseDTO_gy">
 	DELETE from FAV where ITEMBOARD_NO = #{itemboard_no}
 	</delete>

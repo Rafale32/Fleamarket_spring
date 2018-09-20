@@ -44,4 +44,6 @@ public interface PaymentDAO {
 	
 	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception;
 	
+	public int favListcounting(DeliveryDTO_gy dto) throws Exception;
+	
 }

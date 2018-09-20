@@ -271,8 +271,16 @@ public class PaymentController {
       //페이징 부분
        PageMaker pagemaker = new PageMaker();
        pagemaker.setCri(cri);
-       int a = service.puerchasecounting(dto2);
+       int a = service.favCounting(dto2);
+       
+       System.out.println(a + " 인트 서비스 펄체 컨넘");
+       
          pagemaker.setTotalCount(a);
+         
+         System.out.println(pagemaker.getStartPage() + "스타페");
+         System.out.println(pagemaker.getEndPage() + " 엔드페");
+         
+         
          model.addAttribute("pageMaker",pagemaker);
          
         
@@ -297,8 +305,11 @@ public class PaymentController {
       model.addAttribute("list3", list);
        PageMaker pagemaker = new PageMaker();
        pagemaker.setCri(cri);
-       int a = service.puerchasecounting(dto2);
+       int a = service.favCounting(dto2);
         pagemaker.setTotalCount(a);
+        
+        System.out.println(pagemaker.getStartPage() + "스타페");
+        System.out.println(pagemaker.getEndPage() + " 엔드페");
         model.addAttribute("pageMaker",pagemaker);
    }
       

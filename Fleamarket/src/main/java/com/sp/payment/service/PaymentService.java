@@ -38,6 +38,8 @@ public interface PaymentService {
 	
 	public int mystoreReviewCounting(MystoreDTO_gy sdto) throws Exception;
 	
+	public int favCounting(DeliveryDTO_gy dto) throws Exception;
+	
 	//insert_inform
 	
 	public void registerPerchaseAlram(PuerchaseDTO_gy pdto) throws Exception;
