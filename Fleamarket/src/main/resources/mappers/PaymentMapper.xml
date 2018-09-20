@@ -10,7 +10,7 @@
 		<![CDATA[	  
 			select Ite.Itemboard_Title, I.Item_Delivery_State,
 			I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
-			S.Store_Name, Img.Thum_Img, P.Pay_Date,S.Store_No
+			S.Store_Name, P.Pay_Date,S.Store_No
  		 from Oorder o, Member m, Store s , item i, Itemboard ite, Itemimg img
  		 ,pay p
 		where O.Member_No = M.Member_No
@@ -71,7 +71,7 @@
 		<![CDATA[
 		select Ite.Itemboard_Title, I.Item_Delivery_State,
 		I.Item_Price, I.Item_No,Ite.Itemboard_No,
-		S.Store_Name, Img.Thum_Img, P.Pay_Date,M.Member_Email,S.Store_No
+		S.Store_Name, P.Pay_Date,M.Member_Email,S.Store_No
 		from item i, Oorder o, Member m, Itemboard ite,Store s , Itemimg img,Pay p
 		where O.Item_No = I.Item_No
 		and I.Item_No = Ite.Item_No
@@ -113,7 +113,7 @@
 	
 	<select id="MystoreReview" parameterType="MystoreDTO_gy" resultType="MystoreReviewDTO_gy">
 	Select R.Store_No,P.Pay_Date,R.Review_Contents ,S.Store_Name,M.Member_Email
-	,R.Review_Star, M.Member_No, M.Member_Name , Ite.Itemboard_Title,Img.Thum_Img
+	,R.Review_Star, M.Member_No, M.Member_Name , Ite.Itemboard_Title,ite.itemboard_no
 	,I.Item_No
   	From Review r, Store s, pay p, Oorder o, Member m, item i, Itemboard ite,
 	Itemimg img
@@ -144,15 +144,16 @@
 	<!-- favorit -->
 	
 	<select id="favoritList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
-	 select Ite.Itemboard_Title, I.Item_Delivery_State,
-	I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,
- 	Img.Thum_Img,ite.itemboard_local
+	 <![CDATA[
+	 select  Distinct Ite.Itemboard_Title, I.Item_Delivery_State,ite.Itemboard_no,
+	I.Item_Price, I.Item_No, M.Member_Email, Ite.Itemboard_No,ite.itemboard_local
  	from fav f, ITEMBOARD ite, ITEMIMG img, MEMBER m, ITEM i
 	where f.ITEMBOARD_NO = ite.ITEMBOARD_NO
 	and img.ITEMBOARD_NO = ite.ITEMBOARD_NO
 	and m.MEMBER_NO = f.MEMBER_NO
 	and i.ITEM_NO = ite.ITEMBOARD_NO
 	and M.Member_Email = #{member_email} 
+	]]> 	
 	</select>
 	
 	<select id="favoritcount" parameterType="DeliveryDTO_gy" resultType="integer">
@@ -198,6 +199,15 @@
 	where M.Member_No =S.Member_No
 	and S.Store_No = Ite.Store_No
 	and M.Member_Email = #{member_email}
+	</select>
+	
+	<select id="onlyoneimag" parameterType="PuerchaseDTO_gy" resultType="ImagelistDTO">
+		<![CDATA[	  
+		select Distinct Ite.Itemboard_No, Img.Thum_Img from Itemboard ite , Itemimg img
+  		where Ite.Itemboard_No = Img.Itemboard_No
+  		and Ite.Itemboard_No = #{itemboard_no}
+  		and Rownum = 1
+		]]>
 	</select>
 	
 

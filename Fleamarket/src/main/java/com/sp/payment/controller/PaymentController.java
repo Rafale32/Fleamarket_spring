@@ -2,6 +2,7 @@ package com.sp.payment.controller;
 
 import java.awt.Desktop;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,6 +21,7 @@ import com.sp.bean.Bean;
 import com.sp.memManage.domain.MemManageDTO;
 import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
+import com.sp.payment.domain.ImagelistDTO;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
 import com.sp.payment.domain.PageMaker;
@@ -63,6 +65,27 @@ public class PaymentController {
       String loginEmail = dto.getMember_email();
       dto2.setMember_email(loginEmail);
       List<PuerchaseDTO_gy> list   = service.listPuerchase(dto2,cri);
+      
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+	}
+      //종료
+      
+      
+      
       model.addAttribute("list4", list);
       
       //return "/payment/buy_list_gy";
@@ -97,6 +120,30 @@ public class PaymentController {
       
       dto2.setMember_email(loginEmail);
       List<PuerchaseDTO_gy> list   = service.listPuerchase(dto2,cri);
+      
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+    	 
+    	 
+    	  
+    	  
+	}
+      //종료
+      
+      
       model.addAttribute("list4", list);
       
    
@@ -123,6 +170,31 @@ public class PaymentController {
       String loginEmail = dto.getMember_email();
       dto2.setMember_email(loginEmail);
       List<PuerchaseDTO_gy> list   = service.listSell(dto2,cri);
+      
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+    	 
+    	 
+    	  
+    	  
+	}
+      //종료
+      
+      
+      
       model.addAttribute("list", list);
       
       //return "/payment/buy_list_gy";
@@ -146,6 +218,30 @@ public class PaymentController {
       service.changDeliverState2(dto);
       dto2.setMember_email(loginEmail);
       List<PuerchaseDTO_gy> list   = service.listSell(dto2,cri);
+      
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+    	 
+    	 
+    	  
+    	  
+	}
+      //종료
+      
+      
       model.addAttribute("list", list);
       pdto.setInform_contents(3);
       service.registerPerchaseAlram(pdto);
@@ -169,6 +265,32 @@ public class PaymentController {
        MystoreDTO_gy storedto= service.SearchMystore(dto2);
        List<MystoreReviewDTO_gy> list = 
              (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
+       
+       //이미지 뽑
+       PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+       
+       ImagelistDTO idto = new ImagelistDTO();
+       
+       for (int i = 0; i < list.size(); i++) {
+ 		
+     	  int temp = list.get(i).getItemboard_no();
+     	  System.out.println(temp + "상후기");
+     	  dto22.setItemboard_no(temp);
+     	  
+     	 idto = (ImagelistDTO) service.listimag(dto22);
+     	 
+     	 list.get(i).setThum_img(idto.getThum_img());
+     	 //흠...
+     	 
+     	 
+     	  
+     	  
+ 	}
+       //종료
+       
+       
+       
+       
        model.addAttribute("list2", list);
        PageMaker pagemaker = new PageMaker();
        pagemaker.setCri(cri);
@@ -185,6 +307,32 @@ public class PaymentController {
        MystoreDTO_gy storedto = new MystoreDTO_gy();
        storedto.setStore_Name(storename);
        List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
+      
+       //이미지 뽑
+       PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+       
+       ImagelistDTO idto = new ImagelistDTO();
+       
+       for (int i = 0; i < list.size(); i++) {
+ 		
+     	  int temp = list.get(i).getItemboard_no();
+     	  System.out.println(temp);
+     	  dto22.setItemboard_no(temp);
+     	   
+     	 idto = (ImagelistDTO) service.listimag(dto22);
+     	 
+     	 list.get(i).setThum_img(idto.getThum_img());
+     	 //흠...
+     	 
+     	 
+     	  
+     	  
+ 	}
+       //종료
+       
+       
+       
+       
        model.addAttribute("list2", list);
        PageMaker pagemaker = new PageMaker();
        pagemaker.setCri(cri);
@@ -207,6 +355,32 @@ public class PaymentController {
        
        List<MystoreReviewDTO_gy> list = (List<MystoreReviewDTO_gy>) service.MystoreReview(storedto,cri);
       
+       //이미지 뽑
+       PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+       
+       ImagelistDTO idto = new ImagelistDTO();
+       
+       for (int i = 0; i < list.size(); i++) {
+ 		
+     	  int temp = list.get(i).getItemboard_no();
+     	  System.out.println(temp);
+     	  dto22.setItemboard_no(temp);
+     	  
+     	 idto = (ImagelistDTO) service.listimag(dto22);
+     	 
+     	 list.get(i).setThum_img(idto.getThum_img());
+     	 //흠...
+     	 
+     	 
+     	  
+     	  
+ 	}
+       //종료
+       
+       
+       
+       
+       
        
        System.out.println(list.get(0).getStore_name());
        model.addAttribute("list2", list);
@@ -263,6 +437,30 @@ public class PaymentController {
       
       List<PuerchaseDTO_gy> list   = service.listFavorit(dto2,cri);
       
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+    	 
+    	 
+    	  
+    	  
+	}
+      //종료
+      
+      
+      
       System.out.println("리스트 왔나?dd5asdfthyergesfgdnzdgnfgrahsetrwefh ");
       
       model.addAttribute("list3", list);
@@ -299,6 +497,28 @@ public class PaymentController {
       System.out.println(loginEmail);
       dto2.setMember_email(loginEmail);
       List<PuerchaseDTO_gy> list   = service.listFavorit(dto2,cri);
+      
+      //이미지 뽑
+      PuerchaseDTO_gy dto22 = new PuerchaseDTO_gy();
+      
+      ImagelistDTO idto = new ImagelistDTO();
+      
+      for (int i = 0; i < list.size(); i++) {
+		
+    	  int temp = list.get(i).getItemboard_no();
+    	  
+    	  dto22.setItemboard_no(temp);
+    	  
+    	 idto = (ImagelistDTO) service.listimag(dto22);
+    	 
+    	 list.get(i).setThum_img(idto.getThum_img());
+    	 //흠...
+    	 
+    	 
+    	  
+    	  
+	}
+      //종료
       
 
       

@@ -45,7 +45,7 @@ table td {
         <!-- 이미지 -->
         <td rowspan="2">
           <img alt="물품임시이미지" width="200px" height="150px"
-               src="/fleamarket/resources/payment/img/${p.thum_img}.jpg">
+               src="/fleamarket/resources/product/upload${p.thum_img}">
         </td>
         <!-- 상품명 -->
         <td>${p.itemboard_title}</td>

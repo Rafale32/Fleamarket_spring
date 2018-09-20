@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
+import com.sp.payment.domain.ImagelistDTO;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
 import com.sp.payment.domain.PuerchaseDTO_gy;
@@ -17,6 +18,10 @@ public interface PaymentDAO {
 	
 
 	public List<PuerchaseDTO_gy> listSell(DeliveryDTO_gy dto,Criteria2 cri) throws Exception;
+	
+	//이미지 리스트
+	public ImagelistDTO listimag(PuerchaseDTO_gy dto22)throws Exception;
+	
 	
 	
 	public void changDeliverState(DeliveryDTO_gy dto) throws Exception;

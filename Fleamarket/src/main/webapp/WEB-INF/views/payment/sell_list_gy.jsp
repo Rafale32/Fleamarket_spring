@@ -74,8 +74,8 @@ table td {
         <!-- 상품이미지 -->
         <!-- 추후 이미지 경로 src 만 수정 하면 됨 -->
         <td>
-          <img alt="물품임시이미지" width="200px" height="150px"
-               src="/fleamarket/resources/payment/img/${p.thum_img}.jpg">
+          <img alt="물품이미지" width="200px" height="150px"
+               src="/fleamarket/resources/product/upload${p.thum_img}">
         </td>
         <!-- 상품명 -->
         <td>
@@ -86,7 +86,7 @@ table td {
         <!-- 상품가격 -->
         <!-- 상품가격 클릭시 해당 하는 상품결제 상세로 갈것 -->
         <td>
-          <a href="/safepay/order_detail?item_no=${p.item_no }">
+          <a href="/fleamarket/safepay/order_detail?item_no=${p.item_no }">
             <fmt:formatNumber value="${p.item_price}" />원
           </a>
         </td>
@@ -135,10 +135,11 @@ table td {
               <input type="submit" id="purchaseDetermin" class="btn btn-success"
                 value="판매승인">
             </c:if>
+                      </form>
             <a href="/fleamarket/payment/mystoreReview">
-            <input type="button" class="btn btn-info"
-              value="리뷰확인"></a>
-          </form>
+              <input type="button" class="btn btn-info" value="리뷰확인">
+            </a>
+
         </td>
       </tr>
     </c:forEach>
