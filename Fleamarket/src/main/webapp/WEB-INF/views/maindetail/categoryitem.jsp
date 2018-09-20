@@ -11,6 +11,10 @@
 #del{
 color: red;
 }
+.img1{
+   width: 250px !important;
+   height: 220px !important;
+}
 </style>
 </head>
 <body>
@@ -24,14 +28,16 @@ color: red;
       <div class="col-sm-6 col-md-3">
         <div class="thumbnail">
           <c:forEach var="img" items="${reList.imgList}" begin="0" end="0">
-            <img src="/fleamarket/resources/product/upload${img.thum_img}" alt="추천상품이미지">
+            <img class="img1" src="/fleamarket/resources/product/upload${img.big_img}" alt="추천상품이미지">
           </c:forEach>
           <div class="caption">
+          	<div style="text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 30px;">
               <h4>${reList.itemboard_title}</h4>
+						</div>
               <p>
                 <c:choose>
                   <c:when test="${reList.item_delivery_B eq 1}"><div id="del">무료배송</div></c:when>
-                  <c:otherwise>배송비별도</c:otherwise>
+                  <c:otherwise><div>배송비별도</div></c:otherwise>
                 </c:choose>
                 <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
                 <!-- <a href="#" class="btn btn-default" role="button">Button</a> -->

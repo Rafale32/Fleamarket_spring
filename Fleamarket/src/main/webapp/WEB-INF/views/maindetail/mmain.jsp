@@ -19,8 +19,8 @@ color: red;
 }
 
 .img1{
- width: 250px;
- height: 220px;
+   width: 250px !important;
+   height: 220px !important;
 }
 </style>
 <script>
@@ -152,7 +152,7 @@ color: red;
               </c:forEach>
             <div class="caption">
                 <div style="text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;">
-                	<nobr><h4>${itemList.itemboard_title}</h4></nobr>
+                	<nobr><h4><b>${itemList.itemboard_title}</b></h4></nobr>
                 </div>
                 <p>
                 <c:choose>
@@ -162,8 +162,8 @@ color: red;
                 <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
                 <!-- <a href="#" class="btn btn-default" role="button">Button</a> -->
               </p>
-              <p> <fmt:formatNumber value="${itemList.item_price}" />원 </p>
-              <p> ${itemList.itemboard_date} </p>
+              <p> <b><fmt:formatNumber value="${itemList.item_price}" />원 </b> </p>
+              <p style="color : grey; font-size: 12px;"> ${itemList.itemboard_date} </p>
           </div>
         </div>
       </div>
