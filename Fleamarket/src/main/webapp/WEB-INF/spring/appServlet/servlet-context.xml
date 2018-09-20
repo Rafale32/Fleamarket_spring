@@ -60,6 +60,7 @@
 		<beans:constructor-arg
 			value="C:/Users/CJH/git/Fleamarket_spring/Fleamarket/src/main/webapp/resources/product/upload"></beans:constructor-arg>
 	   </beans:bean>
+
 	<!--END 파일 업로드 관련 설정 -->
 	
 	
