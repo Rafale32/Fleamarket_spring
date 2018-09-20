@@ -63,7 +63,7 @@ public class PaymentController {
 		String loginEmail = dto.getMember_email();
 		dto2.setMember_email(loginEmail);
 		List<PuerchaseDTO_gy> list	= service.listPuerchase(dto2,cri);
-		model.addAttribute("list", list);
+		model.addAttribute("list4", list);
 		
 		//return "/payment/buy_list_gy";
 		
@@ -97,7 +97,7 @@ public class PaymentController {
 		
 		dto2.setMember_email(loginEmail);
 		List<PuerchaseDTO_gy> list	= service.listPuerchase(dto2,cri);
-		model.addAttribute("list", list);
+		model.addAttribute("list4", list);
 		
 	
 		 PageMaker pagemaker = new PageMaker();
@@ -159,7 +159,6 @@ public class PaymentController {
 	
 	
 	
-	//�궡�긽�젏 由щ럭蹂닿린濡� 媛�湲�
 	@RequestMapping(value = "/mystoreReview", method = RequestMethod.GET)
 	public void mystoreReview(Model model,HttpSession session,Criteria2 cri)
 			throws Exception{
@@ -252,18 +251,31 @@ public class PaymentController {
 	@RequestMapping(value = "/favoritpage", method = RequestMethod.GET)
 	public void favoritpage(Model model,HttpSession session, Criteria2 cri)
 			throws Exception {
-		
+		System.out.println("겟으로 들어옵니까?");
 		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
 		MemManageDTO dto = (MemManageDTO) session.getAttribute("member");
 		String loginEmail = dto.getMember_email();
+		
+		System.out.println(loginEmail);
+		
 		dto2.setMember_email(loginEmail);
+		System.out.println(dto2.getMember_email()+" + 2222");
+		
 		List<PuerchaseDTO_gy> list	= service.listFavorit(dto2,cri);
-		model.addAttribute("list", list);
+		
+		System.out.println("리스트 왔나?dd5asdfthyergesfgdnzdgnfgrahsetrwefh ");
+		
+		model.addAttribute("list3", list);
+		
+		
+		//페이징 부분
 		 PageMaker pagemaker = new PageMaker();
 		 pagemaker.setCri(cri);
 		 int a = service.puerchasecounting(dto2);
          pagemaker.setTotalCount(a);
          model.addAttribute("pageMaker",pagemaker);
+         
+        
 	}
 	
 	@RequestMapping(value = "/favoritpage", method = RequestMethod.POST)
@@ -271,6 +283,23 @@ public class PaymentController {
 			Criteria2 cri,PuerchaseDTO_gy pdto) throws Exception {
 		System.out.println(pdto.getItemboard_no() + " itemboard_no");
 		service.deletfavorit(pdto);
+		
+		DeliveryDTO_gy dto2 = new DeliveryDTO_gy();
+		MemManageDTO dto = (MemManageDTO) session.getAttribute("member");
+		String loginEmail = dto.getMember_email();
+		
+		System.out.println(loginEmail);
+		dto2.setMember_email(loginEmail);
+		List<PuerchaseDTO_gy> list	= service.listFavorit(dto2,cri);
+		
+
+		
+		model.addAttribute("list3", list);
+		 PageMaker pagemaker = new PageMaker();
+		 pagemaker.setCri(cri);
+		 int a = service.puerchasecounting(dto2);
+        pagemaker.setTotalCount(a);
+        model.addAttribute("pageMaker",pagemaker);
 	}
 		
 		

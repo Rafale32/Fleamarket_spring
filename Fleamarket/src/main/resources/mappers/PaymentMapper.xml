@@ -5,8 +5,7 @@
 
 
 <mapper namespace="PaymentMapper">
-	<cache />
-	
+
 	<select id="puerchaseList" parameterType="DeliveryDTO_gy" resultType="PuerchaseDTO_gy">
 		<![CDATA[	  
 			select Ite.Itemboard_Title, I.Item_Delivery_State,
