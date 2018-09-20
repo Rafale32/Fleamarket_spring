@@ -673,7 +673,9 @@ function getAllList(){
                                                 <div class="small-product">
                                                    <c:forEach var="img" items="${itemList.imgList }"
                                                       begin="0" end="0">
+                                                     	<div class="seller-popular-product">
                                                       <img alt="" src="/fleamarket/resources/product/upload${img.thum_img}">
+                                                      </div>
                                                    </c:forEach>
                                                    <div class="product-price">
                                                       <div class="seller-popular-product">
@@ -687,8 +689,10 @@ function getAllList(){
                                           </c:forEach>
                                        </a>
                                     </div>
-                                    <a class="seller-name"
-                                       href="/Fleamarket/product/productlist.do?store_name=${bean.storeInfo.store_name }">
+                                 </div>
+                                 <br><br><br><br><br>
+                                 <a class="seller-name"
+                                       href="/fleamarket/product/productlist?store_Name=${bean.storeInfo.store_name}">
                                        <div class="seller-product-more">
                                        <c:if test="${bean.storeInfo.itemCount > 2}">
                                           <span class="product-count">${bean.storeInfo.itemCount-2}</span>개
@@ -696,7 +700,6 @@ function getAllList(){
                                        </c:if>
                                        </div>
                                     </a>
-                                 </div>
                               </div>
                               <div class="product-detail-btns">
                                  <c:choose>
