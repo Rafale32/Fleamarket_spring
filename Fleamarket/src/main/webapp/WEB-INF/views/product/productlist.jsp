@@ -47,7 +47,7 @@ table td {
         <tr>
           <td width="100px" height="100px">
             <c:forEach items="${tmp.itemImgList }" var="tmp2" begin="0" end="0">
-              <img src="/fleamarket/resources/product/upload${tmp2.thum_Img }" width="200px" height="150">
+              <img src="/fleamarket/resources/product/upload${tmp2.big_Img }" width="200px" height="150">
             </c:forEach>
           </td>
           <td><a href="/fleamarket/maindetail/detail?itemboard_no=${tmp.itemboard_No }">${tmp.itemboard_Title }</a></td>

@@ -5,7 +5,6 @@
 
 
 <mapper namespace="MainDetailMapper">
-	<cache />
 	
 	<!-- <insert id="insertBoard" parameterType="Board"> insert into board( 
 		seq, title, writer, contents, regdate, hitcount, fname )values( board_seq.nextval, 

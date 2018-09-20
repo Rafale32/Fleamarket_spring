@@ -36,6 +36,39 @@
   max-width: 200px;
   max-height: 200px;
 }
+
+
+.filebox label {
+ display: inline-block;
+ padding: .5em .75em;
+ color: #999;
+ font-size: inherit;
+ line-height: normal;
+ vertical-align: middle;
+ background-color: #fdfdfd;
+ cursor: pointer;
+ border: 1px solid #ebebeb;
+ border-bottom-color: #e2e2e2;
+ border-radius: .25em;
+}
+.filebox input[type="file"] {
+ /* 파일 필드 숨기기 */
+ position: absolute;
+ width: 1px;
+ height: 1px;
+ padding: 0;
+ margin: -1px;
+ overflow: hidden;
+ clip:rect(0,0,0,0);
+ border: 0;
+ }
+ 
+.filebox.bs3-primary label {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
 </style>
 
 </head>
@@ -51,10 +84,12 @@
       <label>이미지</label>
       <form action="/fleamarket/product/productmodify" onsubmit="return addCheck()"
         method="post" enctype="multipart/form-data" name="multipleUpload">
-      <span class="title">업로드할 이미지를 선택해 주세요</span>
+      
 
-      <div id="imgfiles">
+      <div id="imgfiles" class="filebox bs3-primary">
+        <label for="inputimgs">업로드</label>
         <input type="file" class="file_tag" id="inputimgs" name="inputimgs" />
+        <span>업로드할 이미지를 선택해 주세요</span>
       </div>
 
       <div class="imgs_wrap">
