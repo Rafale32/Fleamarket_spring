@@ -151,11 +151,13 @@ color: red;
                 <img class="img1" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.big_img}">
               </c:forEach>
             <div class="caption">
-                <h4>${itemList.itemboard_title}</h4>
+                <div style="text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;">
+                	<nobr><h4>${itemList.itemboard_title}</h4></nobr>
+                </div>
                 <p>
                 <c:choose>
                   <c:when test="${itemList.item_delivery_B eq 1}"><div class="red">무료배송</div></c:when>
-                  <c:otherwise>배송비별도</c:otherwise>
+                  <c:otherwise><div>배송비별도</div></c:otherwise>
                 </c:choose>
                 <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
                 <!-- <a href="#" class="btn btn-default" role="button">Button</a> -->

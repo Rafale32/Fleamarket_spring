@@ -5,7 +5,6 @@
 
 
 <mapper namespace="MainDetailMapper">
-	<cache />
 	
 	<!-- <insert id="insertBoard" parameterType="Board"> insert into board( 
 		seq, title, writer, contents, regdate, hitcount, fname )values( board_seq.nextval, 
@@ -29,7 +28,7 @@
 		select category_title, itemboard_no, sub_title, itemboard_title, item_price, itemboard_date, item_delivery_B, itemboard_viewcount, item_delivery_state, ranking
 		from(select a.category_title, d.itemboard_no, b.sub_title,
 		d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state,
-		rank() over(partition by a.category_title order by itemboard_viewcount desc)as ranking
+		row_number() over(partition by a.category_title order by itemboard_viewcount desc)as ranking
 		from category a, category_sub b, item c, itemboard d, itemimg e
 		where a.category_no = b.category_no
 		and b.sub_no = d.sub_no
@@ -39,7 +38,7 @@
     and d.itemboard_delete_B = 0
 		group by a.category_title, d.itemboard_no, b.sub_title,
 		d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state)
-		where ranking <= 10
+		where ranking <= 8
 		]]>
 	</select>
 
@@ -178,7 +177,7 @@
 		insert into item_qna(
 		item_qna_no, itemboard_no, item_qna_contents, item_qna_date, member_no
 		)values(
-		((select max(item_qna_no) from item_qna)+1),
+		(select nvl(max(item_qna_no)+1,1)from item_qna),
 		#{itemboard_no},
 		#{item_qna_contents},
 		sysdate,
@@ -223,7 +222,7 @@
 	<!-- fav -->
 	<insert id="addFav" parameterType="favDTO">
 		insert into fav(fav_no, member_no, itemboard_no)
-		values(((select max(fav_no) from fav)+1), 
+		values((select nvl(max(fav_no)+1,1)from fav), 
 		#{member_no}, #{itemboard_no})
 	</insert>
 	

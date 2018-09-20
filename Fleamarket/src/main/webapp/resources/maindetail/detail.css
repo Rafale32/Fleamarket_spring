@@ -511,7 +511,20 @@ ul {
 }
 
 .seller-products .seller-popular-product :first-child {
-	margin-right: 5px;
+	margin: 0 auto;
+}
+.seller-products .seller-popular-product :second-child {
+	margin-left: 10px;
+}
+.seller-products .seller-popular-product {
+	margin-left: 20px;
+}
+.seller-products{
+	margin: 0 auto;
+}
+
+#img1{
+	margin-left: 10px;
 }
 
 a {
@@ -525,7 +538,6 @@ a {
 	height: 96px;
 	position: relative;
 	float: left;
-	margin-right: 5px;
 }
 
 .small-product img {
