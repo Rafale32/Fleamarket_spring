@@ -22,10 +22,11 @@
     and a.item_delivery_state=1
    </select>
 
-   <!-- 대 카테고리별 상품들의 itemboard_viewcount 수를 내림차순 정렬하여 10개 씩 잘라 상품정보를 받아오는 쿼리문 -->
+   <!-- 대 카테고리별 상품들의 itemboard_viewcount 수를
+   내림차순 정렬하여 10개 씩 잘라 상품정보를 받아오는 쿼리문 -->
    <select id="hotItemList" resultType="HotItemDTO">
       <![CDATA[
-      select category_title, itemboard_no, sub_title, itemboard_title, item_price, itemboard_date, item_delivery_B, itemboard_viewcount, item_delivery_state, ranking
+      select *
       from(select a.category_title, d.itemboard_no, b.sub_title,
       d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state,
       row_number() over(partition by a.category_title order by itemboard_viewcount desc)as ranking
@@ -35,7 +36,7 @@
       and c.item_no = d.item_no
       and d.itemboard_no = e.itemboard_no
       and c.item_delivery_state = 1
-    and d.itemboard_delete_B = 0
+    	and d.itemboard_delete_B = 0
       group by a.category_title, d.itemboard_no, b.sub_title,
       d.itemboard_title, c.item_price, d.itemboard_date, c.item_delivery_B, d.itemboard_viewcount, c.item_delivery_state)
       where ranking <= 8
@@ -112,7 +113,7 @@
       where a.item_no = b.item_no
       and b.store_no = #{store_no}
       and b.itemboard_delete_b = 0
-      and a.item_delivery_b = 1
+      and a.item_delivery_state = 1
       and b.itemboard_no != #{itemboard_no}
    </select>
 

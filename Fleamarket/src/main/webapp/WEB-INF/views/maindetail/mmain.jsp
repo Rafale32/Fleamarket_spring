@@ -151,25 +151,23 @@ color: red;
               <c:forEach var="img" items="${itemList.imgList}" begin="0" end="0">
                 <img class="img1" alt="카테고리별 인기상품 이미지" src="/fleamarket/resources/product/upload${img.big_img}">
               </c:forEach>
-            <div class="caption">
+            	<div class="caption">
                 <div style="text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;">
                 	<nobr><h4><b>${itemList.itemboard_title}</b></h4></nobr>
                 </div>
                 <p>
-                <c:choose>
-                  <c:when test="${itemList.item_delivery_B eq 1}"><div class="red">무료배송</div></c:when>
-                  <c:otherwise><div>배송비별도</div></c:otherwise>
-                </c:choose>
-                <!-- <a href="#" class="btn btn-primary" role="button">Button</a> -->
-                <!-- <a href="#" class="btn btn-default" role="button">Button</a> -->
-              </p>
-              <p> <b><fmt:formatNumber value="${itemList.item_price}" />원 </b> </p>
-              <p style="color : grey; font-size: 12px;"> ${itemList.itemboard_date} </p>
-          </div>
-        </div>
-      </div>
-      </a>
-      </c:forEach>
+                	<c:choose>
+                  	<c:when test="${itemList.item_delivery_B eq 1}"><div class="red">무료배송</div></c:when>
+                  	<c:otherwise><div>배송비별도</div></c:otherwise>
+                	</c:choose>
+              	</p>
+              	<p> <b><fmt:formatNumber value="${itemList.item_price}" />원 </b> </p>
+              	<p style="color : grey; font-size: 12px;"> ${itemList.itemboard_date} </p>
+          		</div>
+        		</div>
+      		</div>
+      	</a>
+      	</c:forEach>
       </div><!--row -->
       <hr>
     </c:forEach>  
