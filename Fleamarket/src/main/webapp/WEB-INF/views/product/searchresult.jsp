@@ -63,9 +63,11 @@
           + "<a href=/fleamarket/maindetail/detail?itemboard_no="
           + value.itemboard_No + ">"
           + "<img src=/fleamarket/resources/product/upload"+value.thumImg
-          +" class='img'/>"
+          + "class='img'/>"
           + "<div class='caption text-center'>"
-          + "<h4>" + value.itemboard_Title + "</h4>"
+          + "<div style='text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;'>"
+          + "<nobr><h4>" + value.itemboard_Title + "</h4></nobr>"
+          + "</div>"
           + "<p>" + value.item_Price + "원</p>"
           + "<p>" + value.itemboard_Local + "</p>"
           + "</div></a></div>";
