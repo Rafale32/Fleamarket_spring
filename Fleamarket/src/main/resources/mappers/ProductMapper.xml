@@ -5,212 +5,212 @@
 
 
 <mapper namespace="ProductMapper">
-	<cache />
+   <cache />
 
 
-	<select id="countItemBoard" resultType="int" parameterType="String">
-		select count(ITEMBOARD_NO) from itemboard
-		where STORE_NO = (select st.store_no from store st inner join member mb on
-		st.MEMBER_NO = mb.MEMBER_NO
-		where mb.MEMBER_EMAIL = #{ITEMBOARD_email})
-		and itemboard_delete_b = 0
-	</select>
-	
-<!-- 	/ -->
-	<select id="itemListByStore" resultType="ItemDTO" parameterType="String">
-		select * from itemboard ite
-		inner join store st on ite.STORE_NO = st.STORE_NO
-		where st.STORE_NAME=#{store_Name } and ite.ITEMBOARD_DELETE_B = 0 
-    	order by ite.ITEMBOARD_NO desc
-	</select>
-	
-	
-	<select id="itemList" resultType="ItemDTO" parameterType="String">
-		select * from itemboard ite inner join store st on ite.STORE_NO = st.STORE_NO
-  		inner join MEMBER mem on st.MEMBER_NO=mem.MEMBER_NO 
-  		where mem.MEMBER_EMAIL = #{ITEMBOARD_email} and ite.ITEMBOARD_DELETE_B = 0 order by ite.ITEMBOARD_NO desc
-	</select>
-	
-	
- 	<select id="itemImgList" parameterType="int" resultType="ItemImg">
-		select * from itemimg where ITEMBOARD_NO = #{itemboard_No }
-	</select>
-	
-	
-	<select id="itemPrice" parameterType="int" resultType="int">
-		select item_price from item where ITEM_NO=#{item_No }
-	</select>
-	
-	<select id="favCount" parameterType="int" resultType="int">
-		select count(*) from fav where ITEMBOARD_NO = #{itemboard_No }
-	</select>
-	
-	<select id="itemQnaCount" parameterType="int" resultType="int">
-		select count(*) from ITEM_QNA where ITEMBOARD_NO = #{itemboard_No }
-	</select>
-	
-	<select id="countItemBoardByStore" resultType="int" parameterType="String">
-		select count(ITEMBOARD_NO) from itemboard 
-		where STORE_NO = (select STORE_NO from store where STORE_NAME = #{storeName }) and itemboard_delete_b = 0
-	</select>
-	
-	<select id="getCate" resultType="CateDTO">
-		select * from CATEGORY
-	</select>
-	
-	<select id="getSubCate" resultType="CateSubDTO">
-		select * from CATEGORY_SUB where CATEGORY_NO = #{category_No }
-	</select>
-	
-	
-	
-	
-	
-	
-	<insert id="insertItem" parameterType="ItemDTO">
-		INSERT  into item(item_no, item_price, item_state, item_amount, item_delivery_b, 
-		item_delivery_state)
-		  values (
-		    (select nvl(max(ITEM_NO)+1,1) from item),
-		    #{item_Price },
-		    #{item_State },
-		    #{item_Amount },
-		    #{item_Delivery_B },
-		    1
-		  )
-	</insert>
-	
-	<!-- 이거 수정해놔봐 메인카테고리 cateName 이름 디비랑 똑같이 -->
-	<insert id="insertItemBoard" parameterType="ItemDTO">
-		INSERT  into itemboard (sub_no, itemboard_date, itemboard_local, itemboard_title, 
-		  itemboard_contents, itemboard_viewcount, itemboard_recommend_b, itemboard_change_b, 
-		  item_no, itemboard_no, store_no, itemboard_delete_b)
-		  values(
-		    #{sub_No},
-		    sysdate,
-		    #{itemboard_Local },
-		    #{itemboard_Title },
-		    #{itemboard_Contents },
-		    0,
-		    0,
-		    #{itemboard_Change_b },
-		    (select max(ITEM_NO) from item),
-		    (select nvl(max(itemboard_no)+1,1) from itemboard),
-		    (select st.store_no from member mb inner join store st 
-		      on mb.member_no = st.MEMBER_NO where mb.member_email = #{member_email }),
-		    0
-		  )
-	</insert>
-	
+   <select id="countItemBoard" resultType="int" parameterType="String">
+      select count(ITEMBOARD_NO) from itemboard
+      where STORE_NO = (select st.store_no from store st inner join member mb on
+      st.MEMBER_NO = mb.MEMBER_NO
+      where mb.MEMBER_EMAIL = #{ITEMBOARD_email})
+      and itemboard_delete_b = 0
+   </select>
+   
+<!--    / -->
+   <select id="itemListByStore" resultType="ItemDTO" parameterType="String">
+      select * from itemboard ite
+      inner join store st on ite.STORE_NO = st.STORE_NO
+      where st.STORE_NAME=#{store_Name } and ite.ITEMBOARD_DELETE_B = 0 
+       order by ite.ITEMBOARD_NO desc
+   </select>
+   
+   
+   <select id="itemList" resultType="ItemDTO" parameterType="String">
+      select * from itemboard ite inner join store st on ite.STORE_NO = st.STORE_NO
+        inner join MEMBER mem on st.MEMBER_NO=mem.MEMBER_NO 
+        where mem.MEMBER_EMAIL = #{ITEMBOARD_email} and ite.ITEMBOARD_DELETE_B = 0 order by ite.ITEMBOARD_NO desc
+   </select>
+   
+   
+    <select id="itemImgList" parameterType="int" resultType="ItemImg">
+      select * from itemimg where ITEMBOARD_NO = #{itemboard_No }
+   </select>
+   
+   
+   <select id="itemPrice" parameterType="int" resultType="int">
+      select item_price from item where ITEM_NO=#{item_No }
+   </select>
+   
+   <select id="favCount" parameterType="int" resultType="int">
+      select count(*) from fav where ITEMBOARD_NO = #{itemboard_No }
+   </select>
+   
+   <select id="itemQnaCount" parameterType="int" resultType="int">
+      select count(*) from ITEM_QNA where ITEMBOARD_NO = #{itemboard_No }
+   </select>
+   
+   <select id="countItemBoardByStore" resultType="int" parameterType="String">
+      select count(ITEMBOARD_NO) from itemboard 
+      where STORE_NO = (select STORE_NO from store where STORE_NAME = #{storeName }) and itemboard_delete_b = 0
+   </select>
+   
+   <select id="getCate" resultType="CateDTO">
+      select * from CATEGORY
+   </select>
+   
+   <select id="getSubCate" resultType="CateSubDTO">
+      select * from CATEGORY_SUB where CATEGORY_NO = #{category_No }
+   </select>
+   
+   
+   
+   
+   
+   
+   <insert id="insertItem" parameterType="ItemDTO">
+      INSERT  into item(item_no, item_price, item_state, item_amount, item_delivery_b, 
+      item_delivery_state)
+        values (
+          (select nvl(max(ITEM_NO)+1,1) from item),
+          #{item_Price },
+          #{item_State },
+          #{item_Amount },
+          #{item_Delivery_B },
+          1
+        )
+   </insert>
+   
+   <!-- 이거 수정해놔봐 메인카테고리 cateName 이름 디비랑 똑같이 -->
+   <insert id="insertItemBoard" parameterType="ItemDTO">
+      INSERT  into itemboard (sub_no, itemboard_date, itemboard_local, itemboard_title, 
+        itemboard_contents, itemboard_viewcount, itemboard_recommend_b, itemboard_change_b, 
+        item_no, itemboard_no, store_no, itemboard_delete_b)
+        values(
+          #{sub_No},
+          sysdate,
+          #{itemboard_Local },
+          #{itemboard_Title },
+          #{itemboard_Contents },
+          0,
+          0,
+          #{itemboard_Change_b },
+          (select max(ITEM_NO) from item),
+          (select nvl(max(itemboard_no)+1,1) from itemboard),
+          (select st.store_no from member mb inner join store st 
+            on mb.member_no = st.MEMBER_NO where mb.member_email = #{member_email }),
+          0
+        )
+   </insert>
+   
 
-	<insert id="insertImgs" parameterType="ItemImg">
-		insert into itemimg(img_no, itemboard_no, big_img, thum_img ) values(
-		  (select nvl(max(IMG_NO)+1,1) from itemimg),
-		  (select max(itemboard_no) from itemboard),
-		  #{big_Img },
-		  #{thum_Img }
-		)
-	</insert>
-	
-	
-	<insert id="insertTag" parameterType="String">
-		insert into tag (tag_no, TAG_NAME, itemboard_no)
-		values((select nvl(max(TAG_NO)+1,1) from tag),#{tag },
-		(select max(ITEMBOARD_NO) from ITEMBOARD))
-	</insert>	
-	
-	
+   <insert id="insertImgs" parameterType="ItemImg">
+      insert into itemimg(img_no, itemboard_no, big_img, thum_img ) values(
+        (select nvl(max(IMG_NO)+1,1) from itemimg),
+        (select max(itemboard_no) from itemboard),
+        #{big_Img },
+        #{thum_Img }
+      )
+   </insert>
+   
+   
+   <insert id="insertTag" parameterType="String">
+      insert into tag (tag_no, TAG_NAME, itemboard_no)
+      values((select nvl(max(TAG_NO)+1,1) from tag),#{tag },
+      (select max(ITEMBOARD_NO) from ITEMBOARD))
+   </insert>   
+   
+   
 
 
-	<!-- 삭제가 아니라 상태 변경으로 출력을 안해주는것임 -->
-	<update id="itemBoardDelete" parameterType="int">
-		UPDATE itemboard set ITEMBOARD_DELETE_B = 1  where ITEMBOARD_NO = #{itemboard_No }
-	</update>
-	
-	
-	<select id="itemNboardNtag" parameterType="int" resultType="ItemDTO">
-		select * from ITEM it inner join ITEMBOARD ib 
-		on it.ITEM_NO=ib.ITEM_NO
-		inner join tag ta on ta.ITEMBOARD_NO = ib.ITEMBOARD_NO
-		inner join CATEGORY_SUB cs on cs.SUB_NO = ib.SUB_NO
-		where ib.ITEMBOARD_NO =#{itemboard_No }
-	</select>
-	
-	<delete id="oneImgDelete" parameterType="String">
-		delete from itemimg where BIG_IMG = #{big_Img }
-	</delete>
-	
-	
-	
-	
-	
-	
-	<update id="updateItem" parameterType="ItemDTO">
-		update item set item_price = #{item_Price},
-		  item_amount = #{item_Amount },
-		  item_delivery_b = #{item_Delivery_B },
-		  item_delivery_state = item_delivery_state, 
-		  item_state = #{item_State }
-		where item_no = (select item_no from itemboard where itemboard_no = #{itemboard_No })
-	</update>
-	
-	<update id="updateItemBoard" parameterType="ItemDTO">
-		update ITEMBOARD set sub_no = #{sub_No} ,
-		  itemboard_local = #{itemboard_Local }, 
-		  itemboard_title = #{itemboard_Title }, 
-		  itemboard_contents = #{itemboard_Contents },
-		  itemboard_Recommend_b = itemboard_Recommend_b, 
-		  itemboard_Change_b = #{itemboard_Change_b }
-		  where itemboard_no = #{itemboard_No }
-	</update>
-	
-	<update id="tagModify" parameterType="ItemDTO">
-		update tag set TAG_NAME = #{tag_Name }
-		where ITEMBOARD_NO = #{itemboard_No }
-	</update>
-	
-	
-	
-	
-	
-	<!-- 검색관련 -->
-	
+   <!-- 삭제가 아니라 상태 변경으로 출력을 안해주는것임 -->
+   <update id="itemBoardDelete" parameterType="int">
+      UPDATE itemboard set ITEMBOARD_DELETE_B = 1  where ITEMBOARD_NO = #{itemboard_No }
+   </update>
+   
+   
+   <select id="itemNboardNtag" parameterType="int" resultType="ItemDTO">
+      select * from ITEM it inner join ITEMBOARD ib 
+      on it.ITEM_NO=ib.ITEM_NO
+      inner join tag ta on ta.ITEMBOARD_NO = ib.ITEMBOARD_NO
+      inner join CATEGORY_SUB cs on cs.SUB_NO = ib.SUB_NO
+      where ib.ITEMBOARD_NO =#{itemboard_No }
+   </select>
+   
+   <delete id="oneImgDelete" parameterType="String">
+      delete from itemimg where BIG_IMG = #{big_Img }
+   </delete>
+   
+   
+   
+   
+   
+   
+   <update id="updateItem" parameterType="ItemDTO">
+      update item set item_price = #{item_Price},
+        item_amount = #{item_Amount },
+        item_delivery_b = #{item_Delivery_B },
+        item_delivery_state = item_delivery_state, 
+        item_state = #{item_State }
+      where item_no = (select item_no from itemboard where itemboard_no = #{itemboard_No })
+   </update>
+   
+   <update id="updateItemBoard" parameterType="ItemDTO">
+      update ITEMBOARD set sub_no = #{sub_No} ,
+        itemboard_local = #{itemboard_Local }, 
+        itemboard_title = #{itemboard_Title }, 
+        itemboard_contents = #{itemboard_Contents },
+        itemboard_Recommend_b = itemboard_Recommend_b, 
+        itemboard_Change_b = #{itemboard_Change_b }
+        where itemboard_no = #{itemboard_No }
+   </update>
+   
+   <update id="tagModify" parameterType="ItemDTO">
+      update tag set TAG_NAME = #{tag_Name }
+      where ITEMBOARD_NO = #{itemboard_No }
+   </update>
+   
+   
+   
+   
+   
+   <!-- 검색관련 -->
+   
   <!-- <select id="searchAll" resultType="ItemDTO" parameterType="String">
-		select itb.ITEMBOARD_NO, itb.ITEMBOARD_title, itb.ITEMBOARD_local , it.item_PRICE ,ta.TAG_NAME  
-		from ITEMBOARD itb inner join item it on it.ITEM_NO = itb.ITEM_NO 
-		inner join tag ta on ta.ITEMBOARD_NO=itb.ITEMBOARD_NO
-		where itb.ITEMBOARD_title like '%' ||  #{searchSubj } || '%' 
-		or ta.TAG_NAME like '%' ||  #{searchSubj } || '%'
-		and itb.itemboard_delete_B = 0
-		order by itb.ITEM_NO desc
-	</select> -->
+      select itb.ITEMBOARD_NO, itb.ITEMBOARD_title, itb.ITEMBOARD_local , it.item_PRICE ,ta.TAG_NAME  
+      from ITEMBOARD itb inner join item it on it.ITEM_NO = itb.ITEM_NO 
+      inner join tag ta on ta.ITEMBOARD_NO=itb.ITEMBOARD_NO
+      where itb.ITEMBOARD_title like '%' ||  #{searchSubj } || '%' 
+      or ta.TAG_NAME like '%' ||  #{searchSubj } || '%'
+      and itb.itemboard_delete_B = 0
+      order by itb.ITEM_NO desc
+   </select> -->
   <select id="searchAll" resultType="ItemDTO" parameterType="String">
-		select *  
- 		from(select b.item_no, a.itemboard_no, a.itemboard_title, a.itemboard_local, b.item_price, a.itemboard_delete_B,c.tag_name 
- 		from itemboard a, item b, tag c
- 		where a.item_no = b.item_no
- 		and a.itemboard_no = c.itemboard_no
- 		and a.itemboard_delete_b=0)
- 		where ITEMBOARD_title like '%' ||  '' || '%' 
-		or TAG_NAME like '%' ||  '' || '%'
-		order by ITEM_NO desc
-	</select>
-	
-	<select id="getOneImg" resultType="String" parameterType="int">
-		select big_IMG from ITEMIMG where ITEMBOARD_NO = #{itemboard_No } and rownum =1
-	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+      select distinct *  
+       from(select b.item_no, a.itemboard_no, a.itemboard_title, a.itemboard_local, b.item_price, a.itemboard_delete_B,c.tag_name 
+       from itemboard a, item b, tag c
+       where a.item_no = b.item_no
+       and a.itemboard_no = c.itemboard_no
+       and a.itemboard_delete_b=0)
+       where ITEMBOARD_title like '%' || #{searchSubj } || '%' 
+      or TAG_NAME like '%' || #{searchSubj } || '%'
+      order by ITEM_NO desc
+   </select>
+   
+   <select id="getOneImg" resultType="String" parameterType="int">
+      select big_IMG from ITEMIMG where ITEMBOARD_NO = #{itemboard_No } and rownum =1
+   </select>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 </mapper>
