@@ -16,7 +16,7 @@
 		and itemboard_delete_b = 0
 	</select>
 	
-	
+<!-- 	/ -->
 	<select id="itemListByStore" resultType="ItemDTO" parameterType="String">
 		select * from itemboard ite
 		inner join store st on ite.STORE_NO = st.STORE_NO
