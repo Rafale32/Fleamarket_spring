@@ -185,14 +185,14 @@
 		order by itb.ITEM_NO desc
 	</select> -->
   <select id="searchAll" resultType="ItemDTO" parameterType="String">
-		select *  
+		select distinct *  
  		from(select b.item_no, a.itemboard_no, a.itemboard_title, a.itemboard_local, b.item_price, a.itemboard_delete_B,c.tag_name 
  		from itemboard a, item b, tag c
  		where a.item_no = b.item_no
  		and a.itemboard_no = c.itemboard_no
  		and a.itemboard_delete_b=0)
- 		where ITEMBOARD_title like '%' ||  '' || '%' 
-		or TAG_NAME like '%' ||  '' || '%'
+ 		where ITEMBOARD_title like '%' || #{searchSubj } || '%' 
+		or TAG_NAME like '%' || #{searchSubj } || '%'
 		order by ITEM_NO desc
 	</select>
 	

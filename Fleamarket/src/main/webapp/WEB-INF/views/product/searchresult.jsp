@@ -34,10 +34,10 @@
 
     $("#moreinfo").on("click",function() {
       searchSubj = $(".searchSubj").val();
-			$.ajax({
-			  url : "/fleamarket/productajax/searchall?searchSubj="+ 
-				searchSubj,
-				type : "post",
+         $.ajax({
+           url : "/fleamarket/productajax/searchall?searchSubj="+ 
+            searchSubj,
+            type : "post",
         dataType : "json",
         success : function(data) {
 
@@ -45,7 +45,7 @@
         var all = "";
         $.each(data,function(key, value) {
           all = all + "<div class='col-sm-6 col-md-3'>";
-// 					if (cnt == 1 || cnt % 4 == 1) {
+//                if (cnt == 1 || cnt % 4 == 1) {
 //             all = all + "<tr>";
 //          }
 //           var td = "<td>"
@@ -58,12 +58,12 @@
 //           + value.itemboard_Local + "<br></a>"
 //           + "</td>";
           
-					//  썸네일변환
+               //  썸네일변환
           var div = "<div class='thumbnail' style='box-shadow: 5px 7px 20px -5px #8a8a8a;'>"
           + "<a href=/fleamarket/maindetail/detail?itemboard_no="
           + value.itemboard_No + ">"
-          + "<img src=/fleamarket/resources/product/upload"+value.thumImg
-          + "class='img'/>"
+          + "<img src='/fleamarket/resources/product/upload"+value.thumImg
+          + "' class='img1'/>"
           + "<div class='caption text-center'>"
           + "<div style='text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;'>"
           + "<nobr><h4>" + value.itemboard_Title + "</h4></nobr>"
@@ -74,7 +74,7 @@
 
           all = all + div;
           /* if(cnt%4 == 0 ){
-          	all = all + "<tr>";
+             all = all + "<tr>";
           } */
 
 //           if (cnt % 4 == 0) {
@@ -85,11 +85,11 @@
 
         }); //each END
 
-      	$(".itemtab").append(all);
+         $(".itemtab").append(all);
       //alert("**********"+all+"-------------------------------------------"+cnt);
-    	}//success END
-  	});//AJAX END
-	});//moreinfo click END
+       }//success END
+     });//AJAX END
+   });//moreinfo click END
 });//function END
 </script>
 <style>

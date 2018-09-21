@@ -86,8 +86,9 @@ $(function(){
 		//주기적으로 호출하는 함수
 		timer = setInterval(function(){
 			var nextIndex = (currentIndex + 1) % 4;
+//			var nextIndex = currentIndex;
 			goToSlide(nextIndex);
-		}, 2000);
+		}, 8000);
 	}
 	
 	//타이머 정지함수
