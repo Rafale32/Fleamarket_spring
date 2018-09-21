@@ -92,7 +92,7 @@ color: red;
     
     
     <!-- 추천상품 -->
-    <h3>추천상품</h3>
+    <%-- <h3>추천상품</h3>
     <div class="row">
     <c:forEach var="reList" items="${bean.recommend}">
     <a href="/fleamarket/maindetail/detail?itemboard_no=${reList.itemboard_no}">
@@ -119,7 +119,7 @@ color: red;
       </div>
      </a>
     </c:forEach>
-    </div><!--row -->  
+    </div> --%><!--row -->  
     <!-- 추천상품 -->
     
     
@@ -129,7 +129,8 @@ color: red;
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
       <c:forEach var="categoryList" items="${bean.hotList}" varStatus="status">
         <div class="btn-group" role="group">
-          <button onclick="fnMove('${status.count}')" type="button" class="btn btn-default">${categoryList.category_title}</button>
+          <button onclick="fnMove('${status.count}')" type="button" class="btn btn-default"
+          style="text-overflow:ellipsis; overflow:hidden;">${categoryList.category_title}</button>
         </div>
 
       </c:forEach>
@@ -140,7 +141,7 @@ color: red;
     
     <!-- 카테고리별 인기상품 -->
     <c:forEach var="list" items="${bean.hotList}" varStatus="status">
-      <h4 style="display:inline-block;" id="cate${status.count}">${list.category_title}</h4>
+      <h4 style="display:inline-block;" id="cate${status.count}"><b>${list.category_title}</b></h4>
       <a href="/fleamarket/maindetail/categoryitem?category_title=${list.category_title}">전체보기</a>
       <div class="row">
         <c:forEach var="itemList" items="${list.hotList}">

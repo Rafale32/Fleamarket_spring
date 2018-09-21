@@ -175,16 +175,29 @@
 	
 	<!-- 검색관련 -->
 	
-	<select id="searchAll" resultType="ItemDTO" parameterType="String">
+  <!-- <select id="searchAll" resultType="ItemDTO" parameterType="String">
 		select itb.ITEMBOARD_NO, itb.ITEMBOARD_title, itb.ITEMBOARD_local , it.item_PRICE ,ta.TAG_NAME  
 		from ITEMBOARD itb inner join item it on it.ITEM_NO = itb.ITEM_NO 
 		inner join tag ta on ta.ITEMBOARD_NO=itb.ITEMBOARD_NO
 		where itb.ITEMBOARD_title like '%' ||  #{searchSubj } || '%' 
-		or ta.TAG_NAME like '%' ||  #{searchSubj } || '%' order by itb.ITEM_NO desc
+		or ta.TAG_NAME like '%' ||  #{searchSubj } || '%'
+		and itb.itemboard_delete_B = 0
+		order by itb.ITEM_NO desc
+	</select> -->
+  <select id="searchAll" resultType="ItemDTO" parameterType="String">
+		select *  
+ 		from(select b.item_no, a.itemboard_no, a.itemboard_title, a.itemboard_local, b.item_price, a.itemboard_delete_B,c.tag_name 
+ 		from itemboard a, item b, tag c
+ 		where a.item_no = b.item_no
+ 		and a.itemboard_no = c.itemboard_no
+ 		and a.itemboard_delete_b=0)
+ 		where ITEMBOARD_title like '%' ||  '' || '%' 
+		or TAG_NAME like '%' ||  '' || '%'
+		order by ITEM_NO desc
 	</select>
 	
 	<select id="getOneImg" resultType="String" parameterType="int">
-		select THUM_IMG from ITEMIMG where ITEMBOARD_NO = #{itemboard_No } and rownum =1
+		select big_IMG from ITEMIMG where ITEMBOARD_NO = #{itemboard_No } and rownum =1
 	</select>
 	
 	
