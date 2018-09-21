@@ -63,9 +63,11 @@
           + "<a href=/fleamarket/maindetail/detail?itemboard_no="
           + value.itemboard_No + ">"
           + "<img src=/fleamarket/resources/product/upload"+value.thumImg
-          +" class='img'/>"
+          + "class='img'/>"
           + "<div class='caption text-center'>"
-          + "<h4>" + value.itemboard_Title + "</h4>"
+          + "<div style='text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;'>"
+          + "<nobr><h4>" + value.itemboard_Title + "</h4></nobr>"
+          + "</div>"
           + "<p>" + value.item_Price + "원</p>"
           + "<p>" + value.itemboard_Local + "</p>"
           + "</div></a></div>";
@@ -84,13 +86,18 @@
         }); //each END
 
       	$(".itemtab").append(all);
-      //alert("**********"+all+"--------------------------------------------------"+cnt);
+      //alert("**********"+all+"-------------------------------------------"+cnt);
     	}//success END
   	});//AJAX END
 	});//moreinfo click END
 });//function END
 </script>
-
+<style>
+.img1{
+   width: 250px !important;
+   height: 220px !important;
+}
+</style>
 <title>검색 페이지</title>
 </head>
 <body>
@@ -105,9 +112,11 @@
         <a href="/fleamarket/maindetail/detail?itemboard_no=${tmp.itemboard_No }">
 <%--         </c:if> --%>
           <div class="thumbnail" style="box-shadow: 5px 7px 20px -5px #8a8a8a;">
-            <img src="/fleamarket/resources/product/upload${tmp.thumImg }">
+            <img class="img1" src="/fleamarket/resources/product/upload${tmp.thumImg }">
             <div class="caption text-center">
-              <h4>${tmp.itemboard_Title }</h4>
+             <div style="text-overflow:ellipsis; overflow:hidden; width:234.5px; height: 39.56px;"> 
+              <nobr><h4>${tmp.itemboard_Title }</h4></nobr>
+             </div> 
               <p><fmt:formatNumber value="${tmp.item_Price }" />원</p>
               <p>${tmp.itemboard_Local }</p>
             </div>

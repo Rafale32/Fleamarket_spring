@@ -81,6 +81,9 @@ $(document).ready(function(){
 var itemboard_noObj = $("#itemboard_no");
 var itemboard_no = itemboard_noObj.val();
 console.log($("#itemboard_no").val());
+
+var qnaCnt = 4;
+var qnaCheck = 0;
 getAllList();
 
 var favCheck = false; //찜 여부 확인하기 위한 변수
@@ -92,14 +95,14 @@ getFav();
 } */
 
 //댓글목록리스트
-function getAllList(){
+ function getAllList(){
    $.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
      
       var member_noObj = $("#member_no");
       var member_no = member_noObj.val();
       var cnt = 0;
       
-      
+      $("#ccnt").remove();
       $(".replyLi").remove();
       $.each(data, function(index, item) {
          cnt++;
@@ -115,56 +118,61 @@ function getAllList(){
          }
       });
       
-      var str = "<span class='comments-count'>"+cnt+"</span>"
+      var str = "<span id='ccnt' class='comments-count'>"+cnt+"</span>"
       $("#comment-title").append(str);
    }); 
-}
-// }  
-// function getAllList(){
-//    $.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+	}
+
+/* function getAllList(){
+  $.getJSON("/fleamarket/qna/all/"+itemboard_no, function(data){ 
+    
+     var member_noObj = $("#member_no");
+     var member_no = member_noObj.val();
+     var cnt = 0;
      
-//       var member_noObj = $("#member_no");
-//       var member_no = member_noObj.val();
-//       $(".replyLi").remove();
-//       $.each(data, function(index, item) {
-//          if(index < 4){
-//             if(member_no == item.member_no){
-//                var source = $("#template").html();
-//                var template = Handlebars.compile(source);
-//                $("#repliesDiv").after(template(item));
-//                console.log("히든X");
-//             }else{
-//                var source = $("#template2").html();
-//                var template = Handlebars.compile(source);
-//                $("#repliesDiv").after(template(item));
-//                console.log("히든X");
-//             }
-//          }else{
-//             if(member_no == item.member_no){
-//                var source = $("#template").html();
-//                var template = Handlebars.compile(source);
-//                $("#repliesDiv").after(template(item));
-//                $(this).find('replyLi').attr('style', 'display:none');
-//                console.log("히든");
-//             }else{
-//                var source = $("#template2").html();
-//                var template = Handlebars.compile(source);
-//                $("#repliesDiv").after(template(item));
-//                $(this).find('replyLi').attr('style', 'display:none');
-//                console.log("히든");
-//             }
-//          }
-//       });
-//    }); 
-// } 
-  
-    /* //스크롤처리
-   $(window).bind('scroll', function() {
-     if($(window).scrollTop() >= $('body').offset().top + $('body').outerHeight() - window.innerHeight) {
-        alert("dz");
+     $("#ccnt").remove();
+     if(qnaCheck > 0){
+//      	 $(".replyLi").remove();
+  	 }
+     $.each(data, function(index, item) {
+        cnt++;
+        if(index >= qnaCheck && index < qnaCnt){
+        	console.log(index);
+        	if(member_no == item.member_no){
+            var source = $("#template").html();
+            var template = Handlebars.compile(source);
+            $("#repliesDiv").after(template(item));
+          }else{
+            var source = $("#template2").html();
+            var template = Handlebars.compile(source);
+            $("#repliesDiv").after(template(item));
+          }
+        }
+     });
+     
+     var str = "<span id='ccnt' class='comments-count'>"+cnt+"</span>"
+     
+     if(qnaCheck == 0){
+    	 $("#comment-title").append(str);
      }
-  });  */
-  
+     else{
+    	 $("#replies>li:first-child").after(str);
+     }
+     qnaCheck = qnaCnt;
+     qnaCnt= qnaCnt + 4;
+  }); 
+}
+
+	$("#qnaBtn").on("click", function(){
+		getAllList();
+	}); */
+/* //스크롤처리
+	$(window).bind('scroll', function() {
+  	if($(window).scrollTop() >= $('body').offset().top + $('body').outerHeight() - window.innerHeight) {
+  	  alert("Dz"); 
+//   		getAllList();
+ 	 }
+	}); */
    
   $(document).ready(function(){
       $('.btn-call').click(function(){
@@ -638,6 +646,7 @@ function getAllList(){
                            </div> --%>
                               </li>
                            </ul>
+                           <button id="qnaBtn">더보기</button>
                            <div class='text-center'>
                               <ul id="pagination">
 
