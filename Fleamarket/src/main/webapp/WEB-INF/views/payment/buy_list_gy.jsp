@@ -60,8 +60,8 @@ table td {
         <tr>
           <!--  상품이미지 -->
           <td width="100px" height="100px">
-            <img alt="물품임시이미지" width="200px" height="150px"
-                 src="/fleamarket/resources/payment/img/${p.thum_img}.jpg">
+            <img alt="물품이미지" width="200px" height="150px"
+                 src="/fleamarket/resources/product/upload${p.thum_img}">
           </td>
           <!-- 상품 이름, 링크-->
           <td>

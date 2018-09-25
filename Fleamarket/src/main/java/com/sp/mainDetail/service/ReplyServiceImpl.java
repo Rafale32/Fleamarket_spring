@@ -23,7 +23,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<ItemQnaDTO> listQna(Integer itemboard_no) throws Exception {
 		
 		List<ItemQnaDTO> list = dao.listQna(itemboard_no);
-
+		
+		for(int i=0; i<list.size(); i++){
+			System.out.println(list.get(i).getItem_qna_date());
+		}
+		
 		for(int i=0; i<list.size(); i++){
 			list.get(i).setStore_no(dao.storeNoInfo((list.get(i).getMember_no())).getStore_no());
 			list.get(i).setStore_name(dao.storeNoInfo((list.get(i).getMember_no())).getStore_name());

@@ -251,7 +251,7 @@ $(function() {
 				  if(checkImageType(data)){//getImageLink 메소드에서 썸네일이아닌넘의 파일이름 처리를 해줌 
 					  str ="<div><a href=/fleamarket/productajax/displayFile?fileName="+getImageLink(data)+">"
 							  +"<img src='/fleamarket/productajax/displayFile?fileName="+data+"'/>"
-							  +"</a><small data-src="+data+">현재이미지삭제</small></div>";
+							  +"</a><small data-src="+data+"><input type='button' value='삭제' class='btn btn-danger'></small></div>";
 				  }
 				  //그림 파일 아닌넘 일단 안보이게 처리해둠
 				  /*else{

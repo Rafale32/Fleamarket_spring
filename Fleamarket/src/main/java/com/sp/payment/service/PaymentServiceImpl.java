@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.sp.board.model.BoardDAO;
 import com.sp.payment.domain.Criteria2;
 import com.sp.payment.domain.DeliveryDTO_gy;
+import com.sp.payment.domain.ImagelistDTO;
 import com.sp.payment.domain.MystoreDTO_gy;
 import com.sp.payment.domain.MystoreReviewDTO_gy;
 import com.sp.payment.domain.PuerchaseDTO_gy;
@@ -102,6 +103,18 @@ public class PaymentServiceImpl implements PaymentService {
 	public void deletfavorit(PuerchaseDTO_gy pdto) throws Exception {
 		dao.deletfavorit(pdto);
 		
+	}
+
+	@Override
+	public int favCounting(DeliveryDTO_gy dto) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.favListcounting(dto);
+	}
+
+	@Override
+	public ImagelistDTO listimag(PuerchaseDTO_gy dto22) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listimag(dto22);
 	}
 
 

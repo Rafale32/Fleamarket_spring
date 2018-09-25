@@ -15,6 +15,7 @@ public class MystoreReviewDTO_gy implements Serializable {
 	String itemboard_title;
 	String thum_img;
 	int item_no;
+	int itemboard_no;
 	
 	 
 	
@@ -22,9 +23,11 @@ public class MystoreReviewDTO_gy implements Serializable {
 	public MystoreReviewDTO_gy(){}
 
 
+
+
 	public MystoreReviewDTO_gy(int store_no, String pay_date, String review_contents, String store_name,
 			String member_email, int review_star, int member_no, String member_name, String itemboard_title,
-			String thum_img, int item_no) {
+			String thum_img, int item_no, int itemboard_no) {
 		super();
 		this.store_no = store_no;
 		this.pay_date = pay_date;
@@ -37,7 +40,42 @@ public class MystoreReviewDTO_gy implements Serializable {
 		this.itemboard_title = itemboard_title;
 		this.thum_img = thum_img;
 		this.item_no = item_no;
+		this.itemboard_no = itemboard_no;
 	}
+
+
+
+
+
+
+	public int getItemboard_no() {
+		return itemboard_no;
+	}
+
+
+
+
+
+
+	public void setItemboard_no(int itemboard_no) {
+		this.itemboard_no = itemboard_no;
+	}
+
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "MystoreReviewDTO_gy [store_no=" + store_no + ", pay_date=" + pay_date + ", review_contents="
+				+ review_contents + ", store_name=" + store_name + ", member_email=" + member_email + ", review_star="
+				+ review_star + ", member_no=" + member_no + ", member_name=" + member_name + ", itemboard_title="
+				+ itemboard_title + ", thum_img=" + thum_img + ", item_no=" + item_no + ", itemboard_no=" + itemboard_no
+				+ "]";
+	}
+
+
 
 
 
